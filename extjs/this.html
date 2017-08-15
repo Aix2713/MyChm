@@ -1,0 +1,235 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>this</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P><FONT style="BACKGROUND-COLOR: #ffff00" color=#ff0000>记录在view、controller和各个控件中的this代表含义！</FONT></P>
+<P>1、在view中：</P>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+<P><STRONG>a、页面子元素中</STRONG> 
+  </P>
+<P>items: 
+  [{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  region: 
+  'west',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  ui: 
+  'homeNavUi',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  split: 
+  {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  size: 
+  8,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  baseCls: 
+  'splitStyle'<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  },<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  title: 
+  '导航',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  width: 
+  250,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  minWidth: 
+  150,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  maxWidth: 
+  280,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  <STRONG> 
+  listeners: 
+  {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  render: function(p) 
+  {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  console.log(this);</STRONG> 
+  </P>
+<P> 
+  在子元素中，this代表当前子页面的view元素，如上，代表当前所在的panel元素,<STRONG>且p值和this是一样的</STRONG> 
+  </P>
+<P><STRONG>constructor {initialConfig: Object, $iid: 20, 
+  id: "panel-1010", autoGenId: true, protoEl: null…}</STRONG> 
+  </P>
+<P><STRONG>b、页面跟节点下</STRONG> 
+  </P>
+<P>在页面根节点下添加监听，输出this后结果为当前页面的view对象（例子为xtype= 
+  home-Home的一个container）</P>
+<P><STRONG>constructor {initialConfig: Object, $iid: 17, 
+  id: "home-Home-1009", autoGenId: true, protoEl: null…}</STRONG> 
+  </P></BLOCKQUOTE>
+<P dir=ltr>2、在controller中：</P>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <OL class="tree-outline source-code object-properties-section" 
+  style="LIST-STYLE-TYPE: none; BOX-SIZING: border-box; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; MIN-WIDTH: 0px; POSITION: relative; TEXT-TRANSFORM: none; COLOR: rgb(33,33,33) !important; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT: 12px Consolas, 'Lucida Console', monospace; PADDING-LEFT: 0px; MARGIN: 0px; MIN-HEIGHT: 0px; WIDOWS: 1; Z-INDEX: 0; DISPLAY: flex; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; flex-direction: column">
+    <LI class="parent object-properties-section-root-element expanded" 
+    style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; flex-direction: row; align-items: center; -webkit-user-select: text"><SPAN 
+    class=console-object-preview 
+    style="BOX-SIZING: border-box; WORD-WRAP: break-word; WHITE-SPACE: normal; MIN-WIDTH: 0px; FONT-STYLE: italic; MIN-HEIGHT: 0px">constructor<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>{<SPAN class=name 
+    style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">compDomain</SPAN>:<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><SPAN class=object-value-object 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">constructor</SPAN>,<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><SPAN class=name 
+    style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">type</SPAN>:<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><SPAN class=object-value-string 
+    style="BOX-SIZING: border-box; WHITE-SPACE: pre-wrap; MIN-WIDTH: 0px; COLOR: rgb(196,26,22); MIN-HEIGHT: 0px">"home-Home"</SPAN>,<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><SPAN class=name 
+    style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">eventbus</SPAN>:<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><SPAN class=object-value-object 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">constructor</SPAN>,<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><SPAN class=name 
+    style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">$observableInitialized</SPAN>:<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><SPAN class=object-value-boolean 
+    style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(28,0,207); MIN-HEIGHT: 0px">true</SPAN>,<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><SPAN class=name 
+    style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">hasListeners</SPAN>:<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><SPAN class=object-value-object 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">HasListeners</SPAN><SPAN 
+    style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px">…</SPAN>}<SPAN 
+    class=object-info-state-note 
+    style="BOX-SIZING: border-box; FONT-SIZE: 9px; HEIGHT: 11px; WIDTH: 11px; MIN-WIDTH: 0px; COLOR: white; TEXT-ALIGN: center; MARGIN: 0px 6px; MIN-HEIGHT: 0px; DISPLAY: inline-block; LINE-HEIGHT: 13px; BACKGROUND-COLOR: rgb(179,203,247); border-radius: 3px"></SPAN></SPAN>
+    <OL class="children expanded" 
+    style="LIST-STYLE-TYPE: none; BOX-SIZING: border-box; MIN-WIDTH: 0px; PADDING-LEFT: 12px; MIN-HEIGHT: 0px; DISPLAY: block">
+      <LI 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">$observableInitialized</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-boolean" 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(28,0,207); MIN-HEIGHT: 0px">true</SPAN>
+      <LI 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">_id</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-string" 
+      style="BOX-SIZING: border-box; WHITE-SPACE: pre; MIN-WIDTH: 0px; COLOR: rgb(196,26,22); MIN-HEIGHT: 0px">"controller-28"</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">_listen</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-object" 
+      style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">Object</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">_routes</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-object" 
+      style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">Object</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">compDomain</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-object" 
+      style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">constructor</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">config</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-object" 
+      style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">Object</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">eventbus</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-object" 
+      style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">constructor</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">eventedBeforeEventNames</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-object" 
+      style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">Object</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">events</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-object" 
+      style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">Object</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">hasListeners</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-object" 
+      style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">HasListeners</SPAN>
+      <LI 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">id</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-string" 
+      style="BOX-SIZING: border-box; WHITE-SPACE: pre; MIN-WIDTH: 0px; COLOR: rgb(196,26,22); MIN-HEIGHT: 0px">"controller-28"</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">initConfig</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-function" 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; FONT-STYLE: italic; MIN-HEIGHT: 0px">()</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">initialConfig</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-object" 
+      style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">Object</SPAN>
+      <LI 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">isFirstInstance</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-boolean" 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(28,0,207); MIN-HEIGHT: 0px">true</SPAN>
+      <LI 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">type</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-string" 
+      style="BOX-SIZING: border-box; WHITE-SPACE: pre; MIN-WIDTH: 0px; COLOR: rgb(196,26,22); MIN-HEIGHT: 0px">"home-Home"</SPAN>
+      <LI class=parent 
+      style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><SPAN 
+      class=name 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; COLOR: rgb(136,19,145); MIN-HEIGHT: 0px; flex-shrink: 0">view</SPAN><SPAN 
+      class=object-properties-section-separator 
+      style="BOX-SIZING: border-box; MIN-WIDTH: 0px; MIN-HEIGHT: 0px; PADDING-RIGHT: 5px; flex-shrink: 0">:</SPAN><SPAN 
+      class="value object-value-object" 
+      style="BOX-SIZING: border-box; VERTICAL-ALIGN: top; MIN-WIDTH: 0px; POSITION: relative; COLOR: ; MIN-HEIGHT: 0px; DISPLAY: inline-block">constructor</SPAN></LI></OL></LI></OL>
+    <P class=parent 
+    style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text" 
+  dir=ltr>在控制其中表示当前视图的控制器，具体看当前控制器的ID值；两者关系如下：</P>
+  <UL>
+    <LI>
+    <DIV class=parent 
+    style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><FONT color=#212121 face=Consolas><STRONG>在控制器中：this = render.getController();render = 
+    this.getView();</STRONG > </FONT></DIV></LI></UL>
+  <P class=parent 
+  style="BOX-SIZING: border-box; WHITE-SPACE: nowrap; MIN-WIDTH: 0px; TEXT-OVERFLOW: ellipsis; POSITION: relative; MIN-HEIGHT: 16px; DISPLAY: flex; align-items: center; -webkit-user-select: text"><FONT color=#212121 face=Consolas></FONT>&nbsp;</P></BLOCKQUOTE></body>
+</html>

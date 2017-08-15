@@ -1,0 +1,174 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>定时器</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(85,85,85); FONT: 13px 'Segoe UI', Tahoma, Helvetica, sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><FONT style="BACKGROUND-COLOR: #ffff00" color=#ff0000>在指定的毫秒数后调用此函数, 
+可以选择在特定范围内。示例用法:</FONT></SPAN></P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(85,85,85); FONT: 13px 'Segoe UI', Tahoma, Helvetica, sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><PRE class=" language-javascript" style="OVERFLOW: auto; WORD-WRAP: normal; MAX-WIDTH: 800px; BACKGROUND: rgb(245,245,245); WHITE-SPACE: pre; WORD-SPACING: 0px; POSITION: relative; TEXT-TRANSFORM: none; WORD-BREAK: normal; COLOR: rgb(0,0,0); PADDING-BOTTOM: 1em; TEXT-ALIGN: left; PADDING-TOP: 1em; FONT: 13px/1.5 Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; PADDING-LEFT: 1em; MARGIN: 0px 0px 8px 12px; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 1em; MAX-HEIGHT: 600px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; transform: translateZ(0px); box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 3px, rgba(0, 0, 0, 0.239216) 0px 1px 2px; text-shadow: rgb(255, 255, 255) 0px 1px; tab-size: 4"><CODE class=" language-javascript" style="WORD-WRAP: normal; FONT-FAMILY: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; BACKGROUND: 0px 0px; WHITE-SPACE: pre; WORD-SPACING: normal; WORD-BREAK: normal; COLOR: rgb(0,0,0); TEXT-ALIGN: left; LINE-HEIGHT: 1.5; text-shadow: rgb(255, 255, 255) 0px 1px; tab-size: 4"><SPAN class="token keyword" style="COLOR: rgb(0,119,170)">var</SPAN> sayHi <SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">=</SPAN> <SPAN class="token keyword" style="COLOR: rgb(0,119,170)">function</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">(</SPAN>name<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">)</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">{</SPAN>
+    <SPAN class="token function" style="COLOR: rgb(221,74,104)">alert</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">(</SPAN><SPAN class="token string" style="COLOR: rgb(102,153,0)">'Hi, '</SPAN> <SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">+</SPAN> name<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">)</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">;</SPAN>
+<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">}</SPAN>
+
+<SPAN spellcheck=true class="token comment" style="COLOR: rgb(112,128,144)">// executes immediately:</SPAN>
+<SPAN class="token function" style="COLOR: rgb(221,74,104)">sayHi</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">(</SPAN><SPAN class="token string" style="COLOR: rgb(102,153,0)">'Fred'</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">)</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">;</SPAN>
+
+<SPAN spellcheck=true class="token comment" style="COLOR: rgb(112,128,144)">// executes after 2 seconds:</SPAN>
+Ext<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">.</SPAN>Function<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">.</SPAN><SPAN class="token function" style="COLOR: rgb(221,74,104)">defer</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">(</SPAN>sayHi<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">,</SPAN> <SPAN class="token number" style="COLOR: rgb(153,0,85)">2000</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">,</SPAN> <SPAN class="token keyword" style="COLOR: rgb(0,119,170)">this</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">,</SPAN> <SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">[</SPAN><SPAN class="token string" style="COLOR: rgb(102,153,0)">'Fred'</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">]</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">)</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">;</SPAN>
+
+<SPAN spellcheck=true class="token comment" style="COLOR: rgb(112,128,144)">// this syntax is sometimes useful for deferring</SPAN>
+<SPAN spellcheck=true class="token comment" style="COLOR: rgb(112,128,144)">// execution of an anonymous function:</SPAN>
+Ext<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">.</SPAN>Function<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">.</SPAN><SPAN class="token function" style="COLOR: rgb(221,74,104)">defer</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">(</SPAN><SPAN class="token keyword" style="COLOR: rgb(0,119,170)">function</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">(</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">)</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">{</SPAN>
+    <SPAN class="token function" style="COLOR: rgb(221,74,104)">alert</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">(</SPAN><SPAN class="token string" style="COLOR: rgb(102,153,0)">'Anonymous'</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">)</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">;</SPAN>
+<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">}</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">,</SPAN> <SPAN class="token number" style="COLOR: rgb(153,0,85)">100</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">)</SPAN><SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">;</SPAN></CODE></PRE>
+<P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(85,85,85); FONT: 13px 'Segoe UI', Tahoma, Helvetica, sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><FONT style="BACKGROUND-COLOR: #ffff00" color=#ff0000>在指定的时间间隔 (可选) 
+在特定范围内重复调用此函数。</FONT></SPAN></P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(85,85,85); FONT: 13px 'Segoe UI', Tahoma, Helvetica, sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<H2 class=member-header 
+style="FONT-SIZE: 0.93em; FONT-FAMILY: 'Open Sans', Helvetica-Neue, Arial, sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(66,66,66); PADDING-BOTTOM: 5px; FONT-STYLE: normal; PADDING-TOP: 4px; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: 1px; LINE-HEIGHT: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+class=member-name-link 
+style="TEXT-DECORATION: none; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://localhost:8650/extjs-650-docs/extjs/6.5.0/classic/Ext.html#method-interval"><SPAN 
+class=member-name 
+style="CURSOR: pointer; FONT-SIZE: 1.1em; FONT-WEIGHT: 700; COLOR: rgb(2,91,128) !important" 
+data-ref="method-interval"><FONT size=4>interval</FONT></SPAN></A><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN class=params-list 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 400; COLOR: rgb(85,85,85)">( fn, millis, 
+[scope], [args], [appendArgs] ) :<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN class=memberType 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(162,162,162); LETTER-SPACING: 1px"><A 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-WEIGHT: 700; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://localhost:8650/extjs-650-docs/extjs/6.5.0/classic/Number.html">Number</A></SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></H2>
+<H3 class=detail-header 
+style="MARGIN-BOTTOM: 5px; FONT-SIZE: 13px; FONT-FAMILY: 'Open Sans', Helvetica-Neue, Arial, sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: uppercase; COLOR: rgb(85,85,85); PADDING-BOTTOM: 4px; FONT-STYLE: normal; WIDOWS: 1; MARGIN-TOP: 25px; DISPLAY: inline-block; LETTER-SPACING: 1px; LINE-HEIGHT: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">PARAMETERS</H3><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(68,68,68); FONT: 13px 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></SPAN>
+<DIV class=param-row 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(68,68,68); FONT: 13px 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 8px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em"><SPAN 
+id=method-interval--fn class="params-list param-list-item" 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(85,85,85)">fn</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN class=memberType 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(162,162,162); MARGIN-LEFT: 0px; LETTER-SPACING: 1px">&nbsp;<A 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-WEIGHT: 700; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://localhost:8650/extjs-650-docs/extjs/6.5.0/classic/Function.html">Function</A></SPAN></P>
+<DIV class=params-desc style="PADDING-LEFT: 42px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em">The 
+function to defer.</P></DIV></DIV>
+<DIV class=param-row 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(68,68,68); FONT: 13px 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 8px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em"><SPAN 
+id=method-interval--millis class="params-list param-list-item" 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(85,85,85)">millis</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN class=memberType 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(162,162,162); MARGIN-LEFT: 0px; LETTER-SPACING: 1px">&nbsp;<A 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-WEIGHT: 700; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://localhost:8650/extjs-650-docs/extjs/6.5.0/classic/Number.html">Number</A></SPAN></P>
+<DIV class=params-desc style="PADDING-LEFT: 42px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em">The 
+number of milliseconds for the<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="WORD-WRAP: break-word; FONT-SIZE: 0.85em; BORDER-TOP: rgb(224,224,234) 1px solid; FONT-FAMILY: Monaco, monospace; BORDER-RIGHT: rgb(224,224,234) 1px solid; BACKGROUND: rgb(250,252,253); BORDER-BOTTOM: rgb(224,224,234) 1px solid; FONT-WEIGHT: 400; COLOR: rgb(59,44,72); PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: rgb(224,224,234) 1px solid; PADDING-RIGHT: 0px; border-radius: 0.2rem">setInterval</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>call</P></DIV></DIV>
+<DIV class=param-row 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(68,68,68); FONT: 13px 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 8px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em"><SPAN 
+id=method-interval--scope class="params-list param-list-item" 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(85,85,85)">scope</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN class=memberType 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(162,162,162); MARGIN-LEFT: 0px; LETTER-SPACING: 1px">&nbsp;<A 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-WEIGHT: 700; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://localhost:8650/extjs-650-docs/extjs/6.5.0/classic/Object.html">Object</A></SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><I class=memberType 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(162,162,162); MARGIN-LEFT: 0px; LETTER-SPACING: 1px">(optional)</I></P>
+<DIV class=params-desc style="PADDING-LEFT: 42px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em">The 
+scope (<CODE 
+style="WORD-WRAP: break-word; FONT-SIZE: 0.85em; BORDER-TOP: rgb(224,224,234) 1px solid; FONT-FAMILY: Monaco, monospace; BORDER-RIGHT: rgb(224,224,234) 1px solid; BACKGROUND: rgb(250,252,253); BORDER-BOTTOM: rgb(224,224,234) 1px solid; FONT-WEIGHT: 400; COLOR: rgb(59,44,72); PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: rgb(224,224,234) 1px solid; PADDING-RIGHT: 0px; border-radius: 0.2rem">this</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>reference) in which the function is 
+executed.<SPAN class=Apple-converted-space>&nbsp;</SPAN><STRONG>If omitted, 
+defaults to the browser window.</STRONG></P></DIV></DIV>
+<DIV class=param-row 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(68,68,68); FONT: 13px 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 8px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em"><SPAN 
+id=method-interval--args class="params-list param-list-item" 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(85,85,85)">args</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN class=memberType 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(162,162,162); MARGIN-LEFT: 0px; LETTER-SPACING: 1px">&nbsp;<A 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-WEIGHT: 700; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://localhost:8650/extjs-650-docs/extjs/6.5.0/classic/Array.html">Array</A></SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><I class=memberType 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(162,162,162); MARGIN-LEFT: 0px; LETTER-SPACING: 1px">(optional)</I></P>
+<DIV class=params-desc style="PADDING-LEFT: 42px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em">Overrides 
+arguments for the call. Defaults to the arguments passed by the 
+caller.</P></DIV></DIV>
+<DIV class=param-row 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(68,68,68); FONT: 13px 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 8px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em"><SPAN 
+id=method-interval--appendArgs class="params-list param-list-item" 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(85,85,85)">appendArgs</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN class=memberType 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(162,162,162); MARGIN-LEFT: 0px; LETTER-SPACING: 1px">&nbsp;<A 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-WEIGHT: 700; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://localhost:8650/extjs-650-docs/extjs/6.5.0/classic/Boolean.html">Boolean</A><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>/<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><A 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-WEIGHT: 700; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://localhost:8650/extjs-650-docs/extjs/6.5.0/classic/Number.html">Number</A></SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><I class=memberType 
+style="FONT-SIZE: 12px; FONT-WEIGHT: 700; COLOR: rgb(162,162,162); MARGIN-LEFT: 0px; LETTER-SPACING: 1px">(optional)</I></P>
+<DIV class=params-desc style="PADDING-LEFT: 42px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em">If<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="WORD-WRAP: break-word; FONT-SIZE: 0.85em; BORDER-TOP: rgb(224,224,234) 1px solid; FONT-FAMILY: Monaco, monospace; BORDER-RIGHT: rgb(224,224,234) 1px solid; BACKGROUND: rgb(250,252,253); BORDER-BOTTOM: rgb(224,224,234) 1px solid; FONT-WEIGHT: 400; COLOR: rgb(59,44,72); PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: rgb(224,224,234) 1px solid; PADDING-RIGHT: 0px; border-radius: 0.2rem">true</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>args are appended to call args instead 
+of overriding, or, if a number, then the args are inserted at the specified 
+position.</P></DIV>
+<P class=defaults-to-dec 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; COLOR: rgb(128,100,71); MARGIN: 0px 12px; LINE-HEIGHT: 1.7em">Defaults 
+to: false</P></DIV>
+<H3 class=detail-header 
+style="MARGIN-BOTTOM: 5px; FONT-SIZE: 13px; FONT-FAMILY: 'Open Sans', Helvetica-Neue, Arial, sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: uppercase; COLOR: rgb(85,85,85); PADDING-BOTTOM: 4px; FONT-STYLE: normal; WIDOWS: 1; MARGIN-TOP: 25px; DISPLAY: inline-block; LETTER-SPACING: 1px; LINE-HEIGHT: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">RETURNS</H3><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(68,68,68); FONT: 13px 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN class=memberType 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(162,162,162); FONT: 700 12px 'Open Sans', Helvetica-Neue, Arial, sans-serif; MARGIN-LEFT: 12px; WIDOWS: 1; LETTER-SPACING: 1px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-WEIGHT: 700; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://localhost:8650/extjs-650-docs/extjs/6.5.0/classic/Number.html">Number</A></SPAN><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(68,68,68); FONT: 13px 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></SPAN>
+<DIV class=return-desc 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(68,68,68); FONT: 13px 'Open Sans', Helvetica-Neue, Arial, sans-serif; PADDING-LEFT: 12px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<P 
+style="OVERFLOW: visible; FONT-SIZE: 0.93em; MAX-WIDTH: 900px; WIDTH: auto; WHITE-SPACE: normal; TEXT-OVERFLOW: clip; MARGIN: 0px 12px; LINE-HEIGHT: 1.7em">The 
+interval id that can be used with<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="WORD-WRAP: break-word; FONT-SIZE: 0.85em; BORDER-TOP: rgb(224,224,234) 1px solid; FONT-FAMILY: Monaco, monospace; BORDER-RIGHT: rgb(224,224,234) 1px solid; BACKGROUND: rgb(250,252,253); BORDER-BOTTOM: rgb(224,224,234) 1px solid; FONT-WEIGHT: 400; COLOR: rgb(59,44,72); PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: rgb(224,224,234) 1px solid; PADDING-RIGHT: 0px; border-radius: 0.2rem">clearInterval</CODE>.</P></DIV></SPAN></SPAN></body>
+</html>

@@ -1,0 +1,56 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>自动更新服务器</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H1 align=left><FONT style="BACKGROUND-COLOR: #ffff00" color=#ff0000>nodejs改变代码不需要重启的方法</FONT></H1>
+<DIV class=clear 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 12px 'HanHei SC', PingHei, 'PingFang SC', STHeitiSC-Light, 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, Arial, 'Microsoft YaHei', 'WenQuanYi Micro Hei', 微软雅黑, 微軟正黑體, '儷黑 Pro', 宋体, simsun, sans-serif; CLEAR: both; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></DIV>
+<DIV class=postBody 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(66,66,66); TEXT-ALIGN: left; FONT: 16px/1.7 'HanHei SC', PingHei, 'PingFang SC', STHeitiSC-Light, 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, Arial, 'Microsoft YaHei', 'WenQuanYi Micro Hei', 微软雅黑, 微軟正黑體, '儷黑 Pro', 宋体, simsun, sans-serif; WIDOWS: 1; MARGIN-TOP: 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV id=cnblogs_post_body class=cnblogs-markdown style="MARGIN-BOTTOM: 20px">
+<H2 id=node-搭建本地服务器 
+style="FONT-SIZE: 21px; FONT-WEIGHT: bold; MARGIN: 30px auto 2px; LINE-HEIGHT: 1.5">1、node 
+搭建本地服务器</H2>
+<P 
+style="MARGIN: 12px auto 0px; LINE-HEIGHT: 32px; TEXT-INDENT: 0px">在F:/node文件夹下新建app.js</P><PRE style="WORD-WRAP: break-word; MARGIN-BOTTOM: 10px; FONT-FAMILY: 'Courier New', Courier, 'Microsoft Yahei', monospace; WIDTH: 640px; WHITE-SPACE: pre-wrap; MARGIN-TOP: 10px"><CODE class="hljs coffeescript" style="FONT-SIZE: 12px !important; BORDER-TOP: rgb(204,204,204) 1px solid; HEIGHT: auto; FONT-FAMILY: 'Courier New', sans-serif !important; BORDER-RIGHT: rgb(204,204,204) 1px solid; VERTICAL-ALIGN: middle; BACKGROUND: rgb(255,255,255); OVERFLOW-X: auto; BORDER-BOTTOM: rgb(204,204,204) 1px solid; COLOR: rgb(0,0,0); PADDING-BOTTOM: 5px !important; PADDING-TOP: 5px !important; PADDING-LEFT: 5px !important; MARGIN: auto; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.5 !important; PADDING-RIGHT: 5px !important; border-radius: 3px">const http = <SPAN class=hljs-built_in style="COLOR: rgb(0,0,255)">require</SPAN>(<SPAN class=hljs-string style="COLOR: rgb(163,21,21)">'http'</SPAN>);
+
+http.createServer(<SPAN class=hljs-function><SPAN class=hljs-params>(req, res)</SPAN> =&gt;</SPAN> {
+    res.writeHead(<SPAN class=hljs-number>200</SPAN>, {
+        <SPAN class=hljs-string style="COLOR: rgb(163,21,21)">'Content-Type'</SPAN>: <SPAN class=hljs-string style="COLOR: rgb(163,21,21)">'text/plain'</SPAN>
+    });
+
+    res.end(<SPAN class=hljs-string style="COLOR: rgb(163,21,21)">'ok!'</SPAN>);
+}).listen(<SPAN class=hljs-number>3000</SPAN>, <SPAN class=hljs-function><SPAN class=hljs-params>()</SPAN> =&gt;</SPAN> <SPAN class=hljs-built_in style="COLOR: rgb(0,0,255)">console</SPAN>.log(<SPAN class=hljs-string style="COLOR: rgb(163,21,21)">'node localsever start success!'</SPAN>));
+</CODE></PRE>
+<P 
+style="MARGIN: 12px auto 0px; LINE-HEIGHT: 32px; TEXT-INDENT: 0px">运行CMD，切换到F:/node,键入：node 
+app 即可开启本地服务。但我们每次改变代码，都需要手动关闭服务 =》 重启服务这一过程，很麻烦。</P>
+<H2 id=代码变化node-服务自动重启 
+style="FONT-SIZE: 21px; FONT-WEIGHT: bold; MARGIN: 30px auto 2px; LINE-HEIGHT: 1.5">2、代码变化，node 
+服务自动重启</H2>
+<P 
+style="MARGIN: 12px auto 0px; LINE-HEIGHT: 32px; TEXT-INDENT: 0px">直接用npm安装supervisor，键入命令: 
+npm install supervisor -g</P>
+<P 
+style="MARGIN: 12px auto 0px; LINE-HEIGHT: 32px; TEXT-INDENT: 0px">这里注意一点的就是，supervisor必须安装到全局，如果你不安装到全局，错误命令会提示你安装到全局。</P>
+<P 
+style="MARGIN: 12px auto 0px; LINE-HEIGHT: 32px; TEXT-INDENT: 0px">启动时输入supervisor 
+文件入口文件的地址，需要注意的是输入的文件入口文件在当前则修改的代码如果也在当前文件，运行时会起作用，如果不在当前则不起作用。</P>
+<P style="MARGIN: 12px auto 0px; LINE-HEIGHT: 32px; TEXT-INDENT: 0px">supervisor 
+node app</P>
+<P 
+style="MARGIN: 12px auto 0px; LINE-HEIGHT: 32px; TEXT-INDENT: 0px">即可启动应用。</P></DIV></DIV></body>
+</html>

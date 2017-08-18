@@ -57,7 +57,7 @@ this.childrenEidt(itemData.children,
 isCheck);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 }<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp; 
 },<BR>&nbsp;&nbsp;&nbsp; childrenEidt: function(data, isCheck) 
-{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (var i =     0; i &lt; 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (var i =             0; i &lt; 
 data.length; i++) 
 {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var 
 itemData = 
@@ -88,11 +88,11 @@ view.expand(record);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 this,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; view 
 = 
 me.getView().down('treepanel'),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-<FONT color=#ff0000> 
 selectionnode = view.getSelection()[0] || 
 view.getRootNode(),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-target = view.selModel.getSelection()[0] || view.getRootNode();< 
-/FONT >   
+target = 
+view.selModel.getSelection()[0]  || view.getRootNode();&lt; /FONT 
+&gt;    
 <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var newNode = 
 {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; text: 
 btn.up('window').down('textfield').getValue(),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -107,11 +107,13 @@ target.appendChild(newNode);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if
 (!target.isExpanded()) 
 {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 target.expand(false);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <FONT color=#ff0000>view.selModel.select(newNode);//使其进入选中状态</FONT> 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+view.selModel.select(newNode);//使其进入选中状态 
 <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 btn.up('window').destroy();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-Ext.resumeLayouts(true); </P>
+Ext.resumeLayouts(true); </P> 
+<FONT color=#ff0000>
 <P> &nbsp;</P>
 <P>&nbsp;</P>
-<P>&nbsp;</P></body>
+<P>&nbsp;</P></FONT></body>
 </html>

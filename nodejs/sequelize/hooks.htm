@@ -1,0 +1,1120 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>hooks</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H1 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 36px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 20px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">Sequelize 
+中文API文档－8. 钩子函数的使用、Hooks相关API</H1>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><I 
+title=发布时间 class="fa fa-clock-o" 
+style="BOX-SIZING: border-box; FONT-FAMILY: FontAwesome; FONT-WEIGHT: 400; FONT-STYLE: normal; DISPLAY: inline-block; LINE-HEIGHT: 1; -webkit-font-smoothing: antialiased"></I>&nbsp;2016年05月26日 
+&nbsp;&nbsp;<SPAN class=Apple-converted-space>&nbsp;</SPAN><I title=阅读 
+class="fa fa-eye" 
+style="BOX-SIZING: border-box; FONT-FAMILY: FontAwesome; FONT-WEIGHT: 400; FONT-STYLE: normal; DISPLAY: inline-block; LINE-HEIGHT: 1; -webkit-font-smoothing: antialiased"></I><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>1822 &nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN title="" 
+style="BOX-SIZING: border-box" 
+data-original-title="声明：本站文章及示例基于特定的环境或软件版本，本站不为因参考本站文章引起的错误或损失负责。在使用前请自行验证是否可用于实际环境。如有纰漏或错误，欢迎进群指正、交流。" 
+data-toggle="tooltip"><I class="fa fa-exclamation-circle" 
+style="BOX-SIZING: border-box; FONT-FAMILY: FontAwesome; FONT-WEIGHT: 400; FONT-STYLE: normal; DISPLAY: inline-block; LINE-HEIGHT: 1; -webkit-font-smoothing: antialiased"></I>&nbsp;声明</SPAN></P><ARTICLE 
+class=post 
+style="BOX-SIZING: border-box; BORDER-TOP: rgb(204,204,204) 1px dashed; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV class=post_content style="BOX-SIZING: border-box">
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Hooks</CODE>（钩子）是指会在模型生命周期的特殊时刻被调用的函数，如：模型实例被创建前会调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeCreate</CODE>函数，而在模型实例创建后又会调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterCreate</CODE>函数。通过这些钩子函数，使用我们具有在生命周期的特殊时刻访问或操作模型数据的能力。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<OL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><A 
+  style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+  href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#usage">钩子函数的使用</A>
+  <UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#usage-order">1.1 
+    钩子函数的调用顺序</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#usage-declaring">1.2 
+    定义钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#usage-remove">1.3 
+    移除钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#usage-type">1.4 
+    全局/普通钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#usage-associations">1.5 
+    关联模型中的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#usage-transaction">1.6 
+    在事务中应注意</A></LI></UL></LI>
+  <LI style="BOX-SIZING: border-box"><A 
+  style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+  href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api">Hooks API</A>
+  <UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-mixin">2.1 
+    相关说明</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-addHook">2.2<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">addHook()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 添加钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-removeHook">2.3<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">removeHook()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 移除钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-hasHook">2.4<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hasHook()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 是否有钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeValidate">2.5<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeValidate()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 验证前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterValidate">2.6<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterValidate()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 验证后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeCreate">2.7<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterValidate()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 创建前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterCreate">2.8<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterValidate()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 创建后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeDestroy">2.9<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeDestroy()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 删除前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterDestroy">2.10<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterDestroy()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 删除后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeRestore">2.11<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeRestore()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 恢复前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterRestore">2.12<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterRestore()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 恢复后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeUpdate">2.13<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeUpdate()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 更新前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterUpdate">2.14<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterUpdate()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 更新后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeBulkCreate">2.15<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkCreate()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 批量创建前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterBulkCreate">2.16<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkCreate()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 批量创建后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeBulkDestroy">2.17<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkDestroy()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 批量删除前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterBulkDestroy">2.18<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkDestroy()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 批量删除后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeBulkRestore">2.19<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkRestore()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 批量恢复前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterBulkRestore">2.20<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkRestore()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 批量恢复后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeBulkUpdate">2.21<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkUpdate()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 批量更新前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterBulkUpdate">2.22<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkUpdate()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 批量更新后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeFind">2.23<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeFind()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 查询前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeFindAfterExpandIncludeAll">2.24<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeFindAfterExpandIncludeAll()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 查询前展开后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeFindAfterOptions">2.25<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeFindAfterOptions()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 查询前解析后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterFind">2.26<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterFind()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 查询后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeDefine">2.27<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeDefine()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 定义前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterDefine">2.28<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterDefine()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 定义后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeInit">2.29<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeInit()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 初始化前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterInit">2.30<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterInit()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 初始化后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeSync">2.31<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeSync()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 同步前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterSync">2.32<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterSync()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 同步后执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-beforeBulkSync">2.33<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkSync()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 批量同步前执行的钩子</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/NJoieZl7Z.html#api-afterBulkSync">2.34<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkSync()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>- 批量同步后执行的钩子</A></LI></UL></LI></OL>
+<H3 id=usage 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 24px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 20px; LINE-HEIGHT: 1.1">1. 
+钩子函数的使用</H3>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">钩子函数也被称做回调或生命周期事件，这些函数会在Sequlize 
+执行一些操作之前或之后被调用。如，你想在模型数据保存前设置一个值，那么就可以添加一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeUpdate</CODE>钩子。</P>
+<H4 id=usage-order 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.1 
+钩子函数的调用顺序</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">(1)
+  beforeBulkCreate(instances, options, fn)
+  beforeBulkDestroy(options, fn)
+  beforeBulkUpdate(options, fn)
+(2)
+  beforeValidate(instance, options, fn)
+(-)
+  validate
+(3)
+  afterValidate(instance, options, fn)
+  - or -
+  validationFailed(instance, options, error, fn)
+(4)
+  beforeCreate(instance, options, fn)
+  beforeDestroy(instance, options, fn)
+  beforeUpdate(instance, options, fn)
+(-)
+  create
+  destroy
+  update
+(5)
+  afterCreate(instance, options, fn)
+  afterDestroy(instance, options, fn)
+  afterUpdate(instance, options, fn)
+(6)
+  afterBulkCreate(instances, options, fn)
+  afterBulkDestroy(options, fn)
+  afterBulkUpdate(options, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-declaring 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.2 
+定义钩子</H4>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">钩子的参数通过引用传递，这意味着，你可以修改值且修改会体现在 
+insert / update 语句中。钩子函数中可以包含异步操作，这时钩子函数中应该返回一个<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="http://itbilu.com/nodejs/npm/VkYIaRPz-.html#induction-promise" 
+target=_blank>promise</A>。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">可以通过以下三种方式添加钩子：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">// 方法 1, 在.define() 方法中定义
+var User = sequelize.define('user', {
+  username: DataTypes.STRING,
+  mood: {
+    type: DataTypes.ENUM,
+    values: ['happy', 'sad', 'neutral']
+  }
+}, {
+  hooks: {
+    beforeValidate: function(user, options) {
+      user.mood = 'happy'
+    },
+    afterValidate: function(user, options) {
+      user.username = 'Toni'
+    }
+  }
+})
+
+// 方法 2, 通过模型的 .hook() 方法定义
+User.hook('beforeValidate', function(user, options) {
+  user.mood = 'happy'
+})
+
+User.hook('afterValidate', function(user, options) {
+  return sequelize.Promise.reject("I'm afraid I can't let you do that!")
+})
+
+// 方法 3, 通过钩子方法定义
+User.beforeCreate(function(user, options) {
+  return hashPassword(user.password).then(function (hashedPw) {
+    user.password = hashedPw;
+  });
+})
+
+User.afterValidate('myHookAfter', function(user, options, fn) {
+  user.username = 'Toni'
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-remove 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.3 
+移除钩子</H4>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">只有有名称的钩子函数才能被称除：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Book = sequelize.define('book', {
+  title: DataTypes.STRING
+})
+
+Book.addHook('afterCreate', 'notifyUsers', function(book, options) {
+  // ...
+})
+
+Book.removeHook('afterCreate', 'notifyUsers')</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-type 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.4 
+全局/普通钩子</H4>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">全局钩子</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">全局钩子会在所有的模型中运行，它们可以定义你模型的形为，这些钩子很适合应用一些有用的插件。全局钩子有两种定义方式：</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize.options.define 
+(default hook)</CODE></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var sequelize = new Sequelize(..., {
+  define: {
+    hooks: {
+      beforeCreate: function () {
+        // Do stuff
+      }
+    }
+  }
+});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">这样就为所有模型定义一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeCreate</CODE>钩子，它会在所有模型被执行<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">create</CODE>操作前执行：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var User = sequelize.define('user');
+var Project = sequelize.define('project', {}, {
+    hooks: {
+        beforeCreate: function () {
+            // Do other stuff
+        }
+    }
+});
+
+User.create() // 执行全局钩子
+Project.create() // 执行自已的钩子，因为全局钩子会被重写</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize.addHook(permanent 
+hook)</CODE></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">sequelize.addHook('beforeCreate', function () {
+    // Do stuff
+});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">addHook</CODE>方法添加的钩子总是会执行，不会被模型本身定义的钩子函数所覆盖：</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">var User = 
+sequelize.define('user'); var Project = sequelize.define('project', {}, { hooks: 
+{ beforeCreate: function () { // Do other stuff } } }); User.create() // 执行全局钩子 
+Project.create() // 先执行自己的钩子，再执行全局钩子</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">本地钩子总是会在全局钩子之前执行</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">实例钩子</STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">单个<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="http://itbilu.com/nodejs/npm/N1sdaHTzb.html" 
+target=_blank>实例</A>中也有一些钩子，它们会在你编辑修改实例时被执行：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeValidate
+afterValidate or validationFailed
+beforeCreate / beforeUpdate  / beforeDestroy
+afterCreate / afterUpdate / afterDestroy</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">// 定义
+User.beforeCreate(function(user) {
+  if (user.accessLevel &gt; 10 &amp;&amp; user.username !== "Boss") {
+    throw new Error("该问该用户需要10 级以上权限!")
+  }
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">这个示例中，通过钩子返回一个错误：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User.create({username: 'Not a Boss', accessLevel: 20}).catch(function(err) {
+  console.log(err) // 该问该用户需要10 级以上权限!
+})
+</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">操作成功：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User.create({username: 'Boss', accessLevel: 20}).then(function(user) {
+  console.log(user) // user object with username as Boss and accessLevel of 20
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">模型钩子</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">有时我们需要在模型创建/更新/删除等特殊时刻对记录做一些修改，这些可以使用模型钩子。可于模型的钩子有：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeBulkCreate / beforeBulkUpdate / beforeBulkDestroy
+afterBulkCreate / afterBulkUpdate / afterBulkDestroy</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在匹量操作中，如果你想把钩子应用到每个单独的记录中，请设置<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">individualHooks: 
+true</CODE>选项：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Model.destroy({ where: {accessLevel: 0}, individualHooks: true})
+// 会在每条被删除记录执行删除操作前/后 调用钩子
+
+Model.update({username: 'Toni'}, { where: {accessLevel: 0}, individualHooks: true})
+// 会在每条被更新记录执行更新操作前/后 调用钩子</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">实例钩子可能会有两个或三个参数，这取决于钩子的类型：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Model.beforeBulkCreate(function(records, fields) {
+  // records 是发送给 .bulkCreate的第一个参数
+  // fields 是发送给 .bulkCreate的第二个参数
+})
+
+Model.bulkCreate([
+  {username: 'Toni'}, // records 参数部分
+  {username: 'Tobi'} // records 参数部分
+], ['username'] /* fields 参数部分 */)
+
+Model.beforeBulkUpdate(function(attributes, where) {
+  // attributes 是发送 Model.update 的第一个参数
+  // where 是发送 Model.update 的第二个参数
+})
+
+Model.update({gender: 'Male'} /*attributes argument*/, { where: {username: 'Tom'}} /*where argument*/)
+
+Model.beforeBulkDestroy(function(whereClause) {
+  // whereClause 是发送给 Model.destroy 的第一个参数
+})
+
+Model.destroy({ where: {username: 'Tom'}} /*whereClause 参数*/)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.bulkCreate(...)</CODE>方法中使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">updatesOnDuplicate</CODE>选项时，我们可以在钩子函数中对<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">updatesOnDuplicate</CODE>数据进行修改：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">// 使用updatesOnDuplicate 选项在用户存在时进行批量更新
+Users.bulkCreate([{ id: 1, isMemeber: true}, 
+                 { id: 2, isMember: false}], 
+                 { updatesOnDuplicate: ['isMember']})
+
+User.beforeBulkCreate(function (users, options) {
+  users.forEach(function (user) {
+    if (user.isMember) {
+      user.memberSince = new Date()
+    }
+  })
+
+  // 为 updatesOnDuplicate 添加一个 memberSince，其它情况下 memberSince 数据不会保存到数据库
+  options.updatesOnDuplicate.push('memberSince')</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-associations 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.5 
+关联模型中的钩子</H4>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">大部分钩在模型关联中同样可以使用：</P>
+<OL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box">当使用 add/set 函数时，beforeUpdate/afterUpdate 
+  钩子会执行</LI>
+  <LI style="BOX-SIZING: border-box">只有一种方法可以调用 beforeDestroy/afterDestroy 
+  钩子，那就是在关联中使用<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">onDelete: 
+  'cascade'</CODE><SPAN class=Apple-converted-space>&nbsp;</SPAN>和<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hooks: 
+  true</CODE>选项。如：</LI></OL><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Projects = sequelize.define('projects', {
+  title: DataTypes.STRING
+})
+
+var Tasks = sequelize.define('tasks', {
+  title: DataTypes.STRING
+})
+
+Projects.hasMany(Tasks, { onDelete: 'cascade', hooks: true })
+Tasks.belongsTo(Projects)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">这段代码会在删除Tasks表数据时，调用 
+beforeDestroy/afterDestroy 
+钩子。默认情况下，Sequelize会尝试尽可能优化你的查询语句，在连接删除中会像下面这样简单的执行：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">DELETE FROM `table` WHERE associatedIdentifier = associatedIdentifier.primaryKey</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">添加<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hooks: 
+true</CODE>后，相当于告诉Sequelize 你并不关心优化，这将会在每个实例删除时分别应用钩子。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">n:m</CODE>关联中，你可能想在调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">remove</CODE>时使用钩子，这时Sequelize 
+会使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.destroy</CODE>代替<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">bulkDestroy</CODE>，以分别为每个实例应用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">before/afterDestroy</CODE>钩子。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">这时，可以通过在<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">remove</CODE>方法中添加<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">{individualHooks: 
+true}</CODE>选项以分别为每个实例就用钩子。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-transaction 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.6 
+在事务中应注意</H4>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在操作多个模型时，可以设置<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">transaction</CODE>选项，以保障操作数据的完整性。如果在原调用中指定了一个事务，那它将在传递给钩子函数的选项参数中出现：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">// 这时使用 promise 式的异步钩子而非回调
+User.hook('afterCreate', function(user, options) {
+  // 'transaction' 通过 options.transaction 设置
+
+  // 此操作会将相同事务部分像原始 User.create一样调用
+  return User.update({
+    mood: 'sad'
+  }, {
+    where: {
+      id: user.id
+    },
+    transaction: options.transaction
+  });
+});
+
+
+sequelize.transaction(function(t) {
+  User.create({
+    username: 'someguy',
+    mood: 'happy',
+    transaction: t
+  });
+});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">如果在调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">User.update</CODE>时没有设置事务选项，那么不会做任何操作，直到后面的create操作发生时才会触发。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H3 id=api 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 24px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 20px; LINE-HEIGHT: 1.1">2. 
+Hooks API</H3>
+<H4 id=api-mixin 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.1 
+相关说明</H4>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">钩子是会在(批量-)创建/更新/删除和验证之前和之后调用的函数。钩子可以通过以下三种方式添加：</P>
+<OL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box">在模型定义方法<SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize.define</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>的选项中指定</LI>
+  <LI style="BOX-SIZING: border-box">通过调用<SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hook()</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>并传入钩子函数名指事实上</LI>
+  <LI style="BOX-SIZING: border-box">在模型上直接调用钩子函数</LI></OL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-addHook 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.2<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">addHook()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 添加钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">addHook(hooktype, [name], fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">为模型添加钩子</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hooktype</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}，钩子类型</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[name]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}，钩子名，可用于以后钩子函数的移除</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要添加的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">别名：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hook</CODE></STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-removeHook 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.3<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">removeHook()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 移除钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">removeHook(hookType, name)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">从模型中移除钩子</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hooktype</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}，钩子类型</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}，钩子名</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-hasHook 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.4<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hasHook()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 是否有钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">hasHook(hookType)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">检查模型中是否存在指定类型的钩子</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hooktype</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}，钩子类型</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">别名：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hasHooks</CODE></STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeValidate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.5<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeValidate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 验证前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeValidate(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在模型执行数据验证前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterValidate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.6<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterValidate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 验证后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterValidate(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在模型数据验证完成后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeCreate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.7<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterValidate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 创建前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeCreate(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在模型创建实例前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterCreate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.8<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterValidate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 创建后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeDestroy(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在模型创建实例后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeDestroy 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.9<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeDestroy()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 删除前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeDestroy(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在模型删除实例前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">别名：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeDelete</CODE></STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterDestroy 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.10<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterDestroy()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 删除后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterDestroy(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在模型删除实例后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">别名：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterDestroy</CODE></STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeRestore 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.11<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeRestore()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 恢复前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeRestore(name, fn)</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在模型实例恢复(软删除)前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterRestore 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.12<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterRestore()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 恢复后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterRestore(name, fn)</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在模型实例恢复(软删除)后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeUpdate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.13<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeUpdate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 更新前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeUpdate(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在模型实例更新前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterUpdate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.14<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterUpdate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 更新后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterUpdate(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在模型实例更新后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeBulkCreate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.15<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkCreate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 批量创建前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeBulkCreate(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在批量创建模型实例前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterBulkCreate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.16<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkCreate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 批量创建后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterBulkCreate(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在批量创建模型实例后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeBulkDestroy 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.17<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkDestroy()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 批量删除前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeBulkDestroy(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在批量删除模型实例前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">别名：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkDelete</CODE></STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterBulkDestroy 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.18<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkDestroy()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 批量删除后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterBulkDestroy(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在批量删除模型实例后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">别名：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkDelete</CODE></STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeBulkRestore 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.19<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkRestore()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 批量恢复前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeBulkRestore(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在批量恢复模型实例前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterBulkRestore 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.20<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkRestore()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 批量恢复后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterBulkRestore(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在批量恢复模型实例后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeBulkUpdate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.21<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkUpdate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 批量更新前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeBulkUpdate(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在批量更新模型实例前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterBulkUpdate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.22<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkUpdate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 批量更新后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterBulkUpdate(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在批量更新模型实例后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeFind 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.23<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeFind()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 查询前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeFind(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在查找模型数据民前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeFindAfterExpandIncludeAll 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.24<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeFindAfterExpandIncludeAll()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 查询前展开后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeFindAfterExpandIncludeAll(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在执行<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">find()</CODE>查询前，<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>{ include: {all: ...} 
+}</CODE>展开后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeFindAfterOptions 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.25<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeFindAfterOptions()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 查询前解析后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeFindAfterOptions(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在执行<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">find()</CODE>查询前，选项参数解析守成后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterFind 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.26<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterFind()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 查询后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterFind(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在查询完成后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeDefine 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.27<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeDefine()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 定义前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeDefine(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">define</CODE>前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterDefine 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.28<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterDefine()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 定义后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterDefine(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">define</CODE>后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeInit 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.29<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeInit()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 初始化前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeInit(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize()</CODE>前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterInit 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.30<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterInit()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 初始化后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterInit(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize()</CODE>后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeSync 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.31<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeSync()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 同步前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeSync(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.sync()</CODE>前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterSync 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.32<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterSync()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 同步后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterSync(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.sync()</CODE>后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-beforeBulkSync 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.33<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">beforeBulkSync()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 批量同步前执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">beforeBulkSync(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize.sync()</CODE>前执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，要执行的钩子函数</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-afterBulkSync 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.34<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">afterBulkSync()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>- 批量同步后执行的钩子</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">afterBulkSync(name, fn)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">用于在调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize.sync()</CODE>后执行的钩子函数</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fn</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- 
+{Function}，要执行的钩子函数</LI></UL></DIV></ARTICLE></body>
+</html>

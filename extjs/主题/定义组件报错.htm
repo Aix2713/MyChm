@@ -1,0 +1,42 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>定义组件报错</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P><EM><FONT style="BACKGROUND-COLOR: #ffff00" color=#ff0000>unknown definition 
+for mixin named extjs-tab-panel-ui</FONT></EM></P>
+<P>解决方法是：在application中添加引用</P>
+<P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(83,88,95); TEXT-ALIGN: left; FONT: 13px effra, sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">The 
+dirty solution:</SPAN><BR 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(83,88,95); TEXT-ALIGN: left; FONT: 13px effra, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></P>
+<DIV class=bbcode_container 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(83,88,95); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 13px effra, sans-serif; PADDING-LEFT: 0px; MARGIN: 5px 20px 20px; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV class=bbcode_quote 
+style="BOX-SIZING: border-box; BORDER-TOP: rgb(65,115,148) 1px solid; BORDER-RIGHT: rgb(65,115,148) 1px solid; BACKGROUND: rgb(242,246,248); BORDER-BOTTOM: rgb(65,115,148) 1px solid; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT: italic 13px 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; PADDING-LEFT: 0px; MARGIN: 0px 10px 10px; BORDER-LEFT: rgb(65,115,148) 1px solid; TOP: 0px; PADDING-RIGHT: 0px; font-stretch: normal">
+<DIV class=quote_container 
+style="BOX-SIZING: border-box; FONT-FAMILY: effra, sans-serif; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 10px; MARGIN: 0px; PADDING-RIGHT: 10px">
+<DIV class=bbcode_quote_container 
+style="BOX-SIZING: border-box; HEIGHT: 13px; FONT-FAMILY: effra, sans-serif; WIDTH: 9px; BACKGROUND: url(https://www.sencha.com/forum/images/misc/quote-left.png) no-repeat 0% 50%; POSITION: absolute; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; LEFT: -9px; MARGIN: 0px; DISPLAY: block; PADDING-RIGHT: 0px"></DIV>Ext.application({<BR 
+style="BOX-SIZING: border-box; FONT-FAMILY: effra, sans-serif">requires: [<BR 
+style="BOX-SIZING: border-box; FONT-FAMILY: effra, sans-serif">'Ext.*',<BR 
+style="BOX-SIZING: border-box; FONT-FAMILY: effra, sans-serif">...<BR 
+style="BOX-SIZING: border-box; FONT-FAMILY: effra, sans-serif">],<BR 
+style="BOX-SIZING: border-box; FONT-FAMILY: effra, sans-serif">...<BR 
+style="BOX-SIZING: border-box; FONT-FAMILY: effra, sans-serif">});</DIV></DIV>这样就可以编译通过了！</DIV>
+<DIV class=bbcode_container 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(83,88,95); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 13px effra, sans-serif; PADDING-LEFT: 0px; MARGIN: 5px 20px 20px; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">源自：<A 
+href="https://www.sencha.com/forum/showthread.php?341594-Ext-6-2-1-app-build-unknown-definition-for-mixin-named-extjs-tab-panel-ui">https://www.sencha.com/forum/showthread.php?341594-Ext-6-2-1-app-build-unknown-definition-for-mixin-named-extjs-tab-panel-ui</A></DIV></body>
+</html>

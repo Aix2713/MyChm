@@ -1,0 +1,1406 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>cmd自动执行文件</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H2 
+style="FONT-SIZE: 20px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT-STYLE: normal; MARGIN: 0px 0px 4px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+id=cb_post_title_url style="TEXT-DECORATION: none; COLOR: rgb(34,51,85)" 
+href="http://www.cnblogs.com/linglizeng/archive/2010/01/29/Bat-CMD-ChineseVerion.html">BAT 
+CMD 批处理文件脚本总结(中文)</A></H2>
+<P 
+style="FONT-SIZE: 20px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT-STYLE: normal; MARGIN: 0px 0px 4px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+href="http://www.cnblogs.com/linglizeng/archive/2010/01/29/Bat-CMD-ChineseVerion.html">http://www.cnblogs.com/linglizeng/archive/2010/01/29/Bat-CMD-ChineseVerion.html</A></P>
+<DIV class=postbody 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 14px/25px Verdana, Arial, Helvetica, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV id=cnblogs_post_body style="MARGIN-BOTTOM: 20px">
+<P style="MARGIN: 0in 0in 0pt 0.25in; TEXT-INDENT: -0.25in"><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">1.</SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 7pt; FONT-FAMILY: Calibri, sans-serif; COLOR: rgb(22,100,136)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: SimSun; COLOR: rgb(22,100,136)">综述</SPAN></STRONG></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">、</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">”.bat”:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">这是微软的第一个批处理文件的后缀名，在几乎所有的</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Windows<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">操作系统内都能运行。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">2</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">、</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>“.cmd”:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">是为</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Windows 
+NT<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">设计的命令行脚本，</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">为</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Cmd.exe 
+shell</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">而设计的，</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">对于</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">COMMAND.COM</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">不具有向后兼容性。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">3</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">、目前所知道的</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">.cmd<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">和</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>.bat</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">文件的区别是对</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">ERRORLEVEL</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">变量的改变：当</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Command 
+Extensions<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">（命令行扩展）处于</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">enabled</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">状态时，哪怕是</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">.cmd</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">文件中一个成功执行的命令都可以改变</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">ERRORLEVEL</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">的值，而在</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">.bat<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">文件中</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">ERRORLEVEL<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">变量只有在遇到错误的时候才发生改变。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 0.25in; TEXT-INDENT: -0.25in"><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">2.</SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 7pt; FONT-FAMILY: Calibri, sans-serif; COLOR: rgb(22,100,136)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">@echo 
+off/echo on</SPAN></STRONG></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1. 
+“echo”<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">用来在控制台上显示信息。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">2. 
+“echo.”<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">用来显示一空行。（注意：</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">和右下角的点之间没有空格，如果有空格就变成显示句点了。）</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">3. 
+“echo off”:<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">在使用了这行命令之后，其他命令都只显示命令的结果，而不显示命令本身。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">4. 
+“echo on”:<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">这是默认值，表示显示所有的命令结果和命令行本身。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">5. 
+“echo”:<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">当执行</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">而不带任何参数的时候，会显示</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">的打开或关闭的状态：</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">“ECHO 
+is on”<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">或者</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>“ECHO is off”</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">6. 
+“@”:@<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">符号表示不显示本行的命令本身。如果只用</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+off</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">，虽然</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+off</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">后面的命令不显示出来，只显示命令的结果，但是</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+off</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">它自己确被显示出来了，这就是使用</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+off</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">的原因。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 0.25in; TEXT-INDENT: -0.25in"><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">3.</SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 7pt; FONT-FAMILY: Calibri, sans-serif; COLOR: rgb(22,100,136)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">SETLOCAL/ENDLOCAL</SPAN></STRONG></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1. 
+SETLOCAL</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">用来控制批处理文件中变量的可见性。就是高级语言常说的局部变量。凡是在</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">SETLOCAL</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">和</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">ENDLOCAL</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">之间的变量都是局部的，以免被其他脚本文件改变变量的值，而没有使用这个标示的都是</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Global 
+visible</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">（全局变量），很可能被其他文件所改变。下面的例子很好的说明了这一点。</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 251.6pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=335>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">setlocal</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+      version=1.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      the first version is %version%</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">endlocal</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      the second version is %version%</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">::The 
+      follow is global variable</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+      version=2.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      the third version is %version%</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 251.6pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 0in; PADDING-RIGHT: 0in; BACKGROUND-COLOR: transparent"     vAlign=top width=335>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">执行这个文件，将输出：</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      first version is 1.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      second version is</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      third version is 2.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">第二个</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">version</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">是全局变量，但是没有定义，所以是空值。再次执行：</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      first version is 1.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      second version is 2.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      third version is 2.0</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 251.6pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=335>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">setlocal</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+      version=1.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      the first version is %version%</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">endlocal</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      the second version is %version%</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">::The 
+      follow is global variable</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+      version=5.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      the third version is %version%</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 251.6pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 0in; PADDING-RIGHT: 0in; BACKGROUND-COLOR: transparent"     vAlign=top width=335>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">执行第二个文件：</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      first version is 1.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      second version is 2.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      third version is 5.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">再次执行：</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      first version is 1.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      second version is 5.0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">the 
+      third version is 5.0</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">由此可见变量的作用域在简单的批处理文件还是很慎重，否则可以造成千变万化的结果，这样这个脚本就很不稳定了。所以，变量作用域很重要，得注意。</SPAN></P>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">2. 
+EnableDelayedExpansion.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">（参考百度：</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><A 
+style="TEXT-DECORATION: none; COLOR: rgb(29,88,209)" 
+href="http://baike.baidu.com/view/2923132.htm" target=_blank><SPAN 
+style="TEXT-DECORATION: none; FONT-FAMILY: Calibri, sans-serif; COLOR: rgb(51,51,51)">http://baike.baidu.com/view/2923132.htm</SPAN></A><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">）</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 221.4pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=295>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">代码</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 221.4pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=295 colSpan=2>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">结果</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 221.4pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=295>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">setlocal</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+      var=test &amp; echo show %var%</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">endlocal</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 221.4pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=295 colSpan=2>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">show</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">当解析到</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%var%</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">是，</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">CMD</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">还没有执行完任何语句，所以系统并不认识这个变量，所以认为变量没有定义，所以显示空值。</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 221.4pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=295>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Setlocal 
+      ENABLEDELAYEDEXPANSION</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+      var=test &amp; echo show !var!</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">endlocal</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 221.4pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=295 colSpan=2>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">show 
+      test</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">使用了变量延迟扩展，并使用</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">!var!</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">，其实在执行的时候也不认识这个变量，但是这条语句执行完以后，仍然返回去赋值。这种事后处理，就是变量延迟扩展。</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590 colSpan=3>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">For</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">语句看起来写了很多行，其实认为是一条语句。所以如果在没有使用变量延迟扩展的时候，在</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">For</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">语句里的每一行，都只是记忆着系统所记忆的东西。而使用了变量延迟扩展之后，会执行完了整条语句，再“事后处理”给与赋值，然后才显示到控制台。下面的例子很能说明问题。</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 373.1pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=497 colSpan=2>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">setlocal</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">:: 
+      count to 5</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+      _tst=0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR 
+      /l %%G in (1,1,5) Do (echo [%_tst%] &amp; set /a _tst+=1)</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      Total = %_tst%</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 69.7pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=93>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[0]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[0]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[0]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[0]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[0]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Total 
+      = 5</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 373.1pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=497 colSpan=2>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">setlocal 
+      EnableDelayedExpansion</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">:: 
+      count to 5</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+      _tst=0</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR 
+      /l %%G in (1,1,5) Do (echo [!_tst!] &amp; set /a _tst+=1)</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      Total = !_tst!</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 69.7pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=93>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[0]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[1]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[2]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[3]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[4]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Total 
+      = 5</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: rgb(212,208,200); BORDER-RIGHT: rgb(212,208,200); WIDTH: 221.25pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 0in; BORDER-LEFT: rgb(212,208,200); PADDING-RIGHT: 0in; BACKGROUND-COLOR: transparent"     width=295>&nbsp;</TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: rgb(212,208,200); BORDER-RIGHT: rgb(212,208,200); WIDTH: 151.5pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 0in; BORDER-LEFT: rgb(212,208,200); PADDING-RIGHT: 0in; BACKGROUND-COLOR: transparent"     width=202>&nbsp;</TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: rgb(212,208,200); BORDER-RIGHT: rgb(212,208,200); WIDTH: 69.75pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 0in; BORDER-LEFT: rgb(212,208,200); PADDING-RIGHT: 0in; BACKGROUND-COLOR: transparent"     width=93>&nbsp;</TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">在</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">CMD</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">里面，系统使用“</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">^</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">”作为脱字符。使用变量延迟扩展</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">ENABLEDELAYEDEXPANSION</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">之后，脱字符</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">^<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">就可以一直产生作用，而不再局限于一个命令行。这样对于处理包含</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">HTML</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">和</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">XML</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">格式的字符的时候，就方便多了。请看下面的例子。</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">REM<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">这个文件会创建</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">World.txt</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">到本地磁盘，文件内容为</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">Hello</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">REM<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">也就是第二次运行的时候，脱字符没有发挥作用。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">SETLOCAL</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Set 
+      _html= Hello^&gt;World.txt</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Echo 
+      %_html%</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">ENDLOCAL</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">REM<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">这个文件会输出</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">Hello&gt;World.txt</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">，脱字符一直产生作用。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">SETLOCAL 
+      EnableDelayedExpansion</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Set 
+      _html= Hello^&gt;World.txt</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Echo 
+      !_html!</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">ENDLOCAL</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">REM<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">使用变量延迟扩展来处理</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">html</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">语句。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">SETLOCAL 
+      EnableDelayedExpansion</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Set 
+      _html=html format: ^&lt;title^&gt;Hello world^&lt;/title^&gt;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Echo 
+      !_html!</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">ENDLOCAL</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">3. 
+DISABLEEXTENSIONS.</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">值得注意的是，这里的扩展不是扩展名，而是命令的扩展功能，比如</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>“/F”<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">参数就是</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">For</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">循环的命令扩展。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">只有使用了命令扩展我们才能执行下面的语句。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;FOR 
+/F "DELIMS=" %%a IN (test.TXT) DO @echo %%a</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;<SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">否则我们要输出一个文件，只能使用</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Type 
+test.txt</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">了。命令扩展默认是开启的。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 0.25in; TEXT-INDENT: -0.25in"><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">4.</SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 7pt; FONT-FAMILY: Calibri, sans-serif; COLOR: rgb(22,100,136)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">Set</SPAN></STRONG></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1. 
+SET<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">不带任何参数</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">将显示当前用户的所有系统环境变量。</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">(set)</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">2. 
+SET<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">带一个变量名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">尝试搜索并显示以这个变量名开头的环境变量。（</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+PROCESSOR</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">就会显示以</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">PROCESSOR</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">开始的变量）</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">3. 
+SET variable=string:<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">给一个变量赋值。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">4. 
+SET “”:<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">使用一对空的双引号，会显示一个不带参数的情况下没显示出来的变量。我这里就显示下面两个奇怪的变量。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+=C:=C:\Users\Lingli</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+=E:=E:\Powershell</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">使用</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">cd 
+%=C:%</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">还真可以转到</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">C:\Users\Lingli</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">目录下。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">5. 
+SET “var=”(or SET var=):<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">删除一个变量。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">6. 
+SET /A variable=expression:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">使用算数运算符来给变量赋值。</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">组合</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">! 
+      ~ 
+      -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">一元操作符</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">* 
+      / 
+      %&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">算数运算符</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">+ 
+      -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">算数运算符</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&lt;&lt; 
+      &gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">逻辑偏移</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">位与</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">位异或</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">位或</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">= 
+      *= /= %= += -=&nbsp;&nbsp;&nbsp; -<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">赋值</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&amp;= 
+      ^= |= &lt;&lt;= &gt;&gt;=</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">7. 
+SET /P variable=[</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">提示字符</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">]:</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">提示用户输入并把输入的值赋给</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">variable</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">。提示字符可以为空。有时可以使用</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">CHOICE</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">来代替</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">SET 
+/P.</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">setlocal</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+      /p version=Please enter the QQ version:</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      you will install QQ %version%</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">endlocal</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">8.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">有用的环境变量。</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%CD% 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">当前路径名。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%DATE% 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">当前日期。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%TIME% 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">当前时间。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%RANDOM% 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">显示</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">0<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">到</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">32767</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">之间的一个随机数。你看</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">CMD</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">也是可以获取随机数的。</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 0.25in; TEXT-INDENT: -0.25in"><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">5.</SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 7pt; FONT-FAMILY: Calibri, sans-serif; COLOR: rgb(22,100,136)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">Choice</SPAN></STRONG></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">详细语法：</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590 colSpan=2>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">CHOICE 
+      [/C choices] [/N] [/CS] [/T timeout /D choice] [/M text]</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">该命令可以提供用户一个选择列表，并使用</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">ERRORLEVEL</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">参数返回用户选择项的序号。第一项对于</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">，第二项对应</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN>2</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">，依次类推，如果用户按</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">CTRL+C</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">退出而不选择，就返回</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">0</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">。</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 89.6pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=119>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">/C&nbsp;&nbsp;&nbsp; 
+      choices</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;/N</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;/CS</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;/T&nbsp;&nbsp;&nbsp; 
+      timeout</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;/D&nbsp;&nbsp;&nbsp; 
+      choice</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;/M&nbsp;&nbsp;&nbsp; 
+      text</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 353.2pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=471>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">用字母列出所提供的选项，默认是</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">"YN"</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">，即是和否。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">隐藏选择列表。如果使用这个选项，那么提示的文字里最后写清楚以下。不推荐使用。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">激活大小写敏感。默认是对大小写不敏感。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">选择超时设置。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">超时后的默认选项。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">提示字符。最好把要选择的问题将清楚。</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">2.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">例子</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">SETLOCAL</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">CHOICE 
+      /C ABC /M "</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">选择登陆用户：</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">A 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">管理员；</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">B<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">域用户；</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">C</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">注册用户</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">"</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      %errorlevel%==1 goto :Admin</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      %errorlevel%==2 goto :Domain</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      %errorlevel%==3 goto :Local</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">goto 
+      Exit</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:Admin</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+      echo<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">欢迎管理员</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+      goto Exit</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:Domain</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+      echo<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">欢迎域用户</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+      goto Exit</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:Local</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+      echo<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">欢迎注册用户</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+      goto Exit</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:Exit</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">endlocal</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 0.25in; TEXT-INDENT: -0.25in"><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">6.</SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 7pt; FONT-FAMILY: Calibri, sans-serif; COLOR: rgb(22,100,136)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">Rem 
+and Arguments.</SPAN></STRONG></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1. 
+REM [comment]:<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">批处理文件的注释符，可以使用</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">“::”<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">来代替</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">REM</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">2.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">参数。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%0</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">对应文件名本身，其他分别对应一个参数值，支持</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">255</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">个参数。</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR style="break-inside: avoid">
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Test.cmd</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">2</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">3</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">…</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">n</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">…</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">255</SPAN></P></TD></TR>
+  <TR style="break-inside: avoid">
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%0</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%1</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%2</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%3</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">…</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%n</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">…</SPAN></P></TD>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT-COLOR: rgb(212,208,200); PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%255</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">3.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">文件名参数扩展。</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">当使用文件名作参数的时候，可以使用如下文件名扩展。下面的例子扩展</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%1</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">，其实对所有的参数都可以进行类似的扩展。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR><BR>%~f1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">扩展</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%1<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">为带路径的全名。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR>%~d1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">只显示磁盘名称。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR>%~p1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">只显示文件路径。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR>%~n1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">只显示文件名，不包括后缀名，也不包括路径。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR>%~x1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">只显示后缀名。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR>%~s1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">变成短文件名，将包含“</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">~</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">”符号。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR>%~1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">有时候文件名包含空格是，会对文件名加双引号。这个功能是去掉双引号。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR>%~a1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">显示文件的属性。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR>%~t1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">显示文件的修改时间。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR>%~z1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">显示文件的大小。</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><BR>&nbsp;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">上面的扩展是可以组合的</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%~dp1 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">扩展</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%1<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">为磁盘名称和路径名。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%~nx2 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">扩展</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%2<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">为文件名和文件后缀名。</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">::Test.bat</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">::Example: 
+      test.bat test.bat</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">setlocal</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">set 
+      fn=%~f1</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      %fn%</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">endlocal</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 0.25in; TEXT-INDENT: -0.25in"><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">7.</SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 7pt; FONT-FAMILY: Calibri, sans-serif; COLOR: rgb(22,100,136)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">IF 
+语句</SPAN></STRONG></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">详细语法：</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">File 
+      syntax&nbsp;&nbsp;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      [NOT] EXIST filename command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      [NOT] EXIST filename (command) ELSE (command)</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">String 
+      syntax&nbsp;&nbsp;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      [/I] [NOT] item1==item2 command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      [/I] item1 compare-op item2 command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      [/I] item1 compare-op item2 (command) ELSE (command)</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Error 
+      Check Syntax</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      [NOT] DEFINED variable command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      [NOT] ERRORLEVEL number command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      CMDEXTVERSION number command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Key</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">/I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      :<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">比较时不考虑文件名大小写，即大小写不敏感。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">compare-op 
+      :<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">逻辑比较</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">EQU 
+      : equal<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">等于</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">NEQ 
+      : not equal<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">不等于</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">LSS 
+      : less than<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">小于</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">LEQ 
+      : less than or equal</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">小于或等于</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">GTR 
+      : greater than<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">大于</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">GEQ 
+      : greater than or equal</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">大于或等于</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">2.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">例子</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">(</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">可以看出</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">If</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">语句也是一条语句</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">)</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      EXIST filename (del filename) ELSE ( echo The file was not 
+      found.)</SPAN></P></TD></TR>
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-RIGHT: windowtext 1pt solid; BORDER-TOP-COLOR: rgb(212,208,200); WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">IF 
+      EXIST filename (</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">del 
+      filename</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">) 
+      ELSE (</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">echo 
+      The file was not found.</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">)</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 0.25in; TEXT-INDENT: -0.25in"><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">8.</SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 7pt; FONT-FAMILY: Calibri, sans-serif; COLOR: rgb(22,100,136)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">For 
+循环</SPAN></STRONG></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">详细语法：</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 494.6pt; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=659>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR-Files</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR 
+      %%parameter IN (set) DO command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR-Files-Rooted 
+      at Path&nbsp;&nbsp;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR 
+      /R [[drive:]path] %%parameter IN (set) DO command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR-Folders</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR 
+      /D %%parameter IN (folder_set) DO command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR-List 
+      of numbers&nbsp;&nbsp;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR 
+      /L %%parameter IN (start,step,end) DO command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR-File 
+      contents&nbsp;&nbsp;</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR 
+      /F ["options"] %%parameter IN (filenameset) DO command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR 
+      /F ["options"] %%parameter IN ("Text string to process") DO 
+      command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">FOR-Command 
+      Results</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      FOR /F ["options"] %%parameter IN ('command to process') DO 
+      command</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">eol=c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">行首注释符。如果有这个注释符，这一行不做处理。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">skip=n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">制定前</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">n</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">行跳过，不处理</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">delims=xxx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">分隔符集合。默认分隔符是空格和</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Tab</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">tokens=x,y,m-n&nbsp;-<SPAN 
+      class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">选择哪一块用于循环操作。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">usebackq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      -<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">当文件名有空格需要使用双引号时，使用</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">usebackq</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">把双引号内的东西当文件处理，否则当字符串处理。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt">&nbsp;</P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">注意</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">在批处理文件中，参数使用</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%%parameter</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">，而当你拿到命令行使用的时候，使用</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%parameter</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">，就是一个百分号的区别。同时变量名区分大小写，所以</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">%g</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">和</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">G</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">是不相同的。</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">(set)&nbsp;</SPAN><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">说明是文件集合，一个文件或多个文件，还可以对文件名使用通配符。</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">2.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">例子：</SPAN></P>
+<TABLE 
+style="BORDER-TOP: silver 1px solid; BORDER-RIGHT: silver 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: silver 1px solid; MARGIN: auto auto auto 0.5in; BORDER-LEFT: silver 1px solid" 
+cellSpacing=0 cellPadding=0 border=0>
+  
+  <TR>
+    <TD     style="FONT-SIZE: 14px; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; WIDTH: 6.15in; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: windowtext 1pt solid; PADDING-BOTTOM: 0in; PADDING-TOP: 0in; PADDING-LEFT: 5.4pt; BORDER-LEFT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent"     vAlign=top width=590>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">@echo 
+      off</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">setlocal</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">for 
+      %%G in (*.bat *.txt) do echo %%G</SPAN></P>
+      <P style="MARGIN: 0in 0in 0pt; TEXT-INDENT: 0px"><SPAN 
+      style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">endlocal</SPAN></P></TD></TR></TABLE>
+<P style="MARGIN: 0in 0in 7.5pt; TEXT-INDENT: 0px">&nbsp;</P>
+<P style="MARGIN: 0in 0in 0pt 0.25in; TEXT-INDENT: -0.25in"><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">9.</SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 7pt; FONT-FAMILY: Calibri, sans-serif; COLOR: rgb(22,100,136)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN></STRONG><STRONG><SPAN 
+style="FONT-SIZE: 18pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(22,100,136)">Net.</SPAN></STRONG></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">1.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">管理服务</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">: 
+Net start, stop, pause, continue [service]</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">2.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">连接到一个共享文件：</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">Net 
+use</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NET USE [</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">磁盘名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:] 
+\\</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">共享名称</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">[\</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">子目录名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">] 
+[</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">密码</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">] 
+[/USER:[</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">域名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">\]</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">用户名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">]</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NET USE</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">磁盘名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:]: 
+/delete</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">3. 
+Net share:<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">显示本地的所有共享，包括隐藏的共享。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">4. 
+Net share ShareName:<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">显示共享的相关信息。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">5.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">创建一个本地共享</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">: 
+NET SHARE sharename=drive:path /REMARK:"text" [/CACHE:Manual | Automatic | No 
+]</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">6.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">修改用户数量限制和标示。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NET SHARE sharename /USERS:number 
+/REMARK:"text"</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NET SHARE sharename /UNLIMITED 
+/REMARK:"text"</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">7.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">删除共享</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">: 
+NET SHARE {sharename | devicename | drive:path} /DELETE</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">8. 
+Net view \\计算机名:<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">列出远程机器的所有共享。</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">9. 
+Net localgroup:<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">把一个账户加入一个本地组，如加入管理员组：</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">net 
+localgroup administrators<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">DomainName\UserName</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>/add</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">10.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">机器重命名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">:<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><STRONG><SPAN 
+style="COLOR: rgb(51,51,51)">netdom</SPAN></STRONG><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>renamecomputer<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">原机器名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">/newname:</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">修改后的机器名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">/UserD:</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">user</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">/PasswordD:</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(0,176,80)">password</SPAN></P>
+<P style="MARGIN: 0in 0in 0pt 60pt; TEXT-INDENT: -24pt"><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">11.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(51,51,51)">加入域</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">: 
+net dom join<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">计算机名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)">/domain:</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">域名</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>/UserD:</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">域管理员账户</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: Verdana, sans-serif; COLOR: rgb(51,51,51)"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>/PasswordD:</SPAN><SPAN 
+style="FONT-SIZE: 10.5pt; FONT-FAMILY: SimSun; COLOR: rgb(0,176,80)">域管理员密码</SPAN></P></DIV></DIV></body>
+</html>

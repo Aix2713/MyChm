@@ -1,0 +1,172 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>validators</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P><FONT style="BACKGROUND-COLOR: #ffff00" color=#ff0000>给字段添加验证，并在前端验证字段合法性</FONT></P>
+<P>1、给字段添加验证</P>
+<P>a、</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #9cdcfe">fields:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+[{</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">name:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'name'</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'string'</SPAN><SPAN 
+style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">validators:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+{</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'presence'</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">},</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">},</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">{</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">name:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'code'</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'string'</SPAN><SPAN 
+style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">validators:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+{</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'presence'</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">},</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">],</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">data:</SPAN><SPAN style="COLOR: #d4d4d4"> [{</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">code:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'1'</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">name:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'远程'</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}, {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">code:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'2'</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">name:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'远程'</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}],</SPAN></DIV></DIV>
+<P>b、</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #9cdcfe">model:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">Ext</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #dcdcaa">define</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">'User'</SPAN><SPAN 
+style="COLOR: #d4d4d4">, {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">extend:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'Ext.data.Model'</SPAN><SPAN 
+style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">fields:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+[</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">{ </SPAN><SPAN 
+style="COLOR: #9cdcfe">name:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'name'</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'string'</SPAN><SPAN style="COLOR: #d4d4d4"> 
+},</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">{ </SPAN><SPAN 
+style="COLOR: #9cdcfe">name:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'code'</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'string'</SPAN><SPAN style="COLOR: #d4d4d4"> 
+}</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">],</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">validators:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+{</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">name:</SPAN><SPAN style="COLOR: #d4d4d4"> { </SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'presence'</SPAN><SPAN style="COLOR: #d4d4d4"> 
+}</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">},</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}),</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">data:</SPAN><SPAN style="COLOR: #d4d4d4"> [{</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">code:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'1'</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">name:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'远程'</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}, {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">code:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'2'</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">name:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'远程'</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}],</SPAN></DIV></DIV>
+<P>&nbsp;</P>
+<P>2、前端验证合法性</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">me</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #569cd6">this</SPAN><SPAN 
+style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">view</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #569cd6">this</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">getView</SPAN><SPAN 
+style="COLOR: #d4d4d4">().</SPAN><SPAN style="COLOR: #dcdcaa">down</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">'grid'</SPAN><SPAN 
+style="COLOR: #d4d4d4">),</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">gStore</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">me</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">getViewModel</SPAN><SPAN 
+style="COLOR: #d4d4d4">().</SPAN><SPAN style="COLOR: #dcdcaa">get</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #ce9178">'gridStore'</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #4ec9b0">console</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">log</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #9cdcfe">gStore</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">getData</SPAN><SPAN 
+style="COLOR: #d4d4d4">().</SPAN><SPAN style="COLOR: #dcdcaa">getAt</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #b5cea8">0</SPAN><SPAN 
+style="COLOR: #d4d4d4">).</SPAN><SPAN style="COLOR: #dcdcaa">isValid</SPAN><SPAN 
+style="COLOR: #d4d4d4">());</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #4ec9b0">console</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">log</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #9cdcfe">gStore</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">getData</SPAN><SPAN 
+style="COLOR: #d4d4d4">().</SPAN><SPAN style="COLOR: #dcdcaa">getAt</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #b5cea8">0</SPAN><SPAN 
+style="COLOR: #d4d4d4">).</SPAN><SPAN 
+style="COLOR: #dcdcaa">validate</SPAN><SPAN 
+style="COLOR: #d4d4d4">());</SPAN></DIV></DIV></body>
+</html>

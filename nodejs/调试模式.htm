@@ -1,0 +1,101 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>调试模式</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H2 id=关于调试 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(74,190,195); FONT: bold 21px/0 serif; MARGIN: 30px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">关于调试</H2>
+<HR 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当我们只专注于前端的时候，我们习惯性F12，这会给我们带来安全与舒心的感觉。</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">但是当我们使用NodeJs来开发后台的时候，我想噩梦来了。</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">但是也别泰国担心，NodeJs的调试是很不方便！这是肯定的。</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">但是还好，我们有##<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><A 
+style="TEXT-DECORATION: none; COLOR: rgb(28,148,162)" 
+href="https://github.com/node-inspector/node-inspector">node-inspector</A><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>##来帮助我们解决一部分的调试问题，但是对于异步能力很强的NodeJs它还是有点力不从心。</P>
+<H2 id=node-inspector 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(74,190,195); FONT: bold 21px/0 serif; MARGIN: 30px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">node-inspector</H2>
+<HR 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+
+<H3 id=安装node-inspector 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(74,190,195); FONT: bold 16px/1.5 serif; MARGIN: 10px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">安装node-inspector</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">依旧是通过npm来全局安装node-inspector</P>
+<DIV class=sourceCode 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><PRE class="sourceCode js" style="WORD-WRAP: break-word; FONT-SIZE: 1em; WHITE-SPACE: pre-wrap; MARGIN: 10px 0px"><CODE class="sourceCode javascript hljs" style="FONT-SIZE: 12px !important; BORDER-TOP: rgb(204,204,204) 1px solid; HEIGHT: auto; FONT-FAMILY: 'Courier New', sans-serif !important; BORDER-RIGHT: rgb(204,204,204) 1px solid; VERTICAL-ALIGN: middle; BACKGROUND: rgb(255,255,255); OVERFLOW-X: auto; BORDER-BOTTOM: rgb(204,204,204) 1px solid; COLOR: rgb(0,0,0); PADDING-BOTTOM: 5px !important; PADDING-TOP: 5px !important; PADDING-LEFT: 5px !important; MARGIN: auto; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.5 !important; PADDING-RIGHT: 5px !important; border-radius: 3px">npm install <SPAN class=op>-</SPAN>g node<SPAN class=op>-</SPAN>inspector</CODE></PRE></DIV>
+<H3 id=测试代码 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(74,190,195); FONT: bold 16px/1.5 serif; MARGIN: 10px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">测试代码</H3>
+<DIV class=sourceCode 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><PRE class="sourceCode js" style="WORD-WRAP: break-word; FONT-SIZE: 1em; WHITE-SPACE: pre-wrap; MARGIN: 10px 0px"><CODE class="sourceCode javascript hljs" style="FONT-SIZE: 12px !important; BORDER-TOP: rgb(204,204,204) 1px solid; HEIGHT: auto; FONT-FAMILY: 'Courier New', sans-serif !important; BORDER-RIGHT: rgb(204,204,204) 1px solid; VERTICAL-ALIGN: middle; BACKGROUND: rgb(255,255,255); OVERFLOW-X: auto; BORDER-BOTTOM: rgb(204,204,204) 1px solid; COLOR: rgb(0,0,0); PADDING-BOTTOM: 5px !important; PADDING-TOP: 5px !important; PADDING-LEFT: 5px !important; MARGIN: auto; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.5 !important; PADDING-RIGHT: 5px !important; border-radius: 3px"><SPAN class=co><SPAN class=hljs-comment style="COLOR: rgb(160,161,167); FONT-STYLE: italic"><SPAN class=hljs-comment style="COLOR: rgb(160,161,167); FONT-STYLE: italic">//event.js</SPAN></SPAN></SPAN>
+<SPAN class=kw><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)"><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)">var</SPAN></SPAN></SPAN> events <SPAN class=op>=</SPAN> <SPAN class=at><SPAN class=hljs-built_in style="COLOR: rgb(193,132,1)"><SPAN class=hljs-built_in style="COLOR: rgb(193,132,1)">require</SPAN></SPAN></SPAN>(<SPAN class=st><SPAN class=hljs-string style="COLOR: rgb(80,161,79)"><SPAN class=hljs-string style="COLOR: rgb(80,161,79)">'events'</SPAN></SPAN></SPAN>)<SPAN class=op>;</SPAN>
+<SPAN class=kw><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)"><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)">var</SPAN></SPAN></SPAN> util <SPAN class=op>=</SPAN> <SPAN class=at><SPAN class=hljs-built_in style="COLOR: rgb(193,132,1)"><SPAN class=hljs-built_in style="COLOR: rgb(193,132,1)">require</SPAN></SPAN></SPAN>(<SPAN class=st><SPAN class=hljs-string style="COLOR: rgb(80,161,79)"><SPAN class=hljs-string style="COLOR: rgb(80,161,79)">'util'</SPAN></SPAN></SPAN>)<SPAN class=op>;</SPAN>
+
+
+<SPAN class=kw><SPAN class=hljs-function><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)"><SPAN class=hljs-function><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)">function</SPAN></SPAN></SPAN></SPAN></SPAN><SPAN class=hljs-function><SPAN class=hljs-function> </SPAN></SPAN><SPAN class=at><SPAN class=hljs-function><SPAN class=hljs-title style="FONT-WEIGHT: bold; COLOR: rgb(64,120,242)"><SPAN class=hljs-function><SPAN class=hljs-title style="FONT-WEIGHT: bold; COLOR: rgb(64,120,242)">tianxiasan</SPAN></SPAN></SPAN></SPAN></SPAN><SPAN class=hljs-function><SPAN class=hljs-function>(</SPAN><SPAN class=hljs-params><SPAN class=hljs-function><SPAN class=hljs-params>name</SPAN></SPAN></SPAN><SPAN class=hljs-function>)</SPAN></SPAN><SPAN class=op>{</SPAN>
+    <SPAN class=kw><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)"><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)">this</SPAN></SPAN></SPAN>.<SPAN class=at>name</SPAN> <SPAN class=op>=</SPAN> name<SPAN class=op>;</SPAN>
+    <SPAN class=va>events</SPAN>.<SPAN class=va>EventEmitter</SPAN>.<SPAN class=at>call</SPAN>(<SPAN class=kw><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)"><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)">this</SPAN></SPAN></SPAN>)<SPAN class=op>;</SPAN>
+<SPAN class=op>}</SPAN>
+<SPAN class=va>util</SPAN>.<SPAN class=at>inherits</SPAN>(Restaurant<SPAN class=op>,</SPAN> <SPAN class=va>events</SPAN>.<SPAN class=at>EventEmitter</SPAN>)<SPAN class=op>;</SPAN>
+
+
+<SPAN class=co><SPAN class=hljs-comment style="COLOR: rgb(160,161,167); FONT-STYLE: italic"><SPAN class=hljs-comment style="COLOR: rgb(160,161,167); FONT-STYLE: italic">//定义角色</SPAN></SPAN></SPAN>
+<SPAN class=kw><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)"><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)">var</SPAN></SPAN></SPAN> restaurant <SPAN class=op>=</SPAN> <SPAN class=kw><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)"><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)">new</SPAN></SPAN></SPAN> <SPAN class=at>tianxiasan</SPAN>(<SPAN class=st><SPAN class=hljs-string style="COLOR: rgb(80,161,79)"><SPAN class=hljs-string style="COLOR: rgb(80,161,79)">'奕剑'</SPAN></SPAN></SPAN>)<SPAN class=op>;</SPAN></CODE></PRE></DIV>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">这就是我们要调试的代码</P>
+<H3 id=启动node-inspector 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(74,190,195); FONT: bold 16px/1.5 serif; MARGIN: 10px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">启动node-inspector</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">先启动node-inspector</P>
+<DIV class=sourceCode 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><PRE class="sourceCode js" style="WORD-WRAP: break-word; FONT-SIZE: 1em; WHITE-SPACE: pre-wrap; MARGIN: 10px 0px"><CODE class="sourceCode javascript hljs" style="FONT-SIZE: 12px !important; BORDER-TOP: rgb(204,204,204) 1px solid; HEIGHT: auto; FONT-FAMILY: 'Courier New', sans-serif !important; BORDER-RIGHT: rgb(204,204,204) 1px solid; VERTICAL-ALIGN: middle; BACKGROUND: rgb(255,255,255); OVERFLOW-X: auto; BORDER-BOTTOM: rgb(204,204,204) 1px solid; COLOR: rgb(0,0,0); PADDING-BOTTOM: 5px !important; PADDING-TOP: 5px !important; PADDING-LEFT: 5px !important; MARGIN: auto; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.5 !important; PADDING-RIGHT: 5px !important; border-radius: 3px">C<SPAN class=op>:</SPAN>\Users\Administrator<SPAN class=op>&gt;</SPAN>node<SPAN class=op>-</SPAN>inspector
+Node Inspector <SPAN class=va>v0</SPAN><SPAN class=hljs-number style="COLOR: rgb(152,104,1)"><SPAN class=hljs-number style="COLOR: rgb(152,104,1)">.</SPAN></SPAN><SPAN class=fl><SPAN class=hljs-number style="COLOR: rgb(152,104,1)"><SPAN class=hljs-number style="COLOR: rgb(152,104,1)">12</SPAN></SPAN><SPAN class=hljs-number style="COLOR: rgb(152,104,1)"><SPAN class=hljs-number style="COLOR: rgb(152,104,1)">.8</SPAN></SPAN></SPAN>
+Visit http<SPAN class=op>:</SPAN><SPAN class=co><SPAN class=hljs-comment style="COLOR: rgb(160,161,167); FONT-STYLE: italic"><SPAN class=hljs-comment style="COLOR: rgb(160,161,167); FONT-STYLE: italic">//127.0.0.1:8080/?port=5858 to start debugging.</SPAN></SPAN></SPAN></CODE></PRE></DIV>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">好了，启动成功。</P>
+<H3 id=启动nodejs的debug模式 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(74,190,195); FONT: bold 16px/1.5 serif; MARGIN: 10px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">启动nodejs的debug模式</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">重新开个终端,再来启动nodejs提供的debug调试功能</P>
+<DIV class=sourceCode 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><PRE class="sourceCode js" style="WORD-WRAP: break-word; FONT-SIZE: 1em; WHITE-SPACE: pre-wrap; MARGIN: 10px 0px"><CODE class="sourceCode javascript hljs" style="FONT-SIZE: 12px !important; BORDER-TOP: rgb(204,204,204) 1px solid; HEIGHT: auto; FONT-FAMILY: 'Courier New', sans-serif !important; BORDER-RIGHT: rgb(204,204,204) 1px solid; VERTICAL-ALIGN: middle; BACKGROUND: rgb(255,255,255); OVERFLOW-X: auto; BORDER-BOTTOM: rgb(204,204,204) 1px solid; COLOR: rgb(0,0,0); PADDING-BOTTOM: 5px !important; PADDING-TOP: 5px !important; PADDING-LEFT: 5px !important; MARGIN: auto; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.5 !important; PADDING-RIGHT: 5px !important; border-radius: 3px">C<SPAN class=op>:</SPAN>\Users\Administrator\Desktop<SPAN class=op>&gt;</SPAN>node <SPAN class=op>--</SPAN>debug<SPAN class=op>-</SPAN>brk <SPAN class=va>event</SPAN>.<SPAN class=at>js</SPAN>
+Debugger listening on port <SPAN class=dv><SPAN class=hljs-number style="COLOR: rgb(152,104,1)"><SPAN class=hljs-number style="COLOR: rgb(152,104,1)">5858</SPAN></SPAN></SPAN></CODE></PRE></DIV>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">--debug-brk的意思是使用调试模式启动event.js 
+并在第一行断点。</P>
+<H3 id=添加debugger 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(74,190,195); FONT: bold 16px/1.5 serif; MARGIN: 10px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">添加debugger</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">在我们需要断点的地方添加<CODE 
+style="FONT-SIZE: 12px !important; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: 'Courier New', sans-serif !important; BORDER-RIGHT: rgb(204,204,204) 1px solid; VERTICAL-ALIGN: middle; BORDER-BOTTOM: rgb(204,204,204) 1px solid; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; PADDING-LEFT: 5px !important; MARGIN: 1px 5px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: inline-block; LINE-HEIGHT: 1.8; PADDING-RIGHT: 5px !important; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 3px">debugger</CODE>即可。会自动断点到debugger的地方。</P>
+<DIV class=sourceCode 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><PRE class="sourceCode js" style="WORD-WRAP: break-word; FONT-SIZE: 1em; WHITE-SPACE: pre-wrap; MARGIN: 10px 0px"><CODE class="sourceCode javascript hljs" style="FONT-SIZE: 12px !important; BORDER-TOP: rgb(204,204,204) 1px solid; HEIGHT: auto; FONT-FAMILY: 'Courier New', sans-serif !important; BORDER-RIGHT: rgb(204,204,204) 1px solid; VERTICAL-ALIGN: middle; BACKGROUND: rgb(255,255,255); OVERFLOW-X: auto; BORDER-BOTTOM: rgb(204,204,204) 1px solid; COLOR: rgb(0,0,0); PADDING-BOTTOM: 5px !important; PADDING-TOP: 5px !important; PADDING-LEFT: 5px !important; MARGIN: auto; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.5 !important; PADDING-RIGHT: 5px !important; border-radius: 3px"><SPAN class=va>server</SPAN>.<SPAN class=at>on</SPAN>(<SPAN class=st><SPAN class=hljs-string style="COLOR: rgb(80,161,79)"><SPAN class=hljs-string style="COLOR: rgb(80,161,79)">'listening'</SPAN></SPAN></SPAN><SPAN class=op>,</SPAN> onListening)<SPAN class=op>;</SPAN>
+<SPAN class=cf><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)"><SPAN class=hljs-keyword style="FONT-WEIGHT: bold; COLOR: rgb(166,38,164)">debugger</SPAN></SPAN></SPAN></CODE></PRE></DIV>
+<H3 id=查看效果 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(74,190,195); FONT: bold 16px/1.5 serif; MARGIN: 10px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">查看效果</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">这样两个程序之间通过socket来通信。我们就可以在我们属性的谷歌开发者中工具中来调试NodeJs了。<BR><IMG 
+style="MAX-WIDTH: 900px; BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" 
+src="http://images2015.cnblogs.com/blog/743207/201612/743207-20161210151216772-77119725.png"></P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 16px/28px 微软雅黑, Verdana, Helvetica, sans-serif, Arial; MARGIN: 10px auto; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,213); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">多么熟悉的界面，下面的调试流程与Js调试差不多。</P></body>
+</html>

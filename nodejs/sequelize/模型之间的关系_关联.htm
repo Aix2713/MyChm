@@ -1,0 +1,1248 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>模型之间的关系/关联</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H1 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 36px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 20px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">Sequelize 
+中文API文档－3. 模型（表）之间的关系/关联</H1>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><I 
+title=发布时间 class="fa fa-clock-o" 
+style="BOX-SIZING: border-box; FONT-FAMILY: FontAwesome; FONT-WEIGHT: 400; FONT-STYLE: normal; DISPLAY: inline-block; LINE-HEIGHT: 1; -webkit-font-smoothing: antialiased"></I>&nbsp;2016年05月22日 
+&nbsp;&nbsp;<SPAN class=Apple-converted-space>&nbsp;</SPAN><I title=阅读 
+class="fa fa-eye" 
+style="BOX-SIZING: border-box; FONT-FAMILY: FontAwesome; FONT-WEIGHT: 400; FONT-STYLE: normal; DISPLAY: inline-block; LINE-HEIGHT: 1; -webkit-font-smoothing: antialiased"></I><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>12620 &nbsp;&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN title="" 
+style="BOX-SIZING: border-box" data-toggle="tooltip" 
+data-original-title="声明：本站文章及示例基于特定的环境或软件版本，本站不为因参考本站文章引起的错误或损失负责。在使用前请自行验证是否可用于实际环境。如有纰漏或错误，欢迎进群指正、交流。"><I 
+class="fa fa-exclamation-circle" 
+style="BOX-SIZING: border-box; FONT-FAMILY: FontAwesome; FONT-WEIGHT: 400; FONT-STYLE: normal; DISPLAY: inline-block; LINE-HEIGHT: 1; -webkit-font-smoothing: antialiased"></I>&nbsp;声明</SPAN></P><ARTICLE 
+class=post 
+style="BOX-SIZING: border-box; BORDER-TOP: rgb(204,204,204) 1px dashed; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; PADDING-LEFT: 0px; MARGIN: 0px 0px 20px; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV class=post_content style="BOX-SIZING: border-box">
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">模型（<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model</CODE>）之间存在各种各样的关系，如：一对一(One-To-One 
+）、一对多（One-To-Many）等。模型间的关系本质上是对其代表的数据库中表之间的关系描述，通过这些关系可以实现数据库中表之间主/外键约束的创建。查询时也可以基于这些关系，生成在数据库中执行的连接查询或复合查询SQL语句。</P>
+<OL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><A 
+  style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+  href="https://itbilu.com/nodejs/npm/41qaV3czb.html#associations">关系/关联的使用</A>
+  <UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#associations-one-to-one">1.1 
+    一对一(One-To-One)关联</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#associations-one-to-many">1.2 
+    一对多(One-To-Many)关联</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#associations-many-to-many">1.3 
+    多对多(Belongs-To-Many)关联</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#associations-scopes">1.4 
+    Scopes - 作用域</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#associations-naming">1.5 
+    命名策略</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#associations-associating-objects">1.6 
+    关联对象</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#associations-associating-check">1.7 
+    关系检查</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#associations-creating-associations">1.8 
+    通过关联创建实例</A></LI></UL></LI>
+  <LI style="BOX-SIZING: border-box"><A 
+  style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+  href="https://itbilu.com/nodejs/npm/41qaV3czb.html#api">关系/关联相关的API</A>
+  <UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#api-mixin">2.1 
+    综合介绍</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#api-hasOne">2.2<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.hasOne()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>－ 拥有一个</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#api-belongsTo">2.3<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.belongsTo()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>－ 属于</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#api-hasMany">2.4<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.hasMany()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>－ 拥有多个</A></LI>
+    <LI style="BOX-SIZING: border-box"><A 
+    style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+    href="https://itbilu.com/nodejs/npm/41qaV3czb.html#api-belongsToMany">2.5<SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN><CODE 
+    style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.belongsToMany()</CODE><SPAN 
+    class=Apple-converted-space>&nbsp;</SPAN>－ 多对多</A></LI></UL></LI></OL>
+<H3 id=associations 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 24px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 20px; LINE-HEIGHT: 1.1">1. 
+关系/关联的使用</H3>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">Sequelize 
+中的模型存在多种关系。在一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">User.hasOne(Project)</CODE>形式的调用中，正在调用的模型<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">User</CODE>是<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源模型</CODE>而做为参数被传入的模型是<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标模型</CODE>。</P>
+<H4 id=associations-one-to-one 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.1 
+一对一(One-To-One)关联</H4>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">一对一关联是由一个单一的外键，实现两个模型之间的精确关联。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">BelongsTo - 属于</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">BelongsTo关联表示一对一关系的外键存在于<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源模型</CODE>。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">如，下例中<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Player</CODE>是通过外键关联的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Team</CODE>的一部分：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Player = this.sequelize.define('player', {/* attributes */})
+  , Team  = this.sequelize.define('team', {/* attributes */});
+
+Player.belongsTo(Team); // 会为Player添加一个teamId 属性以保持与Team 主键的关系</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">外键</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">默认情况下，一个属于关系的外键将从目标模型的名称和主键名称生成。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">默认命名使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">驼峰式命名</CODE>，而在源模型中添加了<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">underscored: 
+true</CODE>配置，将使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">蛇型命名</CODE>。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var User = this.sequelize.define('user', {/* attributes */})
+  , Company  = this.sequelize.define('company', {/* attributes */});
+
+User.belongsTo(Company); // 会为user 添加 companyId 属性
+
+var User = this.sequelize.define('user', {/* attributes */}, {underscored: true})
+  , Company  = this.sequelize.define('company', {
+    uuid: {
+      type: Sequelize.UUID,
+      primaryKey: true
+    }
+  });
+
+User.belongsTo(Company); // 会为user 添加 company_uuid 属性 </PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在定义中使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">as</CODE>命名时，会将其做为目标模型的名称：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var User = this.sequelize.define('user', {/* attributes */})
+  , UserRole  = this.sequelize.define('userRole', {/* attributes */});
+
+User.belongsTo(UserRole, {as: 'role'}); // 会为 user添加 roleId 属性而不是 userRoleId</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在任命情况下，使用使用了<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">foreignKey</CODE>选项，外键名都会使用此选项值。我可以在Sequelize 
+中像下面这样使用外键：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var User = this.sequelize.define('user', {/* attributes */})
+  , Company  = this.sequelize.define('company', {/* attributes */});
+
+User.belongsTo(Company, {foreignKey: 'fk_company'}); // 为User 添加fk_company 外键</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">目标键</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">目标键是位于目标模型上通过源模型外键列指向的列。默认情况下，目标键是会<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">belongsTo</CODE>关系中目标模型的主键。要使用自定义列，请用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">targetKey</CODE>选项来指定：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var User = this.sequelize.define('user', {/* attributes */})
+  , Company  = this.sequelize.define('company', {/* attributes */});
+
+User.belongsTo(Company, {foreignKey: 'fk_companyname', targetKey: 'name'}); // 为User 添加 fk_companyname 目标键</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">HasOne - 拥有一个</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">HasOne关联表示一对一关系的外键存在于<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标模型</CODE>。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var User = sequelize.define('user', {/* ... */})
+var Project = sequelize.define('project', {/* ... */})
+ 
+// hasOne 关系
+Project.hasOne(User)
+
+/*
+  在这个示例中，hasOne会添加一个projectId 属性到User模型中
+  另外，Project.prototype 中会增加根据传入的第一个定义参数生成的访问器方法 getUser 和 setUser 置。
+  如果启用了underscore 设置，添加的属性会是 project_id 而不是 projectId.
+
+  外键会存在于users 表中
+
+  你同样可以自定义外键，如：你想使用一个已存在数据库:
+*/
+ 
+Project.hasOne(User, { foreignKey: 'initiator_id' })
+ 
+/*
+  因为 Sequelize 会访问器使用模型名（定义时的第一个参数）,
+  如果不使用这个名称，可以在hasOne 的选项中指定:
+*/
+ 
+Project.hasOne(User, { as: 'Initiator' })
+// 这时会有 Project#getInitiator 和 Project#setInitiator
+ 
+// 或者可以定义一些自引用
+var Person = sequelize.define('person', { /* ... */})
+ 
+Person.hasOne(Person, {as: 'Father'})
+// 会为Person 增加一个FatherId 属性
+// 同样可以自定义外键：
+Person.hasOne(Person, {as: 'Father', foreignKey: 'DadId'})
+// 会为Person 增加一个 DadId 属性
+ 
+// 这两种情况下都会有以下两个方法:
+Person#setFather
+Person#getFather
+ 
+// 如果想对一个表做两次连接查询:
+Team.hasOne(Game, {as: 'HomeTeam', foreignKey : 'homeTeamId'});
+Team.hasOne(Game, {as: 'AwayTeam', foreignKey : 'awayTeamId'});
+
+Game.belongsTo(Team);</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">虽然被称为HasOne 关联，但大多数 
+1:1关系中通常会使用BelongsTo 关联，因为BelongsTo 会在源模型中添加外键，而HasOne 则会在目标模型中添加外键。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">HasOne 与BelongsTo 
+的不同</STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在1:1 的关系中，可使用HasOne 
+或BelongsTo来定义。但它们的使用场景有所不同，下面通过一个例子来说明。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">我们有两张表，会别关联到<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Player</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Team</CODE>模型，定义如下：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Player = this.sequelize.define('player', {/* attributes */})
+  , Team  = this.sequelize.define('team', {/* attributes */});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在Sequelize 中我们可以<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标</CODE>模型的形式将二者建立联系。如将<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Player</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>做为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源模型</CODE>，而将<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Team</CODE>做为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标模型</CODE>：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Player.belongsTo(Team);
+//Or
+Player.hasOne(Team);</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">或<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Team</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>做为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源模型</CODE>，而将<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Player</CODE>做为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标模型</CODE>：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Team.belongsTo(Player);
+//Or
+Team.hasOne(Player);</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">HasOne 和 BelongsTo 
+插入外键的位置有所不同。HasOne 会向<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标模型</CODE>中插入关联键，而BelongsTo 
+会向<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源模型</CODE>中插入关联键。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">一个演示HasOne 和 
+BelongsTo使用的示例：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Player = this.sequelize.define('player', {/* attributes */})
+  , Coach  = this.sequelize.define('coach', {/* attributes */})
+  , Team  = this.sequelize.define('team', {/* attributes */});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">假设<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Player</CODE>模型通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">teamId</CODE>列与其团队建立联系，每个团队的教练<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Coach</CODE>信息通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">coachId</CODE>列存储。在这些 
+1:1 场景中需要以不同的方式建立关系，因为模型外键的存储位置不同。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">当信息关联是存在于当前<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源模型</CODE>时，我们可以使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">belongsTo</CODE>。在上面示例中，<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Player</CODE>适合使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">belongsTo</CODE>，因为它有<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">teamId</CODE>列。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Player.belongsTo(Team)  // `teamId` 会添加到 Player / 源模型</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">当信息关联是存在于当前<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标模型</CODE>时，我们可以使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hasOne</CODE>。在上面示例中，<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Coach</CODE>适合使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hasOne</CODE>，因为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">model</CODE>模型中存储了它的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Coach</CODE>信息的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">coachId</CODE>字段。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Coach.hasOne(Team)  // `coachId` 会添加到 Team / 目标模型</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=associations-one-to-many 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.2 
+一对多(One-To-Many)关联</H4>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">One-To-Many关联是指一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源模型</CODE>连接多个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标模型</CODE>。反之目标模型都会有一个明确的源。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var User = sequelize.define('user', {/* ... */})
+var Project = sequelize.define('project', {/* ... */})
+ 
+// 定义 hasMany 关联
+Project.hasMany(User, {as: 'Workers'})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">会向 User 中添加一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">projectId</CODE>或<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">project_id</CODE>属性。Project 
+的实例中会有访问器<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">getWorkers</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>和<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">setWorkers</CODE>。这是一种单向关联方式，如果两个模型间还有其它关联方式请参考下面的多对多关系。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=associations-many-to-many 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.3 
+多对多(Belongs-To-Many)关联</H4>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">Belongs-To-Many 
+关联是指一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源模型</CODE>连接多个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标模型</CODE>。而且，目标模型也可以有多个相关的源。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Project.belongsToMany(User, {through: 'UserProject'});
+User.belongsToMany(Project, {through: 'UserProject'});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">这会创建一个新模型<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">UserProject</CODE>其中会<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">projectId</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">userId</CODE>两个外键。是否使用驼峰命名取决与相关联的两个表。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">定义<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">through</CODE>选项后，Sequelize会尝试自动生成名字，但并一定符合逻辑。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在本例中，会为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">User</CODE>添加方法<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">getUsers</CODE>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">setUsers</CODE>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">addUser</CODE>,<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">addUsers</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>to<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Project</CODE>, 
+and<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">getProjects</CODE>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">setProjects</CODE>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">addProject</CODE>, 
+and<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">addProjects</CODE></P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">有时我们会对连接的模型进行重命名，同样可以使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">as</CODE>实现。如，将User 
+命名为Workers ，将Project 命名为 Tasks：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User.belongsToMany(Project, { as: 'Tasks', through: 'worker_tasks', foreignKey: 'userId' })
+Project.belongsToMany(User, { as: 'Workers', through: 'worker_tasks', foreignKey: 'projectId' })</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">foreignKey</CODE>让你可以设置<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">through</CODE>关系中的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源模型</CODE>，而<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">otherKey</CODE>让你可以<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">through</CODE>关系中的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标模型</CODE>。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User.belongsToMany(Project, { as: 'Tasks', through: 'worker_tasks', foreignKey: 'userId', otherKey: 'projectId'})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">belongsToMany</CODE>同样可以用来定义自连接：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Person.belongsToMany(Person, { as: 'Children', through: 'PersonChildren' })
+// 这会创建 PersonChildren 表，其中存储了对象的 id</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">如果想为连接表添加更多属性，可以建立关联前在sequelize 
+中为连接表定义一个模型，这会告诉sequelize 使用这个表建立关联而不是创建新表：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User = sequelize.define('user', {})
+Project = sequelize.define('project', {})
+UserProjects = sequelize.define('userProjects', {
+    status: DataTypes.STRING
+})
+ 
+User.belongsToMany(Project, { through: UserProjects })
+Project.belongsToMany(User, { through: UserProjects })</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">要为user 添加一个新的project 
+并设置状态，可以在设置器中传入一个额外的对象，这个属性会包含在连接表中：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">user.addProject(project, { status: 'started' })</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">默认情况下会向UserProjects表中添加projectId 
+和 userId，并移除之前已定义的主键属性表并由两个表的主键组建唯一标识，且没有额外的PK 列。要强制为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">UserProjects</CODE>添加主键可以手工添加：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">UserProjects = sequelize.define('userProjects', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  status: DataTypes.STRING
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">Belongs-To-Many 
+可以基于<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">through</CODE>关系查询并可以选择查询属性：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User.findAll({
+  include: [{
+    model: Project,
+    through: {
+      attributes: ['createdAt', 'startedAt', 'finishedAt'],
+      where: {completed: true}
+    }
+  }]
+});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=associations-scopes 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.4 
+Scopes - 作用域</H4>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">关系作用域允许你设置一个作用范围（一组用于设置和创建的默认属性）。作用域同样也以放在通过 
+n:m 建立关系的表的关联模型（关联目标）中。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">1:m</STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">假设有Comment, Post 和 
+Image三个表，Comment表可以通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">commentable_id</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">commentable</CODE>字段分别关联image 
+或 post 表关联：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">this.Comment = this.sequelize.define('comment', {
+  title: Sequelize.STRING,
+  commentable: Sequelize.STRING,
+  commentable_id: Sequelize.INTEGER
+}, {
+  instanceMethods: {
+    getItem: function() {
+      return this['get' + this.get('commentable').substr(0, 1).toUpperCase() + this.get('commentable').substr(1)]();
+    }
+  }
+});
+
+this.Post.hasMany(this.Comment, {
+  foreignKey: 'commentable_id',
+  constraints: false,
+  scope: {
+    commentable: 'post'
+  }
+});
+this.Comment.belongsTo(this.Post, {
+  foreignKey: 'commentable_id',
+  constraints: false,
+  as: 'post'
+});
+
+this.Image.hasMany(this.Comment, {
+  foreignKey: 'commentable_id',
+  constraints: false,
+  scope: {
+    commentable: 'image'
+  }
+});
+this.Comment.belongsTo(this.Image, {
+  foreignKey: 'commentable_id',
+  constraints: false,
+  as: 'image'
+});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">constraints: 
+false</CODE>禁止了引用限制-因为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">commentable_id</CODE>列会引用多个表，所以不能添加<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">REFERENCES</CODE>选项限制它。注意，这样就为Image 
+-&gt; Comment 和 Post -&gt; Comment之间关系定义了一个作用域，<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">commentable:'image'</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">commentable:'post'</CODE>分别对应了不同的表。这个作用域会自动应用到关联函数中：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">image.getComments()
+SELECT * FROM comments WHERE commentable_id = 42 AND commentable = 'image';
+
+image.createComment({
+  title: 'Awesome!'
+})
+INSERT INTO comments (title, commentable_id, commentable) VALUES ('Awesome!', 42, 'image');
+
+image.addComment(comment);
+UPDATE comments SET commentable_id = 42, commentable = 'image'</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">而Comment模型的工具函数<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">getItem</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>会根据<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">commentable</CODE>的不同而进行简单的转换为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">getImage</CODE>或<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">getPost</CODE>。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">n:m</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">继续使用多态模型，一个标签(tag)表－一个项目(item)可以有多个标签，而一个标签也可以属于多个项目。</P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">下面是一个简单示例，一个Post模型和Tag模型，而现实中标签往往被关联到多个其它模型：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">ItemTag = sequelize.define('item_tag', {
+  tag_id: {
+    type: DataTypes.INTEGER,
+    unique: 'item_tag_taggable'
+  },
+  taggable: {
+    type: DataTypes.STRING,
+    unique: 'item_tag_taggable'
+  },
+  taggable_id: {
+    type: DataTypes.INTEGER,
+    unique: 'item_tag_taggable',
+    references: null
+  }
+});
+Tag = sequelize.define('tag', {
+  name: DataTypes.STRING
+});
+
+Post.belongsToMany(Tag, {
+  through: {
+    model: ItemTag,
+    unique: false,
+    scope: {
+      taggable: 'post'
+    }
+  },
+  foreignKey: 'taggable_id',
+  constraints: false
+});
+Tag.belongsToMany(Post, {
+  through: {
+    model: ItemTag,
+    unique: false
+  },
+  foreignKey: 'tag_id'
+});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">作用范围列(<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">taggable</CODE>)实关联到了<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">through</CODE>关系模型(<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">ItemTag</CODE>)。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">我们可以定义一个更严格的关联关系，如为post 
+应用获取所有<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">pending</CODE>状态的标签的作用范围：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Post.hasMany(Tag, {
+  through: {
+    model: ItemTag,
+    unique: false,
+    scope: {
+      taggable: 'post'
+    }
+  },
+  scope: {
+    status: 'pending'
+  },
+  as: 'pendingTags',
+  foreignKey: 'taggable_id',
+  constraints: false
+});
+
+Post.getPendingTags();</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">SELECT `tag`.*  INNER JOIN `item_tags` AS `item_tag`
+ON `tag`.`id` = `item_tag`.`tagId`
+  AND `item_tag`.`taggable_id` = 42
+  AND `item_tag`.`taggable` = 'post'
+WHERE (`tag`.`status` = 'pending');</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=associations-naming 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.5 
+命名策略</H4>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">默认情况下，Sequelize会使用模型名（名称通过<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="http://itbilu.com/nodejs/core/VkYIaRPz-.html#api-instance-define" 
+target=_blank>sequelize.define</A>）来识别模型并与其它模型建立关联。如，一个名为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">user</CODE>的模型，会向其实例添加<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">get/set/add 
+User</CODE>等函数，且一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.user</CODE>属性会在预加载模型中，而对于一个名为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">User</CODE>模型来说会添加相同的函数，但预加载中会使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.User</CODE>属性。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">我在前面介绍过，可以使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">as</CODE>对模型起一个别名。在单一的关系中（hasOne或belongsTo），别名应该使用单数形式，而在多重关系中（hasMany）应该使用复数形式。Sequelize会使用<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="https://www.npmjs.com/package/inflection" 
+target=_blank>inflection</A>库，对别名的单复数形式进行转换。然而这一转换在非英语单词中可能不适用，这时我们以同时指定单数和复数两个别名：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User.belongsToMany(Project, { as: { singular: 'task', plural: 'tasks' }})</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">如果你希望总是使用相同的别名，那么可以定义模型时指定：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Project = sequelize.define('project', attributes, {
+  name: {
+    singular: 'task',
+    plural: 'tasks',
+  }
+})
+ 
+User.belongsToMany(Project);</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">会向 user 实例中添加<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">add/set/get 
+Tasks</CODE>等函数。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><EM 
+style="BOX-SIZING: border-box">请注意</EM>使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">as</CODE>指定别名后，同时也会改变关联的外键列，比较保险的做法是同时指定外键列：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Invoice.belongsTo(Subscription)
+Subscription.hasMany(Invoice)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">不使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">as</CODE>时，一般会生成一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">subscriptionId</CODE>的外键，而通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Ivoice.belongsTo(Subscription, 
+{ as: 'TheSubscription' })</CODE>指定别名后，外键会变成<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">theSubscriptionId</CODE>，这时可以通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">foreignKey</CODE>选项解决这个问题：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Invoice.belongsTo(Subscription, , { as: 'TheSubscription', foreignKey: 'subscription_id' })
+Subscription.hasMany(Invoice, { foreignKey: 'subscription_id' )</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=associations-associating-objects 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.6 
+关联对象</H4>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">因为Sequelize 
+做了很多逻辑运算等，你应该在定义完关系后<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize.sync</CODE>方法：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Project.belongsToMany(Task)
+Task.belongsToMany(Project)
+ 
+Project.create()...
+Task.create()...
+Task.create()...
+ 
+// 保存……然后
+project.setTasks([task1, task2]).then(function() {
+  // saved!
+})
+ 
+// 保存后可以在then 中访问结果
+project.getTasks().then(function(associatedTasks) {
+  // associatedTasks 是一个task 数组 
+})
+ 
+// 同可以在访问器方法中进行筛选
+// 这与传入一个普通这查询方法一样
+project.getTasks({ where: 'id &gt; 10' }).then(function(tasks) {
+  // tasks 中 id 都大于 10 :)
+})
+ 
+// 可以检索相关对象的某些字段.
+project.getTasks({attributes: ['title']}).then(function(tasks) {
+    // 仅返回 "title" 和 "id"字段
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">通过设置(set)方法还可以移除已创建的关系：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">// 称除与 task1 的关联
+project.setTasks([task2]).then(function(associatedTasks) {
+  // 现在只和 task2 有关系
+})
+ 
+// 移除所有关联
+project.setTasks([]).then(function(associatedTasks) {
+  // 现在返回一个空数组
+})
+ 
+// 或者直接删除
+project.removeTask(task1).then(function() {
+  // it's gone
+})
+ 
+// 也可以重新添加
+project.addTask(task1).then(function() {
+  // it's back again
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">也可像下面这样移除：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">// project 与task1 和 task2有关系
+task2.setProject(null).then(function() {
+  // and it's gone
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">hasOne/belongsTo中同样适用：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Task.hasOne(User, {as: "Author"})
+Task.setAuthor(anAuthor)</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在自定义表连接中，可以通过两种方法添加关联关系：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">// 在创建该关联之前，将属性添加到对象的连接表模型名称中
+project.UserProjects = {
+  status: 'active'
+}
+u.addProject(project)
+ 
+// 或者，通过在添加关联时提供一个额外的参数，其中包含在联接表中的数据
+u.addProject(project, { status: 'active' })
+ 
+ 
+// 当关联多个对象时，同样可以使用上面两种方法
+// 在本例中，提供一个包含在联接表中的数据额外的参数
+project1.UserProjects = {
+    status: 'inactive'
+}
+ 
+u.setProjects([project1, project2], { status: 'active' })</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">当获取自定义连接表的关联数据时，连接表会做为一个DAO 
+实例返回：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">u.getProjects().then(function(projects) {
+  var project = projects[0]
+ 
+  if (project.UserProjects.status === 'active') {
+    // .. do magic
+ 
+    // 因为这里是一个真正的 DAO 实例，所以可以直接保存
+    return project.UserProjects.save()
+  }
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">如果只想获取关联表的部分属性，可以提供一个想要获取属性和数组：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">user.getProjects({ attributes: ['name'], joinTableAttributes: ['status']})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=associations-associating-check 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.7 
+关系检查</H4>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">我们可以检查一对象是否已与另一个对象建立关联，下面是一些检查示例：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">// 检查对象是否是关联对象之一：
+Project.create({ /* */ }).then(function(project) {
+  return User.create({ /* */ }).then(function(user) {
+    return project.hasUser(user).then(function(result) {
+      // false
+      return project.addUser(user).then(function() {
+        return project.hasUser(user).then(function(result) {
+          // true
+        })
+      })
+    })
+  })
+})
+ 
+// 检查所有对象是符合预期：
+// 假设已有一个 project 和两个 users
+project.setUsers([user1, user2]).then(function() {
+  return project.hasUsers([user1]);
+}).then(function(result) {
+  // false
+  return project.hasUsers([user1, user2]);
+}).then(function(result) {
+  // true
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=associations-foreign-key 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.8 
+外键</H4>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">Sequelize中，如果创建了两个模型之间的关联，那么相关联的外键会被自动创建：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Task = this.sequelize.define('task', { title: Sequelize.STRING })
+  , User = this.sequelize.define('user', { username: Sequelize.STRING })
+ 
+User.hasMany(Task)
+Task.belongsTo(User)</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">会生成以下SQL 语句：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">CREATE TABLE IF NOT EXISTS `User` (
+  `id` INTEGER PRIMARY KEY,
+  `username` VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS `Task` (
+  `id` INTEGER PRIMARY KEY,
+  `title` VARCHAR(255),
+  `user_id` INTEGER REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+);</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">task 和 
+user之间的关系通过task表的外键<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">user_id</CODE>引入，并<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">REFERENCES</CODE>引用user表。默认情况下，引用的user 
+如果被删除那么<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">user_id</CODE>会被设置为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">NULL</CODE>，并且会随user 
+id的更新而更新。这些选项可以在建立关系时通过M<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">onUpdate</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">onDelete</CODE>选项修改。可选项有：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">对于 1:1 和 1:m 
+的关系，默认的删除选项是<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">SET 
+NULL</CODE>，更新选项是<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">CASCADE</CODE>。而 
+n:m 的关系，两者都是<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">CASCADE</CODE>。这意味着，你从 
+n:m 关系的任一方删除或更新数据，其所对应的关联数据也会同时被删除或更新。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">添加表之间的约束意味着，使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize.sync</CODE>创建表时，相关的表在数据库中必须有一定创建顺序。如果Task 
+表引用了User，那么User 必须在Task 
+之前创建。有时这会导致循环引用，想象一个场景：一个文档和版本，一个文档可以有多个版本，并且为了方便，文档对它的当前版本有一个引用。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Document = this.sequelize.define('document', {
+      author: Sequelize.STRING
+    })
+  , Version = this.sequelize.define('version', {
+      timestamp: Sequelize.DATE
+    })
+
+Document.hasMany(Version) // 添中 document_id 到 version中
+Document.belongsTo(Version, { as: 'Current', foreignKey: 'current_version_id'}) // 添加 current_version_id 到文档中</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">这时可能出现类似以下错误：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Cyclic dependency found. 'Document' is dependent of itself. Dependency Chain: Document -&gt; Version =&gt; Document</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">为了解决这个问题，可以传入一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">constraints: 
+false</CODE>选项：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Document.hasMany(Version)
+Document.belongsTo(Version, { as: 'Current', foreignKey: 'current_version_id', constraints: false})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">这时会按以下顺序将表同步到数据库中：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">CREATE TABLE IF NOT EXISTS `Document` (
+  `id` INTEGER PRIMARY KEY,
+  `author` VARCHAR(255),
+  `current_version_id` INTEGER
+);
+CREATE TABLE IF NOT EXISTS `Version` (
+  `id` INTEGER PRIMARY KEY,
+  `timestamp` DATETIME,
+  `document_id` INTEGER REFERENCES `Document` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+);</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">没有约束的外键引用</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">有时我们想添加一个外键引用，但不想添加任何约束或关系。这种情形下，你可以在schema定义时手动添加<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">reference</CODE>属性：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Series, Trainer, Video
+ 
+// 在调用Trainer.hasMany(series)方法的，Series 有一个 trainer_id=Trainer.id 的外键引用
+Series = sequelize.define('series', {
+  title:        DataTypes.STRING,
+  sub_title:    DataTypes.STRING,
+  description:  DataTypes.TEXT,
+ 
+  // Set FK relationship (hasMany) with `Trainer`
+  trainer_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: "trainers",
+      key: "id"
+    }
+  }
+})
+ 
+Trainer = sequelize.define('trainer', {
+  first_name: DataTypes.STRING,
+  last_name:  DataTypes.STRING
+});
+ 
+// 在调用Series.hasOne(Video)后，Video has a series_id=Series.id 的外键引用……
+Video = sequelize.define('video', {
+  title:        DataTypes.STRING,
+  sequence:     DataTypes.INTEGER,
+  description:  DataTypes.TEXT,
+ 
+  // 为`Series`设置 hasOne关系
+  series_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Series, // 可以是一个表示表名的字符串或模型引用
+      key:   "id"
+    }
+  }
+});
+ 
+Series.hasOne(Video);
+Trainer.hasMany(Series);</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=associations-creating-associations 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">1.8 
+通过关联创建实例</H4>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">一个实例可以在一个步骤中创建嵌套关联，且提供所有元素都是新的。</P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">通过BelongsTo 或HasOne 
+关系创建实例</STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">对于如相模型：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Product = this.sequelize.define('product', {
+  title: Sequelize.STRING
+});
+var User = this.sequelize.define('user', {
+  first_name: Sequelize.STRING,
+  last_name: Sequelize.STRING
+});
+
+Product.belongsTo(User);
+// `hasOne`同样适用</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Product</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">User</CODE>在同一步中被创建：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">return Product.create({
+  title: 'Chair',
+  User: {
+    first_name: 'Mick',
+    last_name: 'Broadstone'
+  }
+}, {
+  include: [ User ]
+});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">通过BelongsTo 
+关系的别名创建</STRONG></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Creator = Product.belongsTo(User, {as: 'creator'});
+
+return Product.create({
+  title: 'Chair',
+  creator: {
+    first_name: 'Matt',
+    last_name: 'Hansen'
+  }
+}, {
+  include: [ Creator ]
+});</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">通过HasMany 或BelongsToMany 
+关系创建实例</STRONG></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">对于以下关系的模型：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Tag = this.sequelize.define('tag', {
+  name: Sequelize.STRING
+});
+
+Product.hasMany(Tag); // `belongsToMany` 同样适用</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">现在我们可以创建一个project 
+同时创建多个相关联的tag：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Product.create({
+  id: 1,
+  title: 'Chair',
+  Tags: [
+    { name: 'Alpha'},
+    { name: 'Beta'}
+  ]
+}, {
+  include: [ Tag ]
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在使用别名时也可以使用：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var Categories = Product.hasMany(Tag, {as: 'categories'});
+
+Product.create({
+  id: 1,
+  title: 'Chair',
+  categories: [
+    {id: 1, name: 'Alpha'},
+    {id: 2, name: 'Beta'}
+  ]
+}, {
+  include: [{
+    model: Categories,
+    as: 'categories'
+  }]
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H3 id=api 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 24px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 20px; LINE-HEIGHT: 1.1">2. 
+关系/关联相关的API</H3>
+<H4 id=api-mixin 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.1 
+综合介绍</H4>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在Sequelize中创建关联通过调用模型（<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">源</CODE>）的 
+belongsTo / hasOne / hasMany / belongsToMany方法完成，并且为这个方法第一个参数提供另一个模型（<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">目标</CODE>）。各种方法以下规则创建关联：</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hasOne</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- 添加外键到目标模型，并以单数关系混入到源模型</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">belongsTo</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- 为当前模型添加外键，并以单数关系混入到源模型</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">hasMany</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- 添加外键到目标模型，并以复数关系混入到源模型</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">belongsToMany</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- 为连接的表创建<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">N:M</CODE>关系并以复数关系混入到源模型。会通过<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sourceId</CODE>和<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">targetId</CODE>创建交叉表。</LI></UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">在创建关系时，可以通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">as</CODE>选项指定别名。这在对一模型引用两次，或者对关联模型使用定义之外的名称时非常有用。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User.hasMany(Picture)
+User.belongsTo(Picture, { as: 'ProfilePicture', constraints: false })
+
+user.getPictures() // 获取所有图片
+user.getProfilePicture() // 仅获取主图
+
+User.findAll({
+  where: ...,
+  include: [
+    { model: Picture }, // 加载所有图片
+    { model: Picture, as: 'ProfilePicture' }, // 加载主图，名称拼写必须与关联关系中命名相同
+  ]
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">要完全控制通过Sequlize 
+添加的外键列，可以使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">foreignKey</CODE>选项。选项值可以是表示名称的字符串或类似使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize.define</CODE>进行模型定义时对象。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User.hasMany(Picture, { foreignKey: 'uid' })</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">这样外键列会使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">uid</CODE>代替默认的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">userId</CODE>。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User.hasMany(Picture, {
+  foreignKey: {
+    name: 'uid',
+    allowNull: false
+  }
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">指定<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">uid</CODE>列不能为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">NULL</CODE>。在大多数情况下，这将覆盖的外键约束，这sequelize自动创建的，这在外键禁用时非常有用。</P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">当匹配关联模型时，可限制只匹配部分模型。这些查询条件与在<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">find/findAll</CODE>中的使用方式相同。如，只查找'jpg'格式的图片：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">user.getPictures({
+  where: {
+    format: 'jpg'
+  }
+})</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-hasOne 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.2<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.hasOne()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 拥有一个</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Model.hasOne(target, [options])</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">创建当前模型（源）到目标模型之间的关系，外键会被添加到目标模型中。</P>
+<TABLE class="table table-striped table-condensed" 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 20px; MAX-WIDTH: 100%; WIDTH: 750px; BORDER-COLLAPSE: collapse; BORDER-SPACING: 0px; BACKGROUND-COLOR: transparent">
+  <THEAD style="BOX-SIZING: border-box">
+  <TR style="BOX-SIZING: border-box">
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">名称</TH>
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">类型</TH>
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">说明</TH></TR></THEAD>
+  <TBODY style="BOX-SIZING: border-box">
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">target</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">Model</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.hooks=false]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">boolean</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">设置为 
+      true 时，会在关联模型删除时执行 before-/afterDestroy 钩子方法</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.as]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">当前模型（源）的别名，单数形式。如果你为一个表创建多次关联，或者不想使用定义模型时使用的名称，那么就应该为模型指定一个别名。</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.foreignKey]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">string 
+      | object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">目标表中的外键名或相当于定义外键列的对象 
+      (语法参考<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+      style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize.define</CODE>)。使用对象时，应该添加一个<CODE 
+      style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE>来设置列名。默认的外键命名规为源模型名+源模型主键名</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.onDelete='SET&nbsp;NULL 
+      | CASCADE']</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">如果外允许空则 
+      SET NULL，其它则 CASCADE</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.onUpdate='CASCADE']</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.constraints=true]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">boolean</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">是否在删除或更新时启用外键约束</TD></TR></TBODY></TABLE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-belongsTo 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.3<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.belongsTo()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 属于</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Model.belongsTo(target, [options])</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">创建当前模型（源）到目标模型之间的关系，外键会被添加到源模型中。</P>
+<TABLE class="table table-striped table-condensed" 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 20px; MAX-WIDTH: 100%; WIDTH: 750px; BORDER-COLLAPSE: collapse; BORDER-SPACING: 0px; BACKGROUND-COLOR: transparent">
+  <THEAD style="BOX-SIZING: border-box">
+  <TR style="BOX-SIZING: border-box">
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">名称</TH>
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">类型</TH>
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">说明</TH></TR></THEAD>
+  <TBODY style="BOX-SIZING: border-box">
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">target</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">Model</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.hooks=false]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">boolean</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">设置为 
+      true 时，会在关联模型删除时执行 before-/afterDestroy 钩子方法</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.as]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">当前模型（源）的别名，单数形式。如果你为一个表创建多次关联，或者不想使用定义模型时使用的名称，那么就应该为模型指定一个别名。</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.foreignKey]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">string 
+      | object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">目标表中的外键名或相当于定义外键列的对象 
+      (语法参考<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+      style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize.define</CODE>)。使用对象时，应该添加一个<CODE 
+      style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE>来设置列名。默认的外键命名规为源模型名+源模型主键名</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.scope]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">键/值 
+      集合，用于目标的创建和查找操作(sqlite 不支持 N:M)</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.onDelete='SET&nbsp;NULL 
+      | NO&nbsp;ACTION']</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">如果外允许空则 
+      SET NULL，其它则 CASCADE</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.onUpdate='CASCADE']</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.constraints=true]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">boolean</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">是否在删除或更新时启用外键约束</TD></TR></TBODY></TABLE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-hasMany 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.4<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.hasMany()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 拥有多个</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Model.hasMany(target, [options])</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">创建当前模型（源）到目标模型之间的 1:m 
+的关系，外键会被添加到目标模型中。</P>
+<TABLE class="table table-striped table-condensed" 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 20px; MAX-WIDTH: 100%; WIDTH: 750px; BORDER-COLLAPSE: collapse; BORDER-SPACING: 0px; BACKGROUND-COLOR: transparent">
+  <THEAD style="BOX-SIZING: border-box">
+  <TR style="BOX-SIZING: border-box">
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">名称</TH>
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">类型</TH>
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">说明</TH></TR></THEAD>
+  <TBODY style="BOX-SIZING: border-box">
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">target</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">Model</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.hooks=false]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">boolean</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">设置为 
+      true 时，会在关联模型删除时执行 before-/afterDestroy 钩子方法</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.as]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">当前模型（源）的别名，单数形式。如果你为一个表创建多次关联，或者不想使用定义模型时使用的名称，那么就应该为模型指定一个别名。</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.foreignKey]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">string 
+      | object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">目标表中的外键名或相当于定义外键列的对象 
+      (语法参考<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+      style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize.define</CODE>)。使用对象时，应该添加一个<CODE 
+      style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE>来设置列名。默认的外键命名规为源模型名+源模型主键名</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.targetKey]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">用于关联目标表的字段名。默认为目标表的主键。</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.onDelete='SET&nbsp;NULL 
+      | NO&nbsp;ACTION']</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">如果外允许空则 
+      SET NULL，其它则 CASCADE</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.onUpdate='CASCADE']</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.constraints=true]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">boolean</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">是否在删除或更新时启用外键约束</TD></TR></TBODY></TABLE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-belongsToMany 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; FONT-SIZE: 18px; FONT-FAMILY: inherit; FONT-WEIGHT: 400; COLOR: ; MARGIN-TOP: 10px; LINE-HEIGHT: 1.1">2.5<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.belongsToMany()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 多对多</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">Model.belongsToMany(target, [options])</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">创建连接表的 N:M 的关系</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">User.belongsToMany(Project, { through: 'UserProjects' })
+Project.belongsToMany(User, { through: 'UserProjects' })</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">定义中指定需要<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">through</CODE>时，sequelize会尝试自动生成名字，但生成的名字并不一定符合逻辑。</P>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">你通过自定义属性定义一个模型，它的属性可以用两种方式添加/设置关联。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">var UserProjects = sequelize.define('UserProjects', {
+  started: Sequelize.BOOLEAN
+})
+User.belongsToMany(Project, { through: UserProjects })
+Project.belongsToMany(User, { through: UserProjects })</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">jan.addProject(homework, { started: false }) // homework 工程还未开始
+jan.setProjects([makedinner, doshopping], { started: true}) // shopping和dinner 两种方式都会启动
+</PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">如果你想设置多个目标实例，但是有不同的属性，这时必须在实例上设置属性：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">p1.UserProjects = {
+  started: true
+}
+user.setProjects([p1, p2], {started: false}) </PRE>
+<P 
+style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">类似的，使用自定义属性连接表时，这些属性将做为一个对象的名称：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); border-radius: 4px">user.getProjects().then(function (projects) {
+  var p1 = projects[0]
+  p1.UserProjects.started // Is this project started yet?
+})</PRE>
+<TABLE class="table table-striped table-condensed" 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 20px; MAX-WIDTH: 100%; WIDTH: 750px; BORDER-COLLAPSE: collapse; BORDER-SPACING: 0px; BACKGROUND-COLOR: transparent">
+  <THEAD style="BOX-SIZING: border-box">
+  <TR style="BOX-SIZING: border-box">
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">名称</TH>
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">类型</TH>
+    <TH 
+    style="BOX-SIZING: border-box; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BORDER-TOP-WIDTH: 0px">说明</TH></TR></THEAD>
+  <TBODY style="BOX-SIZING: border-box">
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">target</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">Model</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.hooks=false]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">boolean</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">设置为 
+      true 时，会在关联模型删除时执行 before-/afterDestroy 钩子方法</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.through]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">Model 
+      | string | object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">在N:M 
+      的关联中，用于连接源 和 目标 表的名称</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.through.model]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">Model</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">用于连接 
+      N:M 关系的模型</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.through.scope]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">用于建立关联的键/值集合，并通过模型查找默认值。</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.through<BR 
+      style="BOX-SIZING: border-box">.unique=true]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">boolean</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">设置为 
+      true时，唯一键会从使用的外键中生成</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.as]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">当前模型（源）的别名，单数形式。如果你为一个表创建多次关联，或者不想使用定义模型时使用的名称，那么就应该为模型指定一个别名。</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.foreignKey]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">string 
+      | object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">目标表中的外键名或相当于定义外键列的对象 
+      (语法参考<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+      style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize.define</CODE>)。使用对象时，应该添加一个<CODE 
+      style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">name</CODE>来设置列名。默认的外键命名规为源模型名+源模型主键名</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.otherKey]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">string 
+      | object</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">连接表的外键名称（表示目标模型）或表示其它列的类型定义（见<CODE 
+      style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize.define</CODE>语法）。使用对象时，可以添加一个name 
+      属性以设置目标列，默认为 目标模型名称 + 目标主键的名称</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.onDelete='SET&nbsp;NULL 
+      | NO&nbsp;ACTION']</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">如果外允许空则 
+      SET NULL，其它则 CASCADE</TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">[options.onUpdate='CASCADE']</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px">string</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px"></TD></TR>
+  <TR style="BOX-SIZING: border-box">
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">[options.constraints=true]</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">boolean</TD>
+    <TD     style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 5px; BACKGROUND-COLOR: rgb(249,249,249)">是否在删除或更新时启用外键约束</TD></TR></TBODY></TABLE></DIV></ARTICLE></body>
+</html>

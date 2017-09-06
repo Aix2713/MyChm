@@ -1,0 +1,376 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>原始查询</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H3 id=model 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 24px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 21px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model</CODE>查询</H3>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model</CODE>是一种表示与数据库中表关系的描述对象，它通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequlize.define</CODE>方法定义或通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequlize.import</CODE>导入创建实例对象。通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model</CODE>进行进行数据查询时，我们可以实现类似在数据库中直接使用SQL语句的查询、排序、分组、别名、连接查询等。</P>
+<H4 id=model-attributes 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.1 
+Attributes - 属性与查询字段</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">查询时，如果只需要查询模型的部分属性，可以在通过在查询选项中指定<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">attributes</CODE>实现。该选项是一个数组参数，在数组中指定要查询的属性即可，这些要查询的属性就表示要在数据库查询的字段：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Model.findAll({
+  attributes: ['foo', 'bar']
+});</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SELECT foo, bar ...</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">查询属性（字段）可以通过传入一个嵌套数据进行重命名：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Model.findAll({
+  attributes: ['foo', ['bar', 'baz']]
+});</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SELECT foo, bar AS baz ...</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize.fn</CODE>方法可以进行聚合查询：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Model.findAll({
+  attributes: [[sequelize.fn('COUNT', sequelize.col('hats')), 'no_hats']]
+});</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SELECT COUNT(hats) AS no_hats ...</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">在使用聚合函数时，要给聚合字段指定一个别名。如，在上例中我们为聚合函数指定了别名<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">'no_hats'</CODE>，这样我们就能在查询的回调函数实例中通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">instance.get('no_hats')</CODE>来访问聚合统计的结果。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当需要查询所有字段并对某一字段使用聚合查询时，而只需要以对象的形式传入<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">attributes</CODE>并添加<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">include</CODE>子属性即可。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// 拽定全查询字段比较麻烦
+Model.findAll({
+  attributes: ['id', 'foo', 'bar', 'baz', 'quz', [sequelize.fn('COUNT', sequelize.col('hats')), 'no_hats']]
+});
+
+// 这样会比较简短，且在你添加/删除属性后不会出错
+Model.findAll({
+  attributes: { include: [[sequelize.fn('COUNT', sequelize.col('hats')), 'no_hats']] }
+});</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SELECT id, foo, bar, baz, quz, COUNT(hats) AS no_hats ...</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">全部查询时，可以通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">exclude</CODE>子属性来排除不需要查询的字段：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Model.findAll({
+  attributes: { exclude: ['baz'] }
+});</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SELECT id, foo, bar, quz ...</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">关于聚合查询，请参考：<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="http://itbilu.com/nodejs/npm/EJcKjQWfM.html" 
+target=_blank>在Sequelize中使用group by分组聚合查询</A></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=model-attributes 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.2 
+Where - 指定筛选条件</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">在模型的 
+find/finAll 或 updates/destroys 操作中，可以指定一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">where</CODE>选项以指定筛选条件，</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">where</CODE>是一个包含属性/值对对象，sequelize会根据此对象生产查询语句的筛选条件。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">基本用法</STRONG></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Post.findAll({
+  where: {
+    authorId: 2
+  }
+});
+// SELECT * FROM post WHERE authorId = 2
+
+Post.findAll({
+  where: {
+    authorId: 12,
+    status: 'active'
+  }
+});
+// SELECT * FROM post WHERE authorId = 12 AND status = 'active';
+
+Post.destroy({
+  where: {
+    status: 'inactive'
+  }
+});
+// DELETE FROM post WHERE status = 'inactive';
+
+Post.update({
+  updatedAt: null,
+}, {
+  where: {
+    deletedAt: {
+      $ne: null
+    }
+  }
+});
+// UPDATE post SET updatedAt = null WHERE deletedAt NOT NULL;
+
+Post.findAll({
+  where: sequelize.where(sequelize.fn('char_length', sequelize.col('status')), 6)
+});
+// SELECT * FROM post WHERE char_length(status) = 6;</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+id=operators style="BOX-SIZING: border-box; FONT-WEIGHT: 700">操作符</STRONG></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">$and: {a: 5}           // AND (a = 5)
+$or: [{a: 5}, {a: 6}]  // (a = 5 OR a = 6)
+$gt: 6,                // &gt; 6
+$gte: 6,               // &gt;= 6
+$lt: 10,               // &lt; 10
+$lte: 10,              // &lt;= 10
+$ne: 20,               // != 20
+$not: true,            // IS NOT TRUE
+$between: [6, 10],     // BETWEEN 6 AND 10
+$notBetween: [11, 15], // NOT BETWEEN 11 AND 15
+$in: [1, 2],           // IN [1, 2]
+$notIn: [1, 2],        // NOT IN [1, 2]
+$like: '%hat',         // LIKE '%hat'
+$notLike: '%hat'       // NOT LIKE '%hat'
+$iLike: '%hat'         // ILIKE '%hat' (case insensitive) (PG only)
+$notILike: '%hat'      // NOT ILIKE '%hat'  (PG only)
+$like: { $any: ['cat', 'hat']}
+                       // LIKE ANY ARRAY['cat', 'hat'] - also works for iLike and notLike
+$overlap: [1, 2]       // &amp;&amp; [1, 2] (PG array overlap operator)
+$contains: [1, 2]      // @&gt; [1, 2] (PG array contains operator)
+$contained: [1, 2]     // &lt;@ [1, 2] (PG array contained by operator)
+$any: [2,3]            // ANY ARRAY[2, 3]::INTEGER (PG only)
+
+$col: 'user.organization_id' // = "user"."organization_id", with dialect specific column identifiers, PG in this example</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">组合查询</STRONG></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">{
+  rank: {
+    $or: {
+      $lt: 1000,
+      $eq: null
+    }
+  }
+}
+// rank &lt; 1000 OR rank IS NULL
+
+{
+  createdAt: {
+    $lt: new Date(),
+    $gt: new Date(new Date() - 24 * 60 * 60 * 1000)
+  }
+}
+// createdAt &lt; [timestamp] AND createdAt &gt; [timestamp]
+
+{
+  $or: [
+    {
+      title: {
+        $like: 'Boat%'
+      }
+    },
+    {
+      description: {
+        $like: '%boat%'
+      }
+    }
+  ]
+}
+// title LIKE 'Boat%' OR description LIKE '%boat%'</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">嵌套对象</STRONG></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">{
+  meta: {
+    video: {
+      url: {
+        $ne: null
+      }
+    }
+  }
+}</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">嵌套键</STRONG></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">{
+  "meta.audio.length": {
+    $gt: 20
+  }
+}</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">包含</STRONG></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">{
+  "meta": {
+    $contains: {
+      site: {
+        url: 'http://itbilu.com'
+      }
+    }
+  }
+}</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">关系/联合</STRONG></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// 查询所有至少有一个task的projects，task.state === project.task
+Project.findAll({
+    include: [{
+        model: Task,
+        where: { state: Sequelize.col('project.state') }
+    }]
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=model-pagination 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.3 
+limit/offset - 分页与限制返回结果数</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">查询进，我们可以使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">limit</CODE>限制返回结果条数，并可以通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">offset</CODE>来设置查询偏移（跳过）量，通过这两个属性我们可以实现分页查询的功能：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// 获取 10 条数据（实例）
+Project.findAll({ limit: 10 })
+
+// 跳过 8 条数据（实例）
+Project.findAll({ offset: 8 })
+
+// 跳过 5 条数据并获取其后的 5 条数据（实例）
+Project.findAll({ offset: 5, limit: 5 })</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=model-order 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.4 
+查询排序</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">order</CODE>选项用于查询结果的排序数据。排序时应该传入一个包含属性-排序方向的元组/数组，以保证正确的转义：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">something.findOne({
+  order: [
+    // 转义 username 并对查询结果按 DESC 方向排序
+    ['username', 'DESC'],
+
+    // 按 max(age) 排序
+    sequelize.fn('max', sequelize.col('age')),
+
+    // 按 max(age) DESC 排序
+    [sequelize.fn('max', sequelize.col('age')), 'DESC'],
+
+    // 按 otherfunction(`col1`, 12, 'lalala') DESC 排序
+    [sequelize.fn('otherfunction', sequelize.col('col1'), 12, 'lalala'), 'DESC'],
+
+    // 按相关联的User 模型的 name 属性排序
+    [User, 'name', 'DESC'],
+
+    // 按相关联的User 模型的 name 属性排序并将模型起别名为 Friend
+    [{model: User, as: 'Friend'}, 'name', 'DESC'],
+
+    // 按相关联的User 模型的嵌套关联的 Company 模型的 name 属性排序
+    [User, Company, 'name', 'DESC'],
+  ]
+  // 以下所有声明方式都会视为字面量，应该小心使用
+  order: 'convert(user_name using gbk)'
+  order: 'username DESC'
+  order: sequelize.literal('convert(user_name using gbk)')
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H3 id=raw 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 24px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2. 
+原始查询</H3>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">有时会使用原始查询或执行已准备好的SQL语句，这时可以用Sequlize提供的工具函数<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize.query</CODE>来实现。</P>
+<H4 id=raw-query 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.1 
+原始查询方法</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">默认情况下，该函数会返回两个参数 
+- 一个包含结果的数组和一个包含原数据对象。请注意，由于是原始查询，所以返回的元数据与使用的数据库类型有关，其对元数据的处理并不一致。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">sequelize.query("UPDATE users SET y = 42 WHERE x = 12").spread(function(results, metadata) {
+  // Results 会是一个空数组和一个包含受影响行数的metadata 元数据对象
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">如果不想使用元数据，可以查询时指定表示查询类型的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">type</CODE>参数，以告诉sequelize 
+应该怎样去格式化返回结果。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">sequelize.query("SELECT * FROM `users`", { type: sequelize.QueryTypes.SELECT})
+  .then(function(users) {
+    // 并不需要在这spread 展开结果，因为所返回的只有所查询的结果
+  })</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">在选项参数中，可以使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">model</CODE>参数指定一个模型，指定后会将查询结果会是传入模型的实例：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// 调用已定义的模型并对其创建实例
+sequelize.query('SELECT * FROM projects', { model: Projects }).then(function(projects){
+  // 每条记录都是一个Project 实例
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=raw-replacements 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.2 
+查询参数替换</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">原始查询中有两种替换查询参数的方法，以<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">:</CODE>开头的参数的形式替换或以不命名以<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">?</CODE>替换。在选项对象中传递参数：</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box">如果传递一个数组，<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">?</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>会按数组的顺序被依次替换</LI>
+  <LI style="BOX-SIZING: border-box">巢传递一个对象，<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">:key</CODE>将会用对象的键替换。如果对象中未找到指定键，则会引发异常（反之亦然）</LI></UL><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">sequelize.query('SELECT * FROM projects WHERE status = ?',
+  { replacements: ['active'], type: sequelize.QueryTypes.SELECT }
+).then(function(projects) {
+  console.log(projects)
+})
+
+sequelize.query('SELECT * FROM projects WHERE status = :status ',
+  { replacements: { status: 'active' }, type: sequelize.QueryTypes.SELECT }
+).then(function(projects) {
+  console.log(projects)
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=raw-bind 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.3 
+参数绑定</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">参数绑定类似于参数替换。尤其是参数替换会在发送到数据库前被sequelize转义和替换，而参数绑定会被发送到SQL 
+查询文本外。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">只有SQLite 
+和 PostgreSQL支持参数绑定，其它类型数据库都会将其插入到SQL 
+查询，并以相同的方式进行参数替换。参数绑定可以使用$1、$2……或$key的形式：</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box">如果传入的是数组，<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">$1</CODE>会绑定到数组听第1个参数 
+  (<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">bind[0]</CODE>)</LI>
+  <LI style="BOX-SIZING: border-box">如果传入一个对象，<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">$key</CODE>会绑定到<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">object['key']</CODE>。每个key 
+  必须以非数字的字符开始。<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">$1</CODE>不是个有效的key，尽管<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">object['1']</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>是存在的。</LI>
+  <LI style="BOX-SIZING: border-box">在使用<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">$$</CODE>时，不会被转义而是将<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">$</CODE>做为一个字面量使用。</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">传入的数组或对象必须包含所有绑定值，否则Sequelize会抛出异常。这同样适用于数据库可能会忽略绑定参数的情况下。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">数据库可能会做进一步限制，绑定参数不能使用数据库关键字，也不能是表或列名，它在引用文本或数据时也可能被忽略。在PostgreSQL中，如果不能从上下文<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">$1::varchar</CODE>中推断类型，那么也需要进行类型转换。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">sequelize.query('SELECT *, "text with literal $$1 and literal $$status" as t FROM projects WHERE status = $1',
+  { bind: ['active'], type: sequelize.QueryTypes.SELECT }
+).then(function(projects) {
+  console.log(projects)
+})
+
+sequelize.query('SELECT *, "text with literal $$1 and literal $$status" as t FROM projects WHERE status = $status',
+  { bind: { status: 'active' }, type: sequelize.QueryTypes.SELECT }
+).then(function(projects) {
+  console.log(projects)
+})</PRE></body>
+</html>

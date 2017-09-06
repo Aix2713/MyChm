@@ -1,0 +1,218 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>scope作用域</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H3 id=definition 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 24px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1. 
+定义</H3>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">作用域允许你定义常用的查询，这样就可以很容易地在之后使用。<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Scopes</CODE>包括所有相同属性规律的筛选器，<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">where</CODE>、<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">where</CODE>、<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">limit</CODE>等。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Scopes</CODE>在定义模型时定义，可以是筛选对象，或是返回筛选对象的函数－除默认限制范围外，它只能是一个对象：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Project = sequelize.define('project', {
+  // Attributes
+}, {
+  defaultScope: {
+    where: {
+      active: true
+    }
+  },
+  scopes: {
+    deleted: {
+      where: {
+        deleted: true
+      }
+    },
+    activeUsers: {
+      include: [
+        { model: User, where: { active: true }}
+      ]
+    }
+    random: function () {
+      return {
+        where: {
+          someNumber: Math.random()
+        }
+      }
+    },
+    accessLevel: function (value) {
+      return {
+        where: {
+          accessLevel: {
+            $gte: value
+          }
+        }
+      }
+    }
+  }
+});</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">也可以模型定义后通过<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="http://itbilu.com/nodejs/npm/V1PExztfb.html#api-addScope" 
+target=_blank><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">addScope</CODE></A>方法添加作用域。这对在使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">include</CODE>包含限制时尤其适用，因为在模型的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">include</CODE>在定义时包括的模型可能还未定义。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">默的作用总是会被使用，也就是说，在上面定义的模型中使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Project.findAll()</CODE>查询时，会创建如下查询语句：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SELECT * FROM projects WHERE active = true</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">默认的作用域可以使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.unscoped()</CODE>、<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.scope(null)</CODE>、或引入一个其它的作用域移除：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Project.scope('deleted').findAll();  // 移除默认作用域</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SELECT * FROM projects WHERE deleted = true</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H3 id=usage 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 24px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2. 
+使用</H3>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">作用域通过调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.scope</CODE>方法应用到模型定义的范围内。该方法会传入一个或多个范围的名称，并范围返回一个全功能的模型实例的所有规则的方法，如：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.findAll</CODE>、<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.update</CODE>、<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.count</CODE>、<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">destroy</CODE>：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var DeletedProjects = Project.scope('deleted');
+
+DeletedProjects.findAll();
+// some time passes
+
+// let's look for deleted projects again!
+DeletedProjects.findAll();</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">作用域被引入时有两种方式：如果不传入参数则正常引用，如果传入参数那么以对象的形式传入：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Project.scope('random', { method: ['accessLevel', 19]}).findAll();</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SELECT * FROM projects WHERE someNumber = 42 AND accessLevel &gt;= 19</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H3 id=merging 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 24px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">3. 
+合并</H3>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">作用域可以同时应用多个，使用用时只要向<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.scope</CODE>方法传入数组参数或做为连续的参数传入即可：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// 两种等价的方式
+Project.scope('deleted', 'activeUsers').findAll();
+Project.scope(['deleted', 'activeUsers']).findAll();</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">如果想在另一个范围内使用默认作用域，通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">defaultScope</CODE>参数传入<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.scope</CODE>即可：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Project.scope('defaultScope', 'deleted').findAll();</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SELECT * FROM projects WHERE active = true AND deleted = true</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">通过对象引入多重作用域时，当key值相同，后引入的作用域会覆盖前面的作用域规则：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">{
+  scope1: {
+    where: {
+      firstName: 'bob',
+      age: {
+        $gt: 20
+      }
+    },
+    limit: 2
+  },
+  scope2: {
+    where: {
+      age: {
+        $gt: 30
+      }
+    },
+    limit: 10
+  }</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">WHERE firstName = 'bob' AND age &gt; 30 LIMIT 10</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">在这个查询中<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">limit</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">age</CODE>被<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">scope2</CODE>同相同的键值覆盖，</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当进行查询时，默认的作用域逻辑会被同时使用：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Project.scope('deleted').findAll({
+  where: {
+    firstName: 'john'
+  }
+})</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">WHERE deleted = true AND firstName = 'john'</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H3 id=associations 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 24px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">4. 
+关联</H3>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">在表关联中，Sequelize有两中不同但作用相关的概念。其区别不大，但很重要：</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: 700">关联作用域</STRONG><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- 
+  允许你获取和设置关联定义默认属性，这在多表关联时很有用。这个作用域仅在使用<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">get</CODE>、<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">set</CODE>、<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">add</CODE>、<CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">create</CODE>函数时调用</LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: 700">模型上的作用域</STRONG><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- 
+  在匹配关联时，允许你作用默认值和其它作用范围。这些作用域都适用于模型匹配，及关联查找</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">以下示例中包含Post 
+和 Comment两个模型，Comment又关联到一些其它的模型，可以理解为通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">commentable_id</CODE>列引用一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">commentable</CODE>表：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">  foreignKey: 'commentable_id',
+  scope: {
+    commentable: 'post'
+  }
+});</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">post.getComments()</CODE>方法时，会自动生成<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">WHERE 
+commentable = 'post'</CODE>语句。类似的，当发表一个新的评论<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Comment</CODE>会自动设置为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">'post'</CODE>。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">我们还应该考虑，Post 
+模型应该只向用户显示状态为活跃的数据：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">where: 
+{ active: true }</CODE>。这个活跃状态会同样应用于所关联的模型，而不是像<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">commentable</CODE>那样没有关联范围。这样，使用默认作用域直接调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Post.findAll()</CODE>方法即可，同样可用于<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">User.getPosts()</CODE>方法。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">禁用默认作用域，在访问器中传入<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">scope: 
+null</CODE>即可，如：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">User.getPosts({ 
+scope: null })</CODE>，如下同样：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">User.getPosts({ scope: ['scope1', 'scope2']});</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">如果你想创建一个关联作用域的快捷方法，那么可以在模型关联中定义。如，创建用户所有已删除的Post的作用域：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Post = sequelize.define('post', attributes, {
+  defaultScope: {
+    where: {
+      active: true
+    }
+  },
+  scopes: {
+    deleted: {
+      where: {
+        deleted: true
+      }
+    }
+  }
+});
+
+User.hasMany(Post); // regular getPosts association
+User.hasMany(Post.scope('deleted'), { as: 'deletedPosts' });</PRE><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">User.getPosts(); // WHERE active = true
+User.getDeletedPosts(); // WHERE deleted = true</PRE></body>
+</html>

@@ -1,0 +1,855 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>instance实例</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H3 id=usage 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 24px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1. 
+实例的创建与使用</H3>
+<H4 id=usage-building 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.1 
+构建非持久化实例</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">为了创建定义类的实例，需要像下面这样做。使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">build</CODE>方法会返回一个未保存的对象，你应该显式的调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">save</CODE>方法保存。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var project = Project.build({
+  title: '这是一个项目',
+  description: '项目的描述，来自：itbilu.com'
+})
+ 
+var task = Task.build({
+  title: 'specify the project idea',
+  description: 'bla',
+  dea</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">构建的实例会自动获取我们定义的默认值：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// 先定义模型
+var Task = sequelize.define('task', {
+  title: Sequelize.STRING,
+  rating: { type: Sequelize.STRING, defaultValue: 3 }
+})
+ 
+// build 构建一个实例
+var task = Task.build({title: 'very important task'})
+ 
+task.title  // ==&gt; 'very important task'
+task.rating // ==&gt; 3</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">要将构建非持久实例保存到数据库中，需要使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">use</CODE>方法：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">project.save().then(function() {
+  // 保存后的回调
+})
+ 
+task.save().catch(function(error) {
+  // mhhh, wth!
+})
+ 
+// 也可以链式的build构建实例，再you can also build, save and access the object with chaining:
+Task
+  .build({ title: 'foo', description: 'bar', deadline: new Date() })
+  .save()
+  .then(function(anotherTask) {
+    // 现在可以通过anotherTask变量，访问已保存的 task
+  }).catch(function(error) {
+    // Ooops, 错误处理
+  })</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-create 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.2 
+创建持久化实例</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">除了显式的调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">save</CODE>方法保存实例外，还可以<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">create</CODE>方法创建并保存实例。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Task.create({ title: 'foo', description: 'bar', deadline: new Date() }).then(function(task) {
+  // 现在可以通过 task 变量访问新创建的 Task
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-updating 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.3 
+实例的更新/保存/持久化</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">修改实例的一些值，并保存到数据库可以通过以下两种方式实现：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// 方法 1
+task.title = 'a very different title now'
+task.save().then(function() {})
+ 
+// 方法 2
+task.update({
+  title: 'a very different title now'
+}).then(function() {})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">可样可以设置哪些属性需要保存，传入一个包含字段名的数组即可。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">task.title = 'foooo'
+task.description = 'baaaaaar'
+task.save({fields: ['title']}).then(function() {
+ // 现在 title 是 'foooo' 但是 description 还是和以前一样
+})
+ 
+// 同样可以使用 update 方法进行保存:
+task.update({ title: 'foooo', description: 'baaaaaar'}, {fields: ['title']}).then(function() {
+ // 现在 title 是 'foooo' 但是 description 还是和以前一样
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">save</CODE>但不做任何修改时，该方法不会做任何操作。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-delete 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.4 
+删除持久化实例</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">创建对象并获取对象引用后，可以通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">destroy</CODE>方法将其从数据库中删除：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Task.create({ title: 'a task' }).then(function(task) {
+  // 这样删除...
+  return task.destroy();
+}).then(function() {
+ // 删除完成 :)
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-bulk 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.5 
+批量操作</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">除更新单个实例外，还可以创建、更新和删除多个实例。批量操作的方法有：</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.bulkCreate</CODE></LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.update</CODE></LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.destroy</CODE></LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当操作多个模型时，回调中不会返回DAO 
+实例。<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">bulkCreate</CODE>会一个包含多个实例/DAO的数组，但不像<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">create</CODE>，结果中没有自增属性。而<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">update</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">destroy</CODE>会返回受影响的行数。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">批量创建操作：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">User.bulkCreate([
+  { username: 'barfooz', isAdmin: true },
+  { username: 'foo', isAdmin: true },
+  { username: 'bar', isAdmin: false }
+]).then(function() { // Notice: There are no arguments here, as of right now you'll have to...
+  return User.findAll();
+}).then(function(users) {
+  console.log(users) // ... in order to get the array of user objects
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">更新多条数据：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Task.bulkCreate([
+  {subject: 'programming', status: 'executing'},
+  {subject: 'reading', status: 'executing'},
+  {subject: 'programming', status: 'finished'}
+]).then(function() {
+  return Task.update(
+    { status: 'inactive' }, /* set attributes' value */,
+    { where: { subject: 'programming' }} /* where criteria */
+  );
+}).spread(function(affectedCount, affectedRows) {
+  // .update 会返会一个包含两个值的数组，使用 .spread展开
+  // 注意，只有支持 returning: true属性的数据库才会返回 affectedRows
+
+  // affectedCount 是 2
+  return Task.findAll();
+}).then(function(tasks) {
+  console.log(tasks) // subject为 'programming' 的对象的 status属性会更新为 'inactive'
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">删除多条数据：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Task.bulkCreate([
+  {subject: 'programming', status: 'executing'},
+  {subject: 'reading', status: 'executing'},
+  {subject: 'programming', status: 'finished'}
+]).then(function() {
+  return Task.destroy({
+    where: {
+      subject: 'programming'
+    },
+    truncate: true /* 这会对表使用truncate（截断）操作 */
+  });
+}).then(function(affectedRows) {
+  // affectedRows 是2 2
+  return Task.findAll();
+}).then(function(tasks) {
+  console.log(tasks) // 没有 programming, 只有 reading :(
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">如果你是从用户输入接收值，那可想要设置要插入的值。<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">bulkCreate()</CODE>接受第二个参数对象，你可以在其中传入一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fields</CODE>（数组）参数，以表示哪些字段需要插入。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">User.bulkCreate([
+  { username: 'foo' },
+  { username: 'bar', admin: true}
+], { fields: ['username'] }).then(function() {
+  // nope bar, you can't be admin!
+})
+</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">bulkCreate</CODE>是一种快速的插入数据的方式，但在插入多行数据时，我们又不希望牺牲模型验证，这时可以通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">validate</CODE>参数告诉Sequelize只有通过筛选的数据才能插入数据库。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Tasks = sequelize.define('task', {
+  name: {
+    type: Sequelize.STRING,
+    validate: {
+      notNull: { args: true, msg: 'name cannot be null' }
+    }
+  },
+  code: {
+    type: Sequelize.STRING,
+    validate: {
+      len: [3, 10]
+    }
+  }
+})
+ 
+Tasks.bulkCreate([
+  {name: 'foo', code: '123'},
+  {code: '1234'},
+  {name: 'bar', code: '1'}
+], { validate: true }).catch(function(errors) {
+  /* console.log(errors) would look like:
+  [
+    { record:
+    ...
+    errors:
+      { name: 'SequelizeValidationError',
+        message: 'Validation error',
+        errors: [Object] } },
+    { record:
+      ...
+      errors:
+        { name: 'SequelizeValidationError',
+        message: 'Validation error',
+        errors: [Object] } }
+  ]
+  */
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-values 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.6 
+实例值</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当我们打印实例时，会看到很多额外的值。为了隐藏这些东西，可以使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">get</CODE>-属性，并使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">plain 
+= true</CODE>选项来返回实例值。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Person.create({
+  name: 'Rambow',
+  firstname: 'John'
+}).then(function(john) {
+  console.log(john.get({
+    plain: true
+  }))
+})
+ 
+// result:
+ 
+// { name: 'Rambow',
+//   firstname: 'John',
+//   id: 1,
+//   createdAt: Tue, 01 May 2012 19:12:16 GMT,
+//   updatedAt: Tue, 01 May 2012 19:12:16 GMT
+// }</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-reloading 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.7 
+实例的重新加载</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">实例中有一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">reload</CODE>方法，该方法会同步数据中的当前的数据，并使用刚加载的数据对模型属性进行重写。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Person.findOne({ where: { name: 'john' } }).then(function(person) {
+  person.name = 'jane'
+  console.log(person.name) // 'jane'
+ 
+  person.reload().then(function() {
+    console.log(person.name) // 'john'
+  })
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-increment 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.8 
+实例字段值的增大</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">increment</CODE>方法，可以为实例属性(字段)增加一个确定义的字面值，该方法直接单个或多个字段属性值的增加。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">为一个属性增加值：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">User.findById(1).then(function(user) {
+  return user.increment('my-integer-field', {by: 2})
+}).then(/* ... */)</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">为多个属性增加值：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">User.findById(1).then(function(user) {
+  return user.increment([ 'my-integer-field', 'my-very-other-field' ], {by: 2})
+}).then(/* ... */)</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">也可以使用对象的形式为多个属性增加值：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">User.findById(1).then(function(user) {
+  return user.increment({
+    'my-integer-field':    2,
+    'my-very-other-field': 3
+  })
+}).then(/* ... */)</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=usage-decrement 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.9 
+实例字段值的减小</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">我们可以向<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">increment</CODE>方法传入一个负数来减小字段值。相对应的，还有一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">decrement</CODE>方法，该方法用于减小字段值：</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">为一个属性减小值：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">User.findById(1).then(function(user) {
+  return user.decrement('my-integer-field', {by: 2})
+}).then(/* ... */)</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">为多个属性减小值：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">User.findById(1).then(function(user) {
+  return user.decrement([ 'my-integer-field', 'my-very-other-field' ], {by: 2})
+}).then(/* ... */)</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">也可以使用对象的形式为多个属性减小值：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">User.findById(1).then(function(user) {
+  return user.decrement({
+    'my-integer-field':    2,
+    'my-very-other-field': 3
+  })
+}).then(/* ... */)</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">更多关于<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">increment</CODE>、<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">increment</CODE>的使用请参考：</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><A 
+  style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+  href="http://itbilu.com/nodejs/npm/N1pPjUdMf.html#single" target=_blank><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">单实例字段的自增、自减</CODE></A></LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H3 id=api 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 24px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 21px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Instance</CODE>类的API</H3>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Instance</CODE>类表示一个实例，表示数据库中的一行。它不能通过构造函数实例化，而应该通过<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="http://itbilu.com/nodejs/npm/V1PExztfb.html#api-findAll" 
+target=_blank>Model.find*</A>或<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="http://itbilu.com/nodejs/npm/V1PExztfb.html#api-create" 
+target=_blank>Model.create</A>等方法创建。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">实例中包含一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">dataValues</CODE>属性，其中存储了实例实际所要操作的值。<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">dataValues</CODE>中的值可以通过以下几种方式访问：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.field
+// 等价于
+instance.get('field')
+// 等价于
+instance.getDataValue('field')</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">如果定义了访问器(getter)/设置器(setter)，字段值从其中访问而不是从<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">dataValues</CODE>。一般会直接访问或使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">get</CODE>来访问属性值，而<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">getDataValue</CODE>只用于自定义的访问器。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">相关</STRONG></P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><A 
+  style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+  href="http://itbilu.com/nodejs/npm/VkYIaRPz-.html#api-instance-method" 
+  target=_blank>Sequelize#define</A></LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-isNewRecord 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.1<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">isNewRecord</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 是否新记录</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.isNewRecord -&gt; Boolean</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当实例是未保存到数据库的<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="https://itbilu.com/nodejs/npm/N1sdaHTzb.html#usage-building">非持久化实例</A>时，返回<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">true</CODE></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-Model 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.2<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 创建实例的模型</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.Model() -&gt; Model</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">返回创建实例的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model</CODE>。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">相关</STRONG></P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><A 
+  style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+  href="http://itbilu.com/nodejs/npm/V1PExztfb.html#api" 
+  target=_blank>Model</A></LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-sequelize 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.3<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ Sequelize实例</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.sequelize() -&gt; Sequelize</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">返回Sequelize实例的引用</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">相关</STRONG></P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><A 
+  style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+  href="http://itbilu.com/nodejs/npm/VkYIaRPz-.html#api" 
+  target=_blank>Sequelize</A></LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-where 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.4<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">where()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 实例的查询条件</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.where() -&gt; Object</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">获取当前实例的查询条件，相当于<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">option.where</CODE></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-getDataValue 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.5<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">getDataValue()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 获取值</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.getDataValue(key) -&gt; any</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">获取底层数据值。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">key</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {String}，表示要获取值的字段名</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-setDataValue 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.6<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">setDataValue()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 设置值</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.setDataValue(key, value)</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">设置底层数据值。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">key</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {String}，表示要设置值的字段名</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">value</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {any}，表示要设置的值</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-get 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.7<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">get()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 获取值（单个或全部）</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.get([key], [options]) -&gt; Object|any</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">不提供<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">key</CODE>时，返回全部实例值。同样适用于虚拟访问器。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">提供<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">key</CODE>时，返回字段值或返回虚拟访问器的值。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[key]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {String}，表示要访问值的字段名</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {Object}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.plain=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {Boolean}，设置为true时，返回简单对象</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-set 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.8<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">set()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 设置值</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.set(key, value, [options])</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">set</CODE>用于更新实例值。<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">set</CODE>更新的值会保存在底层的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">dataValues</CODE>对象中，如果为所设置的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">key</CODE>设置了自定义设置器，那么设置器被调用。如果要绕过这些设置器，可以在选项中设置<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">raw: 
+true</CODE>选项。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当通过一对象进行设置时，它会是一个循环对象，会为其中的每个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">key/value</CODE>分别调用此方法。当设置<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">raw</CODE>时，底层的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">dataValues</CODE>会被直接设置或扩展。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当值被修改后，修改值会被存储在的<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="https://itbilu.com/nodejs/npm/N1sdaHTzb.html#api-previous"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">previous</CODE></A>中，并会设置一个<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="https://itbilu.com/nodejs/npm/N1sdaHTzb.html#api-changed"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">changed</CODE></A>标识。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Set</CODE>同样可以用于构建关联实例。当设置时，应该确认属性键能够匹配到关系实例的别名，并确认这些选项已设置关联。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">在JSON/JSONB属性中，如果使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.</CODE>分隔的字段，那么设置嵌套对象的值。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">key</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {String | Object}，表示要设置值的字段</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">value</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {any}，表示要设置的值</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {Object}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.raw=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {Boolean}，虚拟设置器会被忽略</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.reset=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>－ {Boolean}，清除之前的设置数据</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">别名：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">setAttributes</CODE></STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-changed 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.9<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">changed()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 判断是否修改</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.changed([key]) -&gt; Boolean|Array</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">判断字段或实例是否修改过，即判断<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">dataValues</CODE>中的值是否与<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">_previousDataValues</CODE>中的值是否相同。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当不传入参数时，会返回一个包含已修改字段的数组。当传入参数时，返回一个表示该字段是否修改的布尔值。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-previous 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.10<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">previous()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 返回修改前的值</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.previous([key]) -&gt; any|Array.&lt;any&gt;</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">返回实例修改前的值，即<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">_previousDataValues</CODE>属性中值。如果不传入参数，则返回所有已修改的值。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-save 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.11<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">save()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 保存实例到数据库</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.save([options]) -&gt; Promise.&lt;this|Errors.ValidationError&lt;</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">较验数据，通过后持久化到数据库中。这个方法仅会保存修改过的数据，如果未发生修改那么不会进行任何操作。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">操作成功会回调修改结果，验证失败则返回一个<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize.ValidationError</CODE>对象。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Object}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.fields]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- 
+  {Array.&lt;string&gt;}，可选的表示数据库中字段值，提供后仅会验证和保存其中的字段</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[[options.silent=false]]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Boolean}，设置为 true 
+  时，updatedAt在更新时不会发生变化</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.validate=true]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Boolean}，保存前时否验证</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.logging=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，一个用于打印执行SQL的函数</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.transaction=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Transaction}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.searchPath=DEFAULT]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}，指定schema的 search_path (仅 
+  Postgres)</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-reload 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.12<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">reload()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 重新加载数据</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.reload([options]) -&gt; Promise.&lt;this&gt;</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">用数据库中的数据当前实例。这不同于<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">find(Instance.id)</CODE>，因为它会创建并返回一个新实例。而该方法是用新数据刷新当前实例。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Object}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.logging=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，一个用于打印执行SQL的函数</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-validate 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.13<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">validate()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 验证属性</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.validate([options]) -&gt; Promise.&lt;Errors.ValidationError|undefined&gt;</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">根据模型定义的验证规则验证模型属性。验证成功时返回<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">null</CODE>，否则返回一个错误对象。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Object}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.skip]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- 
+  {String|Array}，包含一个要跳过的验证字段的字符串或数组</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-update 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.14<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">update()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 设置并保存</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.update(updates, options) -&gt; Promise.&lt;this&gt;</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">相当于调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">set</CODE>方法后再调用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">save</CODE>，但它只保存传递给它确切值，使用它更新时更原子和更安全。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">updates</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Object}，见<A 
+  style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+  href="https://itbilu.com/nodejs/npm/N1sdaHTzb.html#api-set"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">set</CODE></A></LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">options</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Object}，见<A 
+  style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+  href="https://itbilu.com/nodejs/npm/N1sdaHTzb.html#api-save"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">save</CODE></A></LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">别名：<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">updateAttributes</CODE></STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-destroy 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.15<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">destroy()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 删除</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.destroy([options={}]) -&gt; Promise.&lt;undefined&gt;</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">删除实例在数据库中对应的行。设置为软删除（<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">paranoid</CODE>）时，数据行并不会真实删除，而是将<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">deletedAt</CODE>列更新为当前时间。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Object}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.force=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Boolean}，强制删除。设置为 
+  true时，软删除的模型也会强制删除</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.logging=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，一个用于打印执行SQL的函数</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.transaction]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Transaction}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.searchPath=DEFAULT]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}，指定schema的 search_path (仅 
+  Postgres)</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-restore 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.16<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">restore()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 数据恢复</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.restore([options={}]) -&gt; Promise.&lt;undefined&gt;</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">恢复实例数据，仅适用于软删除（<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">paranoid</CODE>）模型</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Object}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.logging=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，一个用于打印执行SQL的函数</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.transaction]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Transaction}</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-increment 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.17<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">increment()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 字段值增加</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.increment(fields, [options]) -&gt; Promise&lt;this&gt;</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">为一个或多个字段增加值。这一操作在数据库中完成，也就是说它并不使用实例的存储值。其增加值使用如下语句完成：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SET column = column + X</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">增加后，要获取正确的实例值应该使用<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="https://itbilu.com/nodejs/npm/N1sdaHTzb.html#api-reload"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">reload()</CODE></A>方法重新加载数据。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fields</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String | Array | 
+  Object}，要增加值的字段</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Object}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.by=1]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Integer}，要增加的数字值</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.logging=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，一个用于打印执行SQL的函数</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.transaction]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Transaction}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.searchPath=DEFAULT]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}，指定schema的 search_path (仅 
+  Postgres)</LI></UL><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.increment('number') // 增加 1
+instance.increment(['number', 'count'], { by: 2 }) // 'number' 和 'count'两个字段增加 2
+instance.increment({ answer: 42, tries: 1}, { by: 2 })  // 'answer'字段增加 42, 'tries' 字段增加 1，'by' 参数将忽略，因为每一列都有自己的值</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-decrement 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.18<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">decrement()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 字段值减小</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.decrement(fields, [options]) -&gt; Promise&lt;this&gt;</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">为一个或多个字段减小值。这一操作在数据库中完成，也就是说它并不使用实例的存储值。其增加值使用如下语句完成：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">SET column = column - X</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">增加后，要获取正确的实例值应该使用<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="https://itbilu.com/nodejs/npm/N1sdaHTzb.html#api-reload"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">reload()</CODE></A>方法重新加载数据。</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fields</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String | Array | 
+  Object}，要减小值的字段</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Object}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.by=1]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Integer}，要减小的数字值</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.logging=false]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Function}，一个用于打印执行SQL的函数</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.transaction]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {Transaction}</LI>
+  <LI style="BOX-SIZING: border-box"><CODE 
+  style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">[options.searchPath=DEFAULT]</CODE><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>- {String}，指定schema的 search_path (仅 
+  Postgres)</LI></UL><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.decrement('number') // 减小 1
+instance.decrement(['number', 'count'], { by: 2 }) // 'number' 和 'count'两个字段减小 2
+instance.decrement({ answer: 42, tries: 1}, { by: 2 }) // 'answer'字段减小 42, 'tries' 字段减小 1, 'by' 参数将忽略，因为每一列都有自己的值</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-equals 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.19<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">equals()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 实例值是否相等</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.equals(other) -&gt; Boolean</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">检查当前实例是否与<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">other</CODE>实例的值相等</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-equalsOneOf 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.20<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">equalsOneOf()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 实例值其中的一个相等</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.equalsOneOf(others) -&gt; Boolean</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">检查当前实例是否与<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">others</CODE>数组中的任意一个实例的值相等</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=api-toJSON 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2.21<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">toJSON()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>－ 转换成JSON</H4><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">instance.toJSON() -&gt; object</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">将当前实例转换为JSON形式，意味着会从数据库中取值，并应用所有自定义的访问器。</P></body>
+</html>

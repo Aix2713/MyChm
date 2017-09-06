@@ -1,0 +1,624 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>模型定义和导入</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H3 id=definition 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 24px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1. 
+定义描述</H3>
+<H4 id=definition-define 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.1 
+Definition - 模型定义</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">定义模型<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">model</CODE>和表之间的映射关系使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">define</CODE>方法。定义时Sequelize会自动为其添加<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">createdAt</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">updatedAt</CODE>两个属性（属性相当于表中的字段），这样你就可以知道数据什么时候插入了数据库和什么时候进行了更新。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Project = sequelize.define('project', {
+  title: Sequelize.STRING,
+  description: Sequelize.TEXT
+})
+
+var Task = sequelize.define('task', {
+  title: Sequelize.STRING,
+  description: Sequelize.TEXT,
+  deadline: Sequelize.DATE
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">定义模型时可以为列设置一些选项：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Foo = sequelize.define('foo', {
+ // 实例化时在没有显式设置属性值时，会自动设置为 true
+ flag: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true},
+
+ // 日期默认值 =&gt; 当前时间
+ myDate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
+
+ // 设置 allowNull 选项为 false 后，会为列添加  NOT NULL 非空限制
+ // 这意味着当执行查询（插入/更新）时相关字段为空会从数据库层抛出错误
+ // 如果想在执行查询时进行值检测，请参考“验证”一节
+ title: { type: Sequelize.STRING, allowNull: false},
+
+ // 添加唯一（unique）约束后插入重复值会报错
+ // unique属性可以是boolean 或 string类型
+ // 如果为多个字段添加了相同的字符串那么将会是一个符合唯一键
+ someUnique: {type: Sequelize.STRING, unique: true},
+ uniqueOne: { type: Sequelize.STRING,  unique: 'compositeIndex'},
+ uniqueTwo: { type: Sequelize.INTEGER, unique: 'compositeIndex'}
+
+ // unique属性以一个简单的简写方式创建唯一索引
+ someUnique: {type: Sequelize.STRING, unique: true}
+ // 同样的，也可以模型的选项中创建索引
+ {someUnique: {type: Sequelize.STRING}},
+ {indexes: [{unique: true, fields: ['someUnique']}]}
+
+ // 定义一个主键
+ identifier: { type: Sequelize.STRING, primaryKey: true},
+
+ // autoIncrement 选项用于创建一个自增的整型列
+ incrementMe: { type: Sequelize.INTEGER, autoIncrement: true },
+
+ // Comments 可以在MySQL 和 PG中指定定段描述
+ hasComment: { type: Sequelize.INTEGER, comment: "I'm a comment!" },
+
+ // 可以通过 "field" 属性来指定数据库中的字段名
+ fieldWithUnderscores: { type: Sequelize.STRING, field: "field_with_underscores" },
+
+ // 通过references选项可以创建外键:
+ bar_id: {
+   type: Sequelize.INTEGER,
+
+   references: {
+     // 引用另一个模型
+     model: Bar,
+
+     // 连接模型的列表
+     key: 'id',
+
+     // 强制使用外键约束，仅适用于 PostgreSQL
+     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+   }
+ }
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">如果你不想在模型中使用时间戳，而只需要一些时间；或者你正在使用一个已经存在的数据库，而其中的列名与你的所需要并不一致。更多配置请参考<A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; BACKGROUND: 0px 0px; COLOR: rgb(66,139,202)" 
+href="https://itbilu.com/nodejs/npm/V1PExztfb.html#definition-configuration">模型配置</A>。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=definition-dataType 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.2 
+Data types - 数据类型</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">在定义模型时，我们会指定其属性（字段）的数据类型，下面是Sequelize中支持数据类型及其与数据库中字段类型的对应关系：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Sequelize.STRING                      // VARCHAR(255)
+Sequelize.STRING(1234)                // VARCHAR(1234)
+Sequelize.STRING.BINARY               // VARCHAR BINARY
+Sequelize.TEXT                        // TEXT
+Sequelize.TEXT('tiny')                // TINYTEXT
+
+Sequelize.INTEGER                     // INTEGER
+Sequelize.BIGINT                      // BIGINT
+Sequelize.BIGINT(11)                  // BIGINT(11)
+
+Sequelize.FLOAT                       // FLOAT
+Sequelize.FLOAT(11)                   // FLOAT(11)
+Sequelize.FLOAT(11, 12)               // FLOAT(11,12)
+
+Sequelize.REAL                        // REAL        PostgreSQL only.
+Sequelize.REAL(11)                    // REAL(11)    PostgreSQL only.
+Sequelize.REAL(11, 12)                // REAL(11,12) PostgreSQL only.
+
+Sequelize.DOUBLE                      // DOUBLE
+Sequelize.DOUBLE(11)                  // DOUBLE(11)
+Sequelize.DOUBLE(11, 12)              // DOUBLE(11,12)
+
+Sequelize.DECIMAL                     // DECIMAL
+Sequelize.DECIMAL(10, 2)              // DECIMAL(10,2)
+
+Sequelize.DATE                        // DATETIME for mysql / sqlite, TIMESTAMP WITH TIME ZONE for postgres
+Sequelize.DATE(6)                     // DATETIME(6) for mysql 5.6.4+. Fractional seconds support with up to 6 digits of precision 
+Sequelize.DATEONLY                    // DATE without time.
+Sequelize.BOOLEAN                     // TINYINT(1)
+
+Sequelize.ENUM('value 1', 'value 2')  // An ENUM with allowed values 'value 1' and 'value 2'
+Sequelize.ARRAY(Sequelize.TEXT)       // Defines an array. PostgreSQL only.
+
+Sequelize.JSON                        // JSON column. PostgreSQL only.
+Sequelize.JSONB                       // JSONB column. PostgreSQL only.
+
+Sequelize.BLOB                        // BLOB (bytea for PostgreSQL)
+Sequelize.BLOB('tiny')                // TINYBLOB (bytea for PostgreSQL. Other options are medium and long)
+
+Sequelize.UUID                        //   PostgreSQL 和 SQLite 中为 UUID, MySQL 中为CHAR(36) BINARY (使用 defaultValue: Sequelize.UUIDV1 或 Sequelize.UUIDV4 生成默认值)
+
+Sequelize.RANGE(Sequelize.INTEGER)    // Defines int4range range. PostgreSQL only.
+Sequelize.RANGE(Sequelize.BIGINT)     // Defined int8range range. PostgreSQL only.
+Sequelize.RANGE(Sequelize.DATE)       // Defines tstzrange range. PostgreSQL only.
+Sequelize.RANGE(Sequelize.DATEONLY)   // Defines daterange range. PostgreSQL only.
+Sequelize.RANGE(Sequelize.DECIMAL)    // Defines numrange range. PostgreSQL only.
+
+Sequelize.ARRAY(Sequelize.RANGE(Sequelize.DATE)) // Defines array of tstzrange ranges. PostgreSQL only.
+
+Sequelize.GEOMETRY                    // Spatial column.  PostgreSQL (with PostGIS) or MySQL only.
+Sequelize.GEOMETRY('POINT')           // Spatial column with geomerty type.  PostgreSQL (with PostGIS) or MySQL only.
+Sequelize.GEOMETRY('POINT', 4326)     // Spatial column with geomerty type and SRID.  PostgreSQL (with PostGIS) or MySQL only.</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">BLOB</CODE>类型中你可以插入字符串或二进制<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">buffer</CODE>，在进行查询时其总是会返回<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">buffer</CODE>。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">如果要使用PostgreSQL的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">TIMESTAMP 
+WITHOUT TIME ZONE</CODE>类型，那么你需要存入一个不同的时区，并使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">pg</CODE>库进行转换</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">require('pg').types.setTypeParser(1114, function(stringValue) {
+  return new Date(stringValue + "+0000");
+  // e.g., UTC offset. Use any offset that you would like.
+});</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">下面是一个额外支持的类型，如：integer, 
+bigint, float 和 double 也同样支持 unsigned 和 zerofill。但这些属性并不能在PostgreSQL中使用：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">Sequelize.INTEGER.UNSIGNED              // INTEGER UNSIGNED
+Sequelize.INTEGER(11).UNSIGNED          // INTEGER(11) UNSIGNED
+Sequelize.INTEGER(11).ZEROFILL          // INTEGER(11) ZEROFILL
+Sequelize.INTEGER(11).ZEROFILL.UNSIGNED // INTEGER(11) UNSIGNED ZEROFILL</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">使用一个更加自然的对象：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// 枚举
+sequelize.define('model', {
+  states: {
+    type:   Sequelize.ENUM,
+    values: ['active', 'pending', 'deleted']
+  }
+})
+</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=definition-deferrable 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.3 
+Deferrable - 延时执行</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">当你指定一个可选的外键列，那么可以在PostgreSQL定义为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Deferrable</CODE>类型。以下选项可用：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// Defer all foreign key constraint check to the end of a transaction
+Sequelize.Deferrable.INITIALLY_DEFERRED
+
+// Immediately check the foreign key constraints
+Sequelize.Deferrable.INITIALLY_IMMEDIATE
+
+// Don't defer the checks at all
+Sequelize.Deferrable.NOT</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=definition-getter-setter 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.4 
+Getters &amp; setters - 访问器&amp;设置器</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">可以在你的模型中将对象属性定义为访问/设置函数</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">访问器&amp;设置器有以下两种定义方式：</P>
+<UL 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 0px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box">做为一个属性定义</LI>
+  <LI style="BOX-SIZING: border-box">做为模型选项</LI></UL>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">做为一个属性定义</STRONG></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Employee = sequelize.define('employee', {
+  name:  {
+    type     : Sequelize.STRING,
+    allowNull: false,
+    get      : function()  {
+      var title = this.getDataValue('title');
+      // 'this' allows you to access attributes of the instance
+      return this.getDataValue('name') + ' (' + title + ')';
+    },
+  },
+  title: {
+    type     : Sequelize.STRING,
+    allowNull: false,
+    set      : function(val) {
+      this.setDataValue('title', val.toUpperCase());
+    }
+  }
+});
+
+Employee
+  .create({ name: 'John Doe', title: 'senior engineer' })
+  .then(function(employee) {
+    console.log(employee.get('name')); // John Doe (SENIOR ENGINEER)
+    console.log(employee.get('title')); // SENIOR ENGINEER
+  })</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">做为模型选项</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">在下面的示例中，定义了一个名为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">fullName</CODE>的访问器，它是对<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">this.firstname</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">this.lastname</CODE>两个属性引用，这个属性的一个假属性它并不是数据库中的一部分。定义<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">假属性</CODE>可以使用访问器或定义为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">VIRTUAL</CODE>类型两种方式，<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Virtual</CODE>类型可以验证而访问器则不能。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Foo = sequelize.define('foo', {
+  firstname: Sequelize.STRING,
+  lastname: Sequelize.STRING
+}, {
+  getterMethods   : {
+    fullName       : function()  { return this.firstname + ' ' + this.lastname }
+  },
+
+  setterMethods   : {
+    fullName       : function(value) {
+        var names = value.split(' ');
+
+        this.setDataValue('firstname', names.slice(0, -1).join(' '));
+        this.setDataValue('lastname', names.slice(-1).join(' '));
+    },
+  }
+});</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">访问器&amp;设置器内部定义的帮助函数：</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">检索底层属性值－总是使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">this.getDataValue()</CODE></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">/* 访问 'title' 的属性 */
+function() {
+    return this.getDataValue('title');
+}</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">设置底层属性值－总是使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">this.setDataValue()</CODE></P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">/* 设置 'title' 的属性 */
+function() {
+    return this.setDataValue('title', title.toString().toLowerCase());
+}</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=definition-validations 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.5 
+Validations - 验证</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">模型验证，让我们可以模型的每个属性执行验证。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">我们通过模型列属性的<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">validate</CODE>属性来添加验证，这些验证会在模型实例执行<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">create</CODE>、<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">update</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">save</CODE>自动执行。也可以通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">instance.validate()</CODE>方法，来手工验证模型实例。</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var ValidateMe = sequelize.define('foo', {
+  foo: {
+    type: Sequelize.STRING,
+    validate: {
+      is: ["^[a-z]+$",'i'],     // 只允许字母
+      is: /^[a-z]+$/i,          // 只允许字母
+      not: ["[a-z]",'i'],       // 不能使用字母
+      isEmail: true,            // 检测邮箱格式 (foo@bar.com)
+      isUrl: true,              // 检查Url格式 (http://foo.com)
+      isIP: true,               // 检查 IPv4 或 IPv6 格式
+      isIPv4: true,             // 检查 IPv4
+      isIPv6: true,             // 检查 IPv6
+      isAlpha: true,            // 不能使用字母
+      isAlphanumeric: true,     // 只允许字母数字字符
+      isNumeric: true,          // 只能使用数字
+      isInt: true,              // 只能是整数
+      isFloat: true,            // 只能是浮点数
+      isDecimal: true,          // 检查数字
+      isLowercase: true,        // 检查小写字母
+      isUppercase: true,        // 检查大写字母
+      notNull: true,            // 不允许null
+      isNull: true,             // 只能为null
+      notEmpty: true,           // 不能空字符串
+      equals: 'specific value', // 只能使用指定值
+      contains: 'foo',          // 必须包含子字符串
+      notIn: [['foo', 'bar']],  // 不能是数组中的任意一个值
+      isIn: [['foo', 'bar']],   // 只能是数组中的任意一个值
+      notContains: 'bar',       // 不能包含子字符串
+      len: [2, 10],              // 值的长度必在 2 和 10 之间
+      isUUID: 4,                // 只能是UUID
+      isDate: true,             // 只能是日期字符串
+      isAfter: "2011-11-05",    // 只能使用指定日期之后的时间
+      isBefore: "2011-11-05",   // 只能使用指定日期之前的时间
+      max: 23,                  // 允许的最大值
+      min: 23,                  // 允许的最小值
+      isArray: true,            // 不能使用数组
+      isCreditCard: true,       // 检查是有效的信用卡
+
+      // 也可以自定义验证:
+      isEven: function(value) {
+        if(parseInt(value) % 2 != 0) {
+          throw new Error('Only even values are allowed!')
+        // we also are in the model's context here, so this.otherField
+        // would get the value of otherField if it existed
+        }
+      }
+    }
+  }
+});</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">验证时可以使用自定义的错误信息代替<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">validator.js</CODE>的默认信息，只需要在通过对象或数组的方式提供参数即可：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">isInt: {
+  msg: "Must be an integer number of pennies"
+}</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">或者参数中同样需要提供<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">args</CODE>属性：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">isIn: {
+  args: [['en', 'zh']],
+  msg: "Must be English or Chinese"
+}</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">模型验证</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Validations</CODE>同可以用于模型的检测，只需要在字段定义之后定义验证即可。如，在经纬度的应用的我们会需要<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">latitude</CODE>和<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">longitude</CODE>都不为空或都为空，这时我们可以像下面这样验证：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Pub = Sequelize.define('pub', {
+  name: { type: Sequelize.STRING },
+  address: { type: Sequelize.STRING },
+  latitude: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+    defaultValue: null,
+    validate: { min: -90, max: 90 }
+  },
+  longitude: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+    defaultValue: null,
+    validate: { min: -180, max: 180 }
+  },
+}, {
+  validate: {
+    bothCoordsOrNone: function() {
+      if ((this.latitude === null) !== (this.longitude === null)) {
+        throw new Error('Require either both latitude and longitude or neither')
+      }
+    }
+  }
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=definition-configuration 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.6 
+Configuration - 配置</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">定义模型时，可以通过配置来设置列名等相关信息：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Bar = sequelize.define('bar', { /* bla */ }, {
+  // 不要添加时间戳属性 (updatedAt, createdAt)
+  timestamps: false,
+
+  // 不从数据库中删除数据，而只是增加一个 deletedAt 标识当前时间
+  // paranoid 属性只在启用 timestamps 时适用
+  paranoid: true,
+
+  // 不使用驼峰式命令规则，这样会在使用下划线分隔
+  // 这样 updatedAt 的字段名会是 updated_at
+  underscored: true,
+
+  // 禁止修改表名. 默认情况下
+  // sequelize会自动使用传入的模型名（define的第一个参数）做为表名
+  // 如果你不想使用这种方式你需要进行以下设置
+  freezeTableName: true,
+
+  // 定义表名
+  tableName: 'my_very_custom_table_name'
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">如果你想sequelize处理时间戳，但只在个别情况下使用，那么你可以对使用的列单独重载：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Foo = sequelize.define('foo',  { /* bla */ }, {
+  // 不要忘了启用 timestamps
+  timestamps: true,
+
+  // 不想使用 createdAt
+  createdAt: false,
+
+  // 想 updatedAt 的实际名为 'updateTimestamp'
+  updatedAt: 'updateTimestamp'
+
+  // 要将 deletedAt 设置为 destroyTime (注意要启用paranoid)
+  deletedAt: 'destroyTime',
+  paranoid: true
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">配置时，也可以修改数据库引擎。如，将默认的InnoDB修改为MyISAM：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Person = sequelize.define('person', { /* attributes */ }, {
+  engine: 'MYISAM'
+})
+
+// or globally
+var sequelize = new Sequelize(db, user, pw, {
+  define: { engine: 'MYISAM' }
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">或者指定一个表描述（MySql和PG中）：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Person = sequelize.define('person', { /* attributes */ }, {
+  comment: "I'm a table comment!"
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><EM 
+style="BOX-SIZING: border-box">注意：</EM>字段<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">attributes</CODE>同样可以添加<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">comment</CODE>属性，但出于兼容性考虑自<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize 
+V1.7+</CODE>起已不再将此属性同步到数据库中，但为字段添加这个属性依然是增加可读性的不错的方式。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=definition-import 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.7 
+Import - 模型导入</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">我们可以将模型定义为一个单独的文件，并通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></CODE>导入。通过文件导入返回的对象与通过<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">defined</CODE>方法定义的模型完全一致，两者都是<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">instance</CODE>模型实例。自<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">v1.5.0</CODE>起，sequlize会对导入进行缓存，这样就不用担心多次对文件修改造成的一些问题。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">如，我们在<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">project.js</CODE>文件中定义一个名为<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">project</CODE>的模型：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// 这个文件定义于 /path/to/models/project.js
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define("project", {
+    name: DataTypes.STRING,
+    description: DataTypes.TEXT
+  })
+}</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">我们可以<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">app.js</CODE>或其它需要的地方引入定义的模型：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Project = sequelize.import(__dirname + "/path/to/models/project")</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">import</CODE>同样可以使用回调函数参数的使用方式：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">sequelize.import('project', function(sequelize, DataTypes) {
+  return sequelize.define("project", {
+    name: DataTypes.STRING,
+    description: DataTypes.TEXT
+  })
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=definition-sync 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.8 
+Database synchronization - 数据库同步</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">开始一个新项目时，我们并没有数据库结构，使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize</CODE>时，并不需要先定义好数据库结构。我们只要定义好模型，然后进行同步即可。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize</CODE>支持创建表和删除表：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">// 通过 sync 方法同步数据结构
+// 即,创建表
+Project.sync()
+Task.sync()
+
+// 强制创建
+// 通过设置 force 属性会首先删除表并重新创建
+Project.sync({force: true})
+
+// 删除表
+Project.drop()
+Task.drop()
+
+// 事件处理
+Project.[sync|drop]().then(function() {
+  // 处理成功
+}).catch(function(error) {
+  // 出了点问题^~^
+})</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">.sync({ 
+force: true })</CODE>会删除并重建表，这时我们可以添加<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">match</CODE>选项，只重建正则表达式匹配的表：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">sequelize.sync({ force: true, match: /_test$/ });</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<H4 id=definition-expansion 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 400 18px/1.1 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 10px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1.9 
+Expansion of models - 模型扩展</H4>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">开始一个新项目时，我们并没有数据库结构，使用<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize</CODE>时，并不需要先定义好数据库结构。我们只要定义好模型，然后进行同步即可。</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="BOX-SIZING: border-box"></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">自定义方法</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize</CODE>允许我们为实例添加自定义方法，可以像下面这样定义：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var Foo = sequelize.define('foo', { /* attributes */}, {
+  classMethods: {
+    method1: function(){ return 'smth' }
+  },
+  instanceMethods: {
+    method2: function() { return 'foo' }
+  }
+})
+
+// Example:
+Foo.method1()
+Foo.build().method2()</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">虚拟访问器</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">也可以设置虚拟访问器：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var User = sequelize.define('user', { firstname: Sequelize.STRING, lastname: Sequelize.STRING }, {
+  instanceMethods: {
+    getFullname: function() {
+      return [this.firstname, this.lastname].join(' ')
+    }
+  }
+})
+
+// Example:
+User.build({ firstname: 'foo', lastname: 'bar' }).getFullname() // 'foo bar'</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">全局方法</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">还可以定义用于所有模型实例的全局方法：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">var sequelize = new Sequelize('database', 'username', 'password', {
+  // Other options during the initialization could be here
+  define: {
+    classMethods: {
+      method1: function() {},
+      method2: function() {}
+    },
+    instanceMethods: {
+      method3: function() {}
+    }
+  }
+})
+
+// Example:
+var Foo = sequelize.define('foo', { /* attributes */});
+Foo.method1()
+Foo.method2()
+Foo.build().method3()</PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: 700">索引</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/20px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; MARGIN: 0px 0px 10px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Sequelize</CODE>支持添加索引，在模型中定义后，索引会在<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">Model.sync()</CODE>或<CODE 
+style="BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; WHITE-SPACE: nowrap; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 4px">sequelize.sync</CODE>后创建。下面是几种添加索引的方式：</P><PRE style="BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; FONT: 13px/1.4285 Menlo, Monaco, Consolas, 'Courier New', monospace; PADDING-LEFT: 9px; MARGIN: 0px 0px 10px; BORDER-LEFT: rgb(204,204,204) 1px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 4px">sequelize.define('user', {}, {
+  indexes: [
+    // Create a unique index on email
+    {
+      unique: true,
+      fields: ['email']
+    },
+
+    // Creates a gin index on data with the jsonb_path_ops operator
+    {
+      fields: ['data'],
+      using: 'gin',
+      operator: 'jsonb_path_ops'
+    },
+
+    // By default index name will be [table]_[fields]
+    // Creates a multi column partial index
+    {
+      name: 'public_by_author',
+      fields: ['author', 'status'],
+      where: {
+        status: 'public'
+      }
+    },
+
+    // A BTREE index with a ordered field
+    {
+      name: 'title_index',
+      method: 'BTREE',
+      fields: ['author', {attribute: 'title', collate: 'en_US', order: 'DESC', length: 5}]
+    }
+  ]
+})</PRE></body>
+</html>

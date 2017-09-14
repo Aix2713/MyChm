@@ -1,0 +1,543 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>日期时间选择控件</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><FONT style="BACKGROUND-COLOR: #ffff00" color=#ff0000>自定义日期时间选择控件，同时选择日期和时间</FONT></SPAN></P>
+<P><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">以下代码继承</SPAN></P><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<H1 class=class 
+style="OVERFLOW: visible; WHITE-SPACE: nowrap; WORD-SPACING: 0px; TEXT-OVERFLOW: ellipsis; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 400 1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=multi-src-btn 
+style="CURSOR: pointer; POSITION: relative">Ext.picker.Date</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN class=alias 
+style="FONT-SIZE: 0.6em; COLOR: grey; LETTER-SPACING: 1px"><FONT size=3>xtype: 
+datepicker</FONT></SPAN></H1>
+<H1 class=class 
+style="OVERFLOW: visible; WHITE-SPACE: nowrap; WORD-SPACING: 0px; TEXT-OVERFLOW: ellipsis; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 400 1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=alias 
+style="FONT-SIZE: 0.6em; COLOR: grey; LETTER-SPACING: 1px">添加时间三字段</SPAN></H1>
+<P></SPAN><FONT color=#808080>Ext.define('Common.ux.picker.Datetime', 
+{<BR>&nbsp;&nbsp;&nbsp; extend: 'Ext.picker.Date',<BR>&nbsp;&nbsp;&nbsp; 
+requires: [<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'Ext.form.field.Number'<BR>&nbsp;&nbsp;&nbsp; ],<BR>&nbsp;&nbsp;&nbsp; alias: 
+'widget.datetimepicker',</FONT></P>
+<P><FONT color=#808080>&nbsp;&nbsp;&nbsp; renderTpl: 
+[<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;div id="{id}-innerEl" 
+data-ref="innerEl" 
+role="presentation"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;div 
+class="{baseCls}-header"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;div id="{id}-prevEl" data-ref="prevEl" class="{baseCls}-prev 
+{baseCls}-arrow" role="presentation" 
+title="{prevText}"&gt;&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;div id="{id}-middleBtnEl" data-ref="middleBtnEl" class="{baseCls}-month" 
+role="heading"&gt;{%this.renderMonthBtn(values, 
+out)%}&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;div 
+id="{id}-nextEl" data-ref="nextEl" class="{baseCls}-next {baseCls}-arrow" 
+role="presentation" 
+title="{nextText}"&gt;&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;table 
+role="grid" id="{id}-eventEl" data-ref="eventEl" class="{baseCls}-inner" 
+cellspacing="0" tabindex="0" 
+aria-readonly="true"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;thead&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;tr 
+role="row"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;tpl 
+for="dayNames"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;th 
+role="columnheader" class="{parent.baseCls}-column-header" 
+aria-label="{.}"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;div 
+role="presentation" 
+class="{parent.baseCls}-column-header-inner"&gt;{.:this.firstInitial}&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/th&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/tpl&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/tr&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/thead&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;tbody&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;tr 
+role="row"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;tpl 
+for="days"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'{#:this.isEndOfWeek}',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;td 
+role="gridcell"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;div 
+hidefocus="on" 
+class="{parent.baseCls}-date"&gt;&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/td&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/tpl&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/tr&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/tbody&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/table&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;table 
+role="grid" class="{baseCls}-footer" role="presentation" cellspacing="0" 
+tabindex="0"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;tr&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;td 
+style="width:102px;padding:5px"&gt;{%this.renderHourField(values, 
+out)%}&lt;/td&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;td 
+style="width:104px;padding:6px"&gt;{%this.renderMinuteField(values, 
+out)%}&lt;/td&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;td 
+style="width:102px;padding:5px"&gt;{%this.renderSecondField(values, 
+out)%}&lt;/td&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/tr&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/table&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;tpl 
+if="showToday"&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;div 
+id="{id}-footerEl" data-ref="footerEl" role="presentation" 
+class="{baseCls}-footer"&gt;{%this.renderTodayBtn(values, 
+out)%}&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/tpl&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;div 
+id="{id}-todayText" class="' + Ext.baseCSSPrefix + 
+'hidden-clip"&gt;{todayText}.&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;div id="{id}-ariaMinText" class="' + Ext.baseCSSPrefix + 
+'hidden-clip"&gt;{ariaMinText}.&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;div id="{id}-ariaMaxText" class="' + Ext.baseCSSPrefix + 
+'hidden-clip"&gt;{ariaMaxText}.&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;div id="{id}-ariaDisabledDaysText" class="' + Ext.baseCSSPrefix + 
+'hidden-clip"&gt;{ariaDisabledDaysText}.&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;div id="{id}-ariaDisabledDatesText" class="' + Ext.baseCSSPrefix + 
+'hidden-clip"&gt;{ariaDisabledDatesText}.&lt;/div&gt;',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'&lt;/div&gt;', 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+firstInitial: function(value) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+return 
+Ext.picker.Date.prototype.getDayInitial(value);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+},<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+isEndOfWeek: function(value) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+value--;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+var end = value % 7 === 0 &amp;&amp; value !== 
+0;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+return end ? '&lt;/tr&gt;&lt;tr role="row"&gt;' : 
+'';<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+},<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+renderTodayBtn: function(values, out) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Ext.DomHelper.generateMarkup(values.$comp.todayBtn.getRenderTree(), 
+out);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+},<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+renderMonthBtn: function(values, out) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Ext.DomHelper.generateMarkup(values.$comp.monthBtn.getRenderTree(), 
+out);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+},<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+renderHourField: function(values, out) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Ext.DomHelper.generateMarkup(values.$comp.hourField.getRenderTree(), 
+out);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+},<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+renderMinuteField: function(values, out) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Ext.DomHelper.generateMarkup(values.$comp.minuteField.getRenderTree(), 
+out);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+},<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+renderSecondField: function(values, out) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Ext.DomHelper.generateMarkup(values.$comp.secondField.getRenderTree(), 
+out);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp; 
+],</FONT></P>
+<P><FONT color=#808080>&nbsp;&nbsp;&nbsp; initComponent: function() 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me = 
+this,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+value = me.value;</FONT></P>
+<P><FONT color=#808080>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.callParent();</FONT></P><FONT color=#808080>
+<P><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; me.value = value || new 
+Date();<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;&nbsp;&nbsp; getRefItems: function() 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var results = 
+[],<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+monthBtn = 
+this.monthBtn,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+todayBtn = 
+this.todayBtn,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+hourField = 
+this.hourField,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+minuteField = 
+this.minuteField,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+secondField = this.secondField;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (monthBtn) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+results.push(monthBtn);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (todayBtn) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+results.push(todayBtn);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (hourField) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+results.push(hourField);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (minuteField) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+results.push(minuteField);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (secondField) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+results.push(secondField);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 
+results;<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;&nbsp;&nbsp; numberFieldDefaults: 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowBlank: 
+false,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowDecimals: 
+false,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; width: 
+92,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; maxLength: 
+2,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; autoStripChars: 
+true,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ariaRole: 
+'presentation',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; enforceMaxLength: 
+true<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;&nbsp;&nbsp; beforeRender: function() 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me =    this;</P>
+<P>&nbsp;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; me.hourField = new 
+Ext.form.field.Number(Ext.apply({<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ownerCt: 
+me,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ownerLayout: 
+me.getComponentLayout(),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+maxValue: 
+23,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+minValue: 0<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, 
+me.numberFieldDefaults));</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; me.minuteField = new 
+Ext.form.field.Number(Ext.apply({<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ownerCt: 
+me,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ownerLayout: 
+me.getComponentLayout(),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+maxValue: 
+59,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+minValue: 0<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, 
+me.numberFieldDefaults));</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; me.secondField = new 
+Ext.form.field.Number(Ext.apply({<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ownerCt: 
+me,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ownerLayout: 
+me.getComponentLayout(),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+maxValue: 
+59,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+minValue: 0<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, 
+me.numberFieldDefaults));</P>
+<P><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; me.callParent();</P>
+<P><BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;</P>
+<P>&nbsp;&nbsp;&nbsp; setValue: function(value) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // If passed a null value just 
+pass in a new date object.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.value =   value || new 
+Date();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 
+this.update(this.value, true);<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;&nbsp;&nbsp; handleTabKey: function(e) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me = 
+this,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; t = 
+me.getSelectedDate(me.activeDate),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+handler = 
+me.handler,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+value;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!me.disabled &amp;&amp; 
+t.dateValue &amp;&amp; !Ext.fly(t.parentNode).hasCls(me.disabledCellCls)) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value = 
+new 
+Date(t.dateValue);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.setValue(new Date(value.getFullYear(), value.getMonth(), value.getDate(), 
+me.hourField.getValue(), me.minuteField.getValue(), 
+me.secondField.getValue()));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.fireEvent('select', me, 
+me.value);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if (handler) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Ext.callback(handler, me.scope, [me, me.value], null, me, 
+me);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.onSelect();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.fireEventArgs('tabout', [me]);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;&nbsp;&nbsp; selectToday: function() 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me = 
+this,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; btn 
+= 
+me.todayBtn,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+handler = me.handler;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (btn &amp;&amp; !btn.disabled) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.setValue(new 
+Date());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.fireEvent('select', me, 
+me.value);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if (handler) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Ext.callback(handler, me.scope, [me, me.value], null, me, 
+me);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.onSelect();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return me;<BR>&nbsp;&nbsp;&nbsp; 
+},</P>
+<P><BR>&nbsp;&nbsp;&nbsp; fullUpdate: function(date) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me =    this;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.hourField.setValue(date.getHours());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.minuteField.setValue(date.getMinutes());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.secondField.setValue(date.getSeconds());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.callParent(arguments);<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;&nbsp;&nbsp; onOkClick: function(picker, value) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me = 
+this,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+month = 
+value[0],<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+year = 
+value[1],<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+date = new Date(year, month, me.getActive().getDate(), me.hourField.getValue(), 
+me.minuteField.getValue(), me.secondField.getValue());</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (date.getMonth() !== month) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; date = 
+Ext.Date.getLastDateOfMonth(new Date(year, month, 1, me.hourField.getValue(), 
+me.minuteField.getValue(), 
+me.secondField.getValue()));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.setValue(date);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.hideMonthPicker();<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;&nbsp;&nbsp; handleDateClick: function(e, t) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me = 
+this,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+handler = 
+me.handler,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+value = new Date(t.dateValue);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+e.stopEvent();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!me.disabled 
+&amp;&amp; t.dateValue &amp;&amp; 
+!Ext.fly(t.parentNode).hasCls(me.disabledCellCls)) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.setValue(new Date(value.getFullYear(), value.getMonth(), value.getDate(), 
+me.hourField.getValue(), me.minuteField.getValue(), 
+me.secondField.getValue()));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.fireEvent('select', me, me.value);</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if 
+(handler) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Ext.callback(handler, me.scope, [me, me.value], null, me, 
+me);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.onSelect();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;&nbsp;&nbsp; getSelectedDate: function(date) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me = 
+this,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; t = 
+Ext.Date.clearTime(date, 
+true).getTime(),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cells = 
+me.cells,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cls = 
+me.selectedCls,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cellItems = 
+cells.elements,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cLen = 
+cellItems.length,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cell, c;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cells.removeCls(cls);</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (c = 0; c &lt; cLen; c++) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cell = 
+cellItems[c].firstChild;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if (cell.dateValue === t) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+return 
+cell;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 
+null;<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;&nbsp;&nbsp; selectedUpdate: function(date) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me = 
+this,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; t = 
+Ext.Date.clearTime(date, 
+true).getTime(),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cells = 
+me.cells,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cls = 
+me.selectedCls,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+c,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cLen = 
+cells.getCount(),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cell;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.eventEl.dom.setAttribute('aria-busy', 
+'true');<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cell =   me.activeCell;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (cell) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Ext.fly(cell).removeCls(cls);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cell.setAttribute('aria-selected', 
+false);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (c = 0; c &lt; cLen; c++) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cell = 
+cells.item(c);</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if 
+(me.textNodes[c].dateValue === t) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.activeCell = 
+cell.dom;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.eventEl.dom.setAttribute('aria-activedescendant', 
+cell.dom.id);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cell.dom.setAttribute('aria-selected', 
+true);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+cell.addCls(cls);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.fireEvent('highlightitem', me, 
+cell);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+break;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.eventEl.dom.removeAttribute('aria-busy');<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P><BR>&nbsp;&nbsp;&nbsp; doDestroy: function() 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me = this;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (me.rendered) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Ext.destroy(<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.hourField,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.minuteField,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.secondField<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.callParent(arguments);<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P><BR>&nbsp;&nbsp;&nbsp; onMouseDown: function(e) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var cmp = 
+Ext.Component.fromElement(e.target);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if (cmp.isFormField) return;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+e.preventDefault();<BR>&nbsp;&nbsp;&nbsp; },</P>
+<P>&nbsp;&nbsp;&nbsp; privates: {</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; finishRenderChildren: function() 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me = 
+this;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.callParent(arguments);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.hourField.finishRender();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.minuteField.finishRender();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.secondField.finishRender();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}</P>
+<P>&nbsp;&nbsp;&nbsp; }<BR>});</FONT></P>
+<P><BR 
+class=Apple-interchange-newline>&nbsp;</P>
+<P><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">以下代码继承</SPAN></P><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN class=multi-src-btn 
+style="CURSOR: pointer; POSITION: relative">
+<H1 class=class 
+style="OVERFLOW: visible; WHITE-SPACE: nowrap; WORD-SPACING: 0px; TEXT-OVERFLOW: ellipsis; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 400 1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=multi-src-btn 
+style="CURSOR: pointer; POSITION: relative">Ext.form.field.Date</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN class=alias 
+style="FONT-SIZE: 0.6em; COLOR: grey; LETTER-SPACING: 1px"><FONT size=3>xtype: 
+datefield</FONT></SPAN></H1>
+<H1 class=class 
+style="OVERFLOW: visible; WHITE-SPACE: nowrap; WORD-SPACING: 0px; TEXT-OVERFLOW: ellipsis; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 400 1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=alias 
+style="FONT-SIZE: 0.6em; COLOR: grey; LETTER-SPACING: 1px">添加时间三字段</SPAN></H1>
+<H1 class=class 
+style="OVERFLOW: visible; WHITE-SPACE: nowrap; WORD-SPACING: 0px; TEXT-OVERFLOW: ellipsis; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 400 1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=alias style="FONT-SIZE: 0.6em; COLOR: grey; LETTER-SPACING: 1px"><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">Ext.define('Test.ux.form.field.Datetime', 
+{<BR>&nbsp;&nbsp;&nbsp; extend: 'Ext.form.field.Date',<BR>&nbsp;&nbsp;&nbsp; 
+alias: 'widget.datetimefield',<BR>&nbsp;&nbsp;&nbsp; requires: 
+['Test.ux.picker.Datetime2'],</SPAN></SPAN></H1>
+<H1 class=class 
+style="OVERFLOW: visible; WHITE-SPACE: nowrap; WORD-SPACING: 0px; TEXT-OVERFLOW: ellipsis; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 400 1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=alias style="FONT-SIZE: 0.6em; COLOR: grey; LETTER-SPACING: 1px"><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">&nbsp;&nbsp;&nbsp; 
+createPicker: function() {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var me =   
+ this,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+format = Ext.String.format;</SPAN></SPAN></H1>
+<H1 class=class 
+style="OVERFLOW: visible; WHITE-SPACE: nowrap; WORD-SPACING: 0px; TEXT-OVERFLOW: ellipsis; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 400 1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=alias style="FONT-SIZE: 0.6em; COLOR: grey; LETTER-SPACING: 1px"><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+// Create floating Picker BoundList. It will acquire a floatParent by looking up 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // its ancestor hierarchy 
+(Pickers use their pickerField property as an upward link) 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // for a floating component. 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return new 
+Test.ux.picker.Datetime2({<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+id: me.id + 
+'-picker',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+pickerField: 
+me,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+floating: 
+true,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+preventRefocus: 
+true,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+hidden: 
+true,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+minDate: 
+me.minValue,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+maxDate: 
+me.maxValue,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+disabledDatesRE: 
+me.disabledDatesRE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+disabledDatesText: 
+me.disabledDatesText,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ariaDisabledDatesText: 
+me.ariaDisabledDatesText,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+disabledDays: 
+me.disabledDays,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+disabledDaysText: 
+me.disabledDaysText,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ariaDisabledDaysText: 
+me.ariaDisabledDaysText,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+format: 
+me.format,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+showToday: 
+me.showToday,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+startDay: 
+me.startDay,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+minText: format(me.minText, 
+me.formatDate(me.minValue)),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ariaMinText: format(me.ariaMinText, me.formatDate(me.minValue, 
+me.ariaFormat)),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+maxText: format(me.maxText, 
+me.formatDate(me.maxValue)),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ariaMaxText: format(me.ariaMaxText, me.formatDate(me.maxValue, 
+me.ariaFormat)),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+listeners: 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+scope: 
+me,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+select: 
+me.onSelect,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+tabout: 
+me.onTabOut<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+},<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+keyNavConfig: 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+esc: function() 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.inputEl.focus();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+me.collapse();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });<BR>&nbsp;&nbsp;&nbsp; 
+}</SPAN></SPAN></H1>
+<H1 class=class 
+style="OVERFLOW: visible; WHITE-SPACE: nowrap; WORD-SPACING: 0px; TEXT-OVERFLOW: ellipsis; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 400 1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=alias style="FONT-SIZE: 0.6em; COLOR: grey; LETTER-SPACING: 1px"><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">});</SPAN></SPAN></H1>
+<H1 class=class 
+style="OVERFLOW: visible; WHITE-SPACE: nowrap; WORD-SPACING: 0px; TEXT-OVERFLOW: ellipsis; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 400 1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=alias style="FONT-SIZE: 0.6em; COLOR: grey; LETTER-SPACING: 1px"><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">作者提出的问题：</SPAN></SPAN></H1>
+<H1 class=class 
+style="OVERFLOW: visible; WHITE-SPACE: nowrap; WORD-SPACING: 0px; TEXT-OVERFLOW: ellipsis; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 400 1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=alias style="FONT-SIZE: 0.6em; COLOR: grey; LETTER-SPACING: 1px"><SPAN 
+style="WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/20px 'Source Code Pro', monospace; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(63,63,63); TEXT-ALIGN: left; FONT: 15px/26px 'microsoft yahei'; MARGIN: 0px 0px 1.1em; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">在使用的时候发现个问题，就是时间字段字段点不进去，经过调试，发现在日期选择字段中，当它作为日期下拉选择字段的选择器来使用的时候，</P>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(63,63,63); TEXT-ALIGN: left; FONT: 15px/26px 'microsoft yahei'; MARGIN: 0px 0px 1.1em; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">会把MouseDown事件都屏蔽了，具体代码如下：</P><PRE class=prettyprint style="BOX-SIZING: border-box; WORD-WRAP: break-word; BORDER-TOP: rgb(136,136,136) 0px solid; BORDER-RIGHT: rgb(136,136,136) 0px solid; WHITE-SPACE: nowrap; WORD-SPACING: 0px; OVERFLOW-X: auto; OVERFLOW-Y: hidden; BORDER-BOTTOM: rgb(136,136,136) 0px solid; POSITION: relative; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; FONT: 14px/1.45 'Source Code Pro', monospace; PADDING-LEFT: 60px; MARGIN: 0px 0px 1.1em; BORDER-LEFT: rgb(136,136,136) 0px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 5px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 0px" name="code"><CODE class="hljs javascript has-numbering" style="BOX-SIZING: border-box; WORD-WRAP: normal; FONT-FAMILY: 'Source Code Pro', monospace; BACKGROUND: none transparent scroll repeat 0% 0%; WHITE-SPACE: pre; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; DISPLAY: block; PADDING-RIGHT: 0px; border-radius: 0px">    onMouseDown: <SPAN class=hljs-function style="BOX-SIZING: border-box"><SPAN class=hljs-keyword style="BOX-SIZING: border-box; COLOR: rgb(0,0,136)">function</SPAN><SPAN class=hljs-params style="BOX-SIZING: border-box; COLOR: rgb(102,0,102)">(e)</SPAN> {</SPAN>
+        e.preventDefault();
+    },</CODE><CODE class="hljs javascript has-numbering" style="BOX-SIZING: border-box; WORD-WRAP: normal; FONT-FAMILY: 'Source Code Pro', monospace; BACKGROUND: none transparent scroll repeat 0% 0%; WHITE-SPACE: pre; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; DISPLAY: block; PADDING-RIGHT: 0px; border-radius: 0px">
+        
+    </CODE>我们需要做的就是重写该方法，当单击的组件是数字字段时，允许单击操作，具体代码如下：</PRE><PRE class=prettyprint style="BOX-SIZING: border-box; WORD-WRAP: break-word; BORDER-TOP: rgb(136,136,136) 0px solid; BORDER-RIGHT: rgb(136,136,136) 0px solid; WHITE-SPACE: nowrap; WORD-SPACING: 0px; OVERFLOW-X: auto; OVERFLOW-Y: hidden; BORDER-BOTTOM: rgb(136,136,136) 0px solid; POSITION: relative; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 5px; TEXT-ALIGN: left; PADDING-TOP: 5px; FONT: 14px/1.45 'Source Code Pro', monospace; PADDING-LEFT: 60px; MARGIN: 0px 0px 1.1em; BORDER-LEFT: rgb(136,136,136) 0px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; PADDING-RIGHT: 5px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 0px" name="code"><CODE class="hljs javascript has-numbering" style="BOX-SIZING: border-box; WORD-WRAP: normal; FONT-FAMILY: 'Source Code Pro', monospace; BACKGROUND: none transparent scroll repeat 0% 0%; WHITE-SPACE: pre; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; DISPLAY: block; PADDING-RIGHT: 0px; border-radius: 0px">    onMouseDown: <SPAN class=hljs-function style="BOX-SIZING: border-box"><SPAN class=hljs-keyword style="BOX-SIZING: border-box; COLOR: rgb(0,0,136)">function</SPAN><SPAN class=hljs-params style="BOX-SIZING: border-box; COLOR: rgb(102,0,102)">(e)</SPAN> {</SPAN>
+        <SPAN class=hljs-keyword style="BOX-SIZING: border-box; COLOR: rgb(0,0,136)">var</SPAN> cmp = Ext.Component.fromElement(e.target);
+        <SPAN class=hljs-keyword style="BOX-SIZING: border-box; COLOR: rgb(0,0,136)">if</SPAN> (cmp.isFormField) <SPAN class=hljs-keyword style="BOX-SIZING: border-box; COLOR: rgb(0,0,136)">return</SPAN>;
+        e.preventDefault();
+    },    </CODE></PRE>
+<P 
+style="BOX-SIZING: border-box; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(63,63,63); TEXT-ALIGN: left; FONT: 15px/26px 'microsoft yahei'; MARGIN: 0px 0px 1.1em; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">代码先通过触发事件的元素返回对应的组件，然后判断组件是否表单字段，如果是，则返回，不阻止事件，否则，阻止事件。</P></SPAN></SPAN></SPAN></H1></SPAN></body>
+</html>

@@ -1,0 +1,356 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>web系统权限</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H1 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 24px/1.5em 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; MARGIN: 0px 0px 5px; WIDOWS: 1; LETTER-SPACING: normal; TEXT-INDENT: 0px; text-rendering: optimizeLegibility; -webkit-text-stroke-width: 0px">Web开发中的用户角色权限设计总结</H1>
+<DIV class=article_meta 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(211,211,211) 1px dashed; TEXT-TRANSFORM: none; COLOR: rgb(153,153,153); PADDING-BOTTOM: 8px; FONT: 14px/21px 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; WIDOWS: 1; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV style="MARGIN-BOTTOM: 5px"><SPAN class=timestamp 
+style="MARGIN-RIGHT: 5px">时间&nbsp;2013-09-15 12:02:36<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><SPAN class=from 
+style="MARGIN-RIGHT: 5px"><I class=icon-globe 
+style="TEXT-DECORATION: ; HEIGHT: auto; FONT-FAMILY: FontAwesome; WIDTH: auto; VERTICAL-ALIGN: baseline; BACKGROUND-IMAGE: none; BACKGROUND-REPEAT: repeat; BACKGROUND-POSITION: 0px 0px; FONT-WEIGHT: normal; FONT-STYLE: normal; MARGIN-TOP: 0px; DISPLAY: inline; LINE-HEIGHT: normal; MARGIN-RIGHT: 0px; -webkit-font-smoothing: antialiased"></I><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><A class="cut cut28 from" 
+style="OVERFLOW: hidden; TEXT-DECORATION: none; MAX-WIDTH: 28%; WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis; WORD-BREAK: keep-all; COLOR: rgb(51,51,51); OUTLINE-WIDTH: 0px; OUTLINE-STYLE: none; DISPLAY: inline; OUTLINE-COLOR: invert; transition: 0.25s" 
+href="http://www.tuicool.com/sites/bQzEvq" target=_blank>secondriver 
+的BLOG</A></SPAN></DIV>
+<DIV class=source><I style="FLOAT: left; FONT-STYLE: normal">原文</I>&nbsp;<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><A class="cut cut70" 
+style="OVERFLOW: hidden; TEXT-DECORATION: none; MAX-WIDTH: 69%; WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis; WORD-BREAK: keep-all; COLOR: rgb(51,51,51); OUTLINE-WIDTH: 0px; OUTLINE-STYLE: none; DISPLAY: inline-block; OUTLINE-COLOR: invert; transition: 0.25s" 
+href="http://aiilive.blog.51cto.com/1925756/1297317?utm_source=tuicool&amp;utm_medium=referral">http://aiilive.blog.51cto.com/1925756/1297317</A></DIV>
+<DIV><SPAN style="MARGIN-RIGHT: 5px">主题</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><A 
+style="TEXT-DECORATION: none; COLOR: rgb(51,51,51); OUTLINE-WIDTH: 0px; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+href="http://www.tuicool.com/topics/11000144" target=_blank><SPAN 
+class=new-label 
+style="FONT-SIZE: 0.9em; TEXT-DECORATION: none; VERTICAL-ALIGN: baseline; WHITE-SPACE: nowrap; COLOR: rgb(120,120,120); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; DISPLAY: inline-block; LINE-HEIGHT: 16px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(242,242,242); MARGIN-RIGHT: 5px">Web开发</SPAN></A></DIV></DIV>
+<DIV id=nei class=article_body 
+style="WORD-WRAP: break-word; MARGIN-BOTTOM: 0px; WHITE-SPACE: normal; WORD-SPACING: 0px; OVERFLOW-X: hidden; TEXT-TRANSFORM: none; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 25px; PADDING-TOP: 20px; FONT: 16px/1.7em 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif; PADDING-LEFT: 5px; MIN-HEIGHT: 340px; WIDOWS: 1; LETTER-SPACING: normal; PADDING-RIGHT: 5px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV style="FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">在Web开发中关于权限管理设计大抵涉及到两个方面：一：功能方面权限设计；二：资源方面权限设计。二者比较来看，功能方面权限的可重用性更高。<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><BR></P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">1.关于权限：</P>
+<UL 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 16px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 0.75em 25px; LINE-HEIGHT: 1.7em; PADDING-RIGHT: 0px">
+  <LI style="LIST-STYLE-TYPE: disc; FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">按照角色权限的最简单的设计</P>
+  <TABLE class="table table-bordered" 
+  style="BORDER-LEFT-WIDTH: 0px; MARGIN-BOTTOM: 1.5em; FONT-SIZE: 14px; MAX-WIDTH: 100%; BORDER-TOP: rgb(221,221,221) 1px solid; BORDER-RIGHT: rgb(221,221,221) 1px solid; WIDTH: 659px; BORDER-COLLAPSE: separate; BORDER-BOTTOM: rgb(221,221,221) 1px solid; BORDER-SPACING: 0px; LINE-HEIGHT: 1.3em; BACKGROUND-COLOR: transparent; border-radius: 4px" 
+  border=1>
+    
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px; border-top-left-radius: 4px"       vAlign=top>名称</TD>
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px; border-top-right-radius: 4px"       vAlign=top>描述</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top>用户</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top>不具备管理功能</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top>管理员</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top>具备管理普通用户的权限</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top>超级管理员</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top>具备管理管理员的权限</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; border-bottom-left-radius: 4px"       vAlign=top></TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; border-bottom-right-radius: 4px"       vAlign=top></TD></TR></TABLE>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">上面的设计直接将参与系统的用户分为三类角色：用户，管理员，超级管理员。</P></LI>
+  <LI style="LIST-STYLE-TYPE: disc; FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">按照角色权限，粒度划分再小些设计</P>
+  <TABLE class="table table-bordered" 
+  style="BORDER-LEFT-WIDTH: 0px; MARGIN-BOTTOM: 1.5em; FONT-SIZE: 14px; MAX-WIDTH: 100%; BORDER-TOP: rgb(221,221,221) 1px solid; BORDER-RIGHT: rgb(221,221,221) 1px solid; WIDTH: 659px; BORDER-COLLAPSE: separate; BORDER-BOTTOM: rgb(221,221,221) 1px solid; BORDER-SPACING: 0px; LINE-HEIGHT: 1.3em; BACKGROUND-COLOR: transparent; border-radius: 4px" 
+  border=1>
+    
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px; border-top-left-radius: 4px"       vAlign=top width=205>名称</TD>
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px"       vAlign=top width=205>权限</TD>
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px; border-top-right-radius: 4px"       vAlign=top width=205>描述</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=205>普通用户</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=205>普通服务</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=205><SPAN 
+        style="BACKGROUND-COLOR: rgb(255,255,255)">享有系统有限服务</SPAN></TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=205>VIP用户</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=205>高级服务</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=205>享有VIP服务</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; border-bottom-left-radius: 4px"       vAlign=top width=205></TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=205></TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; border-bottom-right-radius: 4px"       vAlign=top width=205></TD></TR></TABLE>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">上面是用户的简单划分示例，通过将用户进行权限划分，来提供不同的服务。</P>
+  <TABLE class="table table-bordered" 
+  style="BORDER-LEFT-WIDTH: 0px; MARGIN-BOTTOM: 1.5em; FONT-SIZE: 14px; MAX-WIDTH: 100%; BORDER-TOP: rgb(221,221,221) 1px solid; BORDER-RIGHT: rgb(221,221,221) 1px solid; WIDTH: 659px; BORDER-COLLAPSE: separate; BORDER-BOTTOM: rgb(221,221,221) 1px solid; BORDER-SPACING: 0px; LINE-HEIGHT: 1.3em; BACKGROUND-COLOR: transparent; border-radius: 4px" 
+  border=1>
+    
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px; border-top-left-radius: 4px"       vAlign=top width=200>名称</TD>
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px"       vAlign=top width=200>权限</TD>
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px; border-top-right-radius: 4px"       vAlign=top width=200>描述</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>产品管理员</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>管理产品模块</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>具备产品模块的管理操作权限</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>客户管理员</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>管理客户模块</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>具备客户模块的管理操作权限</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; border-bottom-left-radius: 4px"       vAlign=top width=200></TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200></TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; border-bottom-right-radius: 4px"       vAlign=top width=200></TD></TR></TABLE>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">上面是管理员的简单划分示例，通过将后台管理员进行权限划分，使的每一个管理员角色具备不同的操作权限，并且不同角色的管理员在管理角色上不存在交叉管理，这样系统的管理部分才有可能保存清晰，完整，有效。</P>
+  <TABLE class="table table-bordered" 
+  style="BORDER-LEFT-WIDTH: 0px; MARGIN-BOTTOM: 1.5em; FONT-SIZE: 14px; MAX-WIDTH: 100%; BORDER-TOP: rgb(221,221,221) 1px solid; BORDER-RIGHT: rgb(221,221,221) 1px solid; WIDTH: 659px; BORDER-COLLAPSE: separate; BORDER-BOTTOM: rgb(221,221,221) 1px solid; BORDER-SPACING: 0px; LINE-HEIGHT: 1.3em; BACKGROUND-COLOR: transparent; border-radius: 4px" 
+  border=1>
+    
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px; border-top-left-radius: 4px"       vAlign=top width=200>名称</TD>
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px"       vAlign=top width=200>权限</TD>
+      <TD       style="FONT-SIZE: 14px; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; BORDER-TOP-WIDTH: 0px; border-top-right-radius: 4px"       vAlign=top width=200>描述</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>超级管理员</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>管理各类管理员</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>具备最高的管理权限</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>系统管理员</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>管理整个系统，包括管理超级管理员</TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200>系统管理员具备操作整个系统的最高权限</TD></TR>
+    <TR style="FONT-SIZE: 14px; LINE-HEIGHT: 1.3em">
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; border-bottom-left-radius: 4px"       vAlign=top width=200></TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px"       vAlign=top width=200></TD>
+      <TD       style="FONT-SIZE: 14px; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(221,221,221) 1px solid; LINE-HEIGHT: 1.3em; PADDING-RIGHT: 8px; border-bottom-right-radius: 4px"       vAlign=top width=200></TD></TR></TABLE>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">上面是系统级别的管理简单划分示例，<SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN><STRONG 
+  style="FONT-WEIGHT: bold; TEXT-INDENT: 0px">一个系统建设完成后应该具备自管理的功能</STRONG><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN><STRONG 
+  style="FONT-WEIGHT: bold; TEXT-INDENT: 0px">，即：</STRONG><STRONG 
+  style="FONT-WEIGHT: bold; TEXT-INDENT: 0px">系统环境配置，模块管理，使用系统的干系人管理等都可以通过自身的管理模块完成，而不是人为的修改数据或者系统程序。</STRONG></P></LI>
+  <LI style="LIST-STYLE-TYPE: disc; FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">按照模块对角色具备的操作权限进行划分，粒度将更细。对于模块层的权限划分使得系统权限管理严格，个角色的智能更加精确，当然系统的设计，实现也相对复杂。</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">2.用户-角色-权限的一个物理模型</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">设计示例图如下所示：</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px"><A 
+  style="TEXT-DECORATION: none; BORDER-BOTTOM: rgb(148,148,148) 1px dashed; FONT-WEIGHT: bold; COLOR: rgb(148,148,148); OUTLINE-WIDTH: 0px; FONT-STYLE: italic; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+  href="http://img1.51cto.com/attachment/201309/104309462.png"><IMG 
+  title=野马红尘角色权限 onload="if(this.width>650) this.width=650;" 
+  style="MAX-WIDTH: 96%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; TEXT-ALIGN: center; MARGIN: 0px auto; BORDER-LEFT: 0px; DISPLAY: block" 
+  alt=104309462.png 
+src="http://img0.tuicool.com/uauiEj.png!web"></A></P></LI></UL>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">说明：</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">a.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN 
+style="TEXT-DECORATION: underline">用户-用户角色-角色</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>：可以构成一个用户角色权限管理子模块，即</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">b.<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN 
+style="TEXT-DECORATION: underline">模块-模块权限-权限</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>：可以构成一个模块权限管理子模块。注：这里的描述有些欠缺，单独的看待模块部分，应该描述为<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN 
+style="TEXT-DECORATION: underline">模块-模块功能-功能</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>更为恰当。</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">c.将a和b同过角色权限组合在一起就可以构成一个<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><STRONG 
+style="FONT-WEIGHT: bold; TEXT-INDENT: 0px">用户-角色-权限</STRONG><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>的按照<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><STRONG 
+style="FONT-WEIGHT: bold; TEXT-INDENT: 0px">功能模块粒度划分</STRONG>的权限管理系统。</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">3.用户-角色-权限数据库中表之间的关联关系说明：</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em"><A 
+style="TEXT-DECORATION: none; BORDER-BOTTOM: rgb(148,148,148) 1px dashed; FONT-WEIGHT: bold; COLOR: rgb(148,148,148); OUTLINE-WIDTH: 0px; FONT-STYLE: italic; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+href="http://img1.51cto.com/attachment/201309/105731356.png"><IMG 
+title=野马红尘用户角色权限 onload="if(this.width>650) this.width=650;" 
+style="MAX-WIDTH: 96%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; TEXT-ALIGN: center; MARGIN: 0px auto; BORDER-LEFT: 0px; DISPLAY: block" 
+alt=105731356.png src="http://img0.tuicool.com/eiA3Qf.png!web"></A></P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">上述数据库表的关系图中的每一张表不涉及具体的字段内容，所具备的字段都是为了描述各个表之间的关联关系。</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">实体表：用户表，角色表，权限表，模块表；</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">中间表：用户角色，角色权限，模块权限表，用来解决多对多问题；</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">角色权限表：涉及角色具备的权限，该权限是来自模块权限，也就是符合</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">关于角色权限表是用户-角色-权限系统的一个可扩展口。例如：角色权限可以和权限直接关联，或者二者之间添加特定场景的其他表。</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">4.数据库用例数据，使用用户-角色-权限系统</P>
+<UL 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 16px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 0.75em 25px; LINE-HEIGHT: 1.7em; PADDING-RIGHT: 0px">
+  <LI style="LIST-STYLE-TYPE: disc; FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">用户</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px"><A 
+  style="TEXT-DECORATION: none; BORDER-BOTTOM: rgb(148,148,148) 1px dashed; FONT-WEIGHT: bold; COLOR: rgb(148,148,148); OUTLINE-WIDTH: 0px; FONT-STYLE: italic; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+  href="http://img1.51cto.com/attachment/201309/111212500.png"><IMG title=u.png 
+  onload="if(this.width>650) this.width=650;" 
+  style="MAX-WIDTH: 96%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; TEXT-ALIGN: center; MARGIN: 0px auto; BORDER-LEFT: 0px" 
+  alt=111212500.png src="http://img2.tuicool.com/ENbIVr.png!web"><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN></A>三个用户（标识列[主键],用户编码，用户名称）</P></LI>
+  <LI style="LIST-STYLE-TYPE: disc; FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">角色</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px"><A 
+  style="TEXT-DECORATION: none; BORDER-BOTTOM: rgb(148,148,148) 1px dashed; FONT-WEIGHT: bold; COLOR: rgb(148,148,148); OUTLINE-WIDTH: 0px; FONT-STYLE: italic; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+  href="http://img1.51cto.com/attachment/201309/111330529.png"><IMG title=页面红尘 
+  onload="if(this.width>650) this.width=650;" 
+  style="MAX-WIDTH: 96%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; TEXT-ALIGN: center; MARGIN: 0px auto; BORDER-LEFT: 0px; DISPLAY: block" 
+  alt=111330529.png src="http://img0.tuicool.com/i2uyya.png!web"></A></P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">四种角色（标识列[主键],角色编码，角色名称）</P></LI>
+  <LI style="LIST-STYLE-TYPE: disc; FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">用户角色</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px"><A 
+  style="TEXT-DECORATION: none; BORDER-BOTTOM: rgb(148,148,148) 1px dashed; FONT-WEIGHT: bold; COLOR: rgb(148,148,148); OUTLINE-WIDTH: 0px; FONT-STYLE: italic; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+  href="http://img1.51cto.com/attachment/201309/111516931.png"><IMG title=野马红尘 
+  onload="if(this.width>650) this.width=650;" 
+  style="MAX-WIDTH: 96%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; TEXT-ALIGN: center; MARGIN: 0px auto; BORDER-LEFT: 0px; DISPLAY: block" 
+  alt=111516931.png src="http://img0.tuicool.com/zyMjQf.png!web"></A></P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">用户角色标识列，用户编码，角色编码即构成用户角色中间表。注：实际中一个用户足矣具备多种角色。</P></LI>
+  <LI style="LIST-STYLE-TYPE: disc; FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">模块</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px"><A 
+  style="TEXT-DECORATION: none; BORDER-BOTTOM: rgb(148,148,148) 1px dashed; FONT-WEIGHT: bold; COLOR: rgb(148,148,148); OUTLINE-WIDTH: 0px; FONT-STYLE: italic; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+  href="http://img1.51cto.com/attachment/201309/111746736.png"><IMG title=野马红尘 
+  onload="if(this.width>650) this.width=650;" 
+  style="MAX-WIDTH: 96%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; TEXT-ALIGN: center; MARGIN: 0px auto; BORDER-LEFT: 0px; DISPLAY: block" 
+  alt=111746736.png src="http://img0.tuicool.com/zQVBjq.png!web"></A></P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">[模块标识列，模块编码，模块名称，父模块编码，模块URL]</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">说明：</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">父模块编码：用于模块划分粒度层次标识</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">模块URL：用于模块在WBE应用中的访问标识，当然也可以作为他用。</P></LI>
+  <LI style="LIST-STYLE-TYPE: disc; FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">权限</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px"><A 
+  style="TEXT-DECORATION: none; BORDER-BOTTOM: rgb(148,148,148) 1px dashed; FONT-WEIGHT: bold; COLOR: rgb(148,148,148); OUTLINE-WIDTH: 0px; FONT-STYLE: italic; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+  href="http://img1.51cto.com/attachment/201309/112411119.png"><IMG title=野马红尘 
+  onload="if(this.width>650) this.width=650;" 
+  style="MAX-WIDTH: 96%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; TEXT-ALIGN: center; MARGIN: 0px auto; BORDER-LEFT: 0px; DISPLAY: block" 
+  alt=112411119.png src="http://img2.tuicool.com/nqqaui.png!web"></A></P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">权限标识，权限编码，权限名称。</P></LI>
+  <LI style="LIST-STYLE-TYPE: disc; FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">模块权限</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px"><A 
+  style="TEXT-DECORATION: none; BORDER-BOTTOM: rgb(148,148,148) 1px dashed; FONT-WEIGHT: bold; COLOR: rgb(148,148,148); OUTLINE-WIDTH: 0px; FONT-STYLE: italic; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+  href="http://img1.51cto.com/attachment/201309/112806887.png"><IMG title=野马红尘 
+  onload="if(this.width>650) this.width=650;" 
+  style="MAX-WIDTH: 96%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; TEXT-ALIGN: center; MARGIN: 0px auto; BORDER-LEFT: 0px; DISPLAY: block" 
+  alt=112806887.png src="http://img0.tuicool.com/fAFZ7j.png!web"></A></P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">模块权限标识列，模块编码，权限编码。模块权限表在模块粒度和权限粒度上对模块进行的相应的权限设置，可以简单表述为：具备在某一模块上的某种权限操作。因此将角色和模块权限进行关联将成为角色具备这一粒度层次上的操作权限。</P></LI>
+  <LI style="LIST-STYLE-TYPE: disc; FONT-SIZE: 16px; LINE-HEIGHT: 1.7em">
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">角色权限</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px"><A 
+  style="TEXT-DECORATION: none; BORDER-BOTTOM: rgb(148,148,148) 1px dashed; FONT-WEIGHT: bold; COLOR: rgb(148,148,148); OUTLINE-WIDTH: 0px; FONT-STYLE: italic; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+  href="http://img1.51cto.com/attachment/201309/113244594.png"><IMG title=野马红尘 
+  onload="if(this.width>650) this.width=650;" 
+  style="MAX-WIDTH: 96%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; TEXT-ALIGN: center; MARGIN: 0px auto; BORDER-LEFT: 0px; DISPLAY: block" 
+  alt=113244594.png src="http://img2.tuicool.com/IbEjIj.png!web"></A></P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px">角色权限标识列，角色编码，模块权限编码</P>
+  <P 
+  style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 0px"></P></LI></UL>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">至此，用户，角色，权限的划分就形成了，而且可以通过实际中需要的用户，角色，权限的管理程度，进行简化或者增加表。</P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">5.查询用户编码为<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace; COLOR: rgb(0,0,255); LINE-HEIGHT: 17px; BACKGROUND-COLOR: rgb(255,255,255)">400900500</SPAN><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>的权限</P><PRE class="prettyprint hljs sql" style="WORD-WRAP: break-word; FONT-SIZE: 14px; BORDER-TOP: medium none; FONT-FAMILY: Menlo, Monaco, Consolas, 'Courier New', monospace; BORDER-RIGHT: medium none; WHITE-SPACE: pre; OVERFLOW-X: auto; BORDER-BOTTOM: medium none; WORD-BREAK: break-all; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; MARGIN: 0px 0px 1.5em; BORDER-LEFT: medium none; DISPLAY: block; LINE-HEIGHT: 1.5em; PADDING-RIGHT: 0.5em; BACKGROUND-COLOR: rgb(246,246,246); border-radius: 4px"><SPAN class=hljs-keyword style="FONT-WEIGHT: 700; COLOR: rgb(51,51,51)">SELECT</SPAN>
+    t_account.ACCCODE, t_account.ACCNAME,
+    t_role.ROLECODE, t_role.ROLENAME,
+    t_module_privilege.MODUELCODE,
+  t_module.MODUELCODE, t_module.MODUELNAME,
+    t_privilege.PRICODE, t_privilege.PRINAME
+<SPAN class=hljs-keyword style="FONT-WEIGHT: 700; COLOR: rgb(51,51,51)">FROM</SPAN>
+    t_account, t_account_role, t_role, t_role_privilege, t_module_privilege, t_module, t_privilege
+<SPAN class=hljs-keyword style="FONT-WEIGHT: 700; COLOR: rgb(51,51,51)">WHERE</SPAN>
+    t_account_role.ACCCODE=t_account.ACCCODE <SPAN class=hljs-keyword style="FONT-WEIGHT: 700; COLOR: rgb(51,51,51)">AND</SPAN> t_account_role.ROLECODE=t_role.ROLECODE
+<SPAN class=hljs-keyword style="FONT-WEIGHT: 700; COLOR: rgb(51,51,51)">AND</SPAN>
+    t_account.ACCCODE=<SPAN class=hljs-string style="COLOR: rgb(136,0,0)">"400900500"</SPAN>
+<SPAN class=hljs-keyword style="FONT-WEIGHT: 700; COLOR: rgb(51,51,51)">AND</SPAN>
+    t_role_privilege.ROLECODE=t_role.ROLECODE   <SPAN class=hljs-keyword style="FONT-WEIGHT: 700; COLOR: rgb(51,51,51)">AND</SPAN> t_role_privilege.MPID=t_module_privilege.MPID
+<SPAN class=hljs-keyword style="FONT-WEIGHT: 700; COLOR: rgb(51,51,51)">AND</SPAN>
+    t_module_privilege.MODUELCODE=t_module.MODUELCODE <SPAN class=hljs-keyword style="FONT-WEIGHT: 700; COLOR: rgb(51,51,51)">AND</SPAN> t_module_privilege.PRICODE=t_privilege.PRICODE</PRE>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em"><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace"><SPAN 
+style="LINE-HEIGHT: 17px">通过面的SQL语句可以查询到<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace; COLOR: rgb(0,0,255); LINE-HEIGHT: 17px; BACKGROUND-COLOR: rgb(255,255,255)">400900500<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace; COLOR: rgb(0,32,96); LINE-HEIGHT: 17px; BACKGROUND-COLOR: rgb(255,255,255)">用户的权限。</SPAN></SPAN></SPAN></SPAN></P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em"><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace"><SPAN 
+style="LINE-HEIGHT: 17px"><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace; COLOR: rgb(0,0,255); LINE-HEIGHT: 17px; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace; COLOR: rgb(0,32,96); LINE-HEIGHT: 17px; BACKGROUND-COLOR: rgb(255,255,255)"><A 
+style="TEXT-DECORATION: none; BORDER-BOTTOM: rgb(148,148,148) 1px dashed; FONT-WEIGHT: bold; COLOR: rgb(148,148,148); OUTLINE-WIDTH: 0px; FONT-STYLE: italic; OUTLINE-STYLE: none; OUTLINE-COLOR: invert; transition: 0.25s" 
+href="http://img1.51cto.com/attachment/201309/115041959.png"><IMG title=野马红尘 
+onload="if(this.width>650) this.width=650;" 
+style="MAX-WIDTH: 96%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; TEXT-ALIGN: center; MARGIN: 0px auto; BORDER-LEFT: 0px; DISPLAY: block" 
+alt=115041959.png 
+src="http://img1.tuicool.com/67Z3qm.png!web"></A></SPAN></SPAN></SPAN></SPAN></P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em"><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace"><SPAN 
+style="LINE-HEIGHT: 17px"><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace; COLOR: rgb(0,0,255); LINE-HEIGHT: 17px; BACKGROUND-COLOR: rgb(255,255,255)"></SPAN></SPAN></SPAN></P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em"><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace"><SPAN 
+style="LINE-HEIGHT: 17px"><SPAN 
+style="FONT-FAMILY: consolas, 'bitstream vera sans mono', 'courier new', courier, monospace; COLOR: rgb(0,0,255); BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+style="COLOR: rgb(0,32,96)">上述查询仅仅说明各表之间的数据关联关系，在实现开发中这样的查询避免使用。</SPAN></SPAN></SPAN></SPAN></P>
+<P 
+style="FONT-SIZE: 16px; MARGIN: 0px 0px 0.75em; LINE-HEIGHT: 1.7em; TEXT-INDENT: 1em">用户，角色，权限的一个很好的参考示例就是Oracle数据库的用户管理机制。Web开发中更多的是涉及到管理用户，管理员，系统管理，模块访问权限，资源访问等问题的处理。</P></DIV></DIV></body>
+</html>

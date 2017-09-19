@@ -1,0 +1,1111 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>CSS Hack</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H3 
+style="FONT-FAMILY: Arial; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">什么是CSS 
+hack</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">由于不同厂商的流览器或某浏览器的不同版本（如IE6-IE11,Firefox/Safari/Opera/Chrome等），对CSS的支持、解析不一样，导致在不同浏览器的环境中呈现出不一致的页面展现效果。这时，我们为了获得统一的页面效果，就需要针对不同的浏览器或不同版本写特定的CSS样式，我们把这个针对不同的浏览器/不同版本写相应的CSS 
+code的过程，叫做CSS hack!</P>
+<H3 
+style="FONT-FAMILY: Arial; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+name=t1 target=_blank></A>CSS hack的原理</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">由于不同的浏览器和浏览器各版本对CSS的支持及解析结果不一样，以及CSS优先级对浏览器展现效果的影响，我们可以据此针对不同的浏览器情景来应用不同的CSS。</P>
+<H3 
+style="FONT-FAMILY: Arial; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+name=t2 target=_blank></A>CSS hack分类</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">CSS 
+Hack大致有3种表现形式，CSS属性前缀法、选择器前缀法以及IE条件注释法（即HTML头部引用if IE）Hack，实际项目中CSS 
+Hack大部分是针对IE浏览器不同版本之间的表现差异而引入的。</P>
+<UL 
+style="LIST-STYLE-TYPE: none; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI>属性前缀法(即类内部Hack)：例如 IE6能识别下划线"_"和星号" * "，IE7能识别星号" * 
+  "，但不能识别下划线"_"，IE6~IE10都认识"\9"，但firefox前述三个都不能认识。</LI>
+  <LI>选择器前缀法(即选择器Hack)：例如 IE6能识别*html .class{}，IE7能识别*+html 
+  .class{}或者*:first-child+html .class{}。</LI>
+  <LI>IE条件注释法(即HTML条件注释Hack)：针对所有IE(注：IE10+已经不再支持条件注释)： &lt;!--[if 
+  IE]&gt;IE浏览器显示的内容 &lt;![endif]--&gt;，针对IE6及以下版本： &lt;!--[if lt IE 
+  6]&gt;只在IE6-显示的内容 
+&lt;![endif]--&gt;。这类Hack不仅对CSS生效，对写在判断语句里面的所有代码都会生效。</LI></UL><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">　　</SPAN>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">CSS 
+hack书写顺序，一般是将适用范围广、被识别能力强的CSS定义在前面。</P>
+<H3 
+style="FONT-FAMILY: Arial; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+name=t3 target=_blank></A>CSS hack方式一：条件注释法</H3><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">　</SPAN>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">这种方式是IE浏览器专有的Hack方式，微软官方推荐使用的hack方式。举例如下</P><PRE style="WORD-WRAP: break-word; FONT-SIZE: 14px; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; TEXT-ALIGN: left; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">	只在IE下生效
+	&lt;!--[if IE]&gt;
+	这段文字只在IE浏览器显示
+	&lt;![endif]--&gt;
+	
+	只在IE6下生效
+	&lt;!--[if IE 6]&gt;
+	这段文字只在IE6浏览器显示
+	&lt;![endif]--&gt;
+	
+	只在IE6以上版本生效
+	&lt;!--[if gte IE 6]&gt;
+	这段文字只在IE6以上(包括)版本IE浏览器显示
+	&lt;![endif]--&gt;
+	
+	只在IE8上不生效
+	&lt;!--[if ! IE 8]&gt;
+	这段文字在非IE8浏览器显示
+	&lt;![endif]--&gt;
+	
+	非IE浏览器生效
+	&lt;!--[if !IE]&gt;
+	这段文字只在非IE浏览器显示
+	&lt;![endif]--&gt;
+</PRE>
+<H3 
+style="FONT-FAMILY: Arial; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+name=t4 target=_blank></A>CSS hack方式二：类内属性前缀法</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">属性前缀法是在CSS样式属性名前加上一些只有特定浏览器才能识别的hack前缀，以达到预期的页面展现效果。</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">IE浏览器各版本 
+CSS hack 对照表</P>
+<TABLE 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+cellSpacing=0 border=1>
+  
+  <TR>
+    <TD>hack</TD>
+    <TD>写法</TD>
+    <TD>实例</TD>
+    <TD>IE6(S)</TD>
+    <TD>IE6(Q)</TD>
+    <TD>IE7(S)</TD>
+    <TD>IE7(Q)</TD>
+    <TD>IE8(S)</TD>
+    <TD>IE8(Q)</TD>
+    <TD>IE9(S)</TD>
+    <TD>IE9(Q)</TD>
+    <TD>IE10(S)</TD>
+    <TD>IE10(Q)</TD></TR>
+  <TR>
+    <TD>*</TD>
+    <TD>*color</TD>
+    <TD>青色</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD></TR>
+  <TR>
+    <TD>+</TD>
+    <TD>+color</TD>
+    <TD>绿色</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD></TR>
+  <TR>
+    <TD>-</TD>
+    <TD>-color</TD>
+    <TD>黄色</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD></TR>
+  <TR>
+    <TD>_</TD>
+    <TD>_color</TD>
+    <TD>蓝色</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD></TR>
+  <TR>
+    <TD>#</TD>
+    <TD>#color</TD>
+    <TD>紫色</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD></TR>
+  <TR>
+    <TD>\0</TD>
+    <TD>color:red\0</TD>
+    <TD>红色</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD></TR>
+  <TR>
+    <TD>\9\0</TD>
+    <TD>color:red\9\0</TD>
+    <TD>粉色</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD></TR>
+  <TR>
+    <TD>!important</TD>
+    <TD>color:blue !important;color:green;</TD>
+    <TD style="COLOR: rgb(102,51,0) !important">棕色</TD>
+    <TD class=unrender>N</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=unrender>N</TD>
+    <TD class=render>Y</TD>
+    <TD class=render>Y</TD></TR></TABLE>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">说明：在标准模式中</P>
+<UL 
+style="LIST-STYLE-TYPE: none; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI>“-″减号是IE6专有的hack</LI>
+  <LI>“\9″ IE6/IE7/IE8/IE9/IE10都生效</LI>
+  <LI>“\0″ IE8/IE9/IE10都生效，是IE8/9/10的hack</LI>
+  <LI>“\9\0″ 只对IE9/IE10生效，是IE9/10的hack</LI></UL>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">demo如下</P>
+<DIV class="dp-highlighter bg_css" 
+style="WIDTH: 700px; WHITE-SPACE: normal; WORD-SPACING: 0px; OVERFLOW-X: auto; OVERFLOW-Y: hidden; POSITION: relative; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; PADDING-TOP: 1px; FONT: 12px/26px Consolas, 'Courier New', Courier, mono, serif; MARGIN: 18px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(231,229,220); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV class=bar style="PADDING-LEFT: 45px">
+<DIV class=tools 
+style="BORDER-RIGHT: rgb(231,229,220) 1px solid; COLOR: silver; PADDING-BOTTOM: 10px; PADDING-TOP: 3px; FONT: 9px Verdana, Geneva, Arial, Helvetica, sans-serif; PADDING-LEFT: 10px; BORDER-LEFT: rgb(108,226,108) 3px solid; PADDING-RIGHT: 8px; BACKGROUND-COLOR: rgb(248,248,248); font-stretch: normal"><B>[css]</B><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><A 
+onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;" 
+title="view plain" class=ViewSource 
+style="FONT-SIZE: 9px; TEXT-DECORATION: none; BORDER-TOP: medium none; HEIGHT: 16px; BORDER-RIGHT: medium none; WIDTH: 16px; BACKGROUND-IMAGE: url(images/default/ico_plain.gif); BACKGROUND-REPEAT: no-repeat; BORDER-BOTTOM: medium none; BACKGROUND-POSITION: 0% 0%; COLOR: rgb(160,160,160); PADDING-BOTTOM: 1px; PADDING-TOP: 1px; PADDING-LEFT: 1px; MARGIN: 0px 10px 0px 0px; BORDER-LEFT: medium none; DISPLAY: inline-block; PADDING-RIGHT: 1px; TEXT-INDENT: -2000px; background-size: initial; background-origin: initial; background-clip: initial" 
+href="http://blog.csdn.net/freshlover/article/details/12132801#" 
+target=_blank>view plain</A><SPAN data-mod="popu_168"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><A 
+onclick="dp.sh.Toolbar.Command('CopyToClipboard',this);return false;" title=copy 
+class=CopyToClipboard 
+style="FONT-SIZE: 9px; TEXT-DECORATION: none; BORDER-TOP: medium none; HEIGHT: 16px; BORDER-RIGHT: medium none; WIDTH: 16px; BACKGROUND-IMAGE: url(images/default/ico_copy.gif); BACKGROUND-REPEAT: no-repeat; BORDER-BOTTOM: medium none; BACKGROUND-POSITION: 0% 0%; COLOR: rgb(160,160,160); PADDING-BOTTOM: 1px; PADDING-TOP: 1px; PADDING-LEFT: 1px; MARGIN: 0px 10px 0px 0px; BORDER-LEFT: medium none; DISPLAY: inline-block; PADDING-RIGHT: 1px; TEXT-INDENT: -2000px; background-size: initial; background-origin: initial; background-clip: initial" 
+href="http://blog.csdn.net/freshlover/article/details/12132801#" 
+target=_blank>copy</A>
+<DIV 
+style="HEIGHT: 18px; WIDTH: 18px; POSITION: absolute; LEFT: 590px; Z-INDEX: 99; TOP: 2877px"><EMBED 
+id=ZeroClipboardMovie_1 name=ZeroClipboardMovie_1 
+type=application/x-shockwave-flash align=middle 
+pluginspage=http://www.macromedia.com/go/getflashplayer height=18 width=18 
+src=http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf 
+wmode="transparent" flashvars="id=1&amp;width=18&amp;height=18" 
+allowfullscreen="false" allowscriptaccess="always" bgcolor="#ffffff" 
+quality="best" menu="false" loop="false"></DIV></SPAN><SPAN 
+data-mod="popu_169"></SPAN></DIV></DIV>
+<OL class=dp-css 
+style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal; BORDER-RIGHT: rgb(231,229,220) 1px solid; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 1px 45px; BORDER-LEFT-STYLE: none; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255)">
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&lt;script&nbsp;type=</SPAN><SPAN 
+  class=string 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: blue; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">"text/javascript"</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&gt;&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;//alert(document.compatMode);&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&lt;/script&gt;&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&lt;style&nbsp;type=<SPAN 
+  class=string 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: blue; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">"text/css"</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&gt;&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">body:nth-of-type(<SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">1</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">)&nbsp;.iehack{&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:&nbsp;</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">#F00</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;对Windows&nbsp;IE9/Firefox&nbsp;7+/Opera&nbsp;10+/所有Chrome/Safari的CSS&nbsp;hack&nbsp;，选择器也适用几乎全部Mobile/Linux/Mac&nbsp;browser*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">.demo<SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">1</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">,.demo</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">2</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">,.demo</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">3</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">,.demo</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">4</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">{&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">width</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">100px</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">height</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">100px</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">.hack{&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*demo1&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*demo1&nbsp;注意顺序，否则IE6/7下可能无法正确显示，导致结果显示为白色背景*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">red</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;All&nbsp;browsers&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">blue</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;</SPAN><SPAN 
+  class=important 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: red; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">!important</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;All&nbsp;browsers&nbsp;but&nbsp;IE6&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;*<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">black</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;IE6,&nbsp;IE7&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;+<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:yellow;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;IE6,&nbsp;IE7*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">gray</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">9</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;IE6,&nbsp;IE7,&nbsp;IE8,&nbsp;IE9,&nbsp;IE10&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">purple</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;IE8,&nbsp;IE9,&nbsp;IE10&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:orange\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">9\0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*IE9,&nbsp;IE10*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">_background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">green</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;Only&nbsp;works&nbsp;in&nbsp;IE6&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;*+<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:pink;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;&nbsp;WARNING:&nbsp;Only&nbsp;works&nbsp;in&nbsp;IE7&nbsp;?&nbsp;Is&nbsp;it&nbsp;right?&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*可以通过javascript检测IE10，然后给IE10的&lt;html&gt;标签加上class=”ie10″&nbsp;这个类&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">.ie<SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">10</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">#hack</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">{&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">red</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;Only&nbsp;works&nbsp;in&nbsp;IE10&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*demo2*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">.iehack{&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*该demo实例是用于区分标准模式下ie6~ie9和Firefox/Chrome的hack，注意顺序</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE6显示为：绿色，</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE7显示为：黑色，</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE8显示为：红色，</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE9显示为：蓝色，</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">Firefox/Chrome显示为：橘色，</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">（本例IE10效果同IE9,Opera最新版效果同IE8）</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:orange;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;all&nbsp;-&nbsp;for&nbsp;Firefox/Chrome&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">red</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;ie&nbsp;8/9/10/Opera&nbsp;-&nbsp;for&nbsp;ie8/ie10/Opera&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">blue</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">9\0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;ie&nbsp;9/10&nbsp;-&nbsp;for&nbsp;ie9/10&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;*<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">black</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;ie&nbsp;6/7&nbsp;-&nbsp;for&nbsp;ie7&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">_background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">green</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;ie&nbsp;6&nbsp;-&nbsp;for&nbsp;ie6&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*demo3</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">实例是用于区分标准模式下ie6~ie9和Firefox/Chrome的hack，注意顺序</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE6显示为：红色，</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE7显示为：蓝色，</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE8显示为：绿色，</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE9显示为：粉色，</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">Firefox/Chrome显示为：橘色，</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">（本例IE10效果同IE9，Opera最新版效果也同IE9为粉色）</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"></SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">.element&nbsp;{&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:orange;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;all&nbsp;IE/FF/CH/OP*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">.element&nbsp;{&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;*<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:&nbsp;</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">blue</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;IE6+7,&nbsp;doesn't&nbsp;work&nbsp;in&nbsp;IE8/9&nbsp;as&nbsp;IE7&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">.element&nbsp;{&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">_background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:&nbsp;</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">red</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;IE6&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">.element&nbsp;{&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:&nbsp;</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">green</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;IE8+9+10&nbsp;&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:root&nbsp;.element&nbsp;{&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:pink\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;}&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;IE9+10&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*demo4*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"></SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">该实例是用于区分标准模式下ie6~ie10和Opera/Firefox/Chrome的hack，本例特别要注意顺序</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE6显示为：橘色，</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE7显示为：粉色，</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE8显示为：黄色，</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE9显示为：紫色，</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">IE10显示为：绿色，</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">Firefox显示为：蓝色，</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">Opera显示为：黑色，</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">Safari/Chrome显示为：灰色，</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"></SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">.hacktest{&nbsp;&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">blue</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;都识别，此处针对firefox&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">red</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">9</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*all&nbsp;ie*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:yellow\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*for&nbsp;IE8/IE9/10&nbsp;最新版opera也认识*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;+<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:pink;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*for&nbsp;ie6/7*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">_background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:orange;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*for&nbsp;ie6*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">@media&nbsp;<SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">screen</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;and&nbsp;(</SPAN><SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">min-width</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">){&nbsp;&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;.hacktest&nbsp;{<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">black</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;}&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*opera*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">@media&nbsp;<SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">screen</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;and&nbsp;(</SPAN><SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">min-width</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">)&nbsp;{&nbsp;&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;&nbsp;.hacktest&nbsp;{&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">purple</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">\</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">9</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;}</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;&nbsp;for&nbsp;IE9/IE10&nbsp;&nbsp;PS:国外有些习惯常写作\0，根本没考虑Opera也认识\0的实际&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">@media&nbsp;<SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">screen</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;and&nbsp;(-ms-high-contrast:&nbsp;active),&nbsp;(-ms-high-contrast:&nbsp;</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">none</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">)&nbsp;{&nbsp;&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;&nbsp;.hacktest&nbsp;{&nbsp;<SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">green</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;&nbsp;}&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;for&nbsp;IE10+&nbsp;此写法可以适配到高对比度和默认模式，故可覆盖所有ie10的模式&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">}&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">@media&nbsp;<SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">screen</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;and&nbsp;(-webkit-min-device-pixel-ratio:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">0</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">){&nbsp;.hacktest&nbsp;{</SPAN><SPAN 
+  class=keyword 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; FONT-WEIGHT: bold; COLOR: rgb(0,102,153); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">background-color</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:</SPAN><SPAN 
+  class=value 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">gray</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">;}&nbsp;}&nbsp;&nbsp;</SPAN><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*for&nbsp;Chrome/Safari*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*&nbsp;#963棕色&nbsp;:root&nbsp;is&nbsp;for&nbsp;IE9/IE10,&nbsp;优先级高于@media,&nbsp;慎用！如果二者合用，必要时在@media样式加入&nbsp;!important&nbsp;才能区分IE9和IE10&nbsp;*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">/*</SPAN>&nbsp;</SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">:root&nbsp;.hacktest&nbsp;{&nbsp;background-color:#963\9;&nbsp;}&nbsp;</SPAN>&nbsp;</SPAN></LI>
+  <LI 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: rgb(92,92,92); PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(248,248,248)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px"><SPAN 
+  class=comment 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: rgb(0,130,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">*/</SPAN><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&nbsp;&nbsp;</SPAN></SPAN></LI>
+  <LI class=alt 
+  style="BORDER-TOP-STYLE: none; LIST-STYLE-TYPE: decimal-leading-zero; LIST-STYLE-POSITION: outside; BORDER-BOTTOM-STYLE: none; COLOR: ; PADDING-BOTTOM: 0px !important; PADDING-TOP: 0px !important; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 10px !important; MARGIN: 0px; BORDER-LEFT: rgb(108,226,108) 3px solid; LINE-HEIGHT: 18px; PADDING-RIGHT: 3px !important; BACKGROUND-COLOR: rgb(255,255,255)"><SPAN 
+  style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; COLOR: black; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px">&lt;/style&gt;&nbsp;&nbsp;</SPAN></LI></OL></DIV><BR 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">demo1是测试不同IE浏览器下hack 
+的显示效果<BR>IE6显示为：粉色，<BR>IE7显示为：粉色，<BR>IE8显示为：蓝色，<BR>IE9显示为：蓝色，<BR>Firefox/Chrome/Opera显示为：蓝色，<BR>若去掉其中的!important属性定义，则IE6/7仍然是粉色，IE8是紫色，IE9/10为橙色，Firefox/Chrome变为红色，Opera是紫色。是不是有些奇怪：除了IE6以外，其他所有的表现都符合我们的期待。那为何IE6表现的颜色不是_background-color:green;的绿色而是*+background-color:pink的粉色呢？其实是最后一句所谓的IE7私有hack惹的祸？不是说*+是IE7的专有hack吗？？？错，你可能太粗心了！我们常说的IE7专有*+hack的格式是*+html 
+selector，而不是上面的直接在属性上加*+前缀。如果是为IE7定制特殊样式，应该这样使用：</P><PRE style="WORD-WRAP: break-word; FONT-SIZE: 14px; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; TEXT-ALIGN: left; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">*+html #ie7test { /* IE7 only*/
+	color:green;
+}
+</PRE>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">经过测试，我发现属性前缀*+background-color:pink;只有IE6和IE7认识。而*+html 
+selector只有IE7认识。所以我们在使用时候一定要特别注意。</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">demo2实例是用于区分标准模式下ie6~ie9和Firefox/Chrome的hack，注意顺序<BR>IE6显示为：绿色，<BR>IE7显示为：黑色，<BR>IE8显示为：红色，<BR>IE9显示为：蓝色，<BR>Firefox/Chrome显示为：橘色，<BR>（本例IE10效果同IE9,Opera最新版效果同IE8）</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">demo3实例也是用于区分标准模式下ie6~ie9和Firefox/Chrome的hack，注意顺序<BR>IE6显示为：红色，<BR>IE7显示为：蓝色，<BR>IE8显示为：绿色，<BR>IE9显示为：粉色，<BR>Firefox/Chrome显示为：橘色，<BR>（本例IE10效果同IE9，Opera最新版效果也同IE9为粉色）</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">demo4实例是用于区分标准模式下ie6~ie10和Opera/Firefox/Chrome的hack，本例特别要注意顺序<BR>IE6显示为：橘色，<BR>IE7显示为：粉色，<BR>IE8显示为：黄色，<BR>IE9显示为：紫色，<BR>IE10显示为：绿色，<BR>Firefox显示为：蓝色，<BR>Opera显示为：黑色，<BR>Safari/Chrome显示为：灰色，</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+align=center><IMG 
+style="MAX-WIDTH: 100%; BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none" 
+alt="" 
+src="http://img.blog.csdn.net/20130928192555546?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlc2hsb3Zlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"><BR></P>
+<H3 
+style="FONT-FAMILY: Arial; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+name=t5 target=_blank></A>CSS hack方式三：选择器前缀法</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">选择器前缀法是针对一些页面表现不一致或者需要特殊对待的浏览器，在CSS选择器前加上一些只有某些特定浏览器才能识别的前缀进行hack。</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">目前最常见的是</P><PRE style="WORD-WRAP: break-word; FONT-SIZE: 14px; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; TEXT-ALIGN: left; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">*html *前缀只对IE6生效
+*+html *+前缀只对IE7生效
+@media screen\9{...}只对IE6/7生效
+@media \0screen {body { background: red; }}只对IE8有效
+@media \0screen\,screen\9{body { background: blue; }}只对IE6/7/8有效
+@media screen\0 {body { background: green; }} 只对IE8/9/10有效
+@media screen and (min-width:0\0) {body { background: gray; }} 只对IE9/10有效
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {body { background: orange; }} 只对IE10有效
+等等
+</PRE>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: center; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">结合CSS3的一些选择器，如html:first-child，body:nth-of-type(1)，衍生出更多的hack方式，具体的可以参考下表：</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: center; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><IMG 
+style="MAX-WIDTH: 100%; BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none" 
+alt="" 
+src="http://img.blog.csdn.net/20130928162104078?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlc2hsb3Zlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"><BR></P>
+<H3 
+style="FONT-FAMILY: Arial; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+name=t6 target=_blank></A>CSS3选择器结合JavaScript的Hack</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">我们用IE10进行举例：</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">由于IE10用户代理字符串（UserAgent）为：Mozilla/5.0 
+(compatible; MSIE 10.0; Windows NT 6.2; 
+Trident/6.0)，所以我们可以使用javascript将此属性添加到文档标签中，再运用CSS3基本选择器匹配。</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">JavaScript代码:</P><PRE style="WORD-WRAP: break-word; FONT-SIZE: 14px; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; TEXT-ALIGN: left; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">	var htmlObj = document.documentElement;
+	htmlObj.setAttribute('data-useragent',navigator.userAgent);
+	htmlObj.setAttribute('data-platform', navigator.platform );
+</PRE>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">CSS3匹配代码：</P><PRE style="WORD-WRAP: break-word; FONT-SIZE: 14px; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; TEXT-ALIGN: left; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">html[data-useragent*='MSIE 10.0'] #id {
+	color: #F00;
+}
+</PRE>
+<H3 
+style="FONT-FAMILY: Arial; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+name=t7 target=_blank></A>CSS hack利弊</H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">一般情况下，我们尽量避免使用CSS 
+hack，但是有些情况为了顾及用户体验实现向下兼容，不得已才使用hack。比如由于IE8及以下版本不支持CSS3,而我们的项目页面使用了大量CSS3新属性在IE9/Firefox/Chrome下正常渲染，这种情况下如果不使用css3pie或htc或条件注释等方法时,可能就得让IE8-的专属hack出马了。使用hack虽然对页面表现的一致性有好处，但过多的滥用会造成html文档混乱不堪，增加管理和维护的负担。相信只要大家一起努力，少用、慎用hack，未来一定会促使浏览器厂商的标准越来越趋于统一，顺利过渡到标准浏览器的主流时代。抛弃那些陈旧的IE 
+hack，必将减轻我们编码的复杂度，少做无用功。</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">最后补上一张引自国外某大牛总结的CSS 
+hack表，这时一张6年前的旧知识汇总表了，放在这里仅供需要时候方便参考。</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><IMG 
+style="MAX-WIDTH: 100%; BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none" 
+alt="" 
+src="http://img.blog.csdn.net/20130928193301890?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlc2hsb3Zlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><BR></P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); TEXT-ALIGN: left; FONT: 14px/26px Arial; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">说明：本文测试环境为IE6~IE10，Chrome 
+29.0.1547.66 m，Firefox 20.0.1 ，Opera 
+12.02等。一边工作，一边总结，总结了几天写下整理好，今天把它分享出来，文中难免有纰漏，如大侠发现请及时告知！</P></body>
+</html>

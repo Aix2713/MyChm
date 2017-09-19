@@ -74,5 +74,19 @@ b、listeners:
   success: function (form, action) 
 {</P></BLOCKQUOTE>
 <P style="MARGIN-RIGHT: 0px" dir=ltr> 
-4、配置maskDefaults，目前尚未理解怎么搞！！！</P></body>
+4、</P>
+<P style="MARGIN-RIGHT: 0px" dir=ltr> 
+var myPanel = new 
+Ext.panel.Panel({<BR>&nbsp;&nbsp;&nbsp; renderTo : 
+document.body,<BR>&nbsp;&nbsp;&nbsp; height&nbsp;&nbsp; : 
+100,<BR>&nbsp;&nbsp;&nbsp; width&nbsp;&nbsp;&nbsp; : 200,<BR>&nbsp;&nbsp;&nbsp; 
+title&nbsp;&nbsp;&nbsp; : 'Foo'<BR> 
+});</P>
+<P style="MARGIN-RIGHT: 0px" dir=ltr> 
+var myMask = new 
+Ext.LoadMask({<BR>&nbsp;&nbsp;&nbsp; msg&nbsp;&nbsp;&nbsp; : 'Please 
+wait...',<BR>&nbsp;&nbsp;&nbsp; target : myPanel<BR> 
+});</P>
+<P style="MARGIN-RIGHT: 0px" dir=ltr> 
+myMask.show();</P></body>
 </html>

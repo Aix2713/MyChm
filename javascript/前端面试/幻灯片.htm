@@ -1,0 +1,109 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>幻灯片</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、</P>
+<P>&lt;!DOCTYPE html&gt;<BR>&lt;html 
+lang="zh-CN"&gt;<BR>&lt;head&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;meta 
+charset="UTF-8"&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;title&gt;css3 
+实现幻灯片效果&lt;/title&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;style 
+type="text/css"&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .huanDengPic 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; width: 
+600px;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+height: 
+600px;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+margin: 50px auto 
+0;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+overflow: 
+hidden;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+box-shadow:&nbsp; 0 0 5px rgba(0,0,0,1);&nbsp;&nbsp; /*CSS3 
+box-shadow属性,里面的值的设置s可以去网上查*/<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+background-size: cover; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+background-position: 
+center;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+-webkit-animation-name: "loops"; 
+/*检索或设置对象所应用的动画名称*/<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+-webkit-animation-duration: 10s; 
+/*检索或设置对象动画的持续时间*/<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+-webkit-animation-iteration-count: infinite;&nbsp; 
+/*检索或设置对象动画的循环次数，此处的"infinite"为无限循环的意思*/<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @-webkit-keyframes "loops" {&nbsp; 
+/*动画名称和上面设置的动画名称一样*/<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+/*下面是动画过程*/<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+0% 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+background: url(1.jpg) 
+no-repeat;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50% 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+background: url(2.jpg) 
+no-repeat;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 100% 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+background: url(1.jpg) 
+no-repeat;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp; 
+&lt;/style&gt;<BR>&lt;/head&gt;<BR>&lt;body&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;div 
+class="huanDengPic"&gt;&lt;/div&gt;<BR>&lt;/body&gt;<BR>&lt;/html&gt;</P>
+<P>2.</P>
+<P>&lt;!DOCTYPE html&gt;<BR>&lt;html 
+lang="zh-CN"&gt;<BR>&lt;head&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;meta 
+charset="UTF-8"&gt;<BR>&nbsp;&nbsp;&nbsp; 
+&lt;title&gt;CSS实现简单的幻灯片效果&lt;/title&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;style 
+type="text/css"&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; img 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display: 
+none;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+width: 
+600px;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+height: 600px;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; input:checked + img 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; display: 
+block;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; input 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+position: 
+absolute;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+left: -9999px;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cursor: 
+pointer;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp; 
+&lt;/style&gt;<BR>&lt;/head&gt;<BR>&lt;body&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;div 
+id="cont"&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input id="img1" 
+type="radio" checked="checked" name="img"&nbsp; 
+/&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;img src="1.jpg" 
+/&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input id="img2" 
+type="radio" name="img"&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&lt;img src="2.jpg" /&gt;<BR>&nbsp;&nbsp;&nbsp; 
+&lt;/div&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;div 
+id="nav"&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;label 
+for="img1"&gt;第一张&lt;/label&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&lt;label for="img2"&gt;第二张&lt;/label&gt;<BR>&nbsp;&nbsp;&nbsp; 
+&lt;/div&gt;<BR>&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; &lt;!--兼容性： 
+IE8以及IE8以下的浏览器不兼容，只显示文字，不显示图片--&gt;</P>
+<P><BR>&nbsp;&nbsp;&nbsp; 
+&lt;!--以上代码实现使用到的技术：<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+除了设置相应的CSS样式，有两点值得注意：<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+1.设置按钮的位置(绝对定位) 
+，left:-9999px用来隐藏按钮；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+2.&lt;label&gt;标签中的for属性与input标签中的id关联，然后根据input的checked的状态显示或隐藏图片，来达到显示幻灯片效果的目的。<BR>&nbsp;&nbsp;&nbsp; 
+--&gt;<BR>&lt;/body&gt;<BR>&lt;/html&gt;</P></body>
+</html>

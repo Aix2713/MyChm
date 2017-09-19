@@ -1,0 +1,37 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>ext面试题</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P><BR>每一题10分，总共220分。&nbsp;<BR>1.&nbsp;请在空白处填写有且只有一行代码,调用doHandle函数，点击button后使控制台打印出：<BR>Hello&nbsp;World;Value&nbsp;is&nbsp;ExtJS。既不可以写function匿名函数，再在函数内部调用doHandle实现。&nbsp;<BR>填写：function(){doHandle(“World”,”ExtJS”);}者零分！！！！&nbsp;<BR>functiondoHandle(name,value){&nbsp;&nbsp;console.debug("Hello"+name+"&nbsp;&nbsp;Value&nbsp;is&nbsp;"+value);&nbsp;<BR>}&nbsp;<BR>var&nbsp;btn&nbsp;=&nbsp;new&nbsp;Ext.Button({&nbsp;&nbsp;<BR>handler&nbsp;:&nbsp;<FONT color=#ff0000>this.doHandle('a', 
+'b'),</FONT>&nbsp;});&nbsp;<BR>&nbsp;<BR>2.&nbsp;调用ExtJS方法得到一个没有被使用，可使用的唯一id号。&nbsp;</P>
+<P><FONT color=#ff0000>var id = 
+Ext.create('Ext.data.identifier.Uuid');<BR>console.log(id.generate());</FONT><BR>&nbsp;<BR>3.&nbsp;实现在数字1前面增加1000个零，输出0000…….000001。&nbsp;<BR>使用while，for等循环进行字符串相加”0”+”0”……+”0”+”1”实现者一律零分。&nbsp;&nbsp;<BR>4.&nbsp;合并两个数组：&nbsp;<BR>varsrc&nbsp;=&nbsp;[1,2,3,4,5];&nbsp;var&nbsp;dest&nbsp;=&nbsp;[6,7,8,9];&nbsp;<BR>将两个数组合并为一个数组。采用while，for，Ext.each等循环实现者零分。&nbsp;&nbsp;</P><P><FONT color=#ff0000>Ext.Array.push(src, 
+dest&nbsp;)</FONT> </P><P><BR>5.&nbsp;将一个数组[1,2,3,4,5,6,7,8,9]转换为<A 
+href="mailto:1@2@3@4@5@6@7@8@9">1@2@3@4@5@6@7@8@9</A>输出。&nbsp;采用while,for,Ext.each等循环用字符串相加者一律零分。&nbsp;&nbsp;<BR>6.&nbsp;请写出AccordionLayout的配置简写，并用一句话或绘图描述布局呈现样式。&nbsp;<BR>&nbsp;<BR>7.&nbsp;如何监听GridPanel的列点击事件？&nbsp;&nbsp; </P><P><FONT color=#ff0000>listeners:{ </FONT> </P><P><FONT color=#ff0000>&nbsp;&nbsp;&nbsp; 
+itemClick:function(self, record, item, index, e, eOpts){} </FONT>   
+    </P><P><FONT color=#ff0000>}</FONT> </P><P>8.&nbsp;ExtJS中的所有控件都有afterrender事件，请问afterrender事件是什么时候触发的？ </P><P><FONT color=#ff0000>在组件呈现完成后激发。</FONT>&nbsp;&nbsp; </P><P><BR>9.&nbsp;ExtJS如何实现ajax并发访问，既同一时间发起多个ajax访问请求?&nbsp;&nbsp;<BR>10.&nbsp;后台返回前台有数据如下:&nbsp;<BR>[[id&nbsp;:&nbsp;1,name&nbsp;:&nbsp;9],&nbsp;[id&nbsp;:&nbsp;2,name&nbsp;:&nbsp;8],&nbsp;[id&nbsp;:&nbsp;3,name&nbsp;:&nbsp;7],&nbsp;[id&nbsp;:&nbsp;4,name&nbsp;:&nbsp;6],&nbsp;[id&nbsp;:&nbsp;5,name&nbsp;:&nbsp;5]]&nbsp;<BR>并加载到GridPanel中按id升序展示，如何使数据在返回到前台后，按照id降序排列。 </P><P><FONT color=#ff0000>sorts:[{property: <FONT color=#ff0000>'id',</FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+direction: 'ASC'}]</FONT> </P>
+<P>11.&nbsp;有一个数组：&nbsp;<BR>var&nbsp;ary&nbsp;=&nbsp;[1,0,9,5,8,2,10,7,6,3,4]&nbsp;<BR>请对数组进行排序后输出0，1，2，3，4，5，6，7，8，9，10。&nbsp;&nbsp;&nbsp;</P>
+<P><FONT color=#ff0000>Ext.Array.sort(a);</FONT></P>
+<P>&nbsp;&nbsp;<BR>12.&nbsp;有如下代码实例两个数组src和dest，&nbsp;<BR>var&nbsp;src&nbsp;=&nbsp;[{name&nbsp;:&nbsp;'aaa'},{name&nbsp;:&nbsp;'bbb'},{name&nbsp;:&nbsp;'ccc'}];&nbsp;vardest&nbsp;=&nbsp;[{name&nbsp;:&nbsp;'111'},{name&nbsp;:&nbsp;'222'},{name&nbsp;:&nbsp;'333'}];&nbsp;<BR>将src数据复制到dest,&nbsp;<BR>Ext.apply(dest,src);&nbsp;<BR>Ext.each(dest,function(item){&nbsp;&nbsp;<BR>delete&nbsp;item.name;&nbsp;});&nbsp;<BR>请输出下列语句执行结果：&nbsp;<BR>console.debug(src[0].name);&nbsp;console.debug(src[1].name);&nbsp;console.debug(src[2].name);&nbsp;</P>
+<P><FONT color=#ff0000>都为undefined，赋值为引用类型，地址更改，删除全部删除</FONT></P>
+<P><BR>13.&nbsp;Ext.ajax.Request或JsonStore的回调函数failure是在什么情况下触发？&nbsp;</P>
+<P>服务端请求失败的时候会触发，第一个参数的status是错误的代码</P>
+<P><BR>&nbsp;14.&nbsp;Ext.applyIf的作用是什么？</P>
+<P><FONT color=#ff0000>将 config 的所有属性复制到对象 
+(如果它们尚不存在)。</FONT></P>
+<P>&nbsp;&nbsp;<BR>15.&nbsp;在FormPanel中验证TextField字段内容是否为电话号码有哪些方法(至少两种)？&nbsp;&nbsp;<BR>16.&nbsp;有一个javascript变量a，请写一段代码判断该对象是否为一个function函数?&nbsp;&nbsp;<BR>17.&nbsp;Ext.fly的作用是什么?&nbsp;&nbsp;<BR>18.&nbsp;简述JsonStore的recordType的作用,实现一段代码?&nbsp;&nbsp;<BR>19.&nbsp;有一个Ext的控件Component，如何获得此控件的父控件?&nbsp;&nbsp;<BR>20.&nbsp;有一个Ext的控件Component,实现一段代码触发一个Event(‘UserEvent’)事件，并使该控<BR>件的父类控件，父类的父类控件…逐层触发该事件，以此类推,使所有父控件在listeners中监听了’UserEvent’，能够得到相应。&nbsp;&nbsp;<BR>21.&nbsp;请实现两个小数运算后的结果保留2位小数。1.1111111+2.222222222=3.33&nbsp;<BR>&nbsp;<BR>22.&nbsp;有一个字符串”[{a:1,b:10},{a:2,b:20},{a:3,b:30},{a:4,b:40},{a:5,b:50},{a:6,b:60}]”,请编码查询<BR>字符串中大括号对有多少个，并将第N=3个括号对内的a和b值输出。</P></body>
+</html>

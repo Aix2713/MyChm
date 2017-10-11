@@ -15,7 +15,9 @@ html,body {
 </head>
 
 <body>
-<P><BR>每一题10分，总共220分。&nbsp;<BR>1.&nbsp;请在空白处填写有且只有一行代码,调用doHandle函数，点击button后使控制台打印出：<BR>Hello&nbsp;World;Value&nbsp;is&nbsp;ExtJS。既不可以写function匿名函数，再在函数内部调用doHandle实现。&nbsp;<BR>填写：function(){doHandle(“World”,”ExtJS”);}者零分！！！！&nbsp;<BR>functiondoHandle(name,value){&nbsp;&nbsp;console.debug("Hello"+name+"&nbsp;&nbsp;Value&nbsp;is&nbsp;"+value);&nbsp;<BR>}&nbsp;<BR>var&nbsp;btn&nbsp;=&nbsp;new&nbsp;Ext.Button({&nbsp;&nbsp;<BR>handler&nbsp;:&nbsp;<FONT color=#ff0000>this.doHandle('a', 
+<P><BR>每一题10分，总共220分。&nbsp;<BR>1.&nbsp;请在空白处填写有且只有一行代码,调用doHandle函数，点击button后使控制台打印出：<BR>Hello&nbsp;World;Value&nbsp;is&nbsp;ExtJS。既不可以写function匿名函数，再在函数内部调用doHandle实现。&nbsp;<BR>填写：function(){doHandle(“World”,”ExtJS”);}者零分！！！！</P>
+<P>&nbsp;<BR>function 
+doHandle(name,value){&nbsp;&nbsp;console.debug("Hello"+name+"&nbsp;&nbsp;Value&nbsp;is&nbsp;"+value);&nbsp;<BR>}&nbsp;<BR>var&nbsp;btn&nbsp;=&nbsp;new&nbsp;Ext.Button({&nbsp;&nbsp;<BR>handler&nbsp;:&nbsp;<FONT color=#ff0000>this.doHandle('a', 
 'b'),</FONT>&nbsp;});&nbsp;<BR>&nbsp;<BR>2.&nbsp;调用ExtJS方法得到一个没有被使用，可使用的唯一id号。&nbsp;</P>
 <P><FONT color=#ff0000>var id = 
 Ext.create('Ext.data.identifier.Uuid');<BR>console.log(id.generate());</FONT><BR>&nbsp;<BR>3.&nbsp;实现在数字1前面增加1000个零，输出0000…….000001。&nbsp;<BR>使用while，for等循环进行字符串相加”0”+”0”……+”0”+”1”实现者一律零分。</P>
@@ -53,7 +55,7 @@ style="COLOR: #d4d4d4">();</SPAN></DIV>
 <DIV><SPAN style="COLOR: #d4d4d4">},</SPAN></DIV></DIV>
 <P>&nbsp;&nbsp;<BR>4.&nbsp;合并两个数组：&nbsp;<BR>varsrc&nbsp;=&nbsp;[1,2,3,4,5];&nbsp;var&nbsp;dest&nbsp;=&nbsp;[6,7,8,9];&nbsp;<BR>将两个数组合并为一个数组。采用while，for，Ext.each等循环实现者零分。&nbsp;&nbsp;</P><P><FONT color=#ff0000>Ext.Array.push(src, 
 dest&nbsp;)</FONT> </P><P><BR>5.&nbsp;将一个数组[1,2,3,4,5,6,7,8,9]转换为<A 
-href="mailto:1@2@3@4@5@6@7@8@9">1@2@3@4@5@6@7@8@9</A>输出。&nbsp;采用while,for,Ext.each等循环用字符串相加者一律零分。&nbsp;&nbsp; </P><P>&nbsp; </P><P><BR>6.&nbsp;请写出AccordionLayout的配置简写，并用一句话或绘图描述布局呈现样式。&nbsp; </P>
+href="mailto:1@2@3@4@5@6@7@8@9">1@2@3@4@5@6@7@8@9</A>输出。&nbsp;采用while,for,Ext.each等循环用字符串相加者一律零分。&nbsp;&nbsp; </P><P> </P><P><BR>6.&nbsp;请写出AccordionLayout的配置简写，并用一句话或绘图描述布局呈现样式。&nbsp; </P>
 <DIV 
 style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
 <DIV><SPAN style="COLOR: #9cdcfe">Ext</SPAN><SPAN 
@@ -132,7 +134,7 @@ style="COLOR: #9cdcfe">html:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN
 style="COLOR: #ce9178">'Panel content!'</SPAN></DIV>
 <DIV><SPAN style="COLOR: #d4d4d4">}]</SPAN></DIV></DIV><P><FONT color=#ff0000>抽屉式显示隐藏布局，可点击标头切换隐藏现实，且现实的部分自动制订</FONT><BR>&nbsp;<BR>7.&nbsp;如何监听GridPanel的列点击事件？&nbsp;&nbsp; </P><P><FONT color=#ff0000>listeners:{ </FONT> </P><P><FONT color=#ff0000>&nbsp;&nbsp;&nbsp; 
 itemClick:function(self, record, item, index, e, eOpts){} </FONT>   
-    </P><P><FONT color=#ff0000>}</FONT> </P><P>8.&nbsp;ExtJS中的所有控件都有afterrender事件，请问afterrender事件是什么时候触发的？ </P><P><FONT color=#ff0000>在组件呈现完成后激发。</FONT>&nbsp;&nbsp; </P><P><BR>9.&nbsp;ExtJS如何实现ajax并发访问，既同一时间发起多个ajax访问请求?&nbsp;&nbsp; </P><P>&nbsp; </P><P><BR>10.&nbsp;后台返回前台有数据如下:&nbsp;<BR>[[id&nbsp;:&nbsp;1,name&nbsp;:&nbsp;9],&nbsp;[id&nbsp;:&nbsp;2,name&nbsp;:&nbsp;8],&nbsp;[id&nbsp;:&nbsp;3,name&nbsp;:&nbsp;7],&nbsp;[id&nbsp;:&nbsp;4,name&nbsp;:&nbsp;6],&nbsp;[id&nbsp;:&nbsp;5,name&nbsp;:&nbsp;5]]&nbsp;<BR>并加载到GridPanel中按id升序展示，如何使数据在返回到前台后，按照id降序排列。 </P><P><FONT color=#ff0000>sorts:[{property: <FONT color=#ff0000>'id',</FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    </P><P><FONT color=#ff0000>}</FONT> </P><P>8.&nbsp;ExtJS中的所有控件都有afterrender事件，请问afterrender事件是什么时候触发的？ </P><P><FONT color=#ff0000>在组件呈现完成后激发。</FONT>&nbsp;&nbsp; </P><P><BR>9.&nbsp;ExtJS如何实现ajax并发访问，既同一时间发起多个ajax访问请求?&nbsp;&nbsp; </P><P> </P><P><BR>10.&nbsp;后台返回前台有数据如下:&nbsp;<BR>[[id&nbsp;:&nbsp;1,name&nbsp;:&nbsp;9],&nbsp;[id&nbsp;:&nbsp;2,name&nbsp;:&nbsp;8],&nbsp;[id&nbsp;:&nbsp;3,name&nbsp;:&nbsp;7],&nbsp;[id&nbsp;:&nbsp;4,name&nbsp;:&nbsp;6],&nbsp;[id&nbsp;:&nbsp;5,name&nbsp;:&nbsp;5]]&nbsp;<BR>并加载到GridPanel中按id升序展示，如何使数据在返回到前台后，按照id降序排列。 </P><P><FONT color=#ff0000>sorts:[{property: <FONT color=#ff0000>'id',</FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 direction: 'ASC'}]</FONT> </P>
 <P>11.&nbsp;有一个数组：&nbsp;<BR>var&nbsp;ary&nbsp;=&nbsp;[1,0,9,5,8,2,10,7,6,3,4]&nbsp;<BR>请对数组进行排序后输出0，1，2，3，4，5，6，7，8，9，10。&nbsp;&nbsp;&nbsp;</P>
 <P><FONT color=#ff0000>Ext.Array.sort(a);</FONT></P>

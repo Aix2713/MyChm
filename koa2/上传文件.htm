@@ -1,0 +1,102 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>上传文件</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">post</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #ce9178">'/common/uploadfile'</SPAN><SPAN style="COLOR: #d4d4d4">, 
+</SPAN><SPAN style="COLOR: #9cdcfe">upload</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #dcdcaa">single</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">'photo'</SPAN><SPAN 
+style="COLOR: #d4d4d4">), (</SPAN><SPAN style="COLOR: #9cdcfe">ctx</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">next</SPAN><SPAN 
+style="COLOR: #d4d4d4">) </SPAN><SPAN style="COLOR: #569cd6">=&gt;</SPAN><SPAN 
+style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">ctx</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">body</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #ce9178">"success"</SPAN><SPAN 
+style="COLOR: #9cdcfe">:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #569cd6">true</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #608b4e">// note this is Boolean, not string</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #ce9178">"msg"</SPAN><SPAN style="COLOR: #9cdcfe">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #9cdcfe">ctx</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #9cdcfe">req</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #9cdcfe">file</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">filename</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">};</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}) </SPAN><SPAN 
+style="COLOR: #608b4e">//上传单个文件</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">post</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #ce9178">'/common/uploadfiles'</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">upload</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #dcdcaa">array</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">'photos'</SPAN><SPAN 
+style="COLOR: #d4d4d4">), (</SPAN><SPAN style="COLOR: #9cdcfe">ctx</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">next</SPAN><SPAN 
+style="COLOR: #d4d4d4">) </SPAN><SPAN style="COLOR: #569cd6">=&gt;</SPAN><SPAN 
+style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">let</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">filesarr</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">ctx</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">req</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">files</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">filestr</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">''</SPAN><SPAN style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">filesarr</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">map</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #569cd6">function</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #9cdcfe">value</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">key</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">arr</SPAN><SPAN style="COLOR: #d4d4d4">) {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">filestr</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">+=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">value</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">filename</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">+</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'&lt;/br&gt;'</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">});</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">ctx</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">body</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #ce9178">"success"</SPAN><SPAN 
+style="COLOR: #9cdcfe">:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #569cd6">true</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #608b4e">// note this is Boolean, not string</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #ce9178">"msg"</SPAN><SPAN style="COLOR: #9cdcfe">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #9cdcfe">filestr</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">};</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}) </SPAN><SPAN 
+style="COLOR: #608b4e">//上传多个文件</SPAN></DIV></DIV>
+<P>&nbsp;</P></body>
+</html>

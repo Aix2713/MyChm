@@ -1,0 +1,59 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>ext包管理</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H1 id=cmd_packages-_-cmd_creating_packages_-_creating_sencha_cmd_packages 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(2,91,128); FONT: 300 1.5em/1.5em 'Open Sans', Helvetica-Neue, Arial, sans-serif; WIDOWS: 1; MARGIN-TOP: 30px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">Creating 
+Sencha Cmd Packages<A class=quick-link 
+style="TEXT-DECORATION: none; VERTICAL-ALIGN: super; POSITION: relative; COLOR: rgb(10,140,198); MARGIN-LEFT: 20px; DISPLAY: inline-block; LINE-HEIGHT: 26px; transition: color 0.25s ease-out" 
+href="http://docs.sencha.com/cmd/6.5.0/guides/cmd_packages/cmd_creating_packages.html#cmd_packages-_-cmd_creating_packages_-_creating_sencha_cmd_packages"></A></H1>
+<P 
+style="MAX-WIDTH: 800px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(68,68,68); FONT: 15px/22px 'Open Sans', Helvetica-Neue, Arial, sans-serif; MARGIN: 17px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><A 
+class=external-link 
+style="TEXT-DECORATION: none; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://www.sencha.com/products/sencha-cmd/" target=_blank>Sencha 
+Cmd</A><SPAN class=Apple-converted-space>&nbsp;</SPAN>includes the Sencha 
+Package Manager. Packages have many uses even if you do not intend to distribute 
+the packages you create. This guide covers to process of creating your own 
+packages as well as distributing them. For information on using packages please 
+refer to<SPAN class=Apple-converted-space>&nbsp;</SPAN><A 
+style="TEXT-DECORATION: none; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://docs.sencha.com/cmd/6.5.0/guides/cmd_packages/cmd_packages.html">Sencha 
+Cmd Packages</A>.</P>
+<H2 id=cmd_packages-_-cmd_creating_packages_-_generating_packages 
+style="FONT-FAMILY: 'Open Sans', Helvetica-Neue, Arial, sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(68,68,68); FONT-STYLE: normal; WIDOWS: 1; LETTER-SPACING: normal; LINE-HEIGHT: 26px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">Generating 
+Packages<A class=quick-link 
+style="TEXT-DECORATION: none; VERTICAL-ALIGN: super; POSITION: relative; COLOR: rgb(10,140,198); MARGIN-LEFT: 20px; DISPLAY: inline-block; LINE-HEIGHT: 26px; transition: color 0.25s ease-out" 
+href="http://docs.sencha.com/cmd/6.5.0/guides/cmd_packages/cmd_creating_packages.html#cmd_packages-_-cmd_creating_packages_-_generating_packages"></A></H2>
+<P 
+style="MAX-WIDTH: 800px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(68,68,68); FONT: 15px/22px 'Open Sans', Helvetica-Neue, Arial, sans-serif; MARGIN: 17px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">Before 
+we can generate a new package, we must first create a home for it: a<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><A class=external-link 
+style="TEXT-DECORATION: none; COLOR: rgb(10,140,198); transition: color 0.25s ease-out" 
+href="http://docs.sencha.com/cmd/6.5.0/guides/cmd_packages/cmd_creating_packages.html#!/guide/command_workspace" 
+target=_blank>Workspace</A>. For this example we will use Ext JS for this 
+package, so we start with this command:</P><PRE class=" language-javascript" style="OVERFLOW: auto; WORD-WRAP: normal; MAX-WIDTH: 800px; BACKGROUND: rgb(245,242,240); WHITE-SPACE: pre; WORD-SPACING: 0px; POSITION: relative; TEXT-TRANSFORM: none; WORD-BREAK: normal; COLOR: rgb(0,0,0); PADDING-BOTTOM: 1em; TEXT-ALIGN: left; PADDING-TOP: 1em; FONT: 13px/1.5 Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; PADDING-LEFT: 1em; MARGIN: 0.5em 0px; WIDOWS: 1; LETTER-SPACING: normal; PADDING-RIGHT: 1em; MAX-HEIGHT: 600px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; transform: translateZ(0px); box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 3px, rgba(0, 0, 0, 0.239216) 0px 1px 2px; text-shadow: rgb(255, 255, 255) 0px 1px; tab-size: 4"><CODE class=" language-javascript" style="WORD-WRAP: normal; FONT-FAMILY: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; BACKGROUND: 0px 0px; WHITE-SPACE: pre; WORD-SPACING: normal; WORD-BREAK: normal; COLOR: rgb(0,0,0); TEXT-ALIGN: left; LINE-HEIGHT: 1.5; text-shadow: rgb(255, 255, 255) 0px 1px; tab-size: 4">sencha <SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">-</SPAN>sdk <SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">/</SPAN>path<SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">/</SPAN>to<SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">/</SPAN>ext<SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">-</SPAN>n<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">.</SPAN>n<SPAN class="token punctuation" style="COLOR: rgb(153,153,153)">.</SPAN>n generate workspace <SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">/</SPAN>path<SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">/</SPAN>to<SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">/</SPAN>workspace
+</CODE></PRE>
+<P 
+style="MAX-WIDTH: 800px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(68,68,68); FONT: 15px/22px 'Open Sans', Helvetica-Neue, Arial, sans-serif; MARGIN: 17px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">Now 
+we navigate to the new workspace and generate the package:</P><PRE class=" language-javascript" style="OVERFLOW: auto; WORD-WRAP: normal; MAX-WIDTH: 800px; BACKGROUND: rgb(245,242,240); WHITE-SPACE: pre; WORD-SPACING: 0px; POSITION: relative; TEXT-TRANSFORM: none; WORD-BREAK: normal; COLOR: rgb(0,0,0); PADDING-BOTTOM: 1em; TEXT-ALIGN: left; PADDING-TOP: 1em; FONT: 13px/1.5 Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; PADDING-LEFT: 1em; MARGIN: 0.5em 0px; WIDOWS: 1; LETTER-SPACING: normal; PADDING-RIGHT: 1em; MAX-HEIGHT: 600px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; transform: translateZ(0px); box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 3px, rgba(0, 0, 0, 0.239216) 0px 1px 2px; text-shadow: rgb(255, 255, 255) 0px 1px; tab-size: 4"><CODE class=" language-javascript" style="WORD-WRAP: normal; FONT-FAMILY: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; BACKGROUND: 0px 0px; WHITE-SPACE: pre; WORD-SPACING: normal; WORD-BREAK: normal; COLOR: rgb(0,0,0); TEXT-ALIGN: left; LINE-HEIGHT: 1.5; text-shadow: rgb(255, 255, 255) 0px 1px; tab-size: 4">cd <SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">/</SPAN>path<SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">/</SPAN>to<SPAN class="token operator" style="BACKGROUND: 0px 0px; COLOR: rgb(166,127,89)">/</SPAN>workspace
+sencha generate <SPAN class="token keyword" style="COLOR: rgb(0,119,170)">package</SPAN> foo</CODE></PRE>
+<P>&nbsp;</P>
+<P><IMG alt="" 
+src="../imgs/cmd-package.png"></P>
+<P><IMG alt="" src="../imgs/cmd-package1.png"></P>
+<P><IMG alt="" src="../imgs/file1.png"></P></body>
+</html>

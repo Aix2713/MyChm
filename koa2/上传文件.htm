@@ -98,5 +98,119 @@ style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #9cdcfe">filestr</SPAN></DIV>
 <DIV><SPAN style="COLOR: #d4d4d4">};</SPAN></DIV>
 <DIV><SPAN style="COLOR: #d4d4d4">}) </SPAN><SPAN 
 style="COLOR: #608b4e">//上传多个文件</SPAN></DIV></DIV>
+<P>中间件</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #608b4e">/**</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">*</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">* @Description 文件上传配置</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">* @Author Amor</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">* @Created 2016/04/27 17:50</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">* 技术只是解决问题的选择,而不是解决问题的根本...</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">* 我是Amor,为发骚而生!</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">*</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">*/</SPAN></DIV>
+<DIV><SPAN style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">multer</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #dcdcaa">require</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #ce9178">'koa-multer'</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">md5</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #dcdcaa">require</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">'md5'</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV><BR>
+<DIV><SPAN style="COLOR: #569cd6">const</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">filePath</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">process</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #dcdcaa">cwd</SPAN><SPAN 
+style="COLOR: #d4d4d4">() </SPAN><SPAN style="COLOR: #d4d4d4">+</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'/upload_files'</SPAN></DIV><BR>
+<DIV><SPAN style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">storage</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">multer</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">diskStorage</SPAN><SPAN 
+style="COLOR: #d4d4d4">({</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//设置上传文件路径,以后可以扩展成上传至七牛,文件服务器等等</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//Note:如果你传递的是一个函数，你负责创建文件夹，如果你传递的是一个字符串，multer会自动创建</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">destination:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">filePath</SPAN><SPAN 
+style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//TODO:文件区分目录存放</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//获取文件MD5，重命名，添加后缀,文件重复会直接覆盖</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">filename:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #569cd6">function</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #9cdcfe">req</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">file</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">cb</SPAN><SPAN 
+style="COLOR: #d4d4d4">) {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">fileFormat</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+(</SPAN><SPAN style="COLOR: #9cdcfe">file</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">originalname</SPAN><SPAN 
+style="COLOR: #d4d4d4">).</SPAN><SPAN style="COLOR: #dcdcaa">split</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">"."</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #dcdcaa">cb</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #569cd6">null</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">file</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">fieldname</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">+</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #ce9178">'-'</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">+</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #dcdcaa">md5</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #9cdcfe">file</SPAN><SPAN 
+style="COLOR: #d4d4d4">) </SPAN><SPAN style="COLOR: #d4d4d4">+</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #ce9178">"."</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #d4d4d4">+</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">fileFormat</SPAN><SPAN 
+style="COLOR: #d4d4d4">[</SPAN><SPAN 
+style="COLOR: #9cdcfe">fileFormat</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #9cdcfe">length</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #d4d4d4">-</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #b5cea8">1</SPAN><SPAN 
+style="COLOR: #d4d4d4">]);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">});</SPAN></DIV><BR>
+<DIV><SPAN style="COLOR: #608b4e">//添加配置文件到muler对象。</SPAN></DIV>
+<DIV><SPAN style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">upload</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #dcdcaa">multer</SPAN><SPAN 
+style="COLOR: #d4d4d4">({</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">storage:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">storage</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//其他设置请参考multer的limits</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//limits:{}</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">});</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">// upload = multer({ dest: 
+"/upload_files/temp" });</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">//导出对象</SPAN></DIV>
+<DIV><SPAN style="COLOR: #4ec9b0">module</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #4ec9b0">exports</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #9cdcfe">upload</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV></DIV>
 <P>&nbsp;</P></body>
 </html>

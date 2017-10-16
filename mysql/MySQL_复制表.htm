@@ -1,0 +1,123 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>MySQL 复制表</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<DIV id=pro-mian-header 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 40px; FONT: 14px Verdana, Arial, Helvetica, sans-serif; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV class=content-top 
+style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">
+<H1 
+style="FONT-SIZE: 20px; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 20px 0px 0px; PADDING-RIGHT: 0px">MySQL 
+复制表</H1></DIV>
+<DIV class=kn-infomation 
+style="FONT-SIZE: 14px; COLOR: rgb(112,112,112); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 20px; PADDING-RIGHT: 0px">由&nbsp;<SPAN 
+style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">youj</SPAN>&nbsp;创建， 
+最后一次修改&nbsp;<SPAN 
+style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">2015-09-18</SPAN></DIV></DIV>
+<DIV class=content-bg 
+style="BOX-SIZING: border-box; MAX-WIDTH: 980px; WIDTH: auto; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT: 14px Verdana, Arial, Helvetica, sans-serif; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV class="content-intro view-box " 
+style="WORD-WRAP: break-word; FONT-SIZE: 14px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; COLOR: rgb(0,0,0); OUTLINE-WIDTH: medium; PADDING-BOTTOM: 20px; PADDING-TOP: 15px; OUTLINE-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px; MIN-HEIGHT: 600px; OUTLINE-COLOR: invert; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">
+<H2 
+style="BORDER-TOP-STYLE: none; FONT-SIZE: 16px; FONT-WEIGHT: 600; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0.25em; PADDING-LEFT: 0px; MARGIN: 0px 0px 10px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">MySQL 
+复制表</H2>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">如果我们需要完全的复制MySQL的数据表，包括表的结构，索引，默认值等。 
+如果仅仅使用<STRONG 
+style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">CREATE 
+TABLE ... SELECT<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></STRONG>命令，是无法实现的。</P>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">本章节将为大家介绍如何完整的复制MySQL数据表，步骤如下：</P>
+<UL 
+style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 30px; MARGIN: 10px 0px; LIST-STYLE: disc none outside; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">
+  <LI 
+  style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">使用<SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN><STRONG 
+  style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">SHOW 
+  CREATE TABLE</STRONG><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>命令获取创建数据表(<STRONG 
+  style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">CREATE 
+  TABLE</STRONG>) 语句，该语句包含了原数据表的结构，索引等。</LI>
+  <LI 
+  style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px"></LI>
+  <LI 
+  style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">复制以下命令显示的SQL语句，修改数据表名，并执行SQL语句，通过以上命令 
+  将完全的复制数据表结构。</LI>
+  <LI 
+  style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">如果你想复制表的内容，你就可以使用<STRONG 
+  style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px"><SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN>INSERT INTO ... SELECT<SPAN 
+  class=Apple-converted-space>&nbsp;</SPAN></STRONG>语句来实现。</LI></UL>
+<H3 
+style="FONT-SIZE: 14px; FONT-WEIGHT: 600; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 20px 0px 10px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">实例</H3>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">尝试以下实例来复制表 
+w3cschool_tbl 。</P>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px"><STRONG 
+style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">步骤一：</STRONG></P>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">获取数据表的完整结构。</P><PRE style="BOX-SIZING: border-box; WORD-WRAP: break-word !important; FONT-SIZE: 14px; MAX-WIDTH: 700px; BORDER-TOP: rgb(221,221,221) 1px solid; FONT-FAMILY: Consolas, 'Courier New', Courier, monospace; BORDER-RIGHT: rgb(221,221,221) 1px solid; WIDTH: auto; BACKGROUND: rgb(239,239,239); WHITE-SPACE: pre-wrap !important; OVERFLOW-X: auto; BORDER-BOTTOM: rgb(221,221,221) 1px solid; POSITION: relative; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 5px; MARGIN: 15px 0px; BORDER-LEFT: rgb(221,221,221) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.7; PADDING-RIGHT: 5px; border-radius: 3px">mysql&gt; SHOW CREATE TABLE w3cschool_tbl \G;
+*************************** 1. row ***************************
+       Table: w3cschool_tbl
+Create Table: CREATE TABLE `w3cschool_tbl` (
+  `w3cschool_id` int(11) NOT NULL auto_increment,
+  `w3cschool_title` varchar(100) NOT NULL default '',
+  `w3cschool_author` varchar(40) NOT NULL default '',
+  `submission_date` date default NULL,
+  PRIMARY KEY  (`w3cschool_id`),
+  UNIQUE KEY `AUTHOR_INDEX` (`w3cschool_author`)
+) ENGINE=InnoDB
+1 row in set (0.00 sec)
+
+ERROR:
+No query specified
+</PRE>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px"><STRONG 
+style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">步骤二：</STRONG></P>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">修改SQL语句的数据表名，并执行SQL语句。</P><PRE style="BOX-SIZING: border-box; WORD-WRAP: break-word !important; FONT-SIZE: 14px; MAX-WIDTH: 700px; BORDER-TOP: rgb(221,221,221) 1px solid; FONT-FAMILY: Consolas, 'Courier New', Courier, monospace; BORDER-RIGHT: rgb(221,221,221) 1px solid; WIDTH: auto; BACKGROUND: rgb(239,239,239); WHITE-SPACE: pre-wrap !important; OVERFLOW-X: auto; BORDER-BOTTOM: rgb(221,221,221) 1px solid; POSITION: relative; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 5px; MARGIN: 15px 0px; BORDER-LEFT: rgb(221,221,221) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.7; PADDING-RIGHT: 5px; border-radius: 3px">mysql&gt; CREATE TABLE `clone_tbl` (
+  -&gt; `w3cschool_id` int(11) NOT NULL auto_increment,
+  -&gt; `w3cschool_title` varchar(100) NOT NULL default '',
+  -&gt; `w3cschool_author` varchar(40) NOT NULL default '',
+  -&gt; `submission_date` date default NULL,
+  -&gt; PRIMARY KEY  (`w3cschool_id`),
+  -&gt; UNIQUE KEY `AUTHOR_INDEX` (`w3cschool_author`)
+-&gt; ) ENGINE=InnoDB;
+Query OK, 0 rows affected (1.80 sec)
+</PRE>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px"><STRONG 
+style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">步骤三：</STRONG></P>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">执行完第二步骤后，你将在数据库中创建新的克隆表 
+clone_tbl。 如果你想拷贝数据表的数据你可以使用<STRONG 
+style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">INSERT 
+INTO... SELECT<SPAN class=Apple-converted-space>&nbsp;</SPAN></STRONG>语句来实现。</P><PRE style="BOX-SIZING: border-box; WORD-WRAP: break-word !important; FONT-SIZE: 14px; MAX-WIDTH: 700px; BORDER-TOP: rgb(221,221,221) 1px solid; FONT-FAMILY: Consolas, 'Courier New', Courier, monospace; BORDER-RIGHT: rgb(221,221,221) 1px solid; WIDTH: auto; BACKGROUND: rgb(239,239,239); WHITE-SPACE: pre-wrap !important; OVERFLOW-X: auto; BORDER-BOTTOM: rgb(221,221,221) 1px solid; POSITION: relative; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 5px; MARGIN: 15px 0px; BORDER-LEFT: rgb(221,221,221) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.7; PADDING-RIGHT: 5px; border-radius: 3px">mysql&gt; INSERT INTO clone_tbl (w3cschool_id,
+    -&gt;                        w3cschool_title,
+    -&gt;                        w3cschool_author,
+    -&gt;                        submission_date)
+    -&gt; SELECT w3cschool_id,w3cschool_title,
+    -&gt;        w3cschool_author,submission_date
+    -&gt; FROM w3cschool_tbl;
+Query OK, 3 rows affected (0.07 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+</PRE>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">执行以上步骤后，你将完整的复制表，包括表结构及表数据。</P></DIV></DIV></body>
+</html>

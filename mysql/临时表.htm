@@ -1,0 +1,115 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>临时表</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<DIV id=pro-mian-header 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 40px; FONT: 14px Verdana, Arial, Helvetica, sans-serif; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV class=content-top 
+style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">
+<H1 
+style="FONT-SIZE: 20px; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 20px 0px 0px; PADDING-RIGHT: 0px">MySQL 
+临时表</H1></DIV>
+<DIV class=kn-infomation 
+style="FONT-SIZE: 14px; COLOR: rgb(112,112,112); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 2px 0px 20px; PADDING-RIGHT: 0px">由&nbsp;<SPAN 
+style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">youj</SPAN>&nbsp;创建， 
+最后一次修改&nbsp;<SPAN 
+style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">2015-09-28</SPAN></DIV></DIV>
+<DIV class=content-bg 
+style="BOX-SIZING: border-box; MAX-WIDTH: 980px; WIDTH: auto; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT: 14px Verdana, Arial, Helvetica, sans-serif; PADDING-LEFT: 0px; MARGIN: 0px; WIDOWS: 1; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV class="content-intro view-box " 
+style="WORD-WRAP: break-word; FONT-SIZE: 14px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; COLOR: rgb(0,0,0); OUTLINE-WIDTH: medium; PADDING-BOTTOM: 20px; PADDING-TOP: 15px; OUTLINE-STYLE: none; PADDING-LEFT: 0px; MARGIN: 0px; MIN-HEIGHT: 600px; OUTLINE-COLOR: invert; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">
+<H2 
+style="BORDER-TOP-STYLE: none; FONT-SIZE: 16px; FONT-WEIGHT: 600; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0.25em; PADDING-LEFT: 0px; MARGIN: 0px 0px 10px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">MySQL 
+临时表</H2>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">MySQL 
+临时表在我们需要保存一些临时数据时是非常有用的。临时表只在当前连接可见，当关闭连接时，MySQL会自动删除表并释放所有空间。</P>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">临时表在MySQL 
+3.23版本中添加，如果你的MySQL版本低于 3.23版本就无法使用MySQL的临时表。不过现在一般很少有再使用这么低版本的MySQL数据库服务了。</P>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">MySQL临时表只在当前连接可见，如果你使用PHP脚本来创建MySQL临时表，那每当PHP脚本执行完成后，该临时表也会自动销毁。</P>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">如果你使用了其他MySQL客户端程序连接MySQL数据库服务器来创建临时表，那么只有在关闭客户端程序时才会销毁临时表，当然你也可以手动销毁。</P>
+<H3 
+style="FONT-SIZE: 14px; FONT-WEIGHT: 600; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 20px 0px 10px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">实例</H3>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">以下展示了使用MySQL 
+临时表的简单实例，以下的SQL代码可以适用于PHP脚本的mysql_query()函数。</P><PRE style="BOX-SIZING: border-box; WORD-WRAP: break-word !important; FONT-SIZE: 14px; MAX-WIDTH: 700px; BORDER-TOP: rgb(221,221,221) 1px solid; FONT-FAMILY: Consolas, 'Courier New', Courier, monospace; BORDER-RIGHT: rgb(221,221,221) 1px solid; WIDTH: auto; BACKGROUND: rgb(239,239,239); WHITE-SPACE: pre-wrap !important; OVERFLOW-X: auto; BORDER-BOTTOM: rgb(221,221,221) 1px solid; POSITION: relative; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 5px; MARGIN: 15px 0px; BORDER-LEFT: rgb(221,221,221) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.7; PADDING-RIGHT: 5px; border-radius: 3px">mysql&gt; CREATE TEMPORARY TABLE SalesSummary (
+    -&gt; product_name VARCHAR(50) NOT NULL
+    -&gt; , total_sales DECIMAL(12,2) NOT NULL DEFAULT 0.00
+    -&gt; , avg_unit_price DECIMAL(7,2) NOT NULL DEFAULT 0.00
+    -&gt; , total_units_sold INT UNSIGNED NOT NULL DEFAULT 0
+);
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; INSERT INTO SalesSummary
+    -&gt; (product_name, total_sales, avg_unit_price, total_units_sold)
+    -&gt; VALUES
+    -&gt; ('cucumber', 100.25, 90, 2);
+
+mysql&gt; SELECT * FROM SalesSummary;
++--------------+-------------+----------------+------------------+
+| product_name | total_sales | avg_unit_price | total_units_sold |
++--------------+-------------+----------------+------------------+
+| cucumber     |      100.25 |          90.00 |                2 |
++--------------+-------------+----------------+------------------+
+1 row in set (0.00 sec)
+</PRE>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">当你使用<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><STRONG 
+style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">SHOW 
+TABLES</STRONG>命令显示数据表列表时，你将无法看到 SalesSummary表。</P>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">如果你退出当前MySQL会话，再使用<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><STRONG 
+style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">SELECT</STRONG>命令来读取原先创建的临时表数据，那你会发现数据库中没有该表的存在，因为在你退出时该临时表已经被销毁了。</P>
+<HR 
+style="BORDER-LEFT-WIDTH: 0px; BORDER-TOP: rgb(170,170,170) 1px solid; HEIGHT: 0px; BORDER-RIGHT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 15px 0px; DISPLAY: block; PADDING-RIGHT: 0px">
+
+<H2 
+style="FONT-SIZE: 16px; FONT-WEIGHT: 600; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 20px 0px 10px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">删除MySQL 
+临时表</H2>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">默认情况下，当你断开与数据库的连接后，临时表就会自动被销毁。当然你也可以在当前MySQL会话使用<STRONG 
+style="FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px">DROP 
+TABLE<SPAN class=Apple-converted-space>&nbsp;</SPAN></STRONG>命令来手动删除临时表。</P>
+<P 
+style="WORD-WRAP: break-word; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 5px; LINE-HEIGHT: 1.7; PADDING-RIGHT: 0px">以下是手动删除临时表的实例：</P><PRE style="BOX-SIZING: border-box; WORD-WRAP: break-word !important; FONT-SIZE: 14px; MAX-WIDTH: 700px; BORDER-TOP: rgb(221,221,221) 1px solid; FONT-FAMILY: Consolas, 'Courier New', Courier, monospace; BORDER-RIGHT: rgb(221,221,221) 1px solid; WIDTH: auto; BACKGROUND: rgb(239,239,239); WHITE-SPACE: pre-wrap !important; OVERFLOW-X: auto; BORDER-BOTTOM: rgb(221,221,221) 1px solid; POSITION: relative; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 5px; MARGIN: 15px 0px; BORDER-LEFT: rgb(221,221,221) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.7; PADDING-RIGHT: 5px; border-radius: 3px">mysql&gt; CREATE TEMPORARY TABLE SalesSummary (
+    -&gt; product_name VARCHAR(50) NOT NULL
+    -&gt; , total_sales DECIMAL(12,2) NOT NULL DEFAULT 0.00
+    -&gt; , avg_unit_price DECIMAL(7,2) NOT NULL DEFAULT 0.00
+    -&gt; , total_units_sold INT UNSIGNED NOT NULL DEFAULT 0
+);
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; INSERT INTO SalesSummary
+    -&gt; (product_name, total_sales, avg_unit_price, total_units_sold)
+    -&gt; VALUES
+    -&gt; ('cucumber', 100.25, 90, 2);
+
+mysql&gt; SELECT * FROM SalesSummary;
++--------------+-------------+----------------+------------------+
+| product_name | total_sales | avg_unit_price | total_units_sold |
++--------------+-------------+----------------+------------------+
+| cucumber     |      100.25 |          90.00 |                2 |
++--------------+-------------+----------------+------------------+
+1 row in set (0.00 sec)
+mysql&gt; DROP TABLE SalesSummary;
+mysql&gt;  SELECT * FROM SalesSummary;
+ERROR 1146: Table 'W3CSCHOOL.SalesSummary' doesn't exist</PRE></DIV></DIV></body>
+</html>

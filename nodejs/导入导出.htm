@@ -1,0 +1,513 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>导入导出</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、上传单个文件</P>
+<P>倒入自定义的功能js</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #569cd6">const</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">upload</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #dcdcaa">require</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #ce9178">'../util/upload.js'</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV></DIV>
+<P>内容如下：</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #608b4e">/**</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">*</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">* @Description 文件上传配置</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">* @Author Amor</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">* @Created 2016/04/27 17:50</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">* 技术只是解决问题的选择,而不是解决问题的根本...</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">* 我是Amor,为发骚而生!</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">*</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">*/</SPAN></DIV>
+<DIV><SPAN style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">multer</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #dcdcaa">require</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #ce9178">'koa-multer'</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">md5</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #dcdcaa">require</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">'md5'</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV><BR>
+<DIV><SPAN style="COLOR: #569cd6">const</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">filePath</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">process</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #dcdcaa">cwd</SPAN><SPAN 
+style="COLOR: #d4d4d4">() </SPAN><SPAN style="COLOR: #d4d4d4">+</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'/upload_files'</SPAN></DIV><BR>
+<DIV><SPAN style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">storage</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">multer</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">diskStorage</SPAN><SPAN 
+style="COLOR: #d4d4d4">({</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//设置上传文件路径,以后可以扩展成上传至七牛,文件服务器等等</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//Note:如果你传递的是一个函数，你负责创建文件夹，如果你传递的是一个字符串，multer会自动创建</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">destination:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">filePath</SPAN><SPAN 
+style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//TODO:文件区分目录存放</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//获取文件MD5，重命名，添加后缀,文件重复会直接覆盖</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">filename:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #569cd6">function</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #9cdcfe">req</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">file</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">cb</SPAN><SPAN 
+style="COLOR: #d4d4d4">) {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">fileFormat</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+(</SPAN><SPAN style="COLOR: #9cdcfe">file</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">originalname</SPAN><SPAN 
+style="COLOR: #d4d4d4">).</SPAN><SPAN style="COLOR: #dcdcaa">split</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">"."</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #dcdcaa">cb</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #569cd6">null</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">file</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">fieldname</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">+</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #ce9178">'-'</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">+</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #dcdcaa">md5</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #9cdcfe">file</SPAN><SPAN 
+style="COLOR: #d4d4d4">) </SPAN><SPAN style="COLOR: #d4d4d4">+</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #ce9178">"."</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #d4d4d4">+</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">fileFormat</SPAN><SPAN 
+style="COLOR: #d4d4d4">[</SPAN><SPAN 
+style="COLOR: #9cdcfe">fileFormat</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #9cdcfe">length</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #d4d4d4">-</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #b5cea8">1</SPAN><SPAN 
+style="COLOR: #d4d4d4">]);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">});</SPAN></DIV><BR>
+<DIV><SPAN style="COLOR: #608b4e">//添加配置文件到muler对象。</SPAN></DIV>
+<DIV><SPAN style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">upload</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #dcdcaa">multer</SPAN><SPAN 
+style="COLOR: #d4d4d4">({</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">storage:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">storage</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//其他设置请参考multer的limits</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #608b4e">//limits:{}</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">});</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">// upload = multer({ dest: 
+"/upload_files/temp" });</SPAN></DIV>
+<DIV><SPAN style="COLOR: #608b4e">//导出对象</SPAN></DIV>
+<DIV><SPAN style="COLOR: #4ec9b0">module</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #4ec9b0">exports</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #9cdcfe">upload</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV></DIV>
+<P>调用方法：</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">post</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #ce9178">'/common/uploadfile'</SPAN><SPAN style="COLOR: #d4d4d4">, 
+</SPAN><SPAN style="COLOR: #9cdcfe">upload</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #dcdcaa">single</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">'photo'</SPAN><SPAN 
+style="COLOR: #d4d4d4">), (</SPAN><SPAN style="COLOR: #9cdcfe">ctx</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">next</SPAN><SPAN 
+style="COLOR: #d4d4d4">) </SPAN><SPAN style="COLOR: #569cd6">=&gt;</SPAN><SPAN 
+style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">ctx</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">body</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #ce9178">"success"</SPAN><SPAN 
+style="COLOR: #9cdcfe">:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #569cd6">true</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #608b4e">// note this is Boolean, not string</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #ce9178">"msg"</SPAN><SPAN style="COLOR: #9cdcfe">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #9cdcfe">ctx</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #9cdcfe">req</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #9cdcfe">file</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">filename</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">};</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}) </SPAN><SPAN 
+style="COLOR: #608b4e">//上传单个文件</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">post</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #ce9178">'/common/uploadfiles'</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">upload</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #dcdcaa">array</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">'photos'</SPAN><SPAN 
+style="COLOR: #d4d4d4">), (</SPAN><SPAN style="COLOR: #9cdcfe">ctx</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">next</SPAN><SPAN 
+style="COLOR: #d4d4d4">) </SPAN><SPAN style="COLOR: #569cd6">=&gt;</SPAN><SPAN 
+style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">let</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">filesarr</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">ctx</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">req</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">files</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">filestr</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">''</SPAN><SPAN style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">filesarr</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">map</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #569cd6">function</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #9cdcfe">value</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">key</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">arr</SPAN><SPAN style="COLOR: #d4d4d4">) {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">filestr</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">+=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">value</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">filename</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">+</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'&lt;/br&gt;'</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">});</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">ctx</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">body</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #ce9178">"success"</SPAN><SPAN 
+style="COLOR: #9cdcfe">:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #569cd6">true</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #608b4e">// note this is Boolean, not string</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #ce9178">"msg"</SPAN><SPAN style="COLOR: #9cdcfe">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #9cdcfe">filestr</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">};</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}) </SPAN><SPAN 
+style="COLOR: #608b4e">//上传多个文件</SPAN></DIV></DIV>
+<P>2、到出excel文件</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #569cd6">static</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #569cd6">async</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #dcdcaa">exportExcel</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #9cdcfe">ctx</SPAN><SPAN 
+style="COLOR: #d4d4d4">) {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">conf</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> {};</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">conf</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">stylesXmlFile</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #ce9178">"./util/export-excel-style.xml"</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">conf</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">name</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">"mysheet"</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">conf</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">cols</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> [{</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">caption:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'string'</SPAN><SPAN 
+style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'string'</SPAN><SPAN 
+style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">beforeCellWrite:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #569cd6">function</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #9cdcfe">row</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">cellData</SPAN><SPAN style="COLOR: #d4d4d4">) 
+{</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #c586c0">return</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">cellData</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">toUpperCase</SPAN><SPAN 
+style="COLOR: #d4d4d4">();</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">},</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">width:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #b5cea8">28.7109375</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}, {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">caption:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'date'</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'date'</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">beforeCellWrite:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #569cd6">function</SPAN><SPAN 
+style="COLOR: #d4d4d4">() {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">originDate</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #569cd6">new</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #4ec9b0">Date</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #4ec9b0">Date</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #dcdcaa">UTC</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #b5cea8">1899</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #b5cea8">11</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #b5cea8">30</SPAN><SPAN 
+style="COLOR: #d4d4d4">));</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #c586c0">return</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #569cd6">function</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #9cdcfe">row</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">cellData</SPAN><SPAN style="COLOR: #d4d4d4">, 
+</SPAN><SPAN style="COLOR: #9cdcfe">eOpt</SPAN><SPAN style="COLOR: #d4d4d4">) 
+{</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #c586c0">if</SPAN><SPAN style="COLOR: #d4d4d4"> (</SPAN><SPAN 
+style="COLOR: #9cdcfe">eOpt</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">rowNum</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">%</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #b5cea8">2</SPAN><SPAN style="COLOR: #d4d4d4">) {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">eOpt</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">styleIndex</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #b5cea8">1</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">} </SPAN><SPAN 
+style="COLOR: #c586c0">else</SPAN><SPAN style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">eOpt</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">styleIndex</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #b5cea8">2</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #c586c0">if</SPAN><SPAN style="COLOR: #d4d4d4"> (</SPAN><SPAN 
+style="COLOR: #9cdcfe">cellData</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">===</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #569cd6">null</SPAN><SPAN style="COLOR: #d4d4d4">) {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">eOpt</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">cellType</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'string'</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #c586c0">return</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'N/A'</SPAN><SPAN style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">} </SPAN><SPAN 
+style="COLOR: #c586c0">else</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #c586c0">return</SPAN><SPAN style="COLOR: #d4d4d4"> (</SPAN><SPAN 
+style="COLOR: #9cdcfe">cellData</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">-</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">originDate</SPAN><SPAN style="COLOR: #d4d4d4">) 
+</SPAN><SPAN style="COLOR: #d4d4d4">/</SPAN><SPAN style="COLOR: #d4d4d4"> 
+(</SPAN><SPAN style="COLOR: #b5cea8">24</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">*</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #b5cea8">60</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">*</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #b5cea8">60</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">*</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #b5cea8">1000</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}()</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}, {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">caption:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'bool'</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'bool'</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}, {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">caption:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'number'</SPAN><SPAN 
+style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'number'</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}, {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">caption:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'name'</SPAN><SPAN style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">type:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'string'</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}];</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">conf</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">rows</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> [</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">[</SPAN><SPAN 
+style="COLOR: #ce9178">'pi'</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #569cd6">new</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #4ec9b0">Date</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #4ec9b0">Date</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">UTC</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #b5cea8">2013</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #b5cea8">4</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #b5cea8">1</SPAN><SPAN style="COLOR: #d4d4d4">)), </SPAN><SPAN 
+style="COLOR: #569cd6">true</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #b5cea8">3.14</SPAN><SPAN style="COLOR: #d4d4d4">],</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">[</SPAN><SPAN 
+style="COLOR: #ce9178">"e"</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #569cd6">new</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #4ec9b0">Date</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #b5cea8">2012</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #b5cea8">4</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #b5cea8">1</SPAN><SPAN style="COLOR: #d4d4d4">), </SPAN><SPAN 
+style="COLOR: #569cd6">false</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #b5cea8">2.7182</SPAN><SPAN style="COLOR: #d4d4d4">],</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">[</SPAN><SPAN 
+style="COLOR: #ce9178">"M&amp;M&lt;&gt;'"</SPAN><SPAN style="COLOR: #d4d4d4">, 
+</SPAN><SPAN style="COLOR: #569cd6">new</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #4ec9b0">Date</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #4ec9b0">Date</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #dcdcaa">UTC</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #b5cea8">2013</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #b5cea8">6</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #b5cea8">9</SPAN><SPAN 
+style="COLOR: #d4d4d4">)), </SPAN><SPAN style="COLOR: #569cd6">false</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #b5cea8">1.61803</SPAN><SPAN 
+style="COLOR: #d4d4d4">],</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">[</SPAN><SPAN style="COLOR: #ce9178">"null 
+date"</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #569cd6">null</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #569cd6">true</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #b5cea8">1.414</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #ce9178">"些小"</SPAN><SPAN style="COLOR: #d4d4d4">]</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">];</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">result</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">nodeExcel</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #dcdcaa">execute</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #9cdcfe">conf</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">ctx</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">set</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #ce9178">'Content-Type'</SPAN><SPAN style="COLOR: #d4d4d4">, 
+</SPAN><SPAN style="COLOR: #ce9178">'application/vnd.openxmlformats'</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">ctx</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">set</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #ce9178">"Content-disposition"</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #ce9178">"attachment; 
+filename="</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">+</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">"Report.xlsx"</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">let</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">data</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #569cd6">new</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #4ec9b0">Buffer</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #9cdcfe">result</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #ce9178">'binary'</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">ctx</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">body</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">data</SPAN><SPAN style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">};</SPAN></DIV></DIV>
+<P>前端方式：</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #9cdcfe">handler:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #569cd6">function</SPAN><SPAN 
+style="COLOR: #d4d4d4">() {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">var</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">form1</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">document</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">createElement</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #ce9178">"form"</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">document</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">body</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">appendChild</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #9cdcfe">form1</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">form1</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">method</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">"POST"</SPAN><SPAN style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN style="COLOR: #608b4e">// form 
+提交路径 </SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">form1</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">action</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'/common/exportExcel'</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN style="COLOR: #608b4e">// 对该 form 
+执行提交 </SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">form1</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">submit</SPAN><SPAN 
+style="COLOR: #d4d4d4">();</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">document</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">body</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">removeChild</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #9cdcfe">form1</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV></DIV>
+<P>3、导入：未完成</P></body>
+</html>

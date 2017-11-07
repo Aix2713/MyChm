@@ -1,0 +1,286 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>服务</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、由于从服务请求数据都是异步操作，所以要建立一个基于承诺的数据服务</P>
+<P>2、创建英雄服务</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">在<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">app</CODE>目录下创建一个名叫<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">hero.service.ts</CODE>的文件。</P>
+<DIV class=l-sub-section 
+style="BOX-SIZING: border-box; MARGIN-BOTTOM: 8px; WIDTH: 819px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); PADDING-BOTTOM: 16px; PADDING-TOP: 16px; FONT: 14px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; PADDING-LEFT: 16px; CLEAR: both; BORDER-LEFT: rgb(25,118,210) 8px solid; WIDOWS: 1; DISPLAY: table; LETTER-SPACING: normal; PADDING-RIGHT: 16px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<P 
+style="FONT-SIZE: 14px; FONT-WEIGHT: 400; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+translation-result="">我们遵循的文件命名约定是：服务名称的小写形式（基本名），加上<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">.service</CODE>后缀。 
+如果服务名称包含多个单词，我们就把基本名部分写成中线形式 (<A 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: rgb(25,118,210); LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="https://angular.cn/guide/glossary#dash-case">dash-case</A>)。 例如，<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">SpecialSuperHeroService</CODE>服务应该被定义在<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">special-super-hero.service.ts</CODE>文件中。</P></DIV>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">当 TypeScript 看到<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">@<A 
+class=code-anchor 
+style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="https://angular.cn/api/core/Injectable">Injectable</A>()</CODE>装饰器时，就会记下本服务的元数据。 
+如果 Angular 需要往这个服务中注入其它依赖，就会使用这些元数据。</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">虽然<EM style="LETTER-SPACING: 0px">此时</EM><CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">HeroService</CODE>还没有任何依赖，但我们还是得加上这个装饰器。 
+作为一项最佳实践，无论是出于提高统一性还是减少变更的目的， 都应该从一开始就加上<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">@<A 
+class=code-anchor 
+style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="https://angular.cn/api/core/Injectable">Injectable</A>()</CODE>装饰器。</P>
+<P>3、添加一个获取数据的方法</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #dcdcaa">getHeroes</SPAN><SPAN 
+style="COLOR: #d4d4d4">()</SPAN><SPAN style="COLOR: #d4d4d4">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #4ec9b0">Hero</SPAN><SPAN 
+style="COLOR: #d4d4d4">[] {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #c586c0">return</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">HEROES</SPAN><SPAN style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV></DIV>
+<P>4、将模拟数据单独处理，然后在服务中引用</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #c586c0">import</SPAN><SPAN style="COLOR: #d4d4d4"> { 
+</SPAN><SPAN style="COLOR: #9cdcfe">Hero</SPAN><SPAN style="COLOR: #d4d4d4"> } 
+</SPAN><SPAN style="COLOR: #c586c0">from</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #ce9178">'./app.hero'</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #c586c0">import</SPAN><SPAN style="COLOR: #d4d4d4"> { 
+</SPAN><SPAN style="COLOR: #9cdcfe">HEROES</SPAN><SPAN style="COLOR: #d4d4d4"> } 
+</SPAN><SPAN style="COLOR: #c586c0">from</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #ce9178">'./mock-heroes'</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV></DIV>
+<P>5、在主视图中使用服务，注入服务</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">你可能想用<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">new</CODE>来创建<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">HeroService</CODE>的实例，就像这样：</P>
+<P><CODE-EXAMPLE 
+style="BORDER-TOP: rgb(219,219,219) 0px solid; BORDER-RIGHT: rgb(219,219,219) 0px solid; WHITE-SPACE: normal; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(219,219,219) 0px solid; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; CLEAR: both; MARGIN: 16px auto; BORDER-LEFT: rgb(219,219,219) 0px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 5px" 
+ng-version="5.0.0-rc.0" path="toh-pt4/src/app/app.component.1.ts" 
+region="new-service" linenums="false"><HEADER 
+style="FONT-SIZE: 16px; COLOR: rgb(250,250,250); PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 16px; PADDING-RIGHT: 16px; BACKGROUND-COLOR: rgb(30,136,229); border-radius: 5px 5px 0px 0px">src/app/app.component.ts</HEADER><AIO-CODE 
+class=headed-code></P><PRE class="prettyprint lang-" style="WHITE-SPACE: pre-wrap; POSITION: relative; MARGIN: 16px 32px; MIN-HEIGHT: 32px; DISPLAY: flex; -webkit-box-align: center; align-items: center"><CODE class="animated fadeIn" style="OVERFLOW: auto; FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace"><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px">heroService </SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">=</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=kwd style="COLOR: rgb(0,0,255); LINE-HEIGHT: 24px">new</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=typ style="COLOR: red; LINE-HEIGHT: 24px">HeroService</SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">();</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=com style="COLOR: rgb(0,102,0); LINE-HEIGHT: 24px">// don't do this</SPAN></CODE></PRE></AIO-CODE></CODE-EXAMPLE>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">但这不是个好主意，有很多理由，例如：</P>
+<UL 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; LETTER-SPACING: 0px; LINE-HEIGHT: 24px">
+  <P 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; MARGIN: 0px; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+  translation-result="">我们的组件得弄清楚该如何创建<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">HeroService</CODE>。 
+  如果有一天我们修改了<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">HeroService</CODE>的构造函数，我们不得不找出创建过此服务的每一处代码，并修改它。 
+  围着补丁代码转圈很容易导致错误，还会增加测试负担。</P>
+  <LI 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; LETTER-SPACING: 0px; LINE-HEIGHT: 24px">
+  <P 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; MARGIN: 0px; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+  translation-result="">我们每次使用<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">new</CODE>都会创建一个新的服务实例。 
+  如果这个服务需要缓存英雄列表，并把这个缓存共享给别人呢？怎么办？ 没办法，做不到。</P>
+  <LI 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; LETTER-SPACING: 0px; LINE-HEIGHT: 24px">
+  <P 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; MARGIN: 0px; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+  translation-result="">我们把<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">AppComponent</CODE>锁定到<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">HeroService</CODE>的一个特定实现。 
+  我们很难在不同的场景中切换实现。 例如，能离线操作吗？能在测试时使用不同的模拟版本吗？这可不容易。</P></LI></UL>
+<H3 id=注入-heroservice 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 400 20px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; CLEAR: both; MARGIN: 24px 0px; WIDOWS: 1; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">注入<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><EM>HeroService</EM></H3>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">你可以用两行代码代替用<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">new</CODE>时的一行：</P>
+<UL 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; LETTER-SPACING: 0px; LINE-HEIGHT: 24px">
+  <P 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; MARGIN: 0px; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+  translation-result="">添加一个构造函数，并定义一个私有属性。</P>
+  <LI 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; LETTER-SPACING: 0px; LINE-HEIGHT: 24px">
+  <P 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; MARGIN: 0px; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+  translation-result="">添加组件的<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">providers</CODE>元数据。</P></LI></UL>
+<P>&nbsp;</P>
+<P>6、添加一个构造方法，声明一个私有变量</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #569cd6">constructor</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #569cd6">private</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #9cdcfe">heroService</SPAN><SPAN 
+style="COLOR: #d4d4d4">:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #4ec9b0">HeroService</SPAN><SPAN style="COLOR: #d4d4d4">) 
+{};</SPAN></DIV></DIV>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">我们还得注册一个<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">HeroService</CODE><STRONG 
+style="FONT-WEIGHT: 500">提供商</STRONG>，来告诉<EM 
+style="LETTER-SPACING: 0px">注入器</EM>如何创建<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">HeroService</CODE>。 
+要做到这一点，我们在<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">@<A 
+class=code-anchor 
+style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="https://angular.cn/api/core/Component">Component</A></CODE>组件的元数据（装饰器）底部添加<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">providers</CODE>数组属性如下：</P>
+<P><CODE-EXAMPLE 
+style="BORDER-TOP: rgb(219,219,219) 0px solid; BORDER-RIGHT: rgb(219,219,219) 0px solid; WHITE-SPACE: normal; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(219,219,219) 0px solid; TEXT-TRANSFORM: none; COLOR: rgb(51,51,51); FONT: 14px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; CLEAR: both; MARGIN: 16px auto; BORDER-LEFT: rgb(219,219,219) 0px solid; WIDOWS: 1; DISPLAY: block; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-radius: 5px" 
+ng-version="5.0.0-rc.0" path="toh-pt4/src/app/app.component.1.ts" 
+region="providers" linenums="false"><HEADER 
+style="FONT-SIZE: 16px; COLOR: rgb(250,250,250); PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 16px; PADDING-RIGHT: 16px; BACKGROUND-COLOR: rgb(30,136,229); border-radius: 5px 5px 0px 0px">src/app/app.component.ts (providers)</HEADER><AIO-CODE class=headed-code></P><PRE class="prettyprint lang-" style="WHITE-SPACE: pre-wrap; POSITION: relative; MARGIN: 16px 32px; MIN-HEIGHT: 32px; DISPLAY: flex; -webkit-box-align: center; align-items: center"><BUTTON aria-label="Copy code snippet from src/app/app.component.ts (providers)" title="Copy code snippet" class="material-icons copy-button" style="WORD-WRAP: normal; CURSOR: pointer; FONT-SIZE: 24px; BORDER-TOP: medium none; FONT-FAMILY: 'Material Icons'; BORDER-RIGHT: medium none; WHITE-SPACE: nowrap; RIGHT: -32px; MIN-WIDTH: 50px; BORDER-BOTTOM: medium none; POSITION: absolute; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(176,190,197); DIRECTION: ltr; FONT-STYLE: normal; BORDER-LEFT: medium none; DISPLAY: inline-block; LETTER-SPACING: normal; LINE-HEIGHT: 1; TOP: -8px; BACKGROUND-COLOR: transparent; -webkit-font-smoothing: antialiased; font-feature-settings: 'liga' 1"><SPAN aria-hidden=true>content_copy</SPAN></BUTTON><CODE class="animated fadeIn" style="OVERFLOW: auto; FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace"><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px">providers</SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">:</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">[</SPAN><SPAN class=typ style="COLOR: red; LINE-HEIGHT: 24px">HeroService</SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">]</SPAN></CODE></PRE></AIO-CODE></CODE-EXAMPLE>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result=""><CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">providers</CODE>数组告诉 
+Angular，当它创建新的<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">AppComponent</CODE>组件时，也要创建一个<CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">HeroService</CODE>的新实例。<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE 
+style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">AppComponent</CODE>会使用那个服务来获取英雄列表，在它组件树中的每一个子组件也同样如此。</P>
+<P>7，在构造函数中调用装饰器提供的服务提供商中的获取数据的方法，由于构造函数不应处理复杂逻辑，所以使用生命周期钩子函数</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #c586c0">import</SPAN><SPAN style="COLOR: #d4d4d4"> { 
+</SPAN><SPAN style="COLOR: #9cdcfe">Component</SPAN><SPAN 
+style="COLOR: #d4d4d4">, </SPAN><SPAN style="COLOR: #9cdcfe">OnInit</SPAN><SPAN 
+style="COLOR: #d4d4d4"> } </SPAN><SPAN style="COLOR: #c586c0">from</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'@angular/core'</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV></DIV>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #c586c0">export</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #569cd6">class</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #4ec9b0">AppComponent</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #569cd6">implements</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #4ec9b0">OnInit</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN></DIV></DIV>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #dcdcaa">ngOnInit</SPAN><SPAN 
+style="COLOR: #d4d4d4">()</SPAN><SPAN style="COLOR: #d4d4d4">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #4ec9b0">void</SPAN><SPAN 
+style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">this</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">getHeroes</SPAN><SPAN 
+style="COLOR: #d4d4d4">();</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV></DIV>
+<P>8、异步与承诺</P>
+<P>a、将服务的数据以异步的形式提供，防止延迟造成页面阻塞</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #dcdcaa">getHeroes</SPAN><SPAN 
+style="COLOR: #d4d4d4">()</SPAN><SPAN style="COLOR: #d4d4d4">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #4ec9b0">Promise</SPAN><SPAN 
+style="COLOR: #d4d4d4">&lt;</SPAN><SPAN style="COLOR: #4ec9b0">Hero</SPAN><SPAN 
+style="COLOR: #d4d4d4">[]&gt; {</SPAN></DIV>
+<DIV><SPAN 
+style="COLOR: #d4d4d4"><SPAN 
+class=kwd 
+style="WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,255); FONT: 12px/24px 'Droid Sans Mono', monospace; WIDOWS: 1; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">//return</SPAN><SPAN 
+class=pln 
+style="WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 12px/24px 'Droid Sans Mono', monospace; WIDOWS: 1; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"> 
+</SPAN><SPAN class=typ 
+style="WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: red; FONT: 12px/24px 'Droid Sans Mono', monospace; WIDOWS: 1; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">Promise</SPAN><SPAN 
+class=pun 
+style="WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(102,102,0); FONT: 12px/24px 'Droid Sans Mono', monospace; WIDOWS: 1; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">.</SPAN><SPAN 
+class=pln 
+style="WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 12px/24px 'Droid Sans Mono', monospace; WIDOWS: 1; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">resolve</SPAN><SPAN 
+class=pun 
+style="WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(102,102,0); FONT: 12px/24px 'Droid Sans Mono', monospace; WIDOWS: 1; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">(</SPAN><SPAN 
+class=pln 
+style="WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT: 12px/24px 'Droid Sans Mono', monospace; WIDOWS: 1; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">HEROES</SPAN><SPAN 
+class=pun 
+style="WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(102,102,0); FONT: 12px/24px 'Droid Sans Mono', monospace; WIDOWS: 1; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">);</SPAN> </SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #c586c0">return</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #569cd6">new</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #4ec9b0">Promise</SPAN><SPAN style="COLOR: #d4d4d4">((</SPAN><SPAN 
+style="COLOR: #9cdcfe">resolve</SPAN><SPAN style="COLOR: #d4d4d4">, </SPAN><SPAN 
+style="COLOR: #9cdcfe">reject</SPAN><SPAN style="COLOR: #d4d4d4">) </SPAN><SPAN 
+style="COLOR: #569cd6">=&gt;</SPAN><SPAN style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #dcdcaa">setTimeout</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #569cd6">function</SPAN><SPAN 
+style="COLOR: #d4d4d4">(){</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #c586c0">return</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #dcdcaa">resolve</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #9cdcfe">HEROES</SPAN><SPAN style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}, </SPAN><SPAN 
+style="COLOR: #b5cea8">2000</SPAN><SPAN style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">});</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV></DIV>
+<P>b、主视图中调用服务方法，需要定义异步的回调方式</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #dcdcaa">getHeroes</SPAN><SPAN 
+style="COLOR: #d4d4d4">()</SPAN><SPAN style="COLOR: #d4d4d4">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #4ec9b0">void</SPAN><SPAN 
+style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">this</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">heroService</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #dcdcaa">getHeroes</SPAN><SPAN 
+style="COLOR: #d4d4d4">().</SPAN><SPAN style="COLOR: #dcdcaa">then</SPAN><SPAN 
+style="COLOR: #d4d4d4">(</SPAN><SPAN style="COLOR: #9cdcfe">heroes</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #569cd6">=&gt;</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #569cd6">this</SPAN><SPAN 
+style="COLOR: #d4d4d4">.</SPAN><SPAN style="COLOR: #9cdcfe">heroes</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #9cdcfe">heroes</SPAN><SPAN 
+style="COLOR: #d4d4d4">);</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">};</SPAN></DIV></DIV>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN>&nbsp;</DIV></DIV></body>
+</html>

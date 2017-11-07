@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>主从结构</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、定义一个数组HEROES</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #569cd6">const</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">HEROES</SPAN><SPAN 
+style="COLOR: #d4d4d4">:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #4ec9b0">Hero</SPAN><SPAN style="COLOR: #d4d4d4">[] </SPAN><SPAN 
+style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+[]</SPAN></DIV></DIV>
+<P>2、在appcomponent上定义一个全局属性，暴漏上面定义的数组</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #9cdcfe">heroes</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">HEROES</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV></DIV>
+<P>3、使用ngFor来循环显示列表</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #ce9178">&lt;li *ngFor="let hero of heroes" 
+(click)="onSelect(hero)"&gt;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #ce9178">&lt;span 
+class="badge"&gt;{{hero.id}}&lt;/span&gt; {{hero.name}}</SPAN></DIV>
+<DIV><SPAN style="COLOR: #ce9178">&lt;/li&gt;</SPAN></DIV></DIV>
+<P>4、插入列表单击事件</P>
+<P>5、在app.component.ts中添加selectHero属性，用以绑定选中列表数据</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">selectedHero</SPAN><SPAN 
+style="COLOR: #d4d4d4">:</SPAN><SPAN style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #4ec9b0">Hero</SPAN><SPAN style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #dcdcaa">onSelect</SPAN><SPAN style="COLOR: #d4d4d4">(</SPAN><SPAN 
+style="COLOR: #9cdcfe">hero</SPAN><SPAN style="COLOR: #d4d4d4">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #4ec9b0">Hero</SPAN><SPAN 
+style="COLOR: #d4d4d4">)</SPAN><SPAN style="COLOR: #d4d4d4">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #4ec9b0">void</SPAN><SPAN 
+style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #569cd6">this</SPAN><SPAN style="COLOR: #d4d4d4">.</SPAN><SPAN 
+style="COLOR: #9cdcfe">selectedHero</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #d4d4d4">=</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #9cdcfe">hero</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV></DIV>
+<P>6、添加ngIf，处理初始化时没有选中的情况</P>
+<P>7、为所选li行添加样式(当双引号的值为true的时候，会添加selected样式，否则移除)</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #ce9178">&lt;li *ngFor="let hero of heroes" 
+</SPAN></DIV>
+<DIV><SPAN style="COLOR: #ce9178">[class.selected]="hero === 
+selectedHero"</SPAN></DIV>
+<DIV><SPAN 
+style="COLOR: #ce9178">(click)="onSelect(hero)"&gt;</SPAN></DIV></DIV>
+<P>&nbsp;</P></body>
+</html>

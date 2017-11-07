@@ -1,0 +1,109 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>多个组件</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、添加英雄详情组件</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">文件名和组件名遵循<A 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: rgb(25,118,210); LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="https://angular.cn/guide/styleguide#naming">风格指南</A>中的标准方式。</P>
+<UL 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+  <LI 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; LETTER-SPACING: 0px; LINE-HEIGHT: 24px">
+  <P 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; MARGIN: 0px; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+  translation-result="">组件的类名应该是<EM 
+  style="LETTER-SPACING: 0px">大驼峰形式</EM>，并且以<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px"><A 
+  class=code-anchor 
+  style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+  href="https://angular.cn/api/core/Component">Component</A></CODE>结尾。 
+  因此英雄详情组件的类名是<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">HeroDetailComponent</CODE>。</P>
+  <LI 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; LETTER-SPACING: 0px; LINE-HEIGHT: 24px">
+  <P 
+  style="FONT-SIZE: 14px; FONT-WEIGHT: 400; MARGIN: 0px; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+  translation-result="">组件的文件名应该是<A 
+  style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: rgb(25,118,210); LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+  href="https://angular.cn/guide/glossary#dash-case">小写中线形式</A>，每个单词之间用中线分隔，并且以<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">.component.ts</CODE>结尾。 
+  因此<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">HeroDetailComponent</CODE>类应该放在<CODE 
+  style="FONT-SIZE: 12px; FONT-FAMILY: 'Droid Sans Mono', monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px">hero-detail.component.ts</CODE>文件中。</P></LI></UL>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">2、将详情模版单独放到详情组件中</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">3、将hero类单独定义，以便使用的时候直接import文件名直接使用</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #c586c0">import</SPAN><SPAN style="COLOR: #d4d4d4"> { 
+</SPAN><SPAN style="COLOR: #9cdcfe">Hero</SPAN><SPAN style="COLOR: #d4d4d4"> } 
+</SPAN><SPAN style="COLOR: #c586c0">from</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #ce9178">'./app.hero'</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV></DIV>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">4、将详情组件添加到AppMoudule中，否则报错</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #c586c0">import</SPAN><SPAN style="COLOR: #d4d4d4"> { 
+</SPAN><SPAN style="COLOR: #9cdcfe">HeroDetailComponent</SPAN><SPAN 
+style="COLOR: #d4d4d4"> } </SPAN><SPAN style="COLOR: #c586c0">from</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'./hero-detail.component'</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV><BR>
+<DIV><SPAN style="COLOR: #d4d4d4">@</SPAN><SPAN 
+style="COLOR: #dcdcaa">NgModule</SPAN><SPAN 
+style="COLOR: #d4d4d4">({</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">declarations:</SPAN><SPAN style="COLOR: #d4d4d4"> 
+[</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">AppComponent</SPAN><SPAN 
+style="COLOR: #d4d4d4">,</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4"></SPAN><SPAN 
+style="COLOR: #9cdcfe">HeroDetailComponent</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">],</SPAN></DIV></DIV>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">5、将详情组件的hero属性定义为输入属性，否则无法接收select事件传入的hero实例</P>
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e">
+<DIV><SPAN style="COLOR: #c586c0">export</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #569cd6">class</SPAN><SPAN style="COLOR: #d4d4d4"> 
+</SPAN><SPAN style="COLOR: #4ec9b0">HeroDetailComponent</SPAN><SPAN 
+style="COLOR: #d4d4d4"> {</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">@</SPAN><SPAN 
+style="COLOR: #dcdcaa">Input</SPAN><SPAN style="COLOR: #d4d4d4">() </SPAN><SPAN 
+style="COLOR: #9cdcfe">hero</SPAN><SPAN style="COLOR: #d4d4d4">:</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #4ec9b0">Hero</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV>
+<DIV><SPAN style="COLOR: #d4d4d4">}</SPAN></DIV><BR></DIV>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">&nbsp;</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">&nbsp;</P>
+<P 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: ; FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px" 
+translation-result="">&nbsp;</P></body>
+</html>

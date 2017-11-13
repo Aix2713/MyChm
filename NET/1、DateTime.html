@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>时间类型</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>日期格式化</h4>
+    <pre class="brush: csharp;">
+		/// <summary>
+        /// 格式化
+        /// </summary>
+        /// <param name="dt">时间</param>
+        /// <param name="type">显示模式</param>
+        /// <returns></returns>
+        public static string FormatDate(DateTime dt, string type)
+        {
+            string result = string.Empty;
+            switch (type)
+            {
+                case "0":
+                    result = dt.ToString("yyyy-MM-dd HH:mm:ss .fff");
+                    break;
+                case "1":
+                    result = dt.ToString("yyyy-MM-dd");
+                    break;
+                case "2":
+                    result = dt.ToString("yyyy/MM/dd");
+                    break;
+                case "3":
+                    result = dt.ToString("yyyy年MM月dd日");
+                    break;
+                case "4":
+                    result = dt.ToString("HH:mm:ss");
+                    break;
+                case "5":
+                    result = dt.ToString("HH时mm分ss秒");
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
+    </pre>
+    <br />
+    <h4>计算时间差</h4>
+    <pre class="brush: csharp;">
+		DateTime dateTime = System.DateTime.Now;
+		
+		DateTime startTime = DateTime.Parse("2017-02-13 08:00");
+		DateTime endTime = DateTime.Parse("2017-03-15 18:00");
+		TimeSpan planStart = new TimeSpan(startTime.Ticks);
+		TimeSpan planFinish = new TimeSpan(endTime.Ticks);
+		TimeSpan span = planStart.Subtract(planFinish).Duration();
+		dateTime = startTime.AddDays(span.Days).AddHours(span.Hours);
+    </pre>
+    <br />
+    <h4>周计算</h4>
+    <pre class="brush: csharp;">
+        /// <summary>  
+        /// 得到本周第一天(以星期天为第一天)  
+        /// </summary>  
+        /// <param name="datetime"></param>  
+        /// <returns></returns>  
+        public DateTime GetWeekFirstDaySun(DateTime datetime)
+        {
+            //星期天为第一天  
+            int weeknow = Convert.ToInt32(datetime.DayOfWeek);
+            int daydiff = (-1) * weeknow;
+
+            //本周第一天  
+            string FirstDay = datetime.AddDays(daydiff).ToString("yyyy-MM-dd");
+            return Convert.ToDateTime(FirstDay);
+        }
+
+        /// <summary>  
+        /// 得到本周第一天(以星期一为第一天)  
+        /// </summary>  
+        /// <param name="datetime"></param>  
+        /// <returns></returns>  
+        public DateTime GetWeekFirstDayMon(DateTime datetime)
+        {
+            //星期一为第一天  
+            int weeknow = Convert.ToInt32(datetime.DayOfWeek);
+
+            //因为是以星期一为第一天，所以要判断weeknow等于0时，要向前推6天。  
+            weeknow = (weeknow == 0 ? (7 - 1) : (weeknow - 1));
+            int daydiff = (-1) * weeknow;
+
+            //本周第一天  
+            string FirstDay = datetime.AddDays(daydiff).ToString("yyyy-MM-dd");
+            return Convert.ToDateTime(FirstDay);
+        }
+
+        /// <summary>  
+        /// 得到本周最后一天(以星期六为最后一天)  
+        /// </summary>  
+        /// <param name="datetime"></param>  
+        /// <returns></returns>  
+        public DateTime GetWeekLastDaySat(DateTime datetime)
+        {
+            //星期六为最后一天  
+            int weeknow = Convert.ToInt32(datetime.DayOfWeek);
+            int daydiff = (7 - weeknow) - 1;
+
+            //本周最后一天  
+            string LastDay = datetime.AddDays(daydiff).ToString("yyyy-MM-dd");
+            return Convert.ToDateTime(LastDay);
+        }
+
+        /// <summary>  
+        /// 得到本周最后一天(以星期天为最后一天)  
+        /// </summary>  
+        /// <param name="datetime"></param>  
+        /// <returns></returns>  
+        public DateTime GetWeekLastDaySun(DateTime datetime)
+        {
+            //星期天为最后一天  
+            int weeknow = Convert.ToInt32(datetime.DayOfWeek);
+            weeknow = (weeknow == 0 ? 7 : weeknow);
+            int daydiff = (7 - weeknow);
+
+            //本周最后一天  
+            string LastDay = datetime.AddDays(daydiff).ToString("yyyy-MM-dd");
+            return Convert.ToDateTime(LastDay);
+        }  
+    </pre>
+	<br/>
+</body>
+</html>
+
+

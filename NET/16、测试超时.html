@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>测试超时</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>测试超时</h4>
+    <pre class="brush: csharp;">
+	    private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Thread t = new Thread(TestDBConnect);
+            t.Start();
+        }
+		
+		/// <summary>
+        /// 测试数据库超时
+        /// </summary>
+        public void TestDBConnect()
+        {
+            TimeoutChecker timeout = new TimeoutChecker(
+            delegate
+            {
+                try
+                {
+                    if (!MySqlHelper.TestDBConnect())
+                    {
+                        DBConnect = false;
+                    }
+                    else
+                    {
+                        DBConnect = true;
+                    }
+                }
+                catch
+                {
+                    DBConnect = false;
+                }
+            },
+            delegate
+            {
+                DBConnect = false;
+            });
+            if (timeout.Wait(DBTestTime))
+            { }
+            if (!DBConnect)
+            {
+                this.Dispatcher.Invoke(new Action(() =>
+                {
+                    ModernDialog.ShowMessage("数据库连接失败！", "提示", MessageBoxButton.OK);
+                }));
+            }
+        }
+    </pre>
+    <br />
+</body>
+</html>
+
+

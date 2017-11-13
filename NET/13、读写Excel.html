@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>读写Excel</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>读取Excel(xlsx)</h4>
+    <pre class="brush: csharp;">
+        #region 读取Excel
+        /// <summary>
+        /// 读取
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns></returns>
+        public DataTable Read(string filePath)
+        {
+            DataTable dt = new DataTable();
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                FileInfo existingFile = new FileInfo(filePath);
+                ExcelPackage package = new ExcelPackage(existingFile);
+                int sheetCount = package.Workbook.Worksheets.Count;              //获取总Sheet页 
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[1];       //选定 指定页 
+                int maxColumn = worksheet.Dimension.End.Column;                  //最大列 
+                int minColumn = worksheet.Dimension.Start.Column;                //最小列 
+                int maxRow = worksheet.Dimension.End.Row;                        //最大行 
+                int minRow = worksheet.Dimension.Start.Row;                      //最小行 
+                int row = minRow;
+                // 添加列
+                for (int i = minColumn; i <= maxColumn; i++)
+                {
+                    dt.Columns.Add(worksheet.Cells[row, i].Value.ToString());
+                }
+                row++;
+                for (int i = row; i <= maxRow; i++)
+                {
+                    DataRow dr = dt.NewRow();
+                    for (int j = 0; j <= dt.Columns.Count - 1; j++)
+                    {
+                        dr[j] = worksheet.Cells[i, j + 1].Value;
+                    }
+                    dt.Rows.Add(dr);
+                }
+            }
+            // 移除空行
+            dt = SqlHelper.ExecuteRemoveRowEmpty(dt);
+            return dt;
+        }
+
+        /// <summary>
+        /// 读取
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <param name="startRow">有效数据开始行</param>
+        /// <returns></returns>
+        public DataTable Read(string filePath, int startRow)
+        {
+            DataTable dt = new DataTable();
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                FileInfo existingFile = new FileInfo(filePath);
+                ExcelPackage package = new ExcelPackage(existingFile);
+                int sheetCount = package.Workbook.Worksheets.Count;              //获取总Sheet页 
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[1];       //选定 指定页 
+                int maxColumn = worksheet.Dimension.End.Column;                  //最大列 
+                int minColumn = worksheet.Dimension.Start.Column;                //最小列 
+                int maxRow = worksheet.Dimension.End.Row;                        //最大行 
+                int minRow = worksheet.Dimension.Start.Row;                      //最小行 
+                int row = minRow + startRow;
+                // 添加列
+                for (int i = minColumn; i <= maxColumn; i++)
+                {
+                    dt.Columns.Add(worksheet.Cells[row, i].Value.ToString());
+                }
+                row++;
+                for (int i = row; i <= maxRow; i++)
+                {
+                    DataRow dr = dt.NewRow();
+                    for (int j = 0; j <= dt.Columns.Count - 1; j++)
+                    {
+                        dr[j] = worksheet.Cells[i, j + 1].Value;
+                    }
+                    dt.Rows.Add(dr);
+                }
+            }
+            // 移除空行
+            dt = SqlHelper.ExecuteRemoveRowEmpty(dt);
+            return dt;
+        }
+        #endregion
+
+    </pre>
+    <br />
+	<h4>写入Excel(xlsx)</h4>
+    <pre class="brush: csharp;">
+        #region Excel文件流
+        /// <summary>
+        /// 写入
+        /// </summary>
+        /// <param name="dt">数据源</param>
+        /// <returns></returns>
+        public MemoryStream Write(DataTable dt)
+        {
+            MemoryStream ms = new MemoryStream();
+            using (ExcelPackage excel = new ExcelPackage())
+            {
+                int row = 1;
+                ExcelWorksheet sheet = excel.Workbook.Worksheets.Add("Sheet1");
+                if (dt.Columns.Count > 0)
+                {
+                    int count = 1;
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        sheet.Cells[row, count].Value = column.ColumnName;
+                        sheet.Column(count).Width = 10; //列宽   
+                        count++;
+                    }
+                    row++;
+                }
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int count = 1;
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        sheet.Cells[row, count].Value = dr[column.ColumnName].ToString();
+                        count++;
+                    }
+                    row++;
+                }
+                excel.SaveAs(ms);
+            }
+            ms.Seek(0, SeekOrigin.Begin);
+            return ms;
+        }
+
+        /// <summary>
+        /// 写入
+        /// </summary>
+        /// <param name="dt">数据源</param>
+        /// <param name="title">标题</param>
+        /// <param name="columnNames">列信息</param>
+        /// <returns></returns>
+        public MemoryStream Write(DataTable dt, string title)
+        {
+            MemoryStream ms = new MemoryStream();
+            using (ExcelPackage excel = new ExcelPackage())
+            {
+                int row = 1;
+                ExcelWorksheet sheet = excel.Workbook.Worksheets.Add("Sheet1");
+                if (!string.IsNullOrEmpty(title))
+                {
+                    sheet.Cells[row, 1, 1, dt.Columns.Count].Merge = true;     //合并单元格    
+                    sheet.Cells[row, 1].Value = title;
+                    sheet.Cells[row, 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;   //居中    
+                    row++;
+                }
+                if (dt.Columns.Count > 0)
+                {
+                    int count = 1;
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        sheet.Cells[row, count].Value = column.ColumnName;
+                        sheet.Column(count).Width = 10; //列宽   
+                        count++;
+                    }
+                    row++;
+                }
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int count = 1;
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        sheet.Cells[row, count].Value = dr[column.ColumnName].ToString();
+                        count++;
+                    }
+                    row++;
+                }
+                excel.SaveAs(ms);
+            }
+            ms.Seek(0, SeekOrigin.Begin);
+            return ms;
+        }
+
+        /// <summary>
+        /// 写入
+        /// </summary>
+        /// <param name="dt">数据源</param>
+        /// <param name="title">标题</param>
+        /// <param name="columnNames">列信息</param>
+        /// <returns></returns>
+        public MemoryStream Write(DataTable dt, string title, IList<ExcelInfo> columnNames)
+        {
+            MemoryStream ms = new MemoryStream();
+            if (dt != null)
+            {
+                int row = 1, count = 1;
+                using (ExcelPackage excel = new ExcelPackage())
+                {
+                    ExcelWorksheet sheet = excel.Workbook.Worksheets.Add("Sheet1");
+                    // 标题行
+                    if (!string.IsNullOrEmpty(title))
+                    {
+                        sheet.Cells[row, 1, 1, columnNames.Count].Merge = true;     //合并单元格    
+                        sheet.Cells[row, 1].Value = title;
+                        sheet.Cells[row, 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;   //居中    
+                        row++;
+                    } 
+                    if (columnNames != null && columnNames.Count > 0)
+                    {
+                        // 列标题
+                        foreach (ExcelInfo model in columnNames)
+                        {
+                            sheet.Cells[row, count].Value = model.ColumnHeader;
+                            sheet.Column(count).Width = string.IsNullOrEmpty(model.ColumnWidth) ? 10 : Convert.ToInt32(model.ColumnWidth); //列宽   
+                            count++;
+                        }
+                        row++;
+                        // 表数据
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            count = 1;
+                            foreach (ExcelInfo column in columnNames)
+                            {
+                                sheet.Cells[row, count].Value = dr[column.Column].ToString();
+                                count++;
+                            }
+                            row++;
+                        }
+                    }
+                    else
+                    {
+                        // 列标题
+                        foreach (DataColumn column in dt.Columns)
+                        {
+                            sheet.Cells[row, count].Value = column.ColumnName;
+                            sheet.Column(count).Width = 10; //列宽   
+                            count++;
+                        }
+                        row++;
+                        // 表数据
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            count = 1;
+                            foreach (DataColumn column in dt.Columns)
+                            {
+                                sheet.Cells[row, count].Value = dr[column.ColumnName].ToString();
+                                count++;
+                            }
+                            row++;
+                        }
+                    }
+                    excel.SaveAs(ms);
+                }
+            } 
+            ms.Seek(0, SeekOrigin.Begin);
+            return ms; 
+        }
+        #endregion
+		
+		1、 BS调用
+		
+			MemoryStream ms = bll.ExportExcel(string.Empty);
+			return File(ms, "application/ms-excel", fileName);
+		
+		2、 CS调用
+		
+			MemoryStream ms = service.Write(dt, null, null);
+			System.IO.File.WriteAllBytes(@"D:\人员表.xlsx", ms.GetBuffer()); 
+		
+		3、 BS导出Excel方式
+		
+			1)：A连接
+			
+			<a href="~/Home/download?id=1">Click to get file</a>
+			
+			2): 页面跳转
+			
+			window.location.href = "/Home/download?id=1";             
+			
+			3): 页面跳转(服务器上生成文件，返回链接地址)
+			
+			$.ajax({
+				type: "GET",
+				url: "/Home/download",
+				data: { id: "1" },
+				dataType:"json",
+				success: function (result) {
+					window.location.target = "_blank";
+					window.location.href = result;                      
+				}
+			})
+		
+			4): 表单提交
+			
+			$("#BtnExport").click(function () {
+				var form = $("<form>");
+				form.attr("style", "display:none");
+				form.attr("target", "");
+				form.attr("method", "post");
+				form.attr("action", "/Menu/ExportExcel");
+				var inputName = $("<input>");
+				inputName.attr("type", "hidden");
+				inputName.attr("name", "name");
+				inputName.attr("value", $("#Name").val()); 
+				$("body").append(form);
+				form.append(inputName); 
+				form.submit();
+			});
+    </pre>
+    <br />
+</body>
+</html>
+
+

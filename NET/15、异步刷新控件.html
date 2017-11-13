@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>异步刷新控件</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>异步刷新控件</h4>
+    <pre class="brush: csharp;">
+	    /// <summary>
+        /// 下载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Btn_DownLoad_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Thread t = new Thread(DownLoadImage);
+                t.Start();
+            }
+            catch{}
+        }
+		
+		void DownLoadImage()
+        {
+            try
+            {
+                this.Dispatcher.Invoke(new Action(() => 
+                {
+                    ModernDialog.ShowMessage("下载完成！", "提示", MessageBoxButton.OK);
+                    Btn_DownLoad.IsEnabled = true;
+                }));
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("下载图片时出错", ex.Message);
+            }
+        }
+    </pre>
+    <br />
+</body>
+</html>
+
+

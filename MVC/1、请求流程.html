@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>MVC请求流程</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>MVC请求流程</h4>
+    <pre class="brush: csharp;">
+        1、 到达URLModule的第7个Application事件
+		
+		2、	首先根据URL,找到并创建MVCHandle(继承IHttpHandle)
+		
+		3、	映射IHttpHandlehttpContext.RemapHandler(handler)
+		
+		4、	在第11个Application事件后,执行MVCHandle的PR方法
+		
+		5、	根据URL,创建指定Controller(继承Controller,ControllerBase,IController),
+		    调用IController的Execute的方法.
+		
+		6、	在ControllerBase的Execute方法的调用抽象方法ExecuteCore
+		
+		7、	在Controller的ExecuteCore方法调用ActionInvoker,
+		    这个属性实现类是ControllerActionInvoker)的InvokeAction方法
+		   
+		8、	执行MVC过滤器
+		
+		9、	调用控制器的方法,得到ActionResult
+		
+		10、调用ActionResult的ExecuteResult方法
+		
+		11、Response输出
+    </pre>
+	<br/>
+</body>
+</html>
+
+

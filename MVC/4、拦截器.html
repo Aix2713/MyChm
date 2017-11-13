@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>拦截器</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>拦截器</h4>
+    <pre class="brush: csharp;">		
+		1、 AuthorizationAttribute(授权)
+		
+			public class AuthorizationAttribute : AuthorizeAttribute
+			{
+				public override void OnAuthorization(AuthorizationContext filterContext)
+				{
+				}
+			}
+			
+        2、 ActionAttribute(方法)
+		
+			public class ActionAttribute : ActionFilterAttribute
+			{
+				public override void OnActionExecuted(ActionExecutedContext filterContext)
+				{ 
+				}
+
+				public override void OnActionExecuting(ActionExecutingContext filterContext)
+				{
+				} 
+			}
+		
+		3、 ResultAttribute(返回)
+		
+			public class ResultAttribute : ActionFilterAttribute
+			{
+				public override void OnResultExecuted(ResultExecutedContext filterContext)
+				{
+				}
+
+				public override void OnResultExecuting(ResultExecutingContext filterContext)
+				{
+				}
+			}
+		
+		4、 ExceptionAttribute(异常)
+		
+			public class ExceptionAttribute : HandleErrorAttribute
+			{
+				public override void OnException(ExceptionContext filterContext)
+				{
+				}
+			}
+    </pre>
+	<br/>
+</body>
+</html>
+
+

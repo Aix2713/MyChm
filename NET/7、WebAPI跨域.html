@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>WebAPI跨域</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>WebAPI跨域</h4>
+    <pre class="brush: csharp;">
+		针对ASP.NET MVC，只需要在web.config中添加如下的内容即可
+	    <system.webServer>
+			<httpProtocol>
+			  <customHeaders>
+				<add name="Access-Control-Allow-Origin" value="*" />
+				<add name="Access-Control-Allow-Headers" value="Content-Type" />
+				<add name="Access-Control-Allow-Methods" value="GET, POST, PUT, DELETE, OPTIONS" />
+			  </customHeaders>
+			</httpProtocol>
+			<handlers>
+			  <remove name="ExtensionlessUrlHandler-Integrated-4.0" />
+			  <remove name="OPTIONSVerbHandler" />
+			  <remove name="TRACEVerbHandler" />
+			  <add name="ExtensionlessUrlHandler-Integrated-4.0" path="*." verb="*" type="System.Web.Handlers.TransferRequestHandler" preCondition="integratedMode,runtimeVersionv4.0" />
+			</handlers>
+	    </system.webServer>
+		
+		针对ASP.NET Web API,除了上面这样的设置，还需要添加一个特殊的设计，
+		就是为每个APIController添加一个OPTIONS的方法，但无需返回任何东西。
+		public string Options()
+		{
+		    return null;  
+		}
+    </pre>
+    <br />
+</body>
+</html>
+
+

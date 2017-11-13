@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>文件操作</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>文件操作</h4>
+    <pre class="brush: csharp;">
+	    /// <summary>
+		/// 获取程序根目录
+		/// </summary>
+		BS：string str = HttpContext.Current.Server.MapPath("~/") + "\\Logs\\";
+		
+		CS：string str = AppDomain.CurrentDomain.BaseDirectory + "Logs\\";
+		
+        /// <summary>
+		/// 创建文件夹
+		/// </summary>
+		/// <param name="dir">文件路径</param>
+		public static void CreateDir(string dir)
+		{
+			if (!System.IO.Directory.Exists(dir))
+			{
+				System.IO.Directory.CreateDirectory(dir);
+			}
+		}
+		
+		/// <summary>
+		/// 删除文件
+		/// </summary>
+		/// <param name="file">文件所在路径</param>
+		public static void DeleteFile(string file)
+		{
+			if (System.IO.File.Exists(file))
+			{
+				System.IO.File.Delete(file);
+			}	
+		}
+    </pre>
+    <br />
+</body>
+</html>
+
+

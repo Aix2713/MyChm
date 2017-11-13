@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>WebConfig</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>WebConfig</h4>
+    <pre class="brush: csharp;">
+        1、 appSettings
+		
+	        <add key="SSO" value="true"/>
+		
+		2、 system.web
+		
+		    <!--maxRequestLength：控制用户上传文件的大小,默认是4M
+				executionTimeout：最长允许执行请求时间为120秒
+				enableVersionHeader：过滤ResponseHeader中：X-AspNet-Version-->
+			<httpRuntime maxRequestLength="40960" executionTimeout="120" enableVersionHeader="false" targetFramework="4.5"/>
+			
+			<!--设置错误页mode:具有On,Off,RemoteOnly 3种状态
+				On表示始终显示自定义的信息
+				Off表示始终显示详细的asp.net错误信息
+				RemoteOnly表示只对不在本地Web服务器上运行的用户显示自定义信息-->
+			<customErrors defaultRedirect="/Error/ServerError" mode="On">
+			  <error statusCode="403" redirect="/Error/NoAuthority"/>
+			  <error statusCode="404" redirect="/Error/NotFound"/>
+			  <error statusCode="500" redirect="/Error/ServerError"/>
+			</customErrors>
+			
+			<!--设置debug="true"将调试符号插入已编译的页面中,但由于这会影响性能,因此只在开发过程中将此值设置为true-->
+			<compilation debug="true" targetFramework="4.5"/>
+			
+			<!--设置ASP.NET使用的安全身份验证模式-->
+			<authentication mode="Forms">
+			  <!--Name: 指定完成身份验证的Cookie的名称.
+				  LoginUrl: 如果未通过验证或超时后重定向的页面URL,一般为登录页面.
+				  Protection: 指定Cookie数据的保护方式.可设置为:All表示加密数据,并进行有效性验证两种方式;
+							  None表示不保护Cookie,Encryption表示对Cookie内容进行加密,alidation表示对Cookie内容进行有效性验证
+				  TimeOut: 指定Cookie的失效时间,超时后要重新登录-->
+			  <forms name=".ASPNET" loginUrl="~/Admin/Login" protection="All" timeout="30"/>
+			</authentication>
+			
+			<!--设置匿名用户访问(未通过验证)-->
+			<authorization>
+			  <allow users="administrator"/>
+			</authorization>
+			
+			<!--站点全球化设置   uiCulture: 站点默认语言 zh-CN、en-US-->
+			<globalization requestEncoding="utf-8" responseEncoding="utf-8" fileEncoding="utf-8" uiCulture="zh-CN"/>
+			
+		3、 system.net
+		
+			<!--站点邮箱设置-->
+			<mailSettings>
+			  <smtp from="System">
+				<network host="smtp.helperchm.com" userName="admin@helperchm.com" password="Password123456" port="25" />
+			  </smtp>
+			</mailSettings>
+		
+		4、 system.web.extensions
+		
+			<!--设置JSON序列化长度-->
+			<scripting>
+			  <webServices>
+				<jsonSerialization maxJsonLength="5000"/>
+			  </webServices>
+			</scripting>
+			
+		5、 system.webServer
+		
+			<!--设置允许上传文件的大小-->
+			<security>
+			  <requestFiltering>
+				<requestLimits maxAllowedContentLength="1024000000"/>
+			  </requestFiltering>
+			</security>
+			
+			<!--过滤ResponseHeader中：X-Powered-By-->
+			<httpProtocol>
+			  <customHeaders>
+				<remove name="X-Powered-By"/>
+			  </customHeaders>
+			</httpProtocol>
+			
+		6、 entityFramework
+		
+			<contexts>
+			  <!--数据库配置 disableDatabaseInitialization = 'false' 数据结构变动重新生成-->
+			  <context type="DAL.DataAccess, DAL" disableDatabaseInitialization="false">
+				<databaseInitializer type="DAL.DataBaseInitializer, DAL" />
+			  </context>
+			</contexts>
+    </pre>
+	<br/>
+</body>
+</html>
+
+

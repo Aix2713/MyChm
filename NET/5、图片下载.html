@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>图片下载</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>图片下载</h4>
+    <h6>(注：使用HttpHelper类)</h6>
+    <pre class="brush: csharp;">
+	    private string ImageSavePath = System.Configuration.ConfigurationManager.AppSettings["ImageSavePath"];
+        /// <summary>
+        /// 保存图片
+        /// </summary>
+        /// <param name="url">图片链接</param>
+        /// <param name="name">图片名称</param>
+        public string GetImage(string url, string name)
+        {
+            string outStr = "";
+            try
+            {
+                if (url.Length != 0)
+                {
+                    string path = ImageSavePath + "\\" + name + ".jpg";
+                    string dir = System.IO.Path.GetDirectoryName(path);
+                    if (!System.IO.Directory.Exists(dir))
+                    {
+                        System.IO.Directory.CreateDirectory(dir);
+                    }
+                    HttpHelper helper = new HttpHelper();
+                    HttpItem item = new HttpItem()
+                    {
+                        URL = url,
+                        Method = "GET",
+                        ResultType = ResultType.Byte
+                    };
+                    helper.GetImage(item).Save(path);
+                    outStr = path;    //绝对路径
+                }
+                else
+                {
+                    outStr = imageSave + "\\error.jpg";
+                }
+            }
+            catch
+            {
+                outStr = imageSave + "\\error.jpg";
+            }
+            return outStr;
+        }
+    </pre>
+    <br />
+</body>
+</html>
+
+

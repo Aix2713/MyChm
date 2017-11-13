@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>发邮件</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>发邮件</h4>
+	<pre class="brush: csharp;">
+        /// <summary>
+        /// 发送邮件
+        /// </summary>
+        /// <param name="sendEmail">发件邮箱</param>
+        /// <param name="passWord">发件邮箱密码</param>
+        /// <param name="sendServer">发件邮箱服务器</param>
+        /// <param name="receiveList">收件邮箱</param>
+        /// <param name="theme">主题</param>
+        /// <param name="content">内容</param>
+        /// <returns></returns>
+        public static bool SendEmail(string sendEmail, string passWord, string sendServer, IList<string> receiveList, string theme, string content)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                string mF = sendEmail;                                                          //邮件的发件人
+                MailAddress from = new MailAddress(mF, mF.Substring(0, mF.IndexOf('@')), System.Text.Encoding.GetEncoding("GB2312"));
+                mail.From = from;
+                foreach (string address in receiveList)           
+                {
+                    mail.To.Add(address);                                                        //设置邮件的收件人
+                }
+                mail.Subject = theme;                                                            //主题
+                mail.Body = content;                                                             //内容
+                mail.IsBodyHtml = true;                                                          //HTML格式
+                mail.BodyEncoding = System.Text.Encoding.GetEncoding("GB2312");                  //设置邮件的格式
+                mail.Priority = MailPriority.Normal;                                             //设置邮件的发送级别
+                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
+                SmtpClient client = new SmtpClient();                                            //邮件发送服务器
+                client.Host = sendServer;                                                        //发件人地址所在的服务器SMTP 如smtp.etagtron.com
+                client.Port = 25;                                                                //设置用于SMTP端口，默认的是 25
+                client.UseDefaultCredentials = false;
+                client.Credentials = new System.Net.NetworkCredential(sendEmail, passWord);      //发件人邮箱登陆名和密码
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.Send(mail);                                                               //发送邮件
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+    </pre>
+    <br />
+</body>
+</html>
+
+

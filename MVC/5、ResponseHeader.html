@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>ResponseHeader</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>ResponseHeader</h4>
+    <pre class="brush: csharp;">
+        1、 X-AspNetMvc-Version
+              
+            Global中Application_Start方法，添加如下代码：
+            MvcHandler.DisableMvcResponseHeader = true;
+			
+	    2、 Server
+		
+		    Global中添加如下代码：	
+		    protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
+			{
+				HttpApplication app = sender as HttpApplication;
+				if (app != null &&
+					app.Context != null)
+				{
+					app.Context.Response.Headers.Remove("Server");
+				}
+			}
+			
+		3、 X-AspNet-Version
+		
+		    Web.config文件中system.web节点，添加如下配置：
+            <httpRuntime enableVersionHeader="false" />
+			
+		4、 X-Powered-By
+		
+		    Web.Config文件中system.webServer节点，添加如下配置：
+			<httpProtocol>
+			  <customHeaders>
+				<remove name="X-Powered-By" />
+			  </customHeaders>
+			</httpProtocol>
+    </pre>
+	<br/>
+</body>
+</html>
+
+

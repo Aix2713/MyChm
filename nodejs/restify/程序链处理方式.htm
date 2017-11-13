@@ -1,0 +1,46 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>程序链处理方式</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、预处理:server.pre()</P>前处理程序链在路由之前执行。这意味着这些处理程序将为传入的请求执行, 
+即使它是针对您没有注册的路由。这对于记录指标或在路由之前清理传入的请求可能很有用。
+<P>2、处理:server.use()</P>
+<P>在选择了路由以为请求提供服务后, 将执行使用处理程序链。将对所有路由运行通过使用 () 
+方法附加的函数处理程序。由于 restify 按注册顺序运行处理程序, 因此在定义任何路由之前, 请确保所有使用 () 调用都发生。</P>
+<P>3、Using next()</P>在处理程序链中的每个函数完成后, 您负责调用 next ()。调用 next 
+() 将移动到链中的下一个函数。<BR>与其他 REST 框架不同, 调用 res send () 不会自动触发 next ()。在许多应用程序中, 工作可以在 
+res. send () 之后继续发生, 因此, 刷新响应不是完成请求的同义词。<BR>在正常情况下, next () 
+通常不接受任何参数。如果出于某种原因您希望停止处理请求, 则可以调用 next (false) 停止处理请求:
+<P>next () 还接受任何指错误为 true 的对象, 这将导致 restify 
+将该错误对象作为对客户端的响应发送。将从 Error 对象的 statusCode 属性推断出响应的状态代码。如果未找到 statusCode, 
+则默认为500。因此, 下面的代码段将向客户端发送一个带有 http 500 的序列化错误:</P>   
+    
+<P>server.use(function(req, res, next) {<BR>&nbsp; return 
+next(new Error('boom!'));<BR>});</P>   
+    
+<P>这将发送一个 404, 因为 NotFoundError 构造函数为 statusCode 
+提供404的值:</P>   
+    
+<P>server.use(function(req, res, next) {<BR>&nbsp; return 
+next(new NotFoundError('not here!'));<BR>});</P>使用 error 对象调用 res. send () 会产生类似的结果, 此代码段发送的 http 
+500 带有序列化错误客户端:
+<P>server.use(function(req, res, next) {<BR>&nbsp; 
+res.send(new Error('boom!'));<BR>&nbsp; return next();<BR>});</P>
+<P>两者之间的区别在于, 使用错误对象调用 next () 
+可以利用服务器的事件发射器。这使您可以使用公共处理程序处理错误类型的所有事件。有关详细信息, 请参见错误处理部分。</P>
+<P>最后, 您可以调用下一个. ifError (err) 与错误对象, 导致 restify 抛出, 
+使进程下降。如果出现无法处理的错误, 要求您终止该过程, 则此操作可能非常有用。</P></body>
+</html>

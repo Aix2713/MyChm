@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>cmd</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>cmd</h4>
+    <pre class="brush: csharp;">
+	    1、 卸载服务
+		
+		    sc  delete  服务名
+			
+		2、 cmd登陆
+		
+			/// <summary>
+			/// cmd登陆
+			/// </summary>
+			/// <param name="p_Path">路径</param>
+			/// <param name="p_UserName">用户名</param>
+			/// <param name="p_PassWord">密码</param>
+			/// <returns></returns>
+			public string ConnectLan(string p_Path, string p_UserName, string p_PassWord)
+			{
+				System.Diagnostics.Process _Process = new System.Diagnostics.Process();
+				_Process.StartInfo.FileName = "cmd.exe";
+				_Process.StartInfo.UseShellExecute = false;
+				_Process.StartInfo.RedirectStandardInput = true;
+				_Process.StartInfo.RedirectStandardOutput = true;
+				_Process.StartInfo.CreateNoWindow = true;
+				_Process.Start();
+				_Process.StandardInput.WriteLine("net use " + p_Path + " " + p_PassWord + " /user:" + p_UserName);
+				_Process.StandardInput.WriteLine("exit");
+				_Process.WaitForExit();
+				string _ReturnText = _Process.StandardOutput.ReadToEnd();
+				_Process.Close();
+				return _ReturnText;
+			}
+    </pre>
+    <br />
+</body>
+</html>
+
+

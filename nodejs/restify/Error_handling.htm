@@ -1,0 +1,458 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Error handling</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>通常要以同样的方式处理错误条件。例如, 您可能希望在所有 InternalServerErrors 上提供500页。在这种情况下, 您可以为 
+InternalServer 错误事件添加一个侦听器, 当 restify 作为下一 (错误) 语句的一部分遇到此错误时, 
+它将始终激发。这为您提供了一种在服务器上完全相同的处理同一类的所有错误的方法。您还可以使用一般的 restifyError 事件来捕获所有类型的错误。</P>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>An 
+example of sending a 404:</P>
+<DIV class="language-js highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">get</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'/hello/:foo'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// resource not found error</SPAN>
+  <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">var</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">err</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">new</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">restify</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">errors</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">NotFoundError</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'oh noes!'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">err</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+
+<SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">on</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'NotFound'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN> <SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">err</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">cb</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// do not call res.send! you are now in an error context and are outside</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// of the normal next chain. you can log or do metrics here, and invoke</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// the callback when you're done. restify will automtically render the</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// NotFoundError depending on the content-type header you have set in your</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// response.</SPAN>
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">cb</SPAN><SPAN class=p style="BOX-SIZING: border-box">();</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+</CODE></PRE></DIV></DIV>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>For 
+customizing the error being sent back to the client:</P>
+<DIV class="language-js highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">get</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'/hello/:name'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// some internal unrecoverable error</SPAN>
+  <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">var</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">err</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">new</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">restify</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">errors</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">InternalServerError</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'oh noes!'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">err</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+
+<SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">on</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'InternalServer'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN> <SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">err</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">cb</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// by default, restify will usually render the Error object as plaintext or</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// JSON depending on content negotiation. the default text formatter and JSON</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// formatter are pretty simple, they just call toString() and toJSON() on the</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// object being passed to res.send, which in this case, is the error object.</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// so to customize what it sent back to the client when this error occurs,</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// you would implement as follows:</SPAN>
+
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// for any response that is text/plain</SPAN>
+  <SPAN class=nx style="BOX-SIZING: border-box">err</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">toString</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">toString</SPAN><SPAN class=p style="BOX-SIZING: border-box">()</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+    <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'an internal server error occurred!'</SPAN><SPAN class=p style="BOX-SIZING: border-box">;</SPAN>
+  <SPAN class=p style="BOX-SIZING: border-box">};</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// for any response that is application/json</SPAN>
+  <SPAN class=nx style="BOX-SIZING: border-box">err</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">toJSON</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">toJSON</SPAN><SPAN class=p style="BOX-SIZING: border-box">()</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+    <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+      <SPAN class=na style="BOX-SIZING: border-box; COLOR: teal">message</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'an internal server error occurred!'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN>
+      <SPAN class=na style="BOX-SIZING: border-box; COLOR: teal">code</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'boom!'</SPAN>
+    <SPAN class=p style="BOX-SIZING: border-box">}</SPAN>
+  <SPAN class=p style="BOX-SIZING: border-box">};</SPAN>
+
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">cb</SPAN><SPAN class=p style="BOX-SIZING: border-box">();</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+
+<SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">on</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'restifyError'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN> <SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">err</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">cb</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// this listener will fire after both events above!</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// `err` here is the same as the error that was passed to the above</SPAN>
+  <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// error handlers.</SPAN>
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">cb</SPAN><SPAN class=p style="BOX-SIZING: border-box">();</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+</CODE></PRE></DIV></DIV>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>Here 
+is another example of<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>InternalServerError</CODE>, 
+but this time with a custom formatter:</P>
+<DIV class="language-js highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">const</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">require</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'restify-errors'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+
+<SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">const</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">server</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">restify</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">createServer</SPAN><SPAN class=p style="BOX-SIZING: border-box">({</SPAN>
+  <SPAN class=na style="BOX-SIZING: border-box; COLOR: teal">formatters</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+    <SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'text/html'</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">body</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+      <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">if</SPAN> <SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">body</SPAN> <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">instanceof</SPAN> <SPAN class=nb style="BOX-SIZING: border-box; COLOR: rgb(0,134,179)">Error</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+        <SPAN class=c1 style="BOX-SIZING: border-box; COLOR: rgb(153,153,136); FONT-STYLE: italic">// body here is an instance of InternalServerError</SPAN>
+        <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'&lt;html&gt;&lt;body&gt;'</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">+</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">body</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">message</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">+</SPAN> <SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'&lt;/body&gt;&lt;/html&gt;'</SPAN><SPAN class=p style="BOX-SIZING: border-box">;</SPAN>
+      <SPAN class=p style="BOX-SIZING: border-box">}</SPAN>
+    <SPAN class=p style="BOX-SIZING: border-box">}</SPAN>
+  <SPAN class=p style="BOX-SIZING: border-box">}</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+
+<SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">get</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'/'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">header</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'content-type'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'text/html'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">new</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">InternalServerError</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'oh noes!'</SPAN><SPAN class=p style="BOX-SIZING: border-box">));</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN></CODE></PRE></DIV></DIV>
+<H3 id=restify-errors 
+style='BOX-SIZING: border-box; MARGIN-BOTTOM: 12px; FONT-SIZE: 34px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN-TOP: 25px; LETTER-SPACING: 0px; LINE-HEIGHT: 1.1; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>restify-errors</H3>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>A 
+module called restify-errors exposes a suite of error constructors for many 
+common http and REST related errors. These constructors can be used in 
+conjunction with the<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>next(err)</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>pattern to easily leverage the server’s 
+event emitter. The full list of constructors can be viewed over at the<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; COLOR: rgb(33,150,243); BACKGROUND-COLOR: transparent; transition: all 0.2s" 
+href="https://github.com/restify/errors">restify-errors</A><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>repository. Here are some examples:</P>
+<DIV class="language-js highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">var</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">require</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'restify-errors'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+
+<SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">get</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'/'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">new</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">ConflictError</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"I just don't like you"</SPAN><SPAN class=p style="BOX-SIZING: border-box">));</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+</CODE></PRE></DIV></DIV>
+<DIV class="language-sh highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=nv style="BOX-SIZING: border-box; COLOR: teal">$ </SPAN>curl <SPAN class=nt style="BOX-SIZING: border-box; COLOR: navy">-is</SPAN> localhost:3000
+HTTP/1.1 409 Conflict
+Content-Type: application/json
+Content-Length: 53
+Date: Fri, 03 Jun 2016 20:29:45 GMT
+Connection: keep-alive
+
+<SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">{</SPAN><SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"code"</SPAN>:<SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"Conflict"</SPAN>,<SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"message"</SPAN>:<SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"I just don't like you"</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">}</SPAN>
+</CODE></PRE></DIV></DIV>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>When 
+using restify-errors, you can also directly call<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>res.send(err)</CODE>, 
+and restify will automatically serialize your error for you:</P>
+<DIV class="language-js highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">var</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">require</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'restify-errors'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+
+<SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">get</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'/'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">send</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">new</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">GoneError</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'gone girl'</SPAN><SPAN class=p style="BOX-SIZING: border-box">));</SPAN>
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">();</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+</CODE></PRE></DIV></DIV>
+<DIV class="language-sh highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=nv style="BOX-SIZING: border-box; COLOR: teal">$ </SPAN>curl <SPAN class=nt style="BOX-SIZING: border-box; COLOR: navy">-is</SPAN> localhost:8080/
+HTTP/1.1 410 Gone
+Content-Type: application/json
+Content-Length: 37
+Date: Fri, 03 Jun 2016 20:17:48 GMT
+Connection: keep-alive
+
+<SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">{</SPAN><SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"code"</SPAN>:<SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"Gone"</SPAN>,<SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"message"</SPAN>:<SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"gone girl"</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">}</SPAN>
+</CODE></PRE></DIV></DIV>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>This 
+automatic serialization happens because the JSON formatter will call<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>JSON.stringify()</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>on the Error object, and all 
+restify-errors have a<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>toJSON</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>method defined. Compare this to a 
+standard Error object which does not have<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>toJSON</CODE>defined:</P>
+<DIV class="language-js highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">get</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'/sendErr'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">send</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">new</SPAN> <SPAN class=nb style="BOX-SIZING: border-box; COLOR: rgb(0,134,179)">Error</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'where is my msg?'</SPAN><SPAN class=p style="BOX-SIZING: border-box">));</SPAN>
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">();</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+
+<SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">get</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'/nextErr'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">new</SPAN> <SPAN class=nb style="BOX-SIZING: border-box; COLOR: rgb(0,134,179)">Error</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'where is my msg?'</SPAN><SPAN class=p style="BOX-SIZING: border-box">));</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+</CODE></PRE></DIV></DIV>
+<DIV class="language-sh highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=nv style="BOX-SIZING: border-box; COLOR: teal">$ </SPAN>curl <SPAN class=nt style="BOX-SIZING: border-box; COLOR: navy">-is</SPAN> localhost:8080/sendErr
+HTTP/1.1 410 Gone
+Content-Type: application/json
+Content-Length: 37
+Date: Fri, 03 Jun 2016 20:17:48 GMT
+Connection: keep-alive
+
+<SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">{}</SPAN>
+
+<SPAN class=nv style="BOX-SIZING: border-box; COLOR: teal">$ </SPAN>curl <SPAN class=nt style="BOX-SIZING: border-box; COLOR: navy">-is</SPAN> localhost:8080/nextErr
+HTTP/1.1 410 Gone
+Content-Type: application/json
+Content-Length: 37
+Date: Fri, 03 Jun 2016 20:17:48 GMT
+Connection: keep-alive
+
+<SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">{}</SPAN>
+</CODE></PRE></DIV></DIV>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>If 
+you want to use custom errors, make sure you have<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>toJSON</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>defined, or use restify-error’s<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>makeConstructor()</CODE>method 
+to automatically create Errors that are supported with with<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>toJSON</CODE>.</P>
+<H4 id=httperror 
+style='BOX-SIZING: border-box; MARGIN-BOTTOM: 12px; FONT-SIZE: 24px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN-TOP: 12px; LETTER-SPACING: 0px; LINE-HEIGHT: 1.1; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>HttpError</H4>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>restify-errors 
+provides constructors that inherit from either HttpError or RestError. All 
+HttpErrors have a numeric http<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>statusCode</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>and<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>body</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>properties. The statusCode will 
+automatically set the HTTP response status code, and the body attribute by 
+default will be the message.</P>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>All 
+status codes between 400 and 5xx are automatically converted into an HttpError 
+with the name being ‘PascalCase’ and spaces removed. For the complete list, take 
+a look at the<SPAN class=Apple-converted-space>&nbsp;</SPAN><A 
+style="BOX-SIZING: border-box; TEXT-DECORATION: none; COLOR: rgb(33,150,243); BACKGROUND-COLOR: transparent; transition: all 0.2s" 
+href="https://github.com/nodejs/node/blob/master/lib/_http_server.js#L17">node 
+source</A>.</P>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>From 
+that code above<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>418: 
+I'm a teapot</CODE><SPAN class=Apple-converted-space>&nbsp;</SPAN>would be<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>ImATeapotError</CODE>, 
+as an example.</P>
+<H4 id=resterror 
+style='BOX-SIZING: border-box; MARGIN-BOTTOM: 12px; FONT-SIZE: 24px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN-TOP: 12px; LETTER-SPACING: 0px; LINE-HEIGHT: 1.1; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>RestError</H4>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>A 
+common problem with REST APIs and HTTP is that they often end up needing to 
+overload 400 and 409 to mean a bunch of different things. There’s no real 
+standard on what to do in these cases, but in general you want machines to be 
+able to (safely) parse these things out, and so restify defines a convention of 
+a<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>RestError</CODE>. 
+A<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>RestError</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>is a subclass of one of the 
+particular<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>HttpError</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>types, and additionally sets the body 
+attribute to be a JS object with the attributes<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>code</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>and<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>message</CODE>. 
+For example, here’s a built-in RestError:</P>
+<DIV class="language-js highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">var</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">require</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'restify-errors'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+<SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">var</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">server</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">restify</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">createServer</SPAN><SPAN class=p style="BOX-SIZING: border-box">();</SPAN>
+
+<SPAN class=nx style="BOX-SIZING: border-box">server</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">get</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'/hello/:name'</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">function</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=nx style="BOX-SIZING: border-box">req</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">res</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">)</SPAN> <SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">return</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">next</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">new</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">InvalidArgumentError</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"I just don't like you"</SPAN><SPAN class=p style="BOX-SIZING: border-box">));</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">});</SPAN>
+
+<SPAN class=nx style="BOX-SIZING: border-box">$</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">curl</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">is</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">localhost</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN><SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">8080</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">/</SPAN><SPAN class=nx style="BOX-SIZING: border-box">hello</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">/</SPAN><SPAN class=nx style="BOX-SIZING: border-box">mark</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">|</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">json</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">HTTP</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">/</SPAN><SPAN class=mf style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">1.1</SPAN> <SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">409</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Conflict</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Content</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Type</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">application</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">/</SPAN><SPAN class=nx style="BOX-SIZING: border-box">json</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Access</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Control</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Allow</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Origin</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">*</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Access</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Control</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Allow</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Methods</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">GET</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Access</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Control</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Allow</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Headers</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Accept</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Accept</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Version</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Content</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Length</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Content</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">MD5</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Content</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Type</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nb style="BOX-SIZING: border-box; COLOR: rgb(0,134,179)">Date</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Api</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Version</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Access</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Control</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Expose</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Headers</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Api</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Version</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Request</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Id</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Response</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Time</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Connection</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">close</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Content</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Length</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">60</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Content</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">MD5</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">MpEcO5EQFUZ2MNeUB2VaZg</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">==</SPAN>
+<SPAN class=nb style="BOX-SIZING: border-box; COLOR: rgb(0,134,179)">Date</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Tue</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN> <SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">03</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">Jan</SPAN> <SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">2012</SPAN> <SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">00</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN><SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">50</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN><SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">21</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">GMT</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Server</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">restify</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Request</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Id</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">bda456dd</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">2</SPAN><SPAN class=nx style="BOX-SIZING: border-box">fe4</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">478</SPAN><SPAN class=nx style="BOX-SIZING: border-box">d</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">809</SPAN><SPAN class=nx style="BOX-SIZING: border-box">c</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">7</SPAN><SPAN class=nx style="BOX-SIZING: border-box">d159d58d579</SPAN>
+<SPAN class=nx style="BOX-SIZING: border-box">Response</SPAN><SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">-</SPAN><SPAN class=nx style="BOX-SIZING: border-box">Time</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=mi style="BOX-SIZING: border-box; COLOR: rgb(0,153,153)">3</SPAN>
+
+<SPAN class=p style="BOX-SIZING: border-box">{</SPAN>
+  <SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"code"</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"InvalidArgument"</SPAN><SPAN class=p style="BOX-SIZING: border-box">,</SPAN>
+  <SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"message"</SPAN><SPAN class=p style="BOX-SIZING: border-box">:</SPAN> <SPAN class=s2 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">"I just don't like you"</SPAN>
+<SPAN class=p style="BOX-SIZING: border-box">}</SPAN>
+</CODE></PRE></DIV></DIV>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>The 
+built-in HttpErrors are:</P>
+<UL 
+style='BOX-SIZING: border-box; MARGIN-BOTTOM: 12px; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN-TOP: 0px; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+  <LI style="BOX-SIZING: border-box">BadRequestError (400 Bad Request)</LI>
+  <LI style="BOX-SIZING: border-box">UnauthorizedError (401 Unauthorized)</LI>
+  <LI style="BOX-SIZING: border-box">PaymentRequiredError (402 Payment 
+  Required)</LI>
+  <LI style="BOX-SIZING: border-box">ForbiddenError (403 Forbidden)</LI>
+  <LI style="BOX-SIZING: border-box">NotFoundError (404 Not Found)</LI>
+  <LI style="BOX-SIZING: border-box">MethodNotAllowedError (405 Method Not 
+  Allowed)</LI>
+  <LI style="BOX-SIZING: border-box">NotAcceptableError (406 Not 
+Acceptable)</LI>
+  <LI style="BOX-SIZING: border-box">ProxyAuthenticationRequiredError (407 Proxy 
+  Authentication Required)</LI>
+  <LI style="BOX-SIZING: border-box">RequestTimeoutError (408 Request 
+  Time-out)</LI>
+  <LI style="BOX-SIZING: border-box">ConflictError (409 Conflict)</LI>
+  <LI style="BOX-SIZING: border-box">GoneError (410 Gone)</LI>
+  <LI style="BOX-SIZING: border-box">LengthRequiredError (411 Length 
+  Required)</LI>
+  <LI style="BOX-SIZING: border-box">PreconditionFailedError (412 Precondition 
+  Failed)</LI>
+  <LI style="BOX-SIZING: border-box">RequestEntityTooLargeError (413 Request 
+  Entity Too Large)</LI>
+  <LI style="BOX-SIZING: border-box">RequesturiTooLargeError (414 Request-URI 
+  Too Large)</LI>
+  <LI style="BOX-SIZING: border-box">UnsupportedMediaTypeError (415 Unsupported 
+  Media Type)</LI>
+  <LI style="BOX-SIZING: border-box">RequestedRangeNotSatisfiableError (416 
+  Requested Range Not Satisfiable)</LI>
+  <LI style="BOX-SIZING: border-box">ExpectationFailedError (417 Expectation 
+  Failed)</LI>
+  <LI style="BOX-SIZING: border-box">ImATeapotError (418 I’m a teapot)</LI>
+  <LI style="BOX-SIZING: border-box">UnprocessableEntityError (422 Unprocessable 
+  Entity)</LI>
+  <LI style="BOX-SIZING: border-box">LockedError (423 Locked)</LI>
+  <LI style="BOX-SIZING: border-box">FailedDependencyError (424 Failed 
+  Dependency)</LI>
+  <LI style="BOX-SIZING: border-box">UnorderedCollectionError (425 Unordered 
+  Collection)</LI>
+  <LI style="BOX-SIZING: border-box">UpgradeRequiredError (426 Upgrade 
+  Required)</LI>
+  <LI style="BOX-SIZING: border-box">PreconditionRequiredError (428 Precondition 
+  Required)</LI>
+  <LI style="BOX-SIZING: border-box">TooManyRequestsError (429 Too Many 
+  Requests)</LI>
+  <LI style="BOX-SIZING: border-box">RequestHeaderFieldsTooLargeError (431 
+  Request Header Fields Too Large)</LI>
+  <LI style="BOX-SIZING: border-box">InternalServerError (500 Internal Server 
+  Error)</LI>
+  <LI style="BOX-SIZING: border-box">NotImplementedError (501 Not 
+  Implemented)</LI>
+  <LI style="BOX-SIZING: border-box">BadGatewayError (502 Bad Gateway)</LI>
+  <LI style="BOX-SIZING: border-box">ServiceUnavailableError (503 Service 
+  Unavailable)</LI>
+  <LI style="BOX-SIZING: border-box">GatewayTimeoutError (504 Gateway 
+  Time-out)</LI>
+  <LI style="BOX-SIZING: border-box">HttpVersionNotSupportedError (505 HTTP 
+  Version Not Supported)</LI>
+  <LI style="BOX-SIZING: border-box">VariantAlsoNegotiatesError (506 Variant 
+  Also Negotiates)</LI>
+  <LI style="BOX-SIZING: border-box">InsufficientStorageError (507 Insufficient 
+  Storage)</LI>
+  <LI style="BOX-SIZING: border-box">BandwidthLimitExceededError (509 Bandwidth 
+  Limit Exceeded)</LI>
+  <LI style="BOX-SIZING: border-box">NotExtendedError (510 Not Extended)</LI>
+  <LI style="BOX-SIZING: border-box">NetworkAuthenticationRequiredError (511 
+  Network Authentication Required)</LI>
+  <LI style="BOX-SIZING: border-box">BadDigestError (400 Bad Request)</LI>
+  <LI style="BOX-SIZING: border-box">BadMethodError (405 Method Not 
+Allowed)</LI>
+  <LI style="BOX-SIZING: border-box">InternalError (500 Internal Server 
+  Error)</LI>
+  <LI style="BOX-SIZING: border-box">InvalidArgumentError (409 Conflict)</LI>
+  <LI style="BOX-SIZING: border-box">InvalidContentError (400 Bad Request)</LI>
+  <LI style="BOX-SIZING: border-box">InvalidCredentialsError (401 
+  Unauthorized)</LI>
+  <LI style="BOX-SIZING: border-box">InvalidHeaderError (400 Bad Request)</LI>
+  <LI style="BOX-SIZING: border-box">InvalidVersionError (400 Bad Request)</LI>
+  <LI style="BOX-SIZING: border-box">MissingParameterError (409 Conflict)</LI>
+  <LI style="BOX-SIZING: border-box">NotAuthorizedError (403 Forbidden)</LI>
+  <LI style="BOX-SIZING: border-box">RequestExpiredError (400 Bad Request)</LI>
+  <LI style="BOX-SIZING: border-box">RequestThrottledError (429 Too Many 
+  Requests)</LI>
+  <LI style="BOX-SIZING: border-box">ResourceNotFoundError (404 Not Found)</LI>
+  <LI style="BOX-SIZING: border-box">WrongAcceptError (406 Not 
+Acceptable)</LI></UL>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>And 
+the built in RestErrors are:</P>
+<UL 
+style='BOX-SIZING: border-box; MARGIN-BOTTOM: 12px; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN-TOP: 0px; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+  <LI style="BOX-SIZING: border-box">400 BadDigestError</LI>
+  <LI style="BOX-SIZING: border-box">405 BadMethodError</LI>
+  <LI style="BOX-SIZING: border-box">500 InternalError</LI>
+  <LI style="BOX-SIZING: border-box">409 InvalidArgumentError</LI>
+  <LI style="BOX-SIZING: border-box">400 InvalidContentError</LI>
+  <LI style="BOX-SIZING: border-box">401 InvalidCredentialsError</LI>
+  <LI style="BOX-SIZING: border-box">400 InvalidHeaderError</LI>
+  <LI style="BOX-SIZING: border-box">400 InvalidVersionError</LI>
+  <LI style="BOX-SIZING: border-box">409 MissingParameterError</LI>
+  <LI style="BOX-SIZING: border-box">403 NotAuthorizedError</LI>
+  <LI style="BOX-SIZING: border-box">412 PreconditionFailedError</LI>
+  <LI style="BOX-SIZING: border-box">400 RequestExpiredError</LI>
+  <LI style="BOX-SIZING: border-box">429 RequestThrottledError</LI>
+  <LI style="BOX-SIZING: border-box">404 ResourceNotFoundError</LI>
+  <LI style="BOX-SIZING: border-box">406 WrongAcceptError</LI></UL>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>You 
+can also create your own subclasses using the<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>makeConstructor</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>method:</P>
+<DIV class="language-js highlighter-rouge" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>
+<DIV class=highlight 
+style="BOX-SIZING: border-box; BACKGROUND: rgb(255,255,255)"><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; DISPLAY: block; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'><SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">var</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">require</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'restify-errors'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+<SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">var</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">restify</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">require</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'restify'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+
+<SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">makeConstructor</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'ZombieApocalypseError'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+
+<SPAN class=kd style="BOX-SIZING: border-box; FONT-WEIGHT: bold">var</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">myErr</SPAN> <SPAN class=o style="BOX-SIZING: border-box; FONT-WEIGHT: bold">=</SPAN> <SPAN class=k style="BOX-SIZING: border-box; FONT-WEIGHT: bold">new</SPAN> <SPAN class=nx style="BOX-SIZING: border-box">errs</SPAN><SPAN class=p style="BOX-SIZING: border-box">.</SPAN><SPAN class=nx style="BOX-SIZING: border-box">ZombieApocalypseError</SPAN><SPAN class=p style="BOX-SIZING: border-box">(</SPAN><SPAN class=s1 style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)">'zomg!'</SPAN><SPAN class=p style="BOX-SIZING: border-box">);</SPAN>
+</CODE></PRE></DIV></DIV>
+<P 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; MARGIN: 0px 0px 1em; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>The 
+constructor takes<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE 
+class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>message</CODE>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>statusCode</CODE>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>restCode</CODE>, 
+and<SPAN class=Apple-converted-space>&nbsp;</SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); border-radius: 3px'>context</CODE><SPAN 
+class=Apple-converted-space>&nbsp;</SPAN>options. Please check out the 
+restify-errors repo for more information.</P>   
+        
+   
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>读写xml</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>读写xml</h4>
+    <pre class="brush: csharp;">
+	    1、 读取数据
+		
+			string xmlPath = Server.MapPath(strPath + "/About.xml");
+			XmlDocument doc = new XmlDocument();
+			if (File.Exists(xmlPath))
+			{
+				doc.Load(xmlPath);
+				XmlElement rootElem = doc.DocumentElement;   //获取根节点  
+				XmlNodeList personNodes = rootElem.GetElementsByTagName("Item"); //获取person子节点集合  
+				foreach (XmlNode node in personNodes)
+				{
+					ImageList imgList = new ImageList();
+					int i = int.Parse(((XmlElement)node).GetAttribute("id"));
+					imgList.id = Path.GetFileNameWithoutExtension(fileInfo[i].ToString());
+					imgList.source = string.Format("http://{0}/{1}/", Ip, strPath) + fileInfo[i].ToString();
+					imgList.price = node.ChildNodes[0].InnerText;
+					imgList.memo = node.ChildNodes[1].InnerText;
+					path.Add(imgList);
+				}
+			}
+			
+	    2、 添加数据
+		
+			string xmlPath = "";
+			XmlDocument xmlDoc = new XmlDocument();
+			if (File.Exists(xmlPath))
+			{
+				xmlDoc.Load(xmlPath);
+				XmlNodeList nodeList = xmlDoc.SelectNodes("//Bill");
+				XmlNode root = xmlDoc.SelectSingleNode("BillInfo");
+				XmlElement node = xmlDoc.CreateElement("Bill");
+				node.SetAttribute("id", "");
+				root.AppendChild(node);
+				XmlElement nodec1 = xmlDoc.CreateElement("BillCode");
+				nodec1.InnerText = "";
+				node.AppendChild(nodec1);
+				XmlElement nodec2 = xmlDoc.CreateElement("Read");
+				nodec2.InnerText = "0";
+				node.AppendChild(nodec2);
+				xmlDoc.Save(xmlPath);
+			}
+			
+		3、 删除节点
+		
+			XmlDocument xmlDoc = new XmlDocument();
+			xmlDoc.Load(xmlPath);
+			XmlNode root = xmlDoc.SelectSingleNode("BillInfo");
+			XmlNodeList nodeList = root.ChildNodes;
+			if (nodeList.Count > 0)
+			{
+				foreach (XmlNode node in nodeList)
+				{
+					if (node["BillCode"].InnerText.Equals(code))
+					{
+						root.RemoveChild(node);
+						break;
+					}
+				}
+				xmlDoc.Save(xmlPath);
+			}
+			
+		4、 修改
+		
+			XmlDocument xmlDoc = new XmlDocument();
+			xmlDoc.Load(xmlPath);
+			XmlNodeList nodeList = xmlDoc.SelectNodes("//Bill");
+			if (nodeList.Count > 0)
+			{
+				foreach (XmlNode node in nodeList)
+				{
+					node["Read"].InnerText = "0";
+				}
+				xmlDoc.Save(xmlPath);
+			}
+		
+		5、 修改单个节点
+		
+			XmlDataDocument doc = new XmlDataDocument();
+			//获取App.config
+			doc.Load("ImportData.exe.config");
+			//找到xml单个节点
+			XmlNode xNode = doc.SelectSingleNode("//appSettings");
+			//找到单个Add节点
+			XmlElement xElt1 = (XmlElement)xNode.SelectSingleNode("//add[@key='time1']");
+			xElt1.SetAttribute("value", time1);
+			XmlElement xElt2 = (XmlElement)xNode.SelectSingleNode("//add[@key='time2']");
+			xElt2.SetAttribute("value", time2);
+			//更新App.config
+			doc.Save("ImportData.exe.config");
+    </pre>
+    <br />
+</body>
+</html>
+
+

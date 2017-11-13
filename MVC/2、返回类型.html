@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>MVC返回值类型</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>Action</h4>
+    <pre class="brush: csharp;"> 
+		1、	必须是一个public方法
+		
+		2、	必须是实例方法
+		
+		3、	没有标志NonActionAttribute特性的(NoAction)
+		
+		4、	不能被重载
+		
+		5、	必须返回ActionResult类型
+    </pre>
+	<br/>
+	<h4>MVC返回值类型</h4>
+    <pre class="brush: csharp;">
+	    1、 返回ViewResult视图
+		
+			public ActionResult About()  
+			{  
+			    return View();
+			}  
+			
+			注：控制器可以返回本视图，也可以返回其他视图
+			
+		2、 返回PartialViewResult部分视图
+		
+			public ActionResult UserControl()  
+			{  
+				ViewBag.Message = "部分视图";  
+				return PartialView("ViewUserControl");  
+			}  
+											
+		3、 返回Null或者Void数据类型的EmptyResult 
+
+			public ActionResult Empty()  
+			{  
+			    return null; // new EmptyResult(); 
+			}  
+			
+		4、 返回ContentResult用户定义的内容类型 
+		
+			public ActionResult Content()  
+			{  
+			    return Content("Test Content", "text/html"); // 可以指定文本类型  
+			}  
+
+		5、	返回JsonResult序列化的Json对象
+		
+			public ActionResult Json()  
+			{  
+				Dictionary<string, object> dic = new Dictionary<string, object>();  
+				dic.Add("id", 100);  
+				dic.Add("name", "hello");  
+				return Json(dic, JsonRequestBehavior.AllowGet);  
+			}  
+			
+		6、 返回JavaScriptResult
+
+			public ActionResult JavaScript()  
+			{  
+				string str = string.Format("alter('{0}');", "弹出窗口");  
+				return JavaScript(str);  
+			}  		
+			
+		7、 返回文件流
+		
+		    1)FileResult
+			public ActionResult WriteFile()  
+			{  
+				string fileName = "~/Content/test.zip"; 
+				string downFileName = "文件显示名称.zip"; 
+				return File(fileName, "application/octet-stream", downFileName);  
+			}  
+			
+			2)FilePathResult文件路径
+			protected override void WriteFile(HttpResponseBase response) 
+			{
+                response.TransmitFile(FileName);
+            }
+			
+			3)FileContentResult字节数组	
+			public ActionResult WriteFile()
+			{
+			    return File( System.Text.Encoding.UTF8.GetBytes( "你好吗" ), "unknown", "t.txt" );
+			}
+			
+			4)FileStreamResult文件流
+			
+		8、 重定向方法
+		
+		    1)Redirect直接转到指定的url地址 		
+			public ActionResult Redirect()  
+			{
+			    return Redirect("http://www.baidu.com");  
+			}   
+	   
+		    2)RedirectToAction
+			public ActionResult RedirectResult()  
+			{  
+			    return RedirectToAction("Index", "Home", new { id = "100", name = "liu" });  
+			}  
+
+		    3)RedirectToRoute指定路由
+			public ActionResult RedirectRouteResult()  
+			{  
+				return RedirectToRoute("Default", new { controller = "Home", action = "Index"});  
+			}  
+			
+		9、 设置客户端错误代号HttpUnauthorizedResult
+		
+			public ActionResult HttpUnauthorizedResult()   
+		　　{    		　　    
+		　　    return new HttpUnauthorizedResult();  //未验证时,跳转到Logon  
+		　　}  
+		
+		10、HttpNotFoundResult
+		
+		　  public ActionResult HttpNotFoundResult()  
+		　　{  
+		　　    return HttpNotFound("Page Not Found");  
+		　　}  
+    </pre>
+	<br/>
+</body>
+</html>
+
+

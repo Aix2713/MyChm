@@ -1,0 +1,72 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>路由</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>路由</P>
+<P><SPAN 
+style='FONT-SIZE: 13px; FONT-FAMILY: "Segoe UI", Tahoma, Helvetica, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(85,85,85); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>restify 
+路由, 在 ' 基本 ' 模式, 是几乎完全相同的表达/., 因为 HTTP 谓词与参数化的资源一起使用, 
+以确定要运行的处理程序链。与命名占位符关联的值在必需. 参数中可用。在传递给您之前, 这些值将被 URL 解码。</SPAN></P>
+<P>function send(req, res, next) {<BR>&nbsp; 
+res.send('hello ' + req.params.name);<BR>&nbsp; return next();<BR>}</P>
+<P>server.post('/hello', function create(req, res, next) 
+{<BR>&nbsp; res.send(201, Math.random().toString(36).substr(3, 8));<BR>&nbsp; 
+return next();<BR>});<BR>server.put('/hello', 
+send);<BR>server.get('/hello/:name', send);<BR>server.head('/hello/:name', 
+send);<BR>server.del('hello/:name', function rm(req, res, next) {<BR>&nbsp; 
+res.send(204);<BR>&nbsp; return next();<BR>});</P>
+<P>您还可以传入 RegExp 对象, 并使用必需的参数 (不会以任何方式解释) 访问捕获组</P>
+<P>server.get(/^\/([a-zA-Z0-9_\.~-]+)\/(.*)/, function(req, 
+res, next) {<BR>&nbsp; console.log(req.params[0]);<BR>&nbsp; 
+console.log(req.params[1]);<BR>&nbsp; res.send(200);<BR>&nbsp; return 
+next();<BR>});</P><PRE class=highlight style='BOX-SIZING: border-box; OVERFLOW: auto; WORD-WRAP: break-word; FONT-SIZE: 13px; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BACKGROUND: rgb(255,255,255); WORD-SPACING: 0px; BORDER-BOTTOM: rgb(204,204,204) 1px solid; TEXT-TRANSFORM: none; WORD-BREAK: break-all; FONT-WEIGHT: normal; COLOR: rgb(33,33,33); PADDING-BOTTOM: 12px; FONT-STYLE: normal; PADDING-TOP: 12px; PADDING-LEFT: 12px; MARGIN: 0px 0px 12px; BORDER-LEFT: rgb(204,204,204) 1px solid; ORPHANS: 2; WIDOWS: 2; DISPLAY: block; LETTER-SPACING: 0px; LINE-HEIGHT: 1.846; PADDING-RIGHT: 12px; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; border-radius: 3px'><CODE style='BOX-SIZING: border-box; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: pre-wrap; COLOR: ; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: transparent; border-radius: 0px'>localhost:8080/foo/my/cats/name/is/gandalf</CODE></PRE>
+<P><SPAN 
+style='FONT-SIZE: 13px; FONT-FAMILY: "Segoe UI", Tahoma, Helvetica, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(85,85,85); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>路由可以由以下任何 
+http 谓词指定<SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>-<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 4px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; border-radius: 3px'>del</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 4px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; border-radius: 3px'>get</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 4px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; border-radius: 3px'>head</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 4px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; border-radius: 3px'>opts</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 4px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; border-radius: 3px'>post</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>,<SPAN 
+class=Apple-converted-space>&nbsp;</SPAN></SPAN><CODE class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 4px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; border-radius: 3px'>put</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>, 
+and<SPAN class=Apple-converted-space>&nbsp;</SPAN></SPAN><CODE 
+class=highlighter-rouge 
+style='BOX-SIZING: border-box; FONT-SIZE: 12px; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(199,37,78); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 4px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; PADDING-RIGHT: 4px; BACKGROUND-COLOR: rgb(249,242,244); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; border-radius: 3px'>patch</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>.</SPAN></SPAN></P>
+<P><SPAN 
+style='FONT-SIZE: 13px; FONT-FAMILY: "Segoe UI", Tahoma, Helvetica, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(85,85,85); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px'>server.get(<BR>&nbsp;&nbsp;&nbsp; 
+'/foo/:id',<BR>&nbsp;&nbsp;&nbsp; function(req, res, next) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+console.log('Authenticate');<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+return next();<BR>&nbsp;&nbsp;&nbsp; },<BR>&nbsp;&nbsp;&nbsp; function(req, res, 
+next) {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+res.send(200);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 
+next();<BR>&nbsp;&nbsp;&nbsp; }<BR>);<BR></SPAN></SPAN></P></body>
+</html>

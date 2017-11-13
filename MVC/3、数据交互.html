@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>数据交互</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h4>Controller向View传递数据</h4>
+    <pre class="brush: csharp;">
+		1、 TempData
+		
+		    TempData["Message_TempData"] = "Hello word!"; 
+
+			@Html.Encode(TempData["Message_TempData"])  
+
+			<script type="text/javascript">  
+				var tempData = '@TempData["Message_TempData"]';  
+			</script>  	
+			
+			注：默认情况下TempData中的数据只能使用一次
+	
+        2、 ViewData：字典类型(Dictionary、object:需要手动强制转换)
+		
+		    ViewData["Message_ViewData"] = "Hello ViewData!";  
+			
+			@Html.Encode(ViewData["Message_ViewData"]) 
+			
+			<script type="text/javascript">  
+				var viewData = '@ViewData["Message_ViewData"]';  
+			</script>  		
+						
+		3、 ViewBag: 动态类型(dynamic:它会自动根据数据类型转换)
+		
+		    ViewBag.Message_ViewBag = "Hello ViewBag!";  
+			
+			@Html.Encode(ViewBag.Message_ViewBag)  
+
+			<script type="text/javascript">  
+				var viewBag= '@ViewBag.Message_ViewBag';  
+			</script>  
+		
+		4、 ViewModel
+		
+		    1)单一Model
+			
+			引用：@model Test.Model  
+			
+			@Html.Encode(Model.Name)  
+			
+			<script type="text/javascript">  
+				var modelName = '@Model.Name';  
+			</script>  
+			
+		    2)多个Model(MVC4:System.Tuple)
+		
+			public ActionResult Index()  
+			{  
+			    // 返回一个Tuple对象，Item1代表Product、Item2代表Person 
+				return View(Tuple.Create(myProduct,myPerson));   
+			}  
+			
+			引用：@model Tuple<Razor.Models.Product, Razor.Models.Person> 
+			
+			@Model.Item1.Name  
+		
+		5、 匿名类型
+		
+			public ActionResult Index()
+			{
+				string json = JsonConvert.SerializeObject(new { UserName = "测试", Age = 24 });
+				dynamic jsonObj = JsonConvert.DeserializeObject(json);
+				return View(jsonObj);
+			}
+			
+			<p>用户名：@Model.UserName</p>
+		
+		6、 ExpandoObject
+		
+			public ActionResult Index()
+			{
+				dynamic user = new ExpandoObject();
+				user.UserName = "测试";
+				user.Age = 24;
+				return View(user);
+			}
+		
+		7、 Json
+		
+			$(function () {
+				$('#btn').click(function () {
+					$.ajax({
+						'url': '/home/index', 
+						'type': 'post',
+						success: function (data) {
+							$('#message').html('用户名：' + data.UserName + "<br/>年龄：" + data.Age);
+						},
+						error: function (message) {
+							alert('error:' + message.statusText);
+						}
+					});
+				});
+			});
+				
+			public JsonResult Index()
+			{
+				return Json(new { UserName = "测试", Age = 24 });
+			}
+			
+	    8、 Cookie
+		
+			public ActionResult Index()
+			{
+				Response.SetCookie(new HttpCookie("key", "cookie"));
+				return View();
+			}
+			
+			$(function () {
+				var message = $.cookie('key');
+				$('#message').text(message);
+			})
+    </pre>
+	<br/>
+	<h4>View向Controller传递数据</h4>
+    <pre class="brush: csharp;">
+	    1、 QueryString
+		
+			public ActionResult Test()  
+			{  
+			   string name = Request["Name"];
+			   return View();  
+			}  
+			
+		2、 RouteData(配置路由)
+		
+			public void Test()
+			{
+				var value = RouteData.Values["id"];
+			}
+			
+			public void Test(int id)
+			{
+			}
+		
+		3、 使用和Action参数同名的变量进行传递
+		
+		    $.ajax({
+                'type': 'post', 'url': '/home/test',  
+                'data': { username: '测试', age: '24' },
+                error: function (message) {
+                    alert('error!');
+                }
+            });
+			
+			public void Test(string username, int age)
+			{
+			}
+		
+        4、 ModelBinding
+			
+		    1)Request.Form
+		
+			public ActionResult Test()  
+			{  
+			   string name = Request.Form["Name"];
+			   return View();  
+			}   
+			
+		    2)FormCollection
+		
+		    public ActionResult Test(FormCollection fc)  
+			{  
+				string name = fc["Name"];   
+				return View();  
+			}  
+		
+		    3)模型绑定Model
+		
+			public ActionResult Test(Model model)  
+			{  
+			}
+			
+			public ActionResult Test(string name)  
+			{
+			}
+		
+		    4)显式模型绑定
+		
+			public ActionResult Test( )  
+			{  
+				Model model = new Model();                
+				if(this.TryUpdateModel(model))
+				{  
+				}  
+				//可以查看模型状态来判断绑定是否成功
+				if(ModelState.IsValid)
+				{
+				}
+			}   
+		
+		5、 Cookie
+		
+			$(function () {
+				$.cookie('key', 'jscookie');
+				$('#btn').click(function () {
+					location.href = "/home/test";
+				});
+			})
+			
+			public void Test()
+			{
+				var cookie = Request["key"];
+			}
+    </pre>
+	<br/>
+</body>
+</html>
+
+

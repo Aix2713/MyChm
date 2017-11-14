@@ -1,0 +1,172 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>显示数据</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H2 id=使用插值表达式显示组件属性 
+style='FONT-SIZE: 22px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 500; COLOR: ; FONT-STYLE: normal; CLEAR: both; MARGIN: 32px 0px 24px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">使用插值表达式显示组件属性</H2>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">要显示组件的属性，最简单的方式就是通过插值表达式 (interpolation) 来绑定属性名。 
+要使用插值表达式，就把属性名包裹在双花括号里放进视图模板，如<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>{{myHero}}</CODE>。</P>
+<H2 id=内联-inline-模板还是模板文件？ 
+style='FONT-SIZE: 22px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 500; COLOR: ; FONT-STYLE: normal; CLEAR: both; MARGIN: 32px 0px 24px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">内联 (inline) 模板还是模板文件？</H2>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">你可以在两种地方存放组件模板。 你可以使用<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>template</CODE>属性把它定义为<EM 
+style="LETTER-SPACING: 0px">内联</EM>的，或者把模板定义在一个独立的 HTML 文件中， 再通过<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>@<A 
+class=code-anchor 
+style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="https://angular.cn/api/core/Component">Component</A></CODE>装饰器中的<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>templateUrl</CODE>属性， 
+在组件元数据中把它链接到组件。</P>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">到底选择内联 HTML 还是独立 HTML 取决于个人喜好、具体状况和组织级策略。 上面的应用选择内联 HTML 
+，是因为模板很小，而且没有额外的 HTML 文件显得这个演示简单些。</P>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">无论用哪种风格，模板数据绑定在访问组件属性方面都是完全一样的。</P>
+<H2 id=使用构造函数还是变量初始化？ 
+style='FONT-SIZE: 22px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 500; COLOR: ; FONT-STYLE: normal; CLEAR: both; MARGIN: 32px 0px 24px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result=""><A aria-hidden=true title="Link to this heading" 
+class=header-link 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; VERTICAL-ALIGN: middle; FONT-WEIGHT: 400; COLOR: rgb(25,118,210); PADDING-LEFT: 8px; MARGIN-LEFT: -50px; DISPLAY: inline-block; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="https://angular.cn/guide/displaying-data#使用构造函数还是变量初始化？"><I 
+class=material-icons 
+style="WORD-WRAP: normal; FONT-SIZE: 24px; FONT-FAMILY: &quot;Material Icons&quot;; WHITE-SPACE: nowrap; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(110,110,110); DIRECTION: ltr; FONT-STYLE: normal; MARGIN: 0px 8px; DISPLAY: inline-block; LETTER-SPACING: normal; LINE-HEIGHT: 1; VISIBILITY: hidden; font-feature-settings: 'liga' 1; -webkit-font-smoothing: antialiased"></I></A>使用构造函数还是变量初始化？</H2>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">虽然这个例子使用了变量赋值的方式初始化组件，你还可以使用构造函数来声明和初始化属性。</P>
+<H2 id=使用ngfor显示数组属性 
+style='FONT-SIZE: 22px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 500; COLOR: ; FONT-STYLE: normal; CLEAR: both; MARGIN: 32px 0px 24px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">使用<STRONG 
+style="FONT-WEIGHT: 500"><EM>ngFor</EM></STRONG>显示数组属性</H2>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">要显示一个英雄列表，先向组件中添加一个英雄名字数组，然后把<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>myHero</CODE>重定义为数组中的第一个名字。</P>
+<P><SPAN class=kwd 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,255); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>template</SPAN><SPAN 
+class=pun 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>:</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+</SPAN><SPAN class=str 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(136,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>` 
+&lt;h1&gt;{{title}}&lt;/h1&gt; &lt;h2&gt;My favorite hero is: 
+{{myHero}}&lt;/h2&gt; &lt;p&gt;Heroes:&lt;/p&gt; &lt;ul&gt; &lt;li *ngFor="let 
+hero of heroes"&gt; {{ hero }} &lt;/li&gt; &lt;/ul&gt; `</SPAN></P>
+<P><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>这个界面使用了由</SPAN><CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 6px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal; border-radius: 4px'>&lt;ul&gt;</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>和</SPAN><CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 6px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal; border-radius: 4px'>&lt;li&gt;</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>标签组成的无序列表。</SPAN><CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 6px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal; border-radius: 4px'>&lt;li&gt;</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>元素里的</SPAN><CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 6px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal; border-radius: 4px'>*ngFor</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>是 
+Angular 的“迭代”指令。 它将</SPAN><CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; FONT-STYLE: normal; PADDING-TOP: 2px; PADDING-LEFT: 6px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal; border-radius: 4px'>&lt;li&gt;</CODE><SPAN 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 0px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>元素及其子级标记为“迭代模板”：</SPAN></P>
+<P><SPAN class=tag 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,136); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>&lt;li</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+*</SPAN><SPAN class=atn 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,0,102); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>ngFor</SPAN><SPAN 
+class=pun 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>=</SPAN><SPAN 
+class=atv 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(136,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>"let 
+hero of heroes"</SPAN><SPAN class=tag 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,136); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>&gt;</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+{{ hero }} </SPAN><SPAN class=tag 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,136); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>&lt;/li&gt;</SPAN></P>
+<H2 id=为数据创建一个类 
+style='FONT-SIZE: 22px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 500; COLOR: ; FONT-STYLE: normal; CLEAR: both; MARGIN: 32px 0px 24px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">为数据创建一个类</H2>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">应用代码直接在组件内部直接定义了数据。 作为演示还可以，但它显然不是最佳实践。</P>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">现在使用的是到了一个字符串数组的绑定。在真实的应用中，大多是到一个对象数组的绑定。</P>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">要将此绑定转换成使用对象，需要把这个英雄名字数组变成<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>Hero</CODE>对象数组。但首先得有一个<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>Hero</CODE>类。</P>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">在<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>app</CODE>目录下创建一个名叫<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>hero.ts</CODE>的新文件，内容如下：</P>
+<P>export class Hero {<BR>&nbsp; 
+constructor(<BR>&nbsp;&nbsp;&nbsp; public id: number,<BR>&nbsp;&nbsp;&nbsp; 
+public name: string) { }<BR>}</P>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">你定义了一个类，具有一个构造函数和两个属性：<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>id</CODE>和<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>name</CODE>。</P>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">它可能看上去不像是有属性的类，但它确实有，利用的是 TypeScript 提供的简写形式 —— 
+用构造函数的参数直接定义属性。</P>
+<H3 id=使用-hero-类 
+style='FONT-SIZE: 20px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: ; FONT-STYLE: normal; CLEAR: both; MARGIN: 24px 0px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">使用 Hero 类</H3>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">导入了<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>Hero</CODE>类之后，组件的<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>heroes</CODE>属性就可以返回一个<EM 
+style="LETTER-SPACING: 0px">类型化的</EM><CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'>Hero</CODE>对象数组了。</P>
+<P>heroes = [<BR>&nbsp; new Hero(1, 'Windstorm'),<BR>&nbsp; 
+new Hero(13, 'Bombasto'),<BR>&nbsp; new Hero(15, 'Magneta'),<BR>&nbsp; new 
+Hero(20, 'Tornado')<BR>];<BR>myHero = this.heroes[0];</P>
+<H2 id=通过-ngif-进行条件显示 
+style='FONT-SIZE: 22px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 500; COLOR: ; FONT-STYLE: normal; CLEAR: both; MARGIN: 32px 0px 24px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">通过 NgIf 进行条件显示</H2>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">有时，应用需要只在特定情况下显示视图或视图的一部分。</P>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">让我们来修改这个例子，如果多于三位英雄，显示一条消息。</P>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">Angular 的<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; COLOR: rgb(51,51,51); PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 6px; LETTER-SPACING: 0px; LINE-HEIGHT: 1; PADDING-RIGHT: 6px; BACKGROUND-COLOR: rgb(241,241,241); border-radius: 4px'><A 
+class=code-anchor 
+style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="https://angular.cn/api/common/NgIf">ngIf</A></CODE>指令会根据一个布尔条件来显示或移除一个元素。 
+来看看实际效果，把下列语句加到模板的底部：</P>
+<P>&lt;p *ngIf="heroes.length &gt; 3"&gt;There are many 
+heroes!&lt;/p&gt;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></body>
+</html>

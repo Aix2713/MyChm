@@ -1,0 +1,122 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>动画</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<H2 id=概述 
+style='FONT-SIZE: 22px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 500; COLOR: ; FONT-STYLE: normal; CLEAR: both; MARGIN: 32px 0px 24px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">概述</H2>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-result="">Angular的动画系统赋予了制作各种动画效果的能力，以构建出与原生CSS动画性能相同的动画。 
+我们也获得了额外的让动画逻辑与其它应用代码紧紧集成在一起的能力，这让动画可以被更容易的触发与控制。</P>
+<DIV class="alert is-helpful" 
+style='BOX-SIZING: border-box; FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WIDTH: 819px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); PADDING-BOTTOM: 16px; FONT-STYLE: normal; PADDING-TOP: 16px; PADDING-LEFT: 16px; MARGIN: 24px 0px; BORDER-LEFT: rgb(25,118,210) 10px solid; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; PADDING-RIGHT: 16px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>
+<P 
+style="FONT-SIZE: 14px; FONT-WEIGHT: 400; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 16px; MARGIN: 0px; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; PADDING-RIGHT: 16px" 
+translation-result="">Angular动画是基于标准的<A 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: rgb(25,118,210); LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="https://w3c.github.io/web-animations/">Web动画API(Web Animations 
+API)</A>构建的，它们在<A 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: rgb(25,118,210); LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="http://caniuse.com/#feat=web-animation">支持此API的浏览器中</A>会用原生方式工作。</P>
+<P 
+style="FONT-SIZE: 14px; FONT-WEIGHT: 400; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 16px; MARGIN: 0px; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; PADDING-RIGHT: 16px" 
+translation-result="">至于其它浏览器，就需要一个填充库(polyfill)了。你可以<A 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: rgb(25,118,210); LETTER-SPACING: 0px; LINE-HEIGHT: 24px" 
+href="https://github.com/web-animations/web-animations-js">从这里获取<CODE 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace'>web-animations.min.js</CODE></A>，并把它加入你的页面中。</P></DIV>
+<H2 id=setup 
+style='FONT-SIZE: 22px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 500; COLOR: ; FONT-STYLE: normal; CLEAR: both; MARGIN: 32px 0px 24px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-origin="off">Setup</H2>
+<P 
+style='FONT-SIZE: 14px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: ; FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: 0px; LINE-HEIGHT: 24px; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-origin="off">Before you can add animations to your application, you 
+need to import a few animation-specific modules and functions to the root 
+application module.</P>
+<P><CODE-EXAMPLE 
+style='FONT-SIZE: 14px; BORDER-TOP: rgb(219,219,219) 0px solid; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; BORDER-RIGHT: rgb(219,219,219) 0px solid; WHITE-SPACE: normal; WORD-SPACING: 0px; BORDER-BOTTOM: rgb(219,219,219) 0px solid; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; CLEAR: both; MARGIN: 16px auto; BORDER-LEFT: rgb(219,219,219) 0px solid; ORPHANS: 2; WIDOWS: 2; DISPLAY: block; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal; border-radius: 5px' 
+ng-version="5.0.0-rc.0" linenums="false" region="animations-module" 
+path="animations/src/app/app.module.ts"><HEADER 
+style="FONT-SIZE: 16px; COLOR: rgb(250,250,250); PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 16px; PADDING-RIGHT: 16px; BACKGROUND-COLOR: rgb(30,136,229); border-radius: 5px 5px 0px 0px">app.module.ts (animation module import 
+excerpt)</HEADER><AIO-CODE class=headed-code></P><PRE class="prettyprint lang-" style="WHITE-SPACE: pre-wrap; POSITION: relative; MARGIN: 16px 32px; MIN-HEIGHT: 32px; DISPLAY: flex; -webkit-box-align: center; align-items: center"><CODE class="animated fadeIn" style='OVERFLOW: auto; FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace'><SPAN class=kwd style="COLOR: rgb(0,0,255); LINE-HEIGHT: 24px">import</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">{</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><A class=code-anchor style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" href="https://angular.cn/api/platform-browser/BrowserModule"><SPAN class=typ style="COLOR: red; LINE-HEIGHT: 24px">BrowserModule</SPAN></A><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">}</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=kwd style="COLOR: rgb(0,0,255); LINE-HEIGHT: 24px">from</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=str style="COLOR: rgb(136,0,0); LINE-HEIGHT: 24px">'@angular/platform-</SPAN><A class=code-anchor style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" href="https://angular.cn/api/animations/browser"><SPAN class=str style="COLOR: rgb(136,0,0); LINE-HEIGHT: 24px">browser</SPAN></A><SPAN class=str style="COLOR: rgb(136,0,0); LINE-HEIGHT: 24px">'</SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">;</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px">
+</SPAN><SPAN class=kwd style="COLOR: rgb(0,0,255); LINE-HEIGHT: 24px">import</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">{</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><A class=code-anchor style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" href="https://angular.cn/api/platform-browser/animations/BrowserAnimationsModule"><SPAN class=typ style="COLOR: red; LINE-HEIGHT: 24px">BrowserAnimationsModule</SPAN></A><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">}</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=kwd style="COLOR: rgb(0,0,255); LINE-HEIGHT: 24px">from</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=str style="COLOR: rgb(136,0,0); LINE-HEIGHT: 24px">'@angular/platform-</SPAN><A class=code-anchor style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" href="https://angular.cn/api/animations/browser"><SPAN class=str style="COLOR: rgb(136,0,0); LINE-HEIGHT: 24px">browser</SPAN></A><SPAN class=str style="COLOR: rgb(136,0,0); LINE-HEIGHT: 24px">/animations'</SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">;</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px">
+
+</SPAN><SPAN class=lit style="COLOR: rgb(0,136,204); LINE-HEIGHT: 24px">@</SPAN><A class=code-anchor style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" href="https://angular.cn/api/core/NgModule"><SPAN class=lit style="COLOR: rgb(0,136,204); LINE-HEIGHT: 24px">NgModule</SPAN></A><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">({</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px">
+  imports</SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">:</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">[</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><A class=code-anchor style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" href="https://angular.cn/api/platform-browser/BrowserModule"><SPAN class=typ style="COLOR: red; LINE-HEIGHT: 24px">BrowserModule</SPAN></A><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">,</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><A class=code-anchor style="CURSOR: pointer; TEXT-DECORATION: none; FONT-WEIGHT: 400; COLOR: ; LETTER-SPACING: 0px; LINE-HEIGHT: 24px" href="https://angular.cn/api/platform-browser/animations/BrowserAnimationsModule"><SPAN class=typ style="COLOR: red; LINE-HEIGHT: 24px">BrowserAnimationsModule</SPAN></A><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">],</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px">
+  </SPAN><SPAN class=com style="COLOR: rgb(0,102,0); LINE-HEIGHT: 24px">// ... more stuff ...</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px">
+</SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">})</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px">
+</SPAN><SPAN class=kwd style="COLOR: rgb(0,0,255); LINE-HEIGHT: 24px">export</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=kwd style="COLOR: rgb(0,0,255); LINE-HEIGHT: 24px">class</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=typ style="COLOR: red; LINE-HEIGHT: 24px">AppModule</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">{</SPAN><SPAN class=pln style="COLOR: rgb(0,0,0); LINE-HEIGHT: 24px"> </SPAN><SPAN class=pun style="COLOR: rgb(102,102,0); LINE-HEIGHT: 24px">}</SPAN></CODE></PRE></AIO-CODE></CODE-EXAMPLE>
+<H4 id=example-basics 
+style='FONT-SIZE: 18px; FONT-FAMILY: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: ; FONT-STYLE: normal; CLEAR: both; MARGIN: 8px 0px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(250,250,250); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal' 
+translation-origin="off">Example basics</H4>
+<P><SPAN class=kwd 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,255); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>(导入模板)import</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+</SPAN><SPAN class=pun 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>{</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+trigger</SPAN><SPAN class=pun 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>,</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+state</SPAN><SPAN class=pun 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>,</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+style</SPAN><SPAN class=pun 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>,</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+animate</SPAN><SPAN class=pun 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>,</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+transition </SPAN><SPAN class=pun 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>}</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+</SPAN><SPAN class=kwd 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,255); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>from</SPAN><SPAN 
+class=pln 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'> 
+</SPAN><SPAN class=str 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(136,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>'@angular/animations'</SPAN><SPAN 
+class=pun 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: normal; COLOR: rgb(102,102,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; LINE-HEIGHT: 24px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>;</SPAN></P>
+<P>(在组件装饰器中定义动作)animations: [<BR>&nbsp; trigger('heroState', 
+[<BR>&nbsp;&nbsp;&nbsp; state('inactive', 
+style({<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; backgroundColor: 
+'#eee',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; transform: 
+'scale(1)'<BR>&nbsp;&nbsp;&nbsp; })),<BR>&nbsp;&nbsp;&nbsp; 
+state('active',&nbsp;&nbsp; style({<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+backgroundColor: '#cfd8dc',<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; transform: 
+'scale(1.1)'<BR>&nbsp;&nbsp;&nbsp; })),<BR>&nbsp;&nbsp;&nbsp; 
+transition('inactive =&gt; active', animate('100ms 
+ease-in')),<BR>&nbsp;&nbsp;&nbsp; transition('active =&gt; inactive', 
+animate('100ms ease-out'))<BR>&nbsp; ])<BR>]</P>
+<P>(组件中改变动作名称)constructor(public name: string, public state = 
+'inactive') { }</P>
+<P>&nbsp; toggleState() {<BR>&nbsp;&nbsp;&nbsp; this.state 
+= this.state === 'active' ? 'inactive' : 'active';<BR>&nbsp; }</P>
+<P><SPAN 
+style='FONT-SIZE: 12px; FONT-FAMILY: "Droid Sans Mono", monospace; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(136,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; font-variant-ligatures: normal; font-variant-caps: normal'>(给控件绑定动作属性)[@heroState]="hero.state"</SPAN></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></body>
+</html>

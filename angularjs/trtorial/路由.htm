@@ -212,6 +212,50 @@ style="COLOR: #d4d4d4"> </SPAN><SPAN style="COLOR: #9cdcfe">hero</SPAN><SPAN
 style="COLOR: #d4d4d4">);</SPAN></DIV>
 <DIV><SPAN style="COLOR: #d4d4d4">};</SPAN></DIV></DIV></SPAN>
 <P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">7、路由单独封装 app/app-routing.module.ts</SPAN></P>
+<P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">import { NgModule } from <A 
+href="mailto:'@angular/core'">'@angular/core'</A>;<BR>import { RouterModule, 
+Routes } from <A 
+href="mailto:'@angular/router'">'@angular/router'</A>;</SPAN></P>
+<P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">import { DashboardComponent } from 
+'./test-view/dashboard/dashboard.component';<BR>import { HeroesComponent } from 
+'./test-view/heroes/heroes.component';<BR>import { HeroDetailComponent } from 
+'./test-view/hero-detail/hero-detail.component';<BR>const routes: Routes = 
+[<BR>&nbsp; { path: '', redirectTo: '', pathMatch: 'full' },<BR>&nbsp; { path: 
+'dashboard',&nbsp; component: DashboardComponent },<BR>&nbsp; { path: 
+'detail/:id', component: HeroDetailComponent },<BR>&nbsp; { path: 
+'heroes',&nbsp;&nbsp;&nbsp;&nbsp; component: HeroesComponent 
+}<BR>];<BR>@NgModule({<BR>&nbsp; imports: [ RouterModule.forRoot(routes) 
+],<BR>&nbsp; exports: [ RouterModule ]<BR>})<BR>export class AppRoutingModule 
+{}<BR>然后在app.module.ts中引用路由文件，方便路由统一管理</SPAN></P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<DIV 
+style="FONT-SIZE: 14px; FONT-FAMILY: Consolas, 'Courier New', monospace; WHITE-SPACE: pre; FONT-WEIGHT: normal; COLOR: #d4d4d4; LINE-HEIGHT: 19px; BACKGROUND-COLOR: #1e1e1e"><BR>
+<DIV><SPAN style="COLOR: #c586c0">import</SPAN><SPAN style="COLOR: #d4d4d4"> { 
+</SPAN><SPAN style="COLOR: #9cdcfe">AppRoutingModule</SPAN><SPAN 
+style="COLOR: #d4d4d4"> } </SPAN><SPAN style="COLOR: #c586c0">from</SPAN><SPAN 
+style="COLOR: #d4d4d4"> </SPAN><SPAN 
+style="COLOR: #ce9178">'./app-routing.module'</SPAN><SPAN 
+style="COLOR: #d4d4d4">;</SPAN></DIV></DIV></SPAN>
+<P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">&nbsp; imports: [<BR>&nbsp;&nbsp;&nbsp; 
+BrowserModule,<BR>&nbsp;&nbsp;&nbsp; FormsModule,<BR>&nbsp;&nbsp;&nbsp; 
+HttpModule,<BR>&nbsp;&nbsp;&nbsp; AppRoutingModule<BR>&nbsp; ],</P></SPAN>
+<P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">8、路由重定向</SPAN></P>
+<P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">import { Router } from <A 
+href="mailto:'@angular/router'">'@angular/router'</A>;</SPAN></P>
+<P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">constructor(<BR>&nbsp;&nbsp;&nbsp; private heroService: 
+HeroService,<BR>&nbsp;&nbsp;&nbsp; private router: Router,<BR>&nbsp;&nbsp;&nbsp; 
+private http: Http<BR>) {}<BR>this.router.navigate(['/detail', 
+this.selectedHero.id]);</SPAN></P>
+<P><SPAN 
+style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></SPAN>&nbsp;</P>
+<P><SPAN 
 style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></SPAN>&nbsp;</P>
 <P><SPAN 
 style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(51,51,51); FONT: 14px/24px Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; WIDOWS: 1; DISPLAY: inline !important; LETTER-SPACING: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN class=tag 
